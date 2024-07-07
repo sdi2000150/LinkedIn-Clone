@@ -1,7 +1,6 @@
 # Makefile
 
-
-# Fast git add-commit-push (used while working on the project):
+# Fast git add-commit-push (press "make git"):
 git:
 	git add -A
 	git commit -m "fast update"
