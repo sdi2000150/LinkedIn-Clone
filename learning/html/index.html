@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            HTML Cheet Sheet
+        </title>
+    </head>
+    <body>
+        <!-- comment -->
+        <!-- header -->
+        <h2>
+            index.html
+        </h2>
+        <!-- paragraph -->
+        <p>
+        
+            <a href="blog.html"> Click</a> to go to my blog! (internal link, another html of the same site)
+            <br> <br>
+            Lorem ipsum, dolor sit <strong> bla bla i am strong (bold by default) </strong> amet consectetur adipisicing elit. 
+            Asperiores <abbr title="World Wide Web">WWW</abbr> nobis ratione libero, eius quae eum quibusdam, magni, 
+            corporis <cite> italic style </cite> bla bla <em> italic style 2</em> aliquam quam autem? Minima placeat laborum <a href="https://www.google.com/" target="_blank"> click me to go to external link </a> 
+            laboriosam accusamus commodi facilis sed!
+            <a href="about.html"> click me to go to internal link (another html of the same site) </a>
+        </p>
+        <!-- dotted lists -->
+        <ul>
+            <li> bla </li>
+            <li> blu </li>
+            <li> blo </li>
+        </ul>
+        <!-- numbered lists -->
+        <ol>
+            <li> bla </li>
+            <li> blu </li> 
+            <li> blo </li>
+        </ol>
+        <!-- tables -->
+        <table>
+            <thead>
+                <tr>
+                    <th> Name </th>
+                    <th> Email </th>
+                    <th> Phone </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> teodoros moraitis </td>
+                    <td> theodorosmoraitis2002@gmail.com </td>
+                    <td> 69999999 </td>
+                </tr>
+                <tr>
+                    <td> tim mik </td>
+                    <td> timmik@gmail.com </td>
+                    <td> 69999999 </td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+        <br> <!-- "break" - allagi grammis -->
+        <hr> <!-- horizontal row -->
+
+        <form action="something.php" method="POST"> <!-- for us will be something.java, POST instead of GET for more secure reasons-->
+            <label> First Name </label>
+            <input type="text" name="first-name"> <!-- the first-name will be the certain variable inside something.php/java backend server -->
+            <br>
+            <br>
+            <label> Last Name </label>
+            <input type="text" name="last-name"> 
+            <br>
+            <br>
+            <label> Email </label>
+            <input type="email" name="email">  
+            <br>
+            <br>
+            <label> Message </label><br>
+            <textarea name="message"> </textarea>
+            <br>
+            <br>
+            <label> Team </label><br>
+            <select name="team"> 
+                <option value="none"> none </option>
+                <option value="panathinaikos"> panathinaikos </option>
+                <option value="olympiakos"> olympiakos </option>
+            </select>
+            <br>
+            <br>
+            <input type="submit" name="submit" value="submit (not working, needs extension with java-server)"> 
+        </form>
+        
+        <hr> <!-- horizontal row -->
+
+        <!-- buttons -->
+        <button> Click me (not working, needs extension with javascript) </button>
+
+        <br> <br>
+        <!-- images -->
+        <a href="images/imagetest.jpg">
+            <img src="images/imagetest.jpg" alt="test image" width="300">
+        </a>
+        <!-- so that the page can be scrolled -->
+        <div style="margin-top:500px"></div>
+    </body>
+</html>
