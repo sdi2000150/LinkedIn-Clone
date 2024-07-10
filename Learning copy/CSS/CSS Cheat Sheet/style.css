@@ -1,0 +1,189 @@
+/* 3rd way (good): external css  */
+h3 {
+    color: rgb(13, 141, 85);
+}
+
+body {
+    background-color: #d3d1ca;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    font: normal 16px Arial, Helvetica, sans-serif;
+    line-height: 25px;
+
+}
+
+a {
+    /* text-decoration: none; */
+    color: #000;
+}
+
+a:hover {
+    color: rgb(227, 207, 23);
+}
+
+a:active {
+    color: green;
+}
+
+a:visited {
+    color: rgb(101, 46, 46);
+}
+
+.clr {
+    clear: both;
+}
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+.button {
+    background-color: rgb(112, 125, 221);
+    color: rgb(0, 0, 0);
+}
+
+.box-1 {
+    background-color: rgb(57, 57, 86);
+    color: #bfaf7f;
+
+    border: 5px rgb(0, 30, 255) solid;
+    border-width: 3px;
+
+    padding: 20px;
+
+    margin: 20px 0;;
+}
+
+.box-1 h4{
+    font-family: tahoma;
+    font-weight: 800;
+    font-style: italic;
+    text-decoration: underline;
+    text-transform: uppercase;
+    Letter-spacing: 0.2em;
+
+}
+
+.box-2 {
+    border: 3px dotted #ccc;
+    padding: 20px;
+    margin: 20px 0;
+
+}
+
+.categories {
+    border: 1pc #ccc solid;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.categories h5 {
+    text-align: center;
+    font-weight: 800;
+}
+
+.categories ul {
+    padding-left:20px;
+    list-style: square;
+}
+
+.categories li {
+    padding-bottom: 8px;
+    border-bottom: dotted 1px #333;
+    list-style-image: url('images/check.jpg');
+}
+
+.my-form {
+    padding: 20px;
+}
+
+.my-form.form-group {
+    padding-bottom: 15px;
+}
+
+.my-form label {
+    display: block;
+}
+
+.my-form input[type="text"], .my-form textarea {
+    padding: 8px;
+    width: 100%;
+}
+
+/* .my-form input[type="submit"] {
+    background-color: #446d76;
+    color: #fff;
+    padding: 15px 15px;
+    border: none;
+    
+} */
+
+.block {
+    float: left;
+    width: 50%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#main-block {
+    float: left;
+    width: 70%;
+}
+
+#sidebar {
+    float: right;
+    width: 30%;
+    background-color: darkgray;
+    color: #fff;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.p-box {
+    width: 600px;
+    height: 400px;
+    border: 1px solid #000;
+    margin-top: 30px;
+    position: relative;
+    background-image: url('images/bgimage.jpg');
+    background-repeat: no-repeat;
+    background-position: 100px 200px;
+    background-position: center top;
+}
+
+.p-box h1 {
+    position: absolute;
+    top: 40px;
+    left: 200px;
+}
+
+.p-box h2 {
+    position: absolute;
+    bottom: 40px;
+    right: 100px;
+}
+
+.fix-me {
+    position: fixed;
+    top: 400px;
+    color: white;
+    font: bold;
+}
+
+.my-list li:first-child {
+    background: red;
+}
+
+.my-list li:nth-child(3) {
+    background: green;
+}
+
+.my-list li:nth-child(even) {
+    background: gray;
+}
+
+.my-list li:last-child {
+    background: blue;
+}
