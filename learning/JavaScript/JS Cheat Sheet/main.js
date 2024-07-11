@@ -393,7 +393,7 @@ btn.addEventListener("mouseover", function(e) { //or "click" or "mouseout" or ..
 });
 
 /////////////////////////////////////////////////////////////////////
-// Create it functional
+// Make it functional
 const myForm = document.querySelector("#my-form");
 const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#email");
