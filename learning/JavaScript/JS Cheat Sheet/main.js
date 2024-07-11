@@ -1,6 +1,6 @@
 /* JavaScript Cheat Sheet */
 
-// Singleline comment
+// Singleline Comment
 /* Multiline
 Comment */
 
@@ -193,7 +193,7 @@ const todoCompleted2 = todos.filter(function(item) {
 console.log(todoCompleted2);
 
 /////////////////////////////////////////////////////////////////////
-// Conditionals (if statements)
+// Conditionals (if statement)
 
 const x1 = "10";    //same
 // const x1 = 10;   //same 
@@ -226,3 +226,204 @@ if (x2 > 5 && y2 > 10) {    //AND
 
 /////////////////////////////////////////////////////////////////////
 // Ternary operator (shortened if)
+const x3 = 10;
+
+const color = x3 > 10 ? "red" : "blue";
+
+console.log(color);
+
+/////////////////////////////////////////////////////////////////////
+// Switch statement
+switch(color) {
+    case "red":
+        console.log("color is red");
+        break;
+    case "blue":
+        console.log("color is blue");
+        break;
+    default:
+        console.log("color is not red or blue");
+        break;
+}
+
+/////////////////////////////////////////////////////////////////////
+// Functions:
+
+// Simple function
+function addNums(num1 = 1, num2 = 1) {  //just the declaration/definition of the function
+    console.log(num1 + num2);
+    return num1 + num2;
+}
+
+addNums(5,4);   //here we actually call the function
+console.log(addNums(5,4));  //same, using retun value to be printed
+addNums();   //prints NaN if parameters of function are not set to default value, otherwise default values of parameters are used
+
+// Arrow function
+const addNumsArrow = (num1 = 1, num2 = 1) => {  //just the declaration/definition of the function
+    console.log(num1 + num2);
+}
+// const addNumsArrow = (num1 = 1, num2 = 1) => num1 + num2; //same, with return but skipping return
+addNumsArrow(5,5);   //here we actually call the function
+
+/////////////////////////////////////////////////////////////////////
+// OOP Programming ES5 (old) (pre-classes)
+
+// Constructor function
+function Person(firstName, lastName, dob) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.dob = new Date(dob);
+    // this.getBirthYear = function() {
+    //     return this.dob.getFullYear();
+    // }
+    // this.getFullName = function() {
+    //     return `${this.firstName} ${this.lastName}`
+    // }
+}
+// define object methods as prototypes
+Person.prototype.getBirthYear = function() {
+    return this.dob.getFullYear();
+}
+Person.prototype.getFullName = function() {
+    return `${this.firstName} ${this.lastName}`
+}
+
+// Instantiate object
+const person1 = new Person("John", "Doe", "4-3-1980");
+const person2 = new Person("Mary", "Smith", "3-6-1970");
+
+// Access object
+console.log(person1);
+console.log(person2);
+
+console.log(person2.dob);
+console.log(person1.getBirthYear());    //one way
+console.log(person2.dob.getFullYear()); //another way
+console.log(person1.getFullName());
+console.log(person1);
+
+/////////////////////////////////////////////////////////////////////
+// OOP Programming ES6 (2015) (with classes)
+
+// Class definition
+class PersonClass {
+    constructor(firstName, lastName, dob) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = new Date(dob);
+    }
+
+    getBirthYear() {
+        return this.dob.getFullYear();
+    }
+
+    getFullName() {
+        return `${this.firstName} ${this.lastName}`
+    }
+}
+
+// Instantiate object
+const personclass1 = new PersonClass("Teo", "Mor", "2-8-2002");
+const personclass2 = new PersonClass("Brad", "Pitt", "15-7-1965");
+
+// Access object
+console.log(personclass1);
+console.log(personclass2);
+
+console.log(personclass2.dob);
+console.log(personclass1.getBirthYear());    //one way
+console.log(personclass2.dob.getFullYear()); //another way
+console.log(personclass1.getFullName());
+console.log(personclass1);
+
+/////////////////////////////////////////////////////////////////////
+// window object (the parent object of the browser)
+console.log(window);
+// window.alert(1);
+// alert(1); //same as above
+
+/////////////////////////////////////////////////////////////////////
+/* The DOM (Document Object Model) in JavaScript is a programming interface 
+for web documents (HTMLs). It represents the structure of a document as a tree of nodes, 
+allowing programs and scripts to dynamically access and update the content, 
+structure, and style of a document. */
+
+/////////////////////////////////////////////////////////////////////
+// DOM selection (selecting things from DOM, select HTML elements and work with them):
+
+// Single element selectors
+const form = document.getElementById("my-form"); //one way
+console.log(form);
+console.log(document.querySelector(".container"));  //another way (best one)
+console.log(document.querySelector("h1"));
+
+// Multiple elements selectors
+console.log(document.querySelectorAll(".item"));    //one way (nodelist) (best one)
+console.log(document.getElementsByClassName("item")); //another way (HTML collection)
+console.log(document.getElementsByTagName("li"));   //same as above
+
+// iterate through item of list in HTML
+const items = document.querySelectorAll(".item");
+items.forEach((item) => console.log(item));
+
+/////////////////////////////////////////////////////////////////////
+// Manipulating the DOM (changing things in UI/interaction HTML):
+
+//changing HTML things
+const ul = document.querySelector(".items");
+// ul.remove();    //remove list from UI HTML
+ul.lastElementChild.remove();   //remove specific element from list
+ul.firstElementChild.textContent = "hello1"; //change name of first element of list
+ul.children[1].innerText = "Brad";
+ul.lastElementChild.innerHTML = "<h1>hello2</h1>"
+
+//change styling (CSS things)
+const btn = document.querySelector(".btn");
+btn.style.background = "red";
+
+//activate events on clicks etc...
+btn.addEventListener("mouseover", function(e) { //or "click" or "mouseout" or ... (a lot of events available)
+    e.preventDefault(); //to prevent the default submit button function
+    console.log("click");   //show click on console
+    console.log(e.target.className); //show an attribute of btn in console
+    document.querySelector("#my-form").style.background = "#ccc";
+    document.querySelector("body").classList.add("bg-dark");
+    document.querySelector(".items").lastElementChild.innerHTML = "<h1>Hello3</h1>";
+});
+
+/////////////////////////////////////////////////////////////////////
+// Create it functional
+const myForm = document.querySelector("#my-form");
+const nameInput = document.querySelector("#name");
+const emailInput = document.querySelector("#email");
+const msg = document.querySelector(".msg");
+const userList = document.querySelector("#users");
+
+myForm.addEventListener("submit", onSubmit);
+
+function onSubmit(e) {
+    e.preventDefault();
+    console.log(nameInput.value);
+
+    if (nameInput.value === "" || emailInput === "") {
+        msg.classList.add("error");
+        msg.innerHTML = "Please enter both fields";
+
+        setTimeout(function() {
+            msg.remove();
+        }, 3000);
+    } else {
+        console.log("success");
+
+        const li = document.createElement("li");
+        li.appendChild(document.createTextNode(`${nameInput.value} : ${emailInput.value}`));
+        
+        userList.appendChild(li);
+
+        //clear the fields
+        nameInput.value = "";
+        emailInput.value = "";
+    }
+
+}
