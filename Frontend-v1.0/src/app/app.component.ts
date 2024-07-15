@@ -16,8 +16,15 @@ export class AppComponent {
   email: string = '';
   password: string = '';
   msg: string = '';
+  showPassword: boolean = false;
 
   constructor(private router: Router) {}
+
+  togglePasswordVisibility() {
+    const passwordInput = document.getElementById('password') as HTMLInputElement;
+    passwordInput.type = 'text';  //so that it is visible
+    setTimeout(() => passwordInput.type = 'password', 2000);  //set a timer for the time the password will show
+  }
 
   onLogIn() {
     if (this.email === '' || this.password === '') {

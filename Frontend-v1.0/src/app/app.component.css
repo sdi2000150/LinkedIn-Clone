@@ -50,6 +50,17 @@ header {
   font-size: 1rem;
 }
 
+.password-input {
+  position: relative;
+}
+.password-input .toggle-password {
+  position: absolute;
+  top: 43%;
+  right: 10px;
+  font-size: small;
+  cursor: pointer;
+}
+
 .btn {
   display: block;
   width: 100%;

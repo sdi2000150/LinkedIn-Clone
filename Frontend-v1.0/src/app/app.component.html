@@ -1,6 +1,6 @@
 <header>
   <h1>Welcome Page</h1>
-  <div class="logo">Linkedin-Clone</div>
+  <div class="logo">LinkedIn-Clone</div>
 </header>
 
 <section class="container">
@@ -13,9 +13,10 @@
       <label for="email">Email:</label>
       <input type="text" id="email" [(ngModel)]="email" name="email">
     </div>
-    <div>
+    <div class="password-input">
       <label for="password">Password:</label>
       <input type="password" id="password" [(ngModel)]="password" name="password">
+      <span class="toggle-password" (click)="togglePasswordVisibility()">Show Password</span>
     </div>
     <input class="btn" type="submit" value="Login">
   </form>

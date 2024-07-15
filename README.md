@@ -2,5 +2,5 @@
 Mock LinkedIn App - Project for Uni Course
 
 
-Δουλεουμε σε angular Front End (javascipt/typescript)<br>
-και SpringBoot για back end (Java)
+Δουλεουμε σε Angular για Front-End (Javacipt/Typescript)<br>
+και SpringBoot για Back-End (Java)
