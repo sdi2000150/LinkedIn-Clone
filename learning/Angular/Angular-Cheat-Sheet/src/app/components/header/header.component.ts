@@ -11,4 +11,8 @@ import { ButtonComponent } from '../button/button.component'; // Import the Butt
 export class HeaderComponent {
   //component logic here
   title = 'Angular-Cheat-Sheet';
+
+  toggleAddTask() {
+    console.log('toggle');
+  }
 }
