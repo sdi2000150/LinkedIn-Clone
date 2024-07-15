@@ -16,7 +16,6 @@ export class AppComponent {
   email: string = '';
   password: string = '';
   msg: string = '';
-  showPassword: boolean = false;
 
   constructor(private router: Router) {}
 
