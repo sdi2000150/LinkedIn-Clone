@@ -17,7 +17,7 @@ export class AppComponent {
   password: string = '';
   msg: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {} //for usage in this.router.navigate
 
   togglePasswordVisibility() {
     const passwordInput = document.getElementById('password') as HTMLInputElement;
