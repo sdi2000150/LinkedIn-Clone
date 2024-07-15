@@ -19,7 +19,7 @@ export class AppComponent {
 
   constructor(private router: Router) {} //for usage in this.router.navigate
 
-  togglePasswordVisibility() {
+  showPassword() {
     const passwordInput = document.getElementById('password') as HTMLInputElement;
     passwordInput.type = 'text';  //so that it is visible
     setTimeout(() => passwordInput.type = 'password', 2000);  //set a timer for the time the password will show
