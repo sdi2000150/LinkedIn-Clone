@@ -35,7 +35,7 @@ export class AppComponent {
       console.log('Password:', this.password);
       //logic here
 
-      //Clear the form fields
+      //Clear the form fieldss
       this.email = '';
       this.password = '';
     }
