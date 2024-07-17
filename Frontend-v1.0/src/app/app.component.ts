@@ -39,6 +39,13 @@ export class AppComponent {
       this.email = '';
       this.password = '';
     }
+
+    //Redirect to the user-page or admin-page (depending on the email given)
+    //logic here.. of which page to open (user or admin)
+    
+    //User-page
+    console.log('Redirect to user-page');
+    this.router.navigate(['/user-page']);
   }
 
   onSignUp() {

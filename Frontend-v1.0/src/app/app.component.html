@@ -16,7 +16,7 @@
     <div class="password-input">
       <label for="password">Password:</label>
       <input type="password" id="password" [(ngModel)]="password" name="password">
-      <span class="toggle-password" (click)="showPassword()">Show Password</span>
+      <span class="toggle-password" (click)="showPassword()">show</span>
     </div>
     <input class="btn" type="submit" value="Login">
   </form>
@@ -26,4 +26,4 @@
 </section>
 
 
-<router-outlet />
+<router-outlet></router-outlet> <!-- for routing to work -->
