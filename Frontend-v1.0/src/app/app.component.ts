@@ -44,8 +44,8 @@ export class AppComponent {
     //logic here.. of which page to open (user or admin)
     
     //User-page
-    console.log('Redirect to user-page');
-    this.router.navigate(['/user-page']);
+    // console.log('Redirect to user-page');
+    // this.router.navigate(['/user-page']);
   }
 
   onSignUp() {
