@@ -1,1 +1,59 @@
 <p>signing works!</p>
+<header>
+    <h1>Sign Up Page</h1>
+    <div class="logo">LinkedIn-Clone</div>
+  </header>
+  
+  <section class="container">
+    <form id="my-form">
+      <h1>Sign Up.</h1>
+      <h1>Stay Connected</h1>
+      <br>
+      <div *ngIf="msg" class="msg error">{{ msg }}</div>
+      <div class="msg"></div>
+
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name"  name="name">
+      </div>
+
+      <div>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname"  name="surname">
+      </div>
+
+      <div>
+        <label for="email">Email:</label> <!-- If there is already email address used. Show error message-->
+        <input type="text" id="email"  name="email">
+      </div>
+
+      <div class="password-input">
+        <label for="password">Password:</label>
+        <input type="password" id="password"  name="password">
+        <span class="toggle-password" (click)="showPassword()">show</span>
+      </div>
+
+      <div class="password-input">
+        <label for="passwordConf">Confirm Password:</label>
+        <input type="password" id="passwordConf" name="passwordConf">
+        <span class="toggle-password" (click)="showPassword()">show</span>
+      </div>
+      
+      <div>
+      <label for="phone">Phone number:</label>
+      <input type="tel" id="phone" name="phone" placeholder="" pattern="[0-9]{10}"> <!-- add required attribute(?)-->
+      </div>
+      <div>
+      <label for="image">Image:</label>
+        <input type="file" id="image" accept="image/*"><br>
+      </div>
+      <!--Doesnt check erros. Bug on submit-->
+      <form id="sign-up" (submit)="SignUp()">
+       <button class="btn2" type="submit" value="SignUp">Sign Up</button>
+      </form>
+    </form>
+
+  </section>
+
+
+ 
