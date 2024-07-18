@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterOutlet, Router, RouterLink, RouterLinkActive} from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-signing',
   standalone: true,
-  imports: [],
+  imports: [RouterOutlet, CommonModule, FormsModule, RouterLink, RouterLinkActive],
   templateUrl: './signing.component.html',
   styleUrl: './signing.component.css'
 })
@@ -14,8 +17,11 @@ export class SigningComponent {
   passwordConf: string = '';
   name: string = '';
   surname: string = '';
+  phone: string = '';
   
   msg: string = '';
+
+  constructor(private router: Router) {} //for usage in this.router.navigate
 
 
   showPassword() {
@@ -23,35 +29,35 @@ export class SigningComponent {
     passwordInput.type = 'text';  //so that it is visible
     setTimeout(() => passwordInput.type = 'password', 2000);  //set a timer for the time the password will show
   }
-
+  showPasswordConf() {
+    const passwordInput = document.getElementById('passwordConf') as HTMLInputElement;
+    passwordInput.type = 'text';  //so that it is visible
+    setTimeout(() => passwordInput.type = 'password', 2000);  //set a timer for the time the password will show
+  }
 
   SignUp() {
     //Redirect to the sign-up page
     console.log("On sign up is called")
-    if (this.email === '' || this.password === '' || this.name === '' || this.surname === '' || this.passwordConf === '') {
+    if (this.email === '' || this.password === '' || this.name === '' || this.surname === '' || this.passwordConf === '' || this.phone === '') {
       this.msg = 'Please enter all fields';
 
       setTimeout(() => this.msg = '', 3000);  //set a timer for the time the error will show
     } else {
-      //console.log('Email:', this.email);
-      //console.log('Password:', this.password);
       //logic here
 
       //Clear the form fields
-
       this.email = '';
       this.password = '';
       this.name ='';
+      this.surname = '';
       this.password = '';
       this.passwordConf = '';
+      this.phone = '';
 
-      //Redirect to the user-page or admin-page (depending on the email given)
-      //logic here.. of which page to open (user or admin)
-      //User-page
-      console.log('Redirect to user-page');
+      //For now it redirects to login page
+      console.log('Redirect to login-page');
+      this.router.navigate(['../login-page']);
     }
-
-
 
     console.log('Sign-up User');
   }

@@ -1,4 +1,3 @@
-<p>signing works!</p>
 <header>
     <h1>Sign Up Page</h1>
     <div class="logo">LinkedIn-Clone</div>
@@ -14,34 +13,34 @@
 
       <div>
         <label for="name">Name:</label>
-        <input type="text" id="name"  name="name">
+        <input type="text" id="name" [(ngModel)]="name" name="name">
       </div>
 
       <div>
         <label for="surname">Surname:</label>
-        <input type="text" id="surname"  name="surname">
+        <input type="text" id="surname" [(ngModel)]="surname" name="surname">
       </div>
 
       <div>
         <label for="email">Email:</label> <!-- If there is already email address used. Show error message-->
-        <input type="text" id="email"  name="email">
+        <input type="text" id="email" [(ngModel)]="email" name="email">
       </div>
 
       <div class="password-input">
         <label for="password">Password:</label>
-        <input type="password" id="password"  name="password">
+        <input type="password" id="password" [(ngModel)]="password" name="password">
         <span class="toggle-password" (click)="showPassword()">show</span>
       </div>
 
       <div class="password-input">
         <label for="passwordConf">Confirm Password:</label>
-        <input type="password" id="passwordConf" name="passwordConf">
-        <span class="toggle-password" (click)="showPassword()">show</span>
+        <input type="password" id="passwordConf" [(ngModel)]="passwordConf" name="passwordConf">
+        <span class="toggle-password" (click)="showPasswordConf()">show</span>
       </div>
       
       <div>
       <label for="phone">Phone number:</label>
-      <input type="tel" id="phone" name="phone" placeholder="" pattern="[0-9]{10}"> <!-- add required attribute(?)-->
+      <input type="tel" id="phone" name="phone" [(ngModel)]="phone" placeholder="" pattern="[0-9]{10}"> <!-- add required attribute(?)-->
       </div>
       <div>
       <label for="image">Image:</label>
