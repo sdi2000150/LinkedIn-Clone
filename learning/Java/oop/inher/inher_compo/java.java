@@ -4,12 +4,12 @@ class App {
 //        Dish d = new Dish();
 //        Meal ml = new Meal();
 
-///*
+// /*
         Meal ml = new Meal(10, "salata", 7,
                            600,"mbrizola", 15,
                            200, "crema karamele", 4);
 
-//*/
+// */
           }
 }
 
