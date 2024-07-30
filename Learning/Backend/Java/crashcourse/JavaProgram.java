@@ -52,14 +52,14 @@ public class JavaProgram {
     }
 
     // Manual method creation:
-    // without return value (void)
-    // private static void burp(String name, int number) {
-    //     System.out.println("Buurrrp");
-    //     System.out.println("My name is " + name); //concatanating strings with +
-    // }
     // with return value
     private static String burp(String name, int number) {
         System.out.println("Buurrrp");
         return "My name is " + name; //concatanating strings with +
     }
+    // without return value (void)
+    // private static void burp(String name, int number) {
+    //     System.out.println("Buurrrp");
+    //     System.out.println("My name is " + name); //concatanating strings with +
+    // }
 }
