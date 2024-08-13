@@ -33,7 +33,7 @@ public class StudentController {
 		return this.repository.findAll();
 	}
     @CrossOrigin(origins = "*")
-    @GetMapping("/api/student/{id}")
+    @GetMapping("{id}")
     public Optional<Student> GetStudentById(@PathVariable String id){
         System.out.println("Giving back id " + id);
         return this.repository.findById(Long.valueOf(id));
