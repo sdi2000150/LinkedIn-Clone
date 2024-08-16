@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { UserPageComponent } from './user-page/user-page.component';
-import { SigningComponent } from './signing/signing.component';
-import { ProfileComponent } from './profile/profile.component';
-import { SettingsComponent } from './settings/settings.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { UserPageComponent } from './components/user-page/user-page.component';
+import { SigningComponent } from './components/signing/signing.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 export const routes: Routes = [
   { path: 'login-page', component: LoginPageComponent },

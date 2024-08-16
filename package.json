@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "httpclient": "^0.1.0",
+    "rxjs": "^7.8.1"
+  }
+}
