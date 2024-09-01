@@ -16,15 +16,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class UserController {
 
-    @Autowired
+    @Autowired  // Inject UserInfoService
     private UserInfoService service;
 
-    @Autowired
+    @Autowired  // Inject JwtService
     private JwtService jwtService;
 
-    @Autowired
+    @Autowired  // Inject AuthenticationManager
     private AuthenticationManager authenticationManager;
 
+    @GetMapping("/")
+    public String index() {
+        return "index"; // This will render index.html from src/main/resources/templates
+    }
+    
     @GetMapping("/welcome")
     public String welcome() {
         return "Welcome this endpoint is not secure";
@@ -36,24 +41,24 @@ public class UserController {
     }
 
     @GetMapping("/user/userProfile")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_USER')")  // Check if the user has the 'ROLE_USER' authority
     public String userProfile() {
         return "Welcome to User Profile";
     }
 
     @GetMapping("/admin/adminProfile")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')") // Check if the user has the 'ROLE_ADMIN' authority
     public String adminProfile() {
         return "Welcome to Admin Profile";
     }
 
     @PostMapping("/generateToken")
-    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
-        Authentication authentication = authenticationManager.authenticate(
+    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {   // Authenticate user and generate token
+        Authentication authentication = authenticationManager.authenticate( // Authenticate user
             new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
         );
-        if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(authRequest.getUsername());
+        if (authentication.isAuthenticated()) { // If user is authenticated
+            return jwtService.generateToken(authRequest.getUsername()); // Generate token (JWT) and return it
         } else {
             throw new UsernameNotFoundException("Invalid user request!");
         }

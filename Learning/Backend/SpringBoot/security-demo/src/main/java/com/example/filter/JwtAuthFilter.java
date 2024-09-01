@@ -16,16 +16,17 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Component
-public class JwtAuthFilter extends OncePerRequestFilter {
+// A custom filter responsible for handling JWT token validation and authentication
+@Component  // Marks JwtAuthFilter as a Spring bean, allowing dependency injection
+public class JwtAuthFilter extends OncePerRequestFilter { // It will be executed only once for each incoming request (OncePerRequestFilter)
 
-    @Autowired
+    @Autowired  // Inject JwtService
     private JwtService jwtService;
 
-    @Autowired
+    @Autowired  // Inject UserInfoService
     private UserInfoService userDetailsService;
 
-    @Override
+    @Override   // Override the doFilterInternal method (This is the core method of the filter, executed for each request)
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // Retrieve the Authorization header
         String authHeader = request.getHeader("Authorization");

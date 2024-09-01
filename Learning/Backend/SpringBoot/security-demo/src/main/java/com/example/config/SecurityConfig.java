@@ -21,25 +21,25 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@Configuration
-@EnableWebSecurity
-@EnableMethodSecurity
+@Configuration  // Defines configuration for the application. It tells Spring that this class contains beans that should be managed and injected into other parts of the application.
+@EnableWebSecurity // Enables Spring Security
+@EnableMethodSecurity // Allows method-level security (to use annotations like @PreAuthorize and @PostAuthorize to define authorization rules for specific methods)
 public class SecurityConfig {
 
-    @Autowired
-    private JwtAuthFilter authFilter;
+    @Autowired  // Enables automatic dependency injection
+    private JwtAuthFilter authFilter; // Automatically inject an instance of the JwtAuthFilter class
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new UserInfoService(); // Ensure UserInfoService implements UserDetailsService
+    @Bean   // Defines a bean that can be injected into other parts of the application (same for rest beans)
+    public UserDetailsService userDetailsService() { // UserDetailsService is an interface provided by Spring Security that is responsible for loading user details from a data source
+        return new UserInfoService(); // Ensure UserInfoService implements UserDetailsService (Spring will create a new UserInfoService object and make it available for injection into other classes that require a UserDetailsService)
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { // SecurityFilterChain is a chain of filters that are applied to secure the application (incoming requests are passed through these filters)
         http
             .csrf(csrf -> csrf.disable()) // Disable CSRF for stateless APIs
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
+                .requestMatchers("/", "/auth", "/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
                 .requestMatchers("/auth/user/**").hasAuthority("ROLE_USER")
                 .requestMatchers("/auth/admin/**").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated() // Protect all other endpoints
@@ -54,12 +54,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {  // Securely hash user passwords before storing them in the database
         return new BCryptPasswordEncoder(); // Password encoding
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider() {
+    public AuthenticationProvider authenticationProvider() { // Responsible for authenticating users based on their credentials
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
@@ -67,7 +67,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception { // Responsible for coordinating the authentication process
         return config.getAuthenticationManager();
     }
 }

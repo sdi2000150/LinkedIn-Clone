@@ -81,6 +81,12 @@
             <artifactId>jjwt-jackson</artifactId>
             <version>${jjwt.version}</version>
         </dependency>
+
+        <!-- Extras -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
     </dependencies>
 
 <!-- ///////////////////////////////////////////////////////////// -->
