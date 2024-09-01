@@ -1,3 +1,5 @@
+APPLICATION LOGIN - FILES USAGE
+
 UserController.java:
     This class defines the REST API endpoints for user management and authentication. Here's a breakdown of each method and the files involved:
 
