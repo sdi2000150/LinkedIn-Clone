@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration  // Defines configuration for the application. It tells Spring that this class contains beans that should be managed and injected into other parts of the application.
 @EnableWebSecurity // Enables Spring Security
-@EnableMethodSecurity // Allows method-level security (to use annotations like @PreAuthorize and @PostAuthorize to define authorization rules for specific methods)
+@EnableMethodSecurity // Allows method-level security (to use annotations like  @PreAuthorize and @PostAuthorize to define authorization rules for specific methods)
 public class SecurityConfig {
 
     @Autowired  // Enables automatic dependency injection
