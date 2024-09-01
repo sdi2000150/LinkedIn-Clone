@@ -1,5 +1,4 @@
 UserController.java:
-
     This class defines the REST API endpoints for user management and authentication. Here's a breakdown of each method and the files involved:
 
         GET /welcome: This public endpoint doesn't require any security checks. No other files are involved besides UserController.
@@ -7,7 +6,7 @@ UserController.java:
         POST /addNewUser: This endpoint allows adding a new user. It interacts with the following files:
             UserInfoService: Handles adding the user to the database using UserInfoRepository.
             UserInfo: Represents the user data structure.
-            PasswordEncoder (from UserInfoService): Encodes the user's password before saving it.
+            PasswordEncoder (from SecurityConfig): Encodes the user's password before saving it.
 
         GET /user/userProfile: This endpoint requires the user to be logged in with the "ROLE_USER" authority. It uses the following files:
             SecurityConfig: Defines security configurations like URL authorization rules.
@@ -23,6 +22,5 @@ UserController.java:
             AuthRequest: Represents the user's login credentials (username and password).
 
 Other Files:
-
     SecurityDemoApplication: The main application class that bootstraps the Spring application.
     application.properties: Defines application configuration details like database connection and JPA settings.
