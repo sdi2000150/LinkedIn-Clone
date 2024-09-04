@@ -52,6 +52,7 @@ export class LoginPageComponent {
               console.log('User Profile Response:', userProfile);
 
               this.router.navigate(['../user-page']); // For now redirect to user-page
+
               // // Based on profile content, navigate to the appropriate page
               // if (userProfile.includes('Admin')) {
               //   this.router.navigate(['../admin-page']);

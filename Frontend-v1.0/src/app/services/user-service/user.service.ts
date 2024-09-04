@@ -40,7 +40,8 @@ export class UserService {
 
     return this.http.get(url, { headers, responseType: 'text' }); // Expecting plain text response
   }
-  // THESE WERE FOR THE "demo" BACKEND CONNECTION:
+
+  // THE FOLLOWING WERE FOR THE "demo" BACKEND CONNECTION:
 
   // private baseUrl = 'http://localhost:8080/api/students'; // base URL for backend springboot
   // constructor(private http: HttpClient) { }
