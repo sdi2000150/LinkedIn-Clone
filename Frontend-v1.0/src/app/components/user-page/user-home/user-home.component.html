@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div id="left-sidebar">
+        <h2>Personal Information</h2>
+        <ul>
+            <li><a href="../user-page/profile">👤 Profile</a></li>
+            <li><a href="../user-page">🌐 Network</a></li>
+        </ul>
+    </div>
+    <div id="main-content">
+        <div id="post-creation">
+            <textarea placeholder="Start a post..."></textarea>
+            <div class="media-inputs">
+                <label for="media-upload">📷🎥🎵 Media</label>
+                <input type="file" id="media-upload" accept="image/*,video/*,audio/*">
+                <button id="post-button">Post</button>
+            </div>
+        </div>
+        <div id="timeline">
+            <h2>Timeline</h2>
+            <!-- Example post -->
+            <div class="post">
+                <h3>Post 1</h3>
+                <p>Post content...</p>
+                <button>Comment</button>
+                <button>Like</button>
+            </div>
+            <!-- Add more posts here -->
+        </div>
+    </div>
+    <div id="right-sidebar">
+        <h2>Additional Content</h2>
+        <!-- Additional content or advertisements -->
+    </div>
+
+</div>
+
+<!-- so that the page can be scrolled -->
+<div style="margin-top:500px"></div>

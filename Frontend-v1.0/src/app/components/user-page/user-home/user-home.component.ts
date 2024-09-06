@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Import CommonModule (for NgFor... usage on the HTML)
 import { NavbarComponent } from '../navbar/navbar.component';
-import { UserService } from '../../services/user-service/user.service';
+import { UserService } from '../../../services/user-service/user.service';
 
 @Component({
-  selector: 'app-user-page',
+  selector: 'app-user-home',
   standalone: true,
   imports: [CommonModule, NavbarComponent],
-  templateUrl: './user-page.component.html',
-  styleUrls: ['./user-page.component.css']
+  templateUrl: './user-home.component.html',
+  styleUrls: ['./user-home.component.css']
 })
-export class UserPageComponent implements OnInit {
+export class UserHomeComponent implements OnInit {
 
   // THESE WERE FOR THE "demo" BACKEND CONNECTION:
   

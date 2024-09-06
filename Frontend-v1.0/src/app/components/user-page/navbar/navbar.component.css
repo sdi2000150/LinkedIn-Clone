@@ -1,0 +1,65 @@
+/* General styles */
+:host {
+    display: block;
+    width: 100%;
+}
+
+#navbar-container {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Center the navbar container */
+    background-color: white;
+}
+
+#navbar {
+    display: flex;
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center;
+    width: 80%; /* Adjust the width to fit your design */
+    max-width: 1200px; /* Optional: set a max width for large screens */
+    padding: 10px 0; /* Increase padding to make the navbar fatter */
+}
+
+.logo {
+  font-size: 1.8em;
+  color: #0077B5;
+  font-weight: bold;
+  display: flex;
+  align-items: center; /* Align logo and text vertically */
+  margin-right: 20px; /* Reduce space between logo and nav items */
+}
+
+.logo img {
+  max-height: 40px;
+  width: auto;
+  margin-right: 5px; /* Reduce space between logo image and text */
+}
+
+#navbar ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    margin-left: 90px; /* Reduce space between logo and ul */
+}
+
+#navbar li {
+    display: inline;
+    margin-right: 15px; /* Reduce space between items */
+    font-size: 16px;
+}
+
+#navbar a {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    display: block;
+}
+
+.container a:hover {
+    background-color: #0077B5; /* LinkedIn's hover color */
+    border-radius: 4px;
+    color: white; /* Change text color on hover */
+}
