@@ -1,27 +1,32 @@
 /* General styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-.logo {
-    display: flex;
-    align-items: center;
-    font-size: 1.5em;
-    color: #0077B5;
-    font-weight: bold;
-}
-
 body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.6;
+  font-size: 1.1em; /* Slightly increase base font size */
 }
 
 header {
-  background: #f4f4f4;
-  padding: 1rem;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 100px;
+  background-color: #f8f9fa;
+}
+
+.logo {
+  font-size: 1.8em;
+  color: #0077B5;
+  font-weight: bold;
+}
+.logo img {
+  max-height: 40px; /* Adjust the height as needed */
+  width: auto;
+  margin-top: 10px; /* Add margin to move it slightly to the bottom */
 }
 
 .container {
@@ -29,6 +34,17 @@ header {
   width: 500px;
   overflow: auto;
   padding: 3rem 2rem;
+}
+
+h1 {
+  margin-bottom: 0.3em; /* Add space between h1 and h2 */
+  font-size: 2.3em; /* Increase font size */
+}
+
+h2 {
+  margin-bottom: 0;
+  font-weight: normal; /* Remove bold */
+  font-size: 1.2em; /* Decrease font size */
 }
 
 #my-form {
@@ -109,6 +125,15 @@ header {
     background: #004164;
 }
 
+.sign-up-container {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Space between text and button */
+}
+
+.new-to-linkedin {
+  margin-bottom: 0; /* Remove bottom margin */
+}
 .error {
   background: orangered;
   color: #fff;

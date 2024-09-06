@@ -1,26 +1,32 @@
 <header>
-    <h1>Welcome-Login Page</h1>
-    <div class="logo">LinkedIn-Clone</div>
-  </header>
+  <!-- <h1>Welcome-Login Page</h1> -->
+  <div class="logo">
+    <img src="assets/logos/mainLogoOfficial.png" alt="LinkedIn-Clone">
+  </div>  
+</header>
   
-  <section class="container">
-    <form id="my-form" (submit)="onLogIn()">
-      <h1>Log In</h1>
-      <br>
-      <div *ngIf="msg" class="msg error">{{ msg }}</div>
-      <div class="msg"></div>
-      <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" [(ngModel)]="name" name="name">
-      </div>
-      <div class="password-input">
-        <label for="password">Password:</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password">
-        <span class="toggle-password" (click)="showPassword()">show</span>
-      </div>
-      <input class="btn" type="submit" value="Login">
-    </form>
-    <form id="sign-up" (submit)="onSignUp()">
-      <p>New to LinkedIn? <button class="btn2" type="submit" value="SignUp">Sign Up</button></p>
-    </form>
-  </section>
+<section class="container">
+  <form id="my-form" (submit)="onLogIn()">
+    <h1>Login</h1>
+    <h2>Stay updated on your professional world.</h2>
+    <br>
+    <div *ngIf="msg" class="msg error">{{ msg }}</div>
+    <div class="msg"></div>
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" [(ngModel)]="name" name="name">
+    </div>
+    <div class="password-input">
+      <label for="password">Password:</label>
+      <input type="password" id="password" [(ngModel)]="password" name="password">
+      <span class="toggle-password" (click)="showPassword()">show</span>
+    </div>
+    <input class="btn" type="submit" value="Login">
+  </form>
+  <form id="sign-up" (submit)="onSignUp()">
+    <div class="sign-up-container">
+      <p class="new-to-linkedin">New to LinkedIn-Clone?</p>
+      <button class="btn2" type="submit" value="SignUp">Sign Up</button>
+    </div>
+  </form>
+</section>

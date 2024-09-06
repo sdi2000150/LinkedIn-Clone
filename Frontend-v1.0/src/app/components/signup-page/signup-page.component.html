@@ -1,66 +1,62 @@
 <header>
-    <h1>Sign Up Page</h1>
-    <div class="logo">LinkedIn-Clone</div>
-  </header>
+    <!-- <h1>Sign Up Page</h1> -->
+    <div class="logo">
+      <img src="assets/logos/mainLogoOfficial.png" alt="LinkedIn-Clone">
+    </div>  
+</header>
   
-  <section class="container">
-    <form id="my-form">
-      <h1>Sign Up.</h1>
-      <h1>Stay Connected</h1>
-      <br>
-      <div *ngIf="msg" class="msg error">{{ msg }}</div>
-      <div class="msg"></div>
-
-      <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" [(ngModel)]="name" name="name">
-      </div>
-
-      <div>
-        <label for="surname">Surname:</label>
-        <input type="text" id="surname" [(ngModel)]="surname" name="surname">
-      </div>
-
-      <div>
-        <label for="email">Email:</label> <!-- If there is already email address used. Show error message-->
-        <input type="text" id="email" [(ngModel)]="email" name="email">
-      </div>
-      
-      <div>
-        <label for="role">Role:</label>
-        <select id="role" [(ngModel)]="role">
-          <option value="ROLE_USER">User</option>
-          <option value="ROLE_ADMIN">Admin</option>
-        </select>
-      </div>
-
-      <div class="password-input">
-        <label for="password">Password:</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password">
-        <span class="toggle-password" (click)="showPassword()">show</span>
-      </div>
-
-      <div class="password-input">
-        <label for="passwordConf">Confirm Password:</label>
-        <input type="password" id="passwordConf" [(ngModel)]="passwordConf" name="passwordConf">
-        <span class="toggle-password" (click)="showPasswordConf()">show</span>
-      </div>
-      
-      <div>
-      <label for="phone">Phone number:</label>
-      <input type="tel" id="phone" name="phone" [(ngModel)]="phone" placeholder="" pattern="[0-9]{10}"> <!-- add required attribute(?)-->
-      </div>
-      <div>
-      <label for="image">Image:</label>
-        <input type="file" id="image" accept="image/*"><br>
-      </div>
-      <!--Doesnt check erros. Bug on submit-->
-      <form id="sign-up" (submit)="SignUp()">
-       <button class="btn2" type="submit" value="SignUp">Sign Up</button>
-      </form>
+<section class="container">
+  <form id="my-form">
+    <h1>Signup</h1>
+    <h2>Make the most of your professional life.</h2>
+    <br>
+    <div *ngIf="msg" class="msg error">{{ msg }}</div>
+    <div class="msg"></div>
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" [(ngModel)]="name" name="name">
+    </div>
+    <div>
+      <label for="surname">Surname:</label>
+      <input type="text" id="surname" [(ngModel)]="surname" name="surname">
+    </div>
+    <div>
+      <label for="email">Email:</label> <!-- If there is already email address used. Show error message-->
+      <input type="text" id="email" [(ngModel)]="email" name="email">
+    </div>
+    
+    <!-- <div>
+      <label for="role">Role:</label>
+      <select id="role" [(ngModel)]="role">
+        <option value="ROLE_USER">User</option>
+        <option value="ROLE_ADMIN">Admin</option>
+      </select>
+    </div> -->
+    <div class="password-input">
+      <label for="password">Password:</label>
+      <input type="password" id="password" [(ngModel)]="password" name="password">
+      <span class="toggle-password" (click)="showPassword()">show</span>
+    </div>
+    <div class="password-input">
+      <label for="passwordConf">Confirm Password:</label>
+      <input type="password" id="passwordConf" [(ngModel)]="passwordConf" name="passwordConf">
+      <span class="toggle-password" (click)="showPasswordConf()">show</span>
+    </div>
+    
+    <div>
+    <label for="phone">Phone number:</label>
+    <input type="tel" id="phone" name="phone" [(ngModel)]="phone" placeholder="" pattern="[0-9]{10}"> <!-- add required attribute(?)-->
+    </div>
+    <div>
+    <label for="image">Image:</label>
+      <input type="file" id="image" accept="image/*"><br>
+    </div>
+    <!--Doesnt check erros. Bug on submit-->
+    <form id="sign-up" (submit)="SignUp()">
+     <button class="btn2" type="submit" value="SignUp">Sign Up</button>
     </form>
-
-  </section>
+  </form>
+</section>
 
 
  

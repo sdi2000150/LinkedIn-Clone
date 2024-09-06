@@ -1,0 +1,27 @@
+<header>
+    <div class="logo">
+        <img src="assets/logos/mainLogoOfficial.png" alt="LinkedIn-Clone">
+    </div>
+    <div class="header-buttons">
+        <button class="btn2" (click)="onLogIn()">LOGIN</button>
+        <button class="btn2" (click)="onSignUp()">SIGN UP</button>
+    </div>
+</header>
+  
+<div class="main-content">
+    <section class="container">
+        <h1>Welcome to your <br> professional community</h1>
+        <form id="login" (submit)="onLogIn()">
+            <button class="btn2" type="submit" value="Login">Login with Credentials</button>
+        </form>
+        <form id="sign-up" (submit)="onSignUp()">
+            <div class="sign-up-container">
+                <p class="new-to-linkedin">New to LinkedIn-Clone?</p>
+                <button class="btn2" type="submit" value="SignUp">Sign Up</button>
+            </div>
+        </form>
+    </section>
+    <div class="image-container">
+        <img src="assets/images/welcomePageImage.png" alt="Logo or Image">
+    </div>
+</div>
