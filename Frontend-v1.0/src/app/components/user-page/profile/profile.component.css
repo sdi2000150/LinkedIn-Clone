@@ -61,7 +61,7 @@ header {
 }
 
 .user-info h2 {
-    margin: 10px 0;
+    margin: 10px 200px 10px 0; /* Adjust the margin-right to move the h2 to the left */
     font-size: 20px;
     color: #333;
 }
@@ -71,7 +71,7 @@ header {
     color: white;
     border: none;
     padding: 10px 20px;
-    margin: 5px 0;
+    margin: 5px 5px 5px 0; /* Add margin-right for spacing between buttons */
     cursor: pointer;
     border-radius: 4px;
 }

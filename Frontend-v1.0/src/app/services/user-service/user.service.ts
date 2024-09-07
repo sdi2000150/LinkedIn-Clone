@@ -14,9 +14,24 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = 'http://localhost:8080/auth'; // base URL for backend springboot
+  private baseUrl = 'http://localhost:8080'; // base URL for backend springboot
+  
 
   constructor(private http: HttpClient) { }
+
+
+  getUser(): Observable<any> {
+    const url = `${this.baseUrl}/user/1`; // For now, just fetch user
+
+    return this.http.get(url);
+  }
+
+
+  // THE FOLLOWING WERE FOR THE "security-demo" BACKEND CONNECTION:
+
+  // private baseUrl = 'http://localhost:8080/auth'; // base URL for backend springboot
+
+  // constructor(private http: HttpClient) { }
 
   signup(user: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/addNewUser`, user, { responseType: 'text' }); // The backend returns as a plain string a "User Added Successfully"
