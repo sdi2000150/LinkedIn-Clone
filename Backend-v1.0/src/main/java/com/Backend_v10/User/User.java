@@ -6,10 +6,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.NoArgsConstructor;
 
 
 
 @Entity
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,7 +26,8 @@ public class User {
     LocalDate BirthDate;
     byte[] CVFile;
 
-    public User(String name, String Lastname, String lastname, String email, String username){
+    
+    public User(String username, String name, String lastname, String email){
         this.Name = name;
         this.Lastname = lastname;
         this.Email = email;
