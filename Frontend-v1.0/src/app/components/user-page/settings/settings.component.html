@@ -1,34 +1,34 @@
 <app-navbar></app-navbar>
-<header>
+<section class="settings-container">
     <h1>Settings</h1>
-</header>
-<section class="container">
-    <form id="my-form">
-        <h1>User Settings</h1>
-        <br>
-        <div>
-            <label for="email">Change Email:</label> <!-- If there is already email address used. Show error message-->
-            <input type="text" id="email" placeholder="old email address" name="email" value>
+    <form>
+        <div class="form-group">
+            <p>Change Email:</p>
+            <label for="email"></label>
+            <input type="text" id="email" placeholder="New email address" name="email">
         </div>
         
-        <div class="password-input">
-            <label for="password">New Password:</label>
-            <input type="password" id="password"  name="password">
-            <span class="toggle-password">show</span>
+        <div class="form-group">
+            <p>Change Password:</p>
+            <div class="password-input">
+                <label for="password"></label>
+                <input type="password" id="password" placeholder="New Password" [(ngModel)]="password" name="password">
+                <span class="toggle-password" (click)="showPassword()">show</span>
+            </div>
         </div>
 
-        <!--Doesnt check erros. Bug SOLVED(?)-->
-      <div class="password-input">
-          <label for="passwordConf">Confirm New Password:</label>
-          <input type="password" id="passwordConf" name="passwordConf">
-          <span class="toggle-password">show</span>
+        <div class="form-group">
+            <div class="password-input">
+                <label for="passwordConf"></label>
+                <input type="password" id="passwordConf" placeholder="Confirm New Password" [(ngModel)]="passwordConf" name="passwordConf">
+                <span class="toggle-password" (click)="showPasswordConf()">show</span>
+            </div>
         </div>
-        <div>
-            <!-- Make logOut actually log you out and return to login page-->
+
+        <div class="form-group">
             <a href="../../welcome-page">
-            <button id="logOut" type="button">Log Out!</button>
+                <button id="logOut" type="button">Log Out!</button>
             </a>
         </div>
     </form>
-    
 </section>
