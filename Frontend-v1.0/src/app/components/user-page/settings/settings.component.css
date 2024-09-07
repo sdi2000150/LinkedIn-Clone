@@ -1,62 +1,53 @@
-/* General styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    font-size: 1.5em;
-    color: #0077B5;
-    font-weight: bold;
-}
-
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.6;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
 }
 
-header {
-  background: #f4f4f4;
-  padding: 1rem;
+.settings-container {
+  width: 60%; /* Adjusted width to make it smaller */
+  max-width: 800px; /* Added max-width for better responsiveness */
+  margin: 20px auto;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.settings-container h1 {
   text-align: center;
+  color: #0077B5;
 }
 
-.container {
-  margin: auto;
-  width: 500px;
-  overflow: auto;
-  padding: 3rem 2rem;
+.form-group {
+  margin-bottom: 20px;
 }
 
-#my-form {
-  padding: 2rem;
-  background: #f4f4f4;
-}
-
-#my-form label {
+.form-group label {
   display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #333;
 }
 
-#my-form input[type='text'],
-#my-form input[type='password'],
-#my-form input[type='tel'] {
+.form-group input[type="text"],
+.form-group input[type="password"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .password-input {
   position: relative;
 }
+
 .password-input .toggle-password {
   position: absolute;
-  top: 38%;
+  top: 12%;
   right: 10px;
   font-size: medium;
   cursor: pointer;
@@ -78,58 +69,41 @@ header {
   color: rgb(255, 255, 255);
 }
 
-.btn {
+.form-group button {
+  background-color: #0077B5;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
   display: block;
   width: 100%;
-  padding: 10px 15px;
-  border: 0;
-  background: #0077B5;
-  color: #fff;
-  border-radius: 5px;
-  margin: 5px 0;
-  cursor: pointer;
+  font-size: 16px;
 }
 
-.btn2 {
-  /* display: block; */
-  /* width: 100%; */
-  padding: 10px 15px;
-  border: 0;
-  background: #0077B5;
-  color: #fff;
-  border-radius: 5px;
-  margin: 5px 0;
-  width: 100%;
-  cursor: pointer;
-}
-
-.btn:hover {
-  background: #004164;
-}
-
-.btn2:hover {
-    background: #004164;
-}
-
-.error {
-  background: orangered;
-  color: #fff;
-  padding: 5px;
-  margin: 5px;
+.form-group button:hover {
+  background-color: #005f8d;
 }
 
 #logOut {
-    padding: 10px 15px;
-    border: 0;
-    background: #0077B5;
-    color: #fff;
-    border-radius: 5px;
-    margin: 5px 0;
-    width: 100%;
-    cursor: pointer;
+  background-color: #ec4a45; /* Typical logout button color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;   /* centered */
+  width: 75%;
+  font-size: 16px;
+  margin-top: 20px;
 }
 
 #logOut:hover {
-    background: #004164;
+  background-color: #c9302c;
+}
 
+/* Add this to remove underline from the <a> tag */
+a {
+  text-decoration: none;
 }

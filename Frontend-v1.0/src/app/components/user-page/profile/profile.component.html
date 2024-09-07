@@ -1,40 +1,57 @@
 <app-navbar></app-navbar>
-<header>
-    <h1>Profile</h1>
-</header>
 <div class="profile-container">
     <div class="profile-header">
-        <!-- <div class="profile-picture">
-        </div> -->
+        <div class="cover-photo">
+            <label for="media-upload">
+                <img [src]="'assets/images/placeholder-cover.jpg'" alt="Cover Picture" style="cursor: pointer;">
+            </label>
+            <input type="file" id="media-upload" accept="image/*" style="display: none;">
+        </div>
         <div class="profile-info">
-            <p>Info: </p>
-            <button>Connect</button>
-            <button>Message</button>
+            <div class="profile-picture">
+                <label for="media-upload">
+                    <img [src]="'assets/images/placeholder-profile.jpg'" alt="Profile Picture" style="cursor: pointer;">
+                </label>
+                <input type="file" id="media-upload" accept="image/*" style="display: none;">
+            </div>
+            <div class="user-info">
+                <h2>{{ userName }}</h2>
+                <button>Connect</button>
+                <button>Message</button>
+            </div>
         </div>
     </div>
+    <br><br><br><br><br><br><br><br><br><br>
     <div class="profile-content">
         <div class="profile-section">
             <h2>About</h2>
-            <p>...</p>
+            <textarea placeholder="Enter your professional summary..."></textarea>
         </div>
         <div class="profile-section">
             <h2>Experience</h2>
             <ul>
-                <li>
-                </li>
-                <li>
-                </li>
+                <label>
+                    <input type="checkbox"> Public
+                </label>
+                <!-- Add experience entries as needed -->
+            </ul>
+        </div>
+        <div class="profile-section">
+            <h2>Education</h2>
+            <ul>
+                <label>
+                    <input type="checkbox"> Public
+                </label>
+                <!-- Add education entries as needed -->
             </ul>
         </div>
         <div class="profile-section">
             <h2>Skills</h2>
-            <ul class="skills-list">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+            <ul>
+                <label>
+                    <input type="checkbox"> Public
+                </label>
+                <!-- Add skills as needed -->
             </ul>
         </div>
     </div>
