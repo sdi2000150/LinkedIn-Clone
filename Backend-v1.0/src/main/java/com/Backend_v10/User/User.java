@@ -1,5 +1,6 @@
 package com.Backend_v10.User;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,12 +13,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 
 @Entity
 @NoArgsConstructor
+@Table(name = "Users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,6 +44,7 @@ public class User {
         this.Lastname = lastname;
         this.Email = email;
         this.Username = username;
+        MyArticles = new ArrayList<>();
     }
 
     public void setUserID(Long userID) {
@@ -111,6 +116,16 @@ public class User {
         return "User [UserID=" + UserID + ", Username=" + Username + ", Name=" + Name + ", Lastname=" + Lastname
                 + ", Email=" + Email + ", Photo=" + Arrays.toString(Photo) + ", BirthDate=" + BirthDate + ", CVFile="
                 + Arrays.toString(CVFile) + "]";
+    }
+
+    public void setMyArticles(List<Article> myArticles) {
+        MyArticles = myArticles;
+    }
+    public void AddArticle(Article NewArticle){
+        this.MyArticles.add(NewArticle);
+    }
+    public List<Article> getMyArticles() {
+        return MyArticles;
     }
 
     

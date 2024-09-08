@@ -3,6 +3,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.Backend_v10.Articles.Article;
 import com.Backend_v10.User.User;
 import com.Backend_v10.User.UserRepository;
 
@@ -21,7 +22,11 @@ public class LoadDatabase {
         // s.setMyClassroom(c);
         // Srepository.save(s);
         //Crepository.save(c);
+        
         User u = new User("theomor", "Theodoros", "Moraitis", "theomor@gmail.com");
+        Article article = new Article("Just got my First Job!!", null);
+        u.AddArticle(article);
+                
         UserRepo.save(u);
       };
   }
