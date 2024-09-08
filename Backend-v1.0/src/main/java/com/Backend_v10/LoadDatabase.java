@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.Backend_v10.Articles.Article;
+import com.Backend_v10.Articles.ArticleRepository;
 import com.Backend_v10.User.User;
 import com.Backend_v10.User.UserRepository;
 
@@ -25,8 +26,9 @@ public class LoadDatabase {
         
         User u = new User("theomor", "Theodoros", "Moraitis", "theomor@gmail.com");
         Article article = new Article("Just got my First Job!!", null);
+       // ArticleRepo.save(article);
         u.AddArticle(article);
-                
+        
         UserRepo.save(u);
       };
   }

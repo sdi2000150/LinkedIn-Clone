@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.transaction.Transactional;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -39,6 +40,7 @@ public class User {
     byte[] Photo;
     LocalDate BirthDate;
     byte[] CVFile;
+    
     public User(String username, String name, String lastname, String email){
         this.Name = name;
         this.Lastname = lastname;
@@ -121,6 +123,8 @@ public class User {
     public void setMyArticles(List<Article> myArticles) {
         MyArticles = myArticles;
     }
+
+    @Transactional
     public void AddArticle(Article NewArticle){
         this.MyArticles.add(NewArticle);
     }

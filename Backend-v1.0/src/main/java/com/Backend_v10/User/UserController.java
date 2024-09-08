@@ -34,7 +34,7 @@ public class UserController {
         //Optional<User> u = this.repository.findByEmail(Email);
         Optional<User> u = this.repository.findById(1L);
         //unwrap Optional with .get
-        System.out.println("Giving back user" + u.get().getName());
+        System.out.println("Giving back user " + u.get().getMyArticles().size());
         return ResponseEntity.ok(u.get());
     }
     
