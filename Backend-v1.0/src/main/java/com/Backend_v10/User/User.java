@@ -1,11 +1,17 @@
 package com.Backend_v10.User;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
 
+import com.Backend_v10.Articles.Article;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.NoArgsConstructor;
 
 
@@ -16,7 +22,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long UserID;
-
+    
+     @OneToMany(cascade = CascadeType.ALL)
+     @JoinColumn(name = "article_id")
+     private List<Article> MyArticles;
+    
     //rest of the fields (may be private)
     String Username;
     String Name;
@@ -25,8 +35,6 @@ public class User {
     byte[] Photo;
     LocalDate BirthDate;
     byte[] CVFile;
-
-    
     public User(String username, String name, String lastname, String email){
         this.Name = name;
         this.Lastname = lastname;

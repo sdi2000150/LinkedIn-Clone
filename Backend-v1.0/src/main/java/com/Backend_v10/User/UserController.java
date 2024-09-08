@@ -10,6 +10,9 @@ import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -35,4 +38,26 @@ public class UserController {
         return ResponseEntity.ok(u.get());
     }
     
+    //updates User fields. Returns true if its done properly, false else
+    @PutMapping("/{id}")
+    public Boolean UpdateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+
+        repository.findById(id).map(u -> {
+            u.setName(updatedUser.getName());
+            u.setLastname(updatedUser.getLastname());
+            u.setEmail(updatedUser.getEmail());
+            u.setBirthDate(updatedUser.getBirthDate());
+            u.setCVFile(updatedUser.getCVFile());
+            u.setPhoto(updatedUser.getPhoto());
+            u.setUsername(updatedUser.getUsername());
+            repository.save(u);
+            return true;
+        })
+        .orElseGet(() -> {
+            return false;
+        });
+        return false;
+    }
+
+
 }
