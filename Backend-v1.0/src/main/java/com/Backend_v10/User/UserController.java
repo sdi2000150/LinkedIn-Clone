@@ -7,18 +7,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
     private final UserRepository repository;
 
@@ -46,7 +47,7 @@ public class UserController {
             u.setName(updatedUser.getName());
             u.setLastname(updatedUser.getLastname());
             u.setEmail(updatedUser.getEmail());
-            u.setBirthDate(updatedUser.getBirthDate());
+            u.setBirthdate(updatedUser.getBirthdate());
             u.setCVFile(updatedUser.getCVFile());
             u.setPhoto(updatedUser.getPhoto());
             u.setUsername(updatedUser.getUsername());

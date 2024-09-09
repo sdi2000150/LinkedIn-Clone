@@ -1,4 +1,5 @@
 package com.Backend_v10.User;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,12 +17,15 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.transaction.Transactional;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 
 
-@Entity
-@NoArgsConstructor
+@Entity             // This tells Hibernate to make a table out of this class
+@Data               // Lombok annotation to create all the getters, setters, toString methods based on the fields
+@AllArgsConstructor // Lombok annotation to create a constructor with all the arguments
+@NoArgsConstructor  // Lombok annotation to create a constructor with no arguments
 @Table(name = "Users")
 public class User {
     @Id
@@ -33,92 +37,33 @@ public class User {
      private List<Article> MyArticles;
     
     //rest of the fields (may be private)
-    String Username;
-    String Name;
-    String Lastname;
-    String Email;
-    byte[] Photo;
-    LocalDate BirthDate;
-    byte[] CVFile;
+    private String username;
+    private String name;
+    private String password;
+    private String lastname;
+    private String email;
+    private byte[] photo;
+    private LocalDate birthdate;
+    private byte[] CVFile;
+    private String role;
     
-    public User(String username, String name, String lastname, String email){
-        this.Name = name;
-        this.Lastname = lastname;
-        this.Email = email;
-        this.Username = username;
+    public User(String username, String name, String password, String lastname, String email){
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.username = username;
+        this.password = password;
         MyArticles = new ArrayList<>();
     }
 
-    public void setUserID(Long userID) {
-        UserID = userID;
-    }
+    // Getters and Setters are automaticaly created (in the background) by Lombok
 
-    public void setUsername(String username) {
-        Username = username;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public void setLastname(String lastname) {
-        Lastname = lastname;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
-
-    public void setPhoto(byte[] photo) {
-        Photo = photo;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        BirthDate = birthDate;
-    }
-
-    public void setCVFile(byte[] cVFile) {
-        CVFile = cVFile;
-    }
-
-    public Long getUserID() {
-        return UserID;
-    }
-
-    public String getUsername() {
-        return Username;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public String getLastname() {
-        return Lastname;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public byte[] getPhoto() {
-        return Photo;
-    }
-
-    public LocalDate getBirthDate() {
-        return BirthDate;
-    }
-
-    public byte[] getCVFile() {
-        return CVFile;
-    }
-
-    @Override
-    public String toString() {
-        return "User [UserID=" + UserID + ", Username=" + Username + ", Name=" + Name + ", Lastname=" + Lastname
-                + ", Email=" + Email + ", Photo=" + Arrays.toString(Photo) + ", BirthDate=" + BirthDate + ", CVFile="
-                + Arrays.toString(CVFile) + "]";
-    }
+    // @Override
+    // public String toString() {
+    //     return "User [UserID=" + UserID + ", Username=" + Username + ", Name=" + Name + ", Lastname=" + Lastname
+    //             + ", Email=" + Email + ", Photo=" + Arrays.toString(Photo) + ", BirthDate=" + BirthDate + ", CVFile="
+    //             + Arrays.toString(CVFile) + "]";
+    // }
 
     public void setMyArticles(List<Article> myArticles) {
         MyArticles = myArticles;
@@ -131,10 +76,6 @@ public class User {
     public List<Article> getMyArticles() {
         return MyArticles;
     }
-
-    
-
-
 
 
 }
