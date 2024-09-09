@@ -47,7 +47,7 @@ export class UserService {
     // const url = role === 'ROLE_ADMIN' ? 
     //             `${this.baseUrl}/admin/adminProfile` : 
     //             `${this.baseUrl}/user/userProfile`;
-    const url = `${this.baseUrl}/user/1`; // For now, just fetch user 1
+    const url = `${this.baseUrl}/user/1`; // For now, just fetch user
 
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + localStorage.getItem('token') // Use token from localStorage

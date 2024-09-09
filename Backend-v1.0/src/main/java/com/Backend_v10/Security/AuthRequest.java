@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor  // Lombok annotation to create a constructor with no arguments
 public class AuthRequest {  // Class to hold the login credentials
 
-    private String username;    // "Username" is the name
+    // private String username;    // "Username" is the name
+    private String email;
     private String password;    // "Password" is the password
 
 }

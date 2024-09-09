@@ -14,7 +14,7 @@ import { UserService } from '../../services/user-service/user.service';
 
 export class LoginPageComponent {
   title = 'Frontend-v1.0';
-  name: string = '';
+  email: string = '';
   password: string = '';
   msg: string = '';
 
@@ -27,16 +27,16 @@ export class LoginPageComponent {
   }
 
   onLogIn() {
-    if (this.name === '' || this.password === '') {
+    if (this.email === '' || this.password === '') {
       this.msg = 'Please enter both fields';
 
       setTimeout(() => this.msg = '', 3000);  //set a timer for the time the error will show
     } else {
-      console.log('Name:', this.name);
+      console.log('Email:', this.email);
       console.log('Password:', this.password);
       //logic here
       const authRequest = {
-        username: this.name,
+        email: this.email,
         password: this.password
       };
 
@@ -47,7 +47,7 @@ export class LoginPageComponent {
           localStorage.setItem('token', response);
 
           // Fetch user profile
-          this.userService.getUserProfile(this.name).subscribe(
+          this.userService.getUserProfile(this.email).subscribe(
             (userProfile: string) => {
               console.log('User Profile Response:', userProfile);
 
@@ -79,7 +79,7 @@ export class LoginPageComponent {
 
 
       //Clear the form fields
-      this.name = '';
+      this.email = '';
       this.password = '';
 
       // //Redirect to the user-page or admin-page (depending on the name given)

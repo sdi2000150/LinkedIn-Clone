@@ -24,7 +24,7 @@ public class LoadDatabase {
         // Srepository.save(s);
         //Crepository.save(c);
         
-        User u = new User("theomor", "Theodoros", "1234", "Moraitis", "theomor@gmail.com");
+        User u = new User("theomor", "Theodoros", "1234", "ROLE_ADMIN", "Moraitis", "theomor@gmail.com");
         Article article = new Article("Just got my First Job!!", null);
        // ArticleRepo.save(article);
         u.AddArticle(article);

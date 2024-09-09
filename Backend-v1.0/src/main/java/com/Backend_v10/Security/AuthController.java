@@ -47,10 +47,10 @@ public class AuthController {
     @PostMapping("/generateToken")
     public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {   // Authenticate user and generate token
         Authentication authentication = authenticationManager.authenticate( // Authenticate user
-            new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
+            new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword())
         );
         if (authentication.isAuthenticated()) { // If user is authenticated
-            return jwtService.generateToken(authRequest.getUsername()); // Generate token (JWT) and return it
+            return jwtService.generateToken(authRequest.getEmail()); // Generate token (JWT) and return it
         } else {
             throw new UsernameNotFoundException("Invalid user request!");
         }

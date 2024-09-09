@@ -19,6 +19,7 @@ export class SignupPageComponent {
   passwordConf: string = '';
   name: string = '';
   surname: string = '';
+  username: string = '';
   phone: string = '';
   role: string = 'ROLE_USER';  // Default to "User"
   
@@ -41,7 +42,7 @@ export class SignupPageComponent {
   SignUp() {
     //Redirect to the sign-up page
     console.log("On sign up is called")
-    if (this.email === '' || this.password === '' || this.name === '' || this.surname === '' || this.passwordConf === '' || this.phone === '' || this.role === '') {
+    if (this.email === '' || this.password === '' || this.username === '' || this.name === '' || this.surname === '' || this.passwordConf === '') {
       this.msg = 'Please enter all fields';
 
       setTimeout(() => this.msg = '', 3000);  //set a timer for the time the error will show
@@ -52,9 +53,11 @@ export class SignupPageComponent {
       //logic here
       const user = {
         name: this.name,
+        surname: this.surname,
+        username: this.username,
         email: this.email,
         password: this.password,
-        roles: this.role,  // Use the selected role
+        role: 'ROLE_USER'  // Use the default role
         // Add other fields like surname, phone, etc., if they exist in backend
       };
 
@@ -83,6 +86,7 @@ export class SignupPageComponent {
       this.email = '';
       this.password = '';
       this.name ='';
+      this.username = '';
       this.surname = '';
       this.password = '';
       this.passwordConf = '';

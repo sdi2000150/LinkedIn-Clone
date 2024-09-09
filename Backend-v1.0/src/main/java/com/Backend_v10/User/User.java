@@ -47,12 +47,13 @@ public class User {
     private byte[] CVFile;
     private String role;
     
-    public User(String username, String name, String password, String lastname, String email){
+    public User(String username, String name, String password, String role, String lastname, String email){
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.role = role;
         MyArticles = new ArrayList<>();
     }
 

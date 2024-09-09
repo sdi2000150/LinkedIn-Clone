@@ -12,13 +12,13 @@ import java.util.stream.Collectors;
 // Provides a way to map a UserInfo entity from your database to a UserDetails object that Spring Security can understand and use for authentication
 public class UserInfoDetails implements UserDetails {   // Implements the UserDetails interface from Spring Security
 
-    private String username; // Changed from 'name' to 'username' for clarity
+    private String username; // Changed from 'email' to 'username' for clarity
     private String password;
     private List<GrantedAuthority> authorities;
 
     // Constructor
     public UserInfoDetails(User userInfo) {
-        this.username = userInfo.getName(); // Assuming 'name' is used as 'username'
+        this.username = userInfo.getEmail(); // Assuming 'email' is used as 'username'
         this.password = userInfo.getPassword();
         this.authorities = List.of(userInfo.getRole().split(","))
                 .stream()
