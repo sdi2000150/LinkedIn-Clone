@@ -7,17 +7,18 @@ import { AdminHomeComponent } from './components/admin-page/admin-home/admin-hom
 import { ProfileComponent } from './components/user-page/profile/profile.component';
 import { SettingsComponent } from './components/user-page/settings/settings.component';
 import { NavbarComponent } from './components/user-page/navbar/navbar.component';
+import { authGuard } from './auth.guard';  // Import your guard
 
 export const routes: Routes = [
   { path: 'welcome-page', component: WelcomePageComponent },
   { path: 'login-page', component: LoginPageComponent },
   { path: 'signup-page', component: SignupPageComponent },
 
-  { path: 'user-page/user-home', component: UserHomeComponent },
-  { path: 'admin-page/admin-home', component: AdminHomeComponent },
-  { path: 'user-page/navbar', component: NavbarComponent },
-  { path: 'user-page/profile', component: ProfileComponent },
-  { path: 'user-page/settings', component: SettingsComponent },
+  { path: 'user-page/user-home', component: UserHomeComponent, canActivate: [authGuard] },
+  { path: 'admin-page/admin-home', component: AdminHomeComponent, canActivate: [authGuard] },
+  { path: 'user-page/navbar', component: NavbarComponent, canActivate: [authGuard] },
+  { path: 'user-page/profile', component: ProfileComponent, canActivate: [authGuard] },
+  { path: 'user-page/settings', component: SettingsComponent, canActivate: [authGuard] },
 
   
   { path: 'user-page', redirectTo: '/user-page/user-home' },
