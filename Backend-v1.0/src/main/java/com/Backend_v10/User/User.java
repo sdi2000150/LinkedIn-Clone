@@ -6,7 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.Backend_v10.Articles.Article;
-
+import jakarta.persistence.ManyToMany;
+   
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,10 +33,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long UserID;
     
-     @OneToMany(cascade = CascadeType.ALL)
-     @JoinColumn(name = "article_id")
-     private List<Article> MyArticles;
-    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "article_id")
+    private List<Article> MyArticles;
+
+    // @ManyToMany
+    // @JoinColumn(name = "ContactID")
+    // private List<User> Contacts;
+ 
     //rest of the fields (may be private)
     private String username;
     private String name;
@@ -54,8 +59,9 @@ public class User {
         this.username = username;
         this.password = password;
         this.role = role;
-        MyArticles = new ArrayList<>();
-    }
+        this.MyArticles = new ArrayList<>();
+        // this.Contacts = new ArrayList<>();   
+        }
 
     // Getters and Setters are automaticaly created (in the background) by Lombok
 
@@ -79,4 +85,8 @@ public class User {
     }
 
 
+    // @Transactional
+    // public void AddContact(User NewContact){
+    //     this.Contacts.add(NewContact);
+    // }
 }

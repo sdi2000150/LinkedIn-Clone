@@ -1,0 +1,45 @@
+--------TODO-------------------
+
+
+1)Sign Up New User 
+
+2)Log in using Credentials 
+
+3)Use of JWT for the Requests 
+
+4) SSL/TLS Integration
+
+5) Integration of the above also for ADMIN.
+
+6) (ADMIN) Exporting Users data as JSON and XML 
+
+7) (Network) Show connections in grid structure 
+
+8) (Network) Clicking on a connected User returns his personal information page
+
+9) (Network) Click to start chatting with User
+
+10) (Network) Search Bar for new Users (using username or email etc.)
+
+11) (Job Offers) Show Job Offers from Connected Users
+
+12) (Job Offers) Upload own Job Offers
+
+13) (Job Offers) Check Applications of other Users on your Job Offers
+
+14) (Job Offers) Matrix Factorization
+
+15) (Discussions) Left Side: Show all Users as their personal Discussions
+
+16) (Discussions) Center: Show last discussion or current discussion
+
+17) (Notifications) Upper Side: Connection Requests + Choice for acceptance/decline
+
+18) (Notifications) Lower Side: Notifications on interactions of job offers/ articles
+
+19) (Personal Data) Fill in/ Change data 
+
+20) (Personal Data) Change private/public domain 
+
+21) (Settings) Change email and password
+
