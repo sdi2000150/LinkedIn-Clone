@@ -42,7 +42,8 @@ public class LoadDatabase {
         //Crepository.save(c);
         
         // Create and save articles first
-        Article article = new Article("Just got my First Job!!", null);
+        Article article1 = new Article("Just got my First Job!!", null);
+        Article article2 = new Article("Just got my First Job!!", null);
         // articleRepo.save(article);
 
         // Create and save users
@@ -52,8 +53,8 @@ public class LoadDatabase {
         User user2 = new User("jetlee", "Jet", encoder.encode("1234"), "ROLE_USER", "Lee", "jetlee@email.com");
 
         // Associate articles with users
-        admin1.AddArticle(article);
-        // admin2.AddArticle(article);
+        admin1.AddArticle(article1);
+        admin2.AddArticle(article2);
         // user1.AddArticle(article);
         // user2.AddArticle(article);
 

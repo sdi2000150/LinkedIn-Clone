@@ -1,10 +1,14 @@
 package com.Backend_v10.User;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import com.Backend_v10.Articles.Article;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
