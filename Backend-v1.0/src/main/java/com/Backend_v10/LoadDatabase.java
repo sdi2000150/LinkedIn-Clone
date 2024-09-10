@@ -29,12 +29,24 @@ public class LoadDatabase {
         // Srepository.save(s);
         //Crepository.save(c);
         
-        User u = new User("teomor", "Theodoros", encoder.encode("1234"), "ROLE_ADMIN", "Moraitis", "teomor@email.com");
+        User admin1 = new User("teomor", "Theodoros", encoder.encode("1234"), "ROLE_ADMIN", "Moraitis", "teomor@email.com");
         Article article = new Article("Just got my First Job!!", null);
-       // ArticleRepo.save(article);
-        u.AddArticle(article);
-        
-        UserRepo.save(u);
+        // ArticleRepo.save(article);
+        admin1.AddArticle(article);
+
+        User admin2 = new User("nickmosch", "Nikitas", encoder.encode("1234"), "ROLE_ADMIN", "Moschos", "nickmosch@email.com");
+        // ArticleRepo.save(article);
+        admin2.AddArticle(article);
+
+        User user1 = new User("bobross", "Bob", encoder.encode("1234"), "ROLE_USER", "Ross", "bobross@email.com");
+        user1.AddArticle(article);
+        User user2 = new User("jetlee", "Jet", encoder.encode("1234"), "ROLE_USER", "Lee", "jetlee@email.com");
+        user2.AddArticle(article);
+
+
+        UserRepo.save(admin1);
+        UserRepo.save(admin2);
+        UserRepo.save(user1);
       };
   }
 }
