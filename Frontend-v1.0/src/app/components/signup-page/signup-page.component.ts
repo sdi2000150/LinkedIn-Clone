@@ -18,13 +18,14 @@ export class SignupPageComponent {
   password: string = '';
   passwordConf: string = '';
   name: string = '';
-  surname: string = '';
+  lastname: string = '';
   username: string = '';
   phone: string = '';
   birthdate: string = '';
   role: string = 'ROLE_USER';  // Default to "User"
   
-  msg: string = '';
+  msgError: string = '';
+  msgSuccess: string = '';
 
   constructor(private router: Router, private userService: UserService) {} //for usage in this.router.navigate
 
@@ -43,19 +44,19 @@ export class SignupPageComponent {
   SignUp() {
     //Redirect to the sign-up page
     console.log("On sign up is called")
-    if (this.email === '' || this.password === '' || this.username === '' || this.name === '' || this.surname === '' || this.passwordConf === '') {
-      this.msg = 'Please enter all fields';
-      setTimeout(() => this.msg = '', 3000);  //set a timer for the time the error will show
+    if (this.email === '' || this.password === '' || this.username === '' || this.name === '' || this.lastname === '' || this.passwordConf === '') {
+      this.msgError = 'Please enter all the required fields';
+      setTimeout(() => this.msgError = '', 3000);  //set a timer for the time the error will show
 
     } else if (this.password !== this.passwordConf) {
-      this.msg = 'Passwords do not match';
-      setTimeout(() => this.msg = '', 3000);  // Clear the message after 3 seconds
+      this.msgError = 'Passwords do not match';
+      setTimeout(() => this.msgError = '', 3000);  // Clear the message after 3 seconds
       
     } else {
       //logic here
       const user = {
         name: this.name,
-        lastname: this.surname,
+        lastname: this.lastname,
         username: this.username,
         phone: this.phone,
         email: this.email,
@@ -69,9 +70,9 @@ export class SignupPageComponent {
       this.userService.signup(user).subscribe(
         (response: string) => {
           console.log('User added successfully', response);
-          this.msg = 'Signup successful! Redirecting to login...';
+          this.msgSuccess = 'Signup successful! Redirecting to login...';
           setTimeout(() => {
-            this.msg = '';
+            this.msgError = '';
             this.router.navigate(['../login-page']);  // Redirect to login page
           }, 2000);
         },
@@ -81,8 +82,8 @@ export class SignupPageComponent {
           console.log('Message:', error.message);
           console.log('Error body:', error.error);
           
-          this.msg = 'Signup failed! Please try again.';
-          setTimeout(() => this.msg = '', 3000);  // Clear the message after 3 seconds
+          this.msgError = 'Signup failed! Please try again.';
+          setTimeout(() => this.msgError = '', 3000);  // Clear the message after 3 seconds
         }
       );
 
@@ -91,7 +92,7 @@ export class SignupPageComponent {
       this.password = '';
       this.name ='';
       this.username = '';
-      this.surname = '';
+      this.lastname = '';
       this.password = '';
       this.passwordConf = '';
       this.phone = '';

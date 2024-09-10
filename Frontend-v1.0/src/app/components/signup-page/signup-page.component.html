@@ -12,22 +12,24 @@
     <h1>Sign Up</h1>
     <h2>Make the most of your professional life.</h2>
     <br>
-    <div *ngIf="msg" class="msg error">{{ msg }}</div>
-    <div class="msg"></div>
+    <div *ngIf="msgError" class="msgError error">{{ msgError }}</div>
+    <div class="msgError"></div>
+    <div *ngIf="msgSuccess" class="msgSuccess success">{{ msgSuccess }}</div>
+    <div class="msgSuccess"></div>
     <div>
-      <label for="name">Name:</label>
+      <label for="name">Name: <span class="required">*</span></label>
       <input type="text" id="name" [(ngModel)]="name" name="name">
     </div>
     <div>
-      <label for="surname">Surname:</label>
-      <input type="text" id="surname" [(ngModel)]="surname" name="surname">
+      <label for="lastname">Lastname: <span class="required">*</span></label>
+      <input type="text" id="lastname" [(ngModel)]="lastname" name="lastname">
     </div>
     <div>
-      <label for="username">Username:</label>
+      <label for="username">Username: <span class="required">*</span></label>
       <input type="text" id="username" [(ngModel)]="username" name="username">
     </div>
     <div>
-      <label for="email">Email:</label> <!-- If there is already email address used. Show error message-->
+      <label for="email">Email: <span class="required">*</span></label> <!-- If there is already email address used. Show error message-->
       <input type="text" id="email" [(ngModel)]="email" name="email">
     </div>
     
@@ -39,12 +41,12 @@
       </select>
     </div> -->
     <div class="password-input">
-      <label for="password">Password:</label>
+      <label for="password">Password: <span class="required">*</span></label>
       <input type="password" id="password" [(ngModel)]="password" name="password">
       <span class="toggle-password" (click)="showPassword()">show</span>
     </div>
     <div class="password-input">
-      <label for="passwordConf">Confirm Password:</label>
+      <label for="passwordConf">Confirm Password: <span class="required">*</span></label>
       <input type="password" id="passwordConf" [(ngModel)]="passwordConf" name="passwordConf">
       <span class="toggle-password" (click)="showPasswordConf()">show</span>
     </div>
