@@ -30,10 +30,21 @@ public class UserController {
 
     //FILL ALL MAPPINGS(GET,POST,DELETE,PUT)
 
+    //for testing
     @GetMapping("/1")
     public ResponseEntity<User> GetUser() {
         //Optional<User> u = this.repository.findByEmail(Email);
         Optional<User> u = this.repository.findById(1L);
+        //unwrap Optional with .get
+        System.out.println("Giving back user " + u.get().getMyArticles().size());
+        return ResponseEntity.ok(u.get());
+    }
+    
+    //get user info by email
+    @GetMapping("/{email}")
+    public ResponseEntity<User> GetUser(@PathVariable String email) {
+        //Optional<User> u = this.repository.findByEmail(Email);
+        Optional<User> u = this.repository.findByEmail(email);
         //unwrap Optional with .get
         System.out.println("Giving back user " + u.get().getMyArticles().size());
         return ResponseEntity.ok(u.get());

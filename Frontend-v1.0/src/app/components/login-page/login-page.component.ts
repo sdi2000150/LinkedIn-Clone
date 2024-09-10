@@ -29,8 +29,8 @@ export class LoginPageComponent {
   onLogIn() {
     if (this.email === '' || this.password === '') {
       this.msg = 'Please enter both fields';
-
       setTimeout(() => this.msg = '', 3000);  //set a timer for the time the error will show
+
     } else {
       console.log('Email:', this.email);
       console.log('Password:', this.password);
@@ -39,8 +39,7 @@ export class LoginPageComponent {
         email: this.email,
         password: this.password
       };
-
-
+      // call the login service
       this.userService.login(authRequest).subscribe(
         (response: string) => {
           // Store JWT token

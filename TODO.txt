@@ -1,11 +1,11 @@
 --------TODO-------------------
 
 
-1)Sign Up New User 
+1)[DONE] Sign Up New User 
 
-2)Log in using Credentials 
+2)[DONE] Log in using Credentials 
 
-3)Use of JWT for the Requests 
+3)[DONE] Use of JWT for the Requests 
 
 4) SSL/TLS Integration
 

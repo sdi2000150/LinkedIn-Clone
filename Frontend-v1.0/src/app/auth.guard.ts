@@ -12,5 +12,6 @@ export const authGuard: CanActivateFn = (route, state) => {
     // Token doesn't exist, redirect to login
     router.navigate(['/login']);
     return false;
+    // return true; // For now, allow access
   }
 };

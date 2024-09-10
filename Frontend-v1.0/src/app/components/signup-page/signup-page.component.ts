@@ -21,6 +21,7 @@ export class SignupPageComponent {
   surname: string = '';
   username: string = '';
   phone: string = '';
+  birthdate: string = '';
   role: string = 'ROLE_USER';  // Default to "User"
   
   msg: string = '';
@@ -44,21 +45,24 @@ export class SignupPageComponent {
     console.log("On sign up is called")
     if (this.email === '' || this.password === '' || this.username === '' || this.name === '' || this.surname === '' || this.passwordConf === '') {
       this.msg = 'Please enter all fields';
-
       setTimeout(() => this.msg = '', 3000);  //set a timer for the time the error will show
+
     } else if (this.password !== this.passwordConf) {
       this.msg = 'Passwords do not match';
       setTimeout(() => this.msg = '', 3000);  // Clear the message after 3 seconds
+      
     } else {
       //logic here
       const user = {
         name: this.name,
-        surname: this.surname,
+        lastname: this.surname,
         username: this.username,
+        phone: this.phone,
         email: this.email,
         password: this.password,
+        birthdate: this.birthdate,
         role: 'ROLE_USER'  // Use the default role
-        // Add other fields like surname, phone, etc., if they exist in backend
+        // Add other fields like phone, etc., if they exist in backend
       };
 
       // Use UserService to send a signup request
@@ -91,13 +95,8 @@ export class SignupPageComponent {
       this.password = '';
       this.passwordConf = '';
       this.phone = '';
+      this.birthdate = '';
       this.role = 'ROLE_USER';  // Reset to default role
-
-      // //For now it redirects to login page
-      // console.log('Redirect to login-page');
-      // this.router.navigate(['../login-page']);
     }
-
-    console.log('Sign-up User');
   }
 }

@@ -9,7 +9,7 @@
   
 <section class="container">
   <form id="my-form">
-    <h1>Signup</h1>
+    <h1>Sign Up</h1>
     <h2>Make the most of your professional life.</h2>
     <br>
     <div *ngIf="msg" class="msg error">{{ msg }}</div>
@@ -52,6 +52,10 @@
     <div>
     <label for="phone">Phone number:</label>
     <input type="tel" id="phone" name="phone" [(ngModel)]="phone" placeholder="" pattern="[0-9]{10}"> <!-- add required attribute(?)-->
+    </div>
+    <div>
+      <label for="birthdate">Birthdate:</label>
+      <input type="date" id="birthdate" [(ngModel)]="birthdate" name="birthdate">
     </div>
     <div>
     <label for="image">Image:</label>

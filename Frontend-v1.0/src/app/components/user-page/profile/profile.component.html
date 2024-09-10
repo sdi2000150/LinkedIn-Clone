@@ -15,7 +15,7 @@
                 <input type="file" id="media-upload" accept="image/*" style="display: none;">
             </div>
             <div class="user-info">
-                <h2>{{ userName }}</h2>
+                <h1>{{ Name }} {{ Surname }}</h1>
                 <button>Connect</button>
                 <button>Message</button>
                 <button (click)="fetchUserData()">Fetch User Data</button> <!-- New button to fetch user data -->
@@ -24,6 +24,20 @@
     </div>
     <br><br><br><br><br><br><br><br><br><br>
     <div class="profile-content">
+        <div class="profile-section">
+            <h2>Contact info</h2>
+            <ul>
+              <li>
+                <label>Email: {{ Email }}</label>
+              </li>
+              <li>
+                <label>Phone: {{ Phone }}</label>
+              </li>
+              <li>
+                <label>Birthdate: {{ Birthdate }}</label>
+              </li>
+            </ul>
+          </div>
         <div class="profile-section">
             <h2>About</h2>
             <textarea placeholder="Enter your professional summary..."></textarea>

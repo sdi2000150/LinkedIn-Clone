@@ -19,19 +19,11 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-
   getUser(): Observable<any> {
     const url = `${this.baseUrl}/user/1`; // For now, just fetch user
 
     return this.http.get(url);
   }
-
-
-  // THE FOLLOWING WERE FOR THE "security-demo" BACKEND CONNECTION:
-
-  // private baseUrl = 'http://localhost:8080/auth'; // base URL for backend springboot
-
-  // constructor(private http: HttpClient) { }
 
   signup(user: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/auth/addNewUser`, user, { responseType: 'text' }); // The backend returns as a plain string a "User Added Successfully"
@@ -51,9 +43,42 @@ export class UserService {
 
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + localStorage.getItem('token') // Use token from localStorage
-  });
+    });
 
     return this.http.get(url, { headers, responseType: 'text' }); // Expecting plain text response
+  }
+
+  // Method to fetch user profile based on JWT token and extracted email
+  getUserProfileFromToken(token: string): Observable<any> {
+    // Extract the email from the token
+    const email = this.extractEmailFromToken(token);
+
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    // Append the email to the URL
+    const url = `${this.baseUrl}/user/${email}`;
+
+    // Send the GET request with the Authorization header
+    return this.http.get<any>(url, { headers });
+  }
+
+  // Utility method to extract email from the JWT token
+  private extractEmailFromToken(token: string): string | null {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
+      if (payload && payload.sub) {
+        return payload.sub; // Extract and return the email from the 'sub' field
+      } else {
+        console.error('Email not found in token');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error decoding token or extracting email', error);
+      return null;
+    }
   }
 
 }

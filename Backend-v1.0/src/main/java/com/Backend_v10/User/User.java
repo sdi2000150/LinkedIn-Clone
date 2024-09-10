@@ -46,6 +46,7 @@ public class User {
     private String name;
     private String password;
     private String lastname;
+    private String phone;
     private String email;
     private byte[] photo;
     private LocalDate birthdate;
