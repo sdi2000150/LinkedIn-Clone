@@ -54,6 +54,4 @@ public class Article {
         return "Article [articleID=" + articleID + ", Text=" + Text + ", Photo=" + Arrays.toString(Photo) + "]";
     }   
 
-
-    
 }

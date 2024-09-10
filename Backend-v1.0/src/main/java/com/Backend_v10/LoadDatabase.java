@@ -16,11 +16,23 @@ import com.Backend_v10.User.UserRepository;
 @Configuration
 public class LoadDatabase {
 
+  @Autowired  // Inject UserRepository
+  private UserRepository userRepo;
+
+  @Autowired  // Inject ArticleRepository
+  private ArticleRepository articleRepo;
+
   @Autowired  // Inject PasswordEncoder
   private PasswordEncoder encoder;
 
+  public LoadDatabase(UserRepository userRepo, ArticleRepository articleRepo, PasswordEncoder encoder) {
+    this.userRepo = userRepo;
+    this.articleRepo = articleRepo;
+    this.encoder = encoder;
+  }
+
   @Bean  
-  CommandLineRunner initDatabase(UserRepository UserRepo){
+  CommandLineRunner initDatabase(){
     return args -> {
         // Classroom c = new Classroom(33, "George Giannakoopoulos");
         // Srepository.save(new Student());
@@ -29,24 +41,27 @@ public class LoadDatabase {
         // Srepository.save(s);
         //Crepository.save(c);
         
-        User admin1 = new User("teomor", "Theodoros", encoder.encode("1234"), "ROLE_ADMIN", "Moraitis", "teomor@email.com");
+        // Create and save articles first
         Article article = new Article("Just got my First Job!!", null);
-        // ArticleRepo.save(article);
-        admin1.AddArticle(article);
+        // articleRepo.save(article);
 
+        // Create and save users
+        User admin1 = new User("teomor", "Theodoros", encoder.encode("1234"), "ROLE_ADMIN", "Moraitis", "teomor@email.com");
         User admin2 = new User("nickmosch", "Nikitas", encoder.encode("1234"), "ROLE_ADMIN", "Moschos", "nickmosch@email.com");
-        // ArticleRepo.save(article);
-        admin2.AddArticle(article);
-
         User user1 = new User("bobross", "Bob", encoder.encode("1234"), "ROLE_USER", "Ross", "bobross@email.com");
-        user1.AddArticle(article);
         User user2 = new User("jetlee", "Jet", encoder.encode("1234"), "ROLE_USER", "Lee", "jetlee@email.com");
-        user2.AddArticle(article);
 
+        // Associate articles with users
+        admin1.AddArticle(article);
+        // admin2.AddArticle(article);
+        // user1.AddArticle(article);
+        // user2.AddArticle(article);
 
-        UserRepo.save(admin1);
-        UserRepo.save(admin2);
-        UserRepo.save(user1);
+        // Save users to the repository
+        userRepo.save(admin1);
+        userRepo.save(admin2);
+        userRepo.save(user1);
+        userRepo.save(user2);
       };
   }
 }
