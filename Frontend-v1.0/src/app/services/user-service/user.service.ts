@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // Define HTTP options with headers
 const httpOptions = {
@@ -19,11 +20,11 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUser(): Observable<any> {
-    const url = `${this.baseUrl}/user/1`; // For now, just fetch user
+  // getUser(): Observable<any> {
+  //   const url = `${this.baseUrl}/user/1`; // For now, just fetch user
 
-    return this.http.get(url);
-  }
+  //   return this.http.get(url);
+  // }
 
   signup(user: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/auth/addNewUser`, user, { responseType: 'text' }); // The backend returns as a plain string a "User Added Successfully"
@@ -35,18 +36,18 @@ export class UserService {
     });
   }
 
-  getUserProfile(role: string): Observable<any> {
-    // const url = role === 'ROLE_ADMIN' ? 
-    //             `${this.baseUrl}/admin/adminProfile` : 
-    //             `${this.baseUrl}/user/userProfile`;
-    const url = `${this.baseUrl}/user/1`; // For now, just fetch user
+  // getUserProfile(role: string): Observable<any> {
+  //   // const url = role === 'ROLE_ADMIN' ? 
+  //   //             `${this.baseUrl}/admin/adminProfile` : 
+  //   //             `${this.baseUrl}/user/userProfile`;
+  //   const url = `${this.baseUrl}/user/1`; // For now, just fetch user
 
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + localStorage.getItem('token') // Use token from localStorage
-    });
+  //   const headers = new HttpHeaders({
+  //     Authorization: 'Bearer ' + localStorage.getItem('token') // Use token from localStorage
+  //   });
 
-    return this.http.get(url, { headers, responseType: 'text' }); // Expecting plain text response
-  }
+  //   return this.http.get(url, { headers, responseType: 'text' }); // Expecting plain text response
+  // }
 
   // Method to fetch user profile based on JWT token and extracted email
   getUserProfileFromToken(token: string): Observable<any> {
@@ -63,6 +64,27 @@ export class UserService {
 
     // Send the GET request with the Authorization header
     return this.http.get<any>(url, { headers });
+  }
+
+  isUserAdmin(token: string): Observable<boolean> {
+      const email = this.extractEmailFromToken(token);
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      const url = `${this.baseUrl}/user/${email}`;
+
+    // Return an observable that checks if the user is an admin
+    return this.http.get<any>(url, { headers }).pipe(
+      map((data: any) => {
+        if (data.role === 'ROLE_ADMIN') {
+          // User is an admin
+          return true;
+        } else {
+          // User is not an admin
+          return false;
+        }
+      })
+    );
   }
 
   // Utility method to extract email from the JWT token

@@ -4,11 +4,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 
-
-@Entity
+@Entity             // This tells Hibernate to make a table out of this class
+@Data               // Lombok annotation to create all the getters, setters, toString methods based on the fields
+@AllArgsConstructor // Lombok annotation to create a constructor with all the arguments
+@NoArgsConstructor  // Lombok annotation to create a constructor with no arguments
+@Table(name = "Jobs")
 public class Job{
 
     public enum WorkFields{
@@ -27,23 +36,22 @@ public class Job{
     }
 
     public enum Regions{
-        Athens,
-        Tripoli,
-        Thessaloniki,
-        Patra,
-        Volos,
-        Trikala,
-        Chania,
-        Herakleion,
-        Rhodes,
-        Karditsa,
-        Larissa,
-        Nauplio,
-        Syros,
-        Mykonos,
-        Kimi;
+            Athens,
+            Thessaloniki,
+            Patra,
+            Volos,
+            Trikala,
+            Chania,
+            Herakleion,
+            Rhodes,
+            Karditsa,
+            Larissa,
+            Nauplio,
+            Syros,
+            Mykonos,
+            Kimi;
     }
-    public enum Expirience{
+    public enum Experience{
         Junior,
         Mid,
         Senior;
@@ -51,19 +59,17 @@ public class Job{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long JobID;
-    String Title;
-    WorkFields FieldOfWork; 
-    Boolean FullTime;
-    Regions Region; 
-    Integer NumOfLikes;
-    Expirience LevelOfExpirience;
-    Boolean NeedOfDegree;
-    String OtherRequirements;
+    Long jobID;
+    String title;
+    WorkFields fieldOfWork; 
+    Boolean fullTime;
+    Regions region; 
+    Integer numOfLikes;
+    Experience levelOfExperience;
+    Boolean needOfDegree;
+    String otherRequirements;
 
-
-    public Job(String title, WorkFields field){
-        this.Title = title;
-        this.FieldOfWork = field;
+    public Job(String title) {
+        this.title = title;
     }
 }

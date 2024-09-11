@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div id="left-sidebar">
+        <h2>My Job Offers</h2>
+        <ul>
+            <h3>{{ JobTitle }}</h3>
+            <p>Job content...</p>
+            <h3>Job 2</h3>
+            <p>Job content...</p>
+        </ul>
+    </div>
+    <div id="main-content">
+        <div id="timeline">
+            <div id="job-creation">
+                <textarea placeholder="Upload a job offer..."></textarea>
+                <div class="media-inputs">
+                    <label for="media-upload">📷🎥🎵 Media</label>
+                    <input type="file" id="media-upload" accept="image/*,video/*,audio/*">
+                    <button id="post-button">Post Job</button>
+                </div>
+            </div>
+            <h2>Job listings</h2>
+            <!-- Example job -->
+            <div class="post">
+                <h3>Job 1</h3>
+                <p>Job content...</p>
+                <button>Apply</button>
+                <h3>Job 2</h3>
+                <p>Job content...</p>
+                <button>Apply</button>
+            </div>
+            <!-- Add more jobs here -->
+        </div>
+    </div>
+</div>
+
+<!-- so that the page can be scrolled -->
+<div style="margin-top:500px"></div>

@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Import CommonModule (for NgFor... usage on the HTML)
+import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { UserService } from '../../../services/user-service/user.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-user-home',
+  selector: 'app-jobs',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
-  templateUrl: './user-home.component.html',
-  styleUrls: ['./user-home.component.css']
+  imports: [NavbarComponent],
+  templateUrl: './jobs.component.html',
+  styleUrl: './jobs.component.css'
 })
-export class UserHomeComponent implements OnInit {
-  ArticleText: string = 'Empty'; //Placeholder
+export class JobsComponent {
+  JobTitle: string = 'Empty'; //Placeholder
 
   token: string | null = null; // Store token from localStorage
 
@@ -40,7 +39,7 @@ export class UserHomeComponent implements OnInit {
         (data: any) => {
           console.log('User Profile Data:', data);
           // Add any logic you want to execute after fetching the user profile
-          this.ArticleText = data.myArticles[0].text;
+          this.JobTitle = data.myJobs[0].title;
         },
         (error) => {
           console.error('Error fetching user data', error);
@@ -51,5 +50,6 @@ export class UserHomeComponent implements OnInit {
       // Handle case where token is missing
       console.error('No token found');
     }
+
   }
 }

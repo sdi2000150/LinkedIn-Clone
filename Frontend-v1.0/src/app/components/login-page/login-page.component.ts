@@ -46,28 +46,31 @@ export class LoginPageComponent {
           localStorage.setItem('token', response);
 
           // Fetch user profile
-          this.userService.getUserProfile(this.email).subscribe(
-            (userProfile: string) => {
-              console.log('User Profile Response:', userProfile);
+          const token = localStorage.getItem('token'); // Fetch the token from localStorage
+          if (token) {
+            this.userService.getUserProfileFromToken(token).subscribe(
+              (data: any) => {
+                // Add any logic you want to execute after fetching the user profile
+                if (data.role === 'ROLE_USER') {
+                  //Redirect to the user-page
+                  console.log('Redirect to user-page');
+                  this.router.navigate(['../user-page']);
 
-              this.router.navigate(['../user-page']); // For now redirect to user-page
-
-              // // Based on profile content, navigate to the appropriate page
-              // if (userProfile.includes('Admin')) {
-              //   this.router.navigate(['../admin-page']);
-              // } else if (userProfile.includes('User')) {
-              //   this.router.navigate(['../user-page']);
-              // } else {
-              //   this.msg = 'Profile content does not match expected values.';
-              //   setTimeout(() => this.msg = '', 3000);
-              // }
-            },
-            (error) => {
-              console.error('Error fetching user profile', error);
-              this.msg = 'Error fetching user profile. Please try again.';
-              setTimeout(() => this.msg = '', 3000);
-            }
-          );
+                } else if (data.role === 'ROLE_ADMIN') {
+                  //Redirect to the admin-page
+                  console.log('Redirect to admin-page');
+                  this.router.navigate(['../admin-page']);
+                }
+              },
+              (error) => {
+                console.error('Error fetching user data', error);
+                // Handle error, potentially navigate back to login
+              }
+            );
+          } else {
+            // Handle case where token is missing
+            console.error('No token found');
+          }
         },
         (error) => {
           console.error('Login error', error);

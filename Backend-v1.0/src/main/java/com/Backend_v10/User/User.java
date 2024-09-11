@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.Backend_v10.Articles.Article;
+import com.Backend_v10.Jobs.Job;
 import jakarta.persistence.ManyToMany;
    
 import jakarta.persistence.CascadeType;
@@ -23,6 +24,7 @@ import lombok.Data;
 
 
 
+
 @Entity             // This tells Hibernate to make a table out of this class
 @Data               // Lombok annotation to create all the getters, setters, toString methods based on the fields
 @AllArgsConstructor // Lombok annotation to create a constructor with all the arguments
@@ -34,13 +36,17 @@ public class User {
     private Long UserID;
     
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "article_id")
-    private List<Article> MyArticles;
+    @JoinColumn(name = "article_user_id")
+    private List<Article> myArticles;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "job_user_id")
+    private List<Job> myJobs;
 
     // @ManyToMany
     // @JoinColumn(name = "ContactID")
     // private List<User> Contacts;
- 
+
     //rest of the fields (may be private)
     private String username;
     private String name;
@@ -52,7 +58,7 @@ public class User {
     private LocalDate birthdate;
     private byte[] CVFile;
     private String role;
-    
+
     public User(String username, String name, String password, String role, String lastname, String email){
         this.name = name;
         this.lastname = lastname;
@@ -60,9 +66,10 @@ public class User {
         this.username = username;
         this.password = password;
         this.role = role;
-        this.MyArticles = new ArrayList<>();
-        // this.Contacts = new ArrayList<>();   
-        }
+        this.myArticles = new ArrayList<>();
+        this.myJobs = new ArrayList<>();
+        // this.Contacts = new ArrayList<>();
+    }
 
     // Getters and Setters are automaticaly created (in the background) by Lombok
 
@@ -74,15 +81,15 @@ public class User {
     // }
 
     public void setMyArticles(List<Article> myArticles) {
-        MyArticles = myArticles;
+        myArticles = myArticles;
     }
 
     @Transactional
     public void AddArticle(Article NewArticle){
-        this.MyArticles.add(NewArticle);
+        this.myArticles.add(NewArticle);
     }
     public List<Article> getMyArticles() {
-        return MyArticles;
+        return myArticles;
     }
 
 
@@ -90,4 +97,9 @@ public class User {
     // public void AddContact(User NewContact){
     //     this.Contacts.add(NewContact);
     // }
+
+
+    public void AddJob(Job NewJob){
+        this.myJobs.add(NewJob);
+    }   
 }

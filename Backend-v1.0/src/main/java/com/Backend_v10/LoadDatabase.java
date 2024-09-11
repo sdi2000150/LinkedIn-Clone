@@ -9,6 +9,8 @@ import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Articles.ArticleRepository;
 import com.Backend_v10.User.User;
 import com.Backend_v10.User.UserRepository;
+import com.Backend_v10.Jobs.Job;
+import com.Backend_v10.Jobs.JobRepository;
 
 
 
@@ -22,29 +24,27 @@ public class LoadDatabase {
   @Autowired  // Inject ArticleRepository
   private ArticleRepository articleRepo;
 
+  @Autowired  // Inject JobRepository
+  private JobRepository jobRepo;
+
   @Autowired  // Inject PasswordEncoder
   private PasswordEncoder encoder;
 
-  public LoadDatabase(UserRepository userRepo, ArticleRepository articleRepo, PasswordEncoder encoder) {
+  public LoadDatabase(UserRepository userRepo, ArticleRepository articleRepo, JobRepository jobRepo, PasswordEncoder encoder) {
     this.userRepo = userRepo;
     this.articleRepo = articleRepo;
+    this.jobRepo = jobRepo;
     this.encoder = encoder;
   }
 
   @Bean  
   CommandLineRunner initDatabase(){
     return args -> {
-        // Classroom c = new Classroom(33, "George Giannakoopoulos");
-        // Srepository.save(new Student());
-        // Student s = new Student();
-        // s.setMyClassroom(c);
-        // Srepository.save(s);
-        //Crepository.save(c);
-        
-        // Create and save articles first
+
+        // Create articles and jobs first
         Article article1 = new Article("Just got my First Job!!", null);
         Article article2 = new Article("Just got my First Job!!", null);
-        // articleRepo.save(article);
+        Job job1 = new Job("My first job offer");
 
         // Create and save users
         User admin1 = new User("teomor", "Theodoros", encoder.encode("1234"), "ROLE_ADMIN", "Moraitis", "teomor@email.com");
@@ -54,9 +54,10 @@ public class LoadDatabase {
 
         // Associate articles with users
         admin1.AddArticle(article1);
-        admin2.AddArticle(article2);
+        admin1.AddJob(job1);
+        // admin2.AddArticle(article2);
         // user1.AddArticle(article);
-        // user2.AddArticle(article);
+        user2.AddArticle(article2);
 
         // Save users to the repository
         userRepo.save(admin1);
