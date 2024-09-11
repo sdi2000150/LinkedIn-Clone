@@ -10,7 +10,14 @@ export const authGuard: CanActivateFn = (route, state): Observable<boolean> | Pr
   const token = localStorage.getItem('token');
 
   if (token) {
-    // If token exists, check if the user is admin or not
+    // If token exists, check if it is expired
+    if (userService.isTokenExpired(token)) {
+      // If token is expired, redirect to login
+      router.navigate(['/login']);
+      return false;
+    }
+
+    // If token is not expired, check if the user is admin or not
     return userService.isUserAdmin(token).pipe(
       map((isAdmin: boolean) => {
         if (isAdmin && state.url.startsWith('/admin-page')) {

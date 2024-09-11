@@ -83,4 +83,11 @@ export class UserService {
       return null;
     }
   }
+
+  isTokenExpired(token: string): boolean {
+    const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
+    const expiry = payload.exp; // Extract the expiry time from the 'exp' field
+    const now = Math.floor(Date.now() / 1000); // Get the current time in seconds
+    return now >= expiry; // Return if the token is expired
+  }
 }
