@@ -18,18 +18,13 @@
         </div>
         <div id="timeline">
             <h2>Timeline</h2>
-            <!-- Example post -->
-            <div class="post">
-                <h3>{{ ArticleText }}</h3>
-                <p>Post content...</p>
-                <button>Comment</button>
-                <button>Like</button>
-                <h3>Post 2</h3>
-                <p>Post content...</p>
+            <!-- Iterate over the articles and display them -->
+            <div *ngFor="let article of articles" class="post">
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.text }}</p>
                 <button>Comment</button>
                 <button>Like</button>
             </div>
-            <!-- Add more posts here -->
         </div>
     </div>
     <div id="right-sidebar">

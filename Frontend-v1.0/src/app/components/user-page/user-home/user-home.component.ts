@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-home.component.css']
 })
 export class UserHomeComponent implements OnInit {
-  ArticleText: string = 'Empty'; //Placeholder
+  articles: any[] = []; // Store articles of the user
 
   token: string | null = null; // Store token from localStorage
 
@@ -40,8 +40,7 @@ export class UserHomeComponent implements OnInit {
         (data: any) => {
           console.log('User Profile Data:', data);
           // Add any logic you want to execute after fetching the user profile
-          this.ArticleText = data.myArticles[0].text;
-        },
+          this.articles = data.myArticles;        },
         (error) => {
           console.error('Error fetching user data', error);
           // Handle error, potentially navigate back to login

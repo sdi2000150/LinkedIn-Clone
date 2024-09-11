@@ -3,10 +3,13 @@
     <div id="left-sidebar">
         <h2>My Job Offers</h2>
         <ul>
-            <h3>{{ JobTitle }}</h3>
-            <p>Job content...</p>
-            <h3>Job 2</h3>
-            <p>Job content...</p>
+            <!-- Iterate over the articles and display them -->
+            <div *ngFor="let job of jobs" class="post">
+                <h3>{{ job.title }}</h3>
+                <p>{{ job.text }}</p>
+                <button>Comment</button>
+                <button>Like</button>
+            </div>
         </ul>
     </div>
     <div id="main-content">

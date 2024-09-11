@@ -2,16 +2,17 @@ import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { UserService } from '../../../services/user-service/user.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common'; // Import CommonModule (for NgFor... usage on the HTML)
 
 @Component({
   selector: 'app-jobs',
   standalone: true,
-  imports: [NavbarComponent],
+  imports: [NavbarComponent, CommonModule],
   templateUrl: './jobs.component.html',
   styleUrl: './jobs.component.css'
 })
 export class JobsComponent {
-  JobTitle: string = 'Empty'; //Placeholder
+  jobs: any[] = []; // Store articles of the user
 
   token: string | null = null; // Store token from localStorage
 
@@ -39,7 +40,7 @@ export class JobsComponent {
         (data: any) => {
           console.log('User Profile Data:', data);
           // Add any logic you want to execute after fetching the user profile
-          this.JobTitle = data.myJobs[0].title;
+          this.jobs = data.myJobs;
         },
         (error) => {
           console.error('Error fetching user data', error);
