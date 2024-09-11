@@ -27,9 +27,26 @@ body {
 
 #main-header h1 {
     text-align: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     margin: 0;
     font-size: 24px;
+}
+.form-group {
+    margin-left: auto; /* Pushes the form group to the right edge */
+}
+
+#logOut {
+    background-color: #460000; /* Darker blue */
+    color: #ffffff; /* White text color */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px;
+}
+
+#logOut:hover {
+    background-color: #000000; /* Even darker blue on hover */
 }
 
 /* Main Section Styles */
@@ -49,9 +66,8 @@ body {
     padding: 20px;
     box-sizing: border-box;
 }
-
 #sidebar h2 {
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 10px;
     color: #00094a; /* Dark blue color */
 }
@@ -62,8 +78,10 @@ body {
 }
 
 #sidebar ul li {
+    font-size: 17px;
     margin-bottom: 10px;
 }
+
 
 #sidebar ul li a {
     color: #000b4c; /* Dark blue color */
