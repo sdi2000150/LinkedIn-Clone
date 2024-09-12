@@ -85,7 +85,7 @@ public class User {
     // Articles methods:
 
     public void setMyArticles(List<Article> myArticles) {
-        myArticles = myArticles;
+        this.myArticles = myArticles;
     }
 
     @Transactional
