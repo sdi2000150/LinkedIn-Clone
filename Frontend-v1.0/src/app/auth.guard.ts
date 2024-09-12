@@ -40,7 +40,7 @@ export const authGuard: CanActivateFn = (route, state): Observable<boolean> | Pr
   } else {
     // Token doesn't exist, redirect to login
     router.navigate(['/login']);
-    // return false;
-    return true; // For now, allow access
+    return false;
+    // return true; // For now, allow access
   }
 };

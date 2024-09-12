@@ -7,6 +7,9 @@ import java.util.List;
 
 import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Jobs.Job;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.ManyToMany;
    
 import jakarta.persistence.CascadeType;
@@ -43,6 +46,10 @@ public class User {
     @JoinColumn(name = "job_user_id")
     private List<Job> myJobs;
 
+    @ManyToMany
+    @JsonBackReference // Breaks infinite recursion for jobs the user has applied to
+    private List<Job> appliedJobs; // Jobs the user has applied to
+
     // @ManyToMany
     // @JoinColumn(name = "ContactID")
     // private List<User> Contacts;
@@ -59,6 +66,7 @@ public class User {
     private byte[] CVFile;
     private String role;
 
+     //simple constuctor for testing
     public User(String username, String name, String password, String role, String lastname, String email){
         this.name = name;
         this.lastname = lastname;
@@ -68,38 +76,41 @@ public class User {
         this.role = role;
         this.myArticles = new ArrayList<>();
         this.myJobs = new ArrayList<>();
+        this.appliedJobs = new ArrayList<>();
         // this.Contacts = new ArrayList<>();
     }
 
-    // Getters and Setters are automaticaly created (in the background) by Lombok
+    // Getters, Setters and toString are automaticaly created (in the background) by Lombok
 
-    // @Override
-    // public String toString() {
-    //     return "User [UserID=" + UserID + ", Username=" + Username + ", Name=" + Name + ", Lastname=" + Lastname
-    //             + ", Email=" + Email + ", Photo=" + Arrays.toString(Photo) + ", BirthDate=" + BirthDate + ", CVFile="
-    //             + Arrays.toString(CVFile) + "]";
-    // }
+    // Articles methods:
 
     public void setMyArticles(List<Article> myArticles) {
         myArticles = myArticles;
     }
 
     @Transactional
-    public void AddArticle(Article NewArticle){
+    public void addArticle(Article NewArticle){
         this.myArticles.add(NewArticle);
     }
     public List<Article> getMyArticles() {
         return myArticles;
     }
 
+    // Jobs methods:
 
+    public void addJob(Job newJob) {
+        this.myJobs.add(newJob);
+    }
+
+    @Transactional
+    public void applyToJob(Job job) {
+        this.appliedJobs.add(job);
+        job.getApplicants().add(this); // Add this user to the list of applicants in the job
+    } 
+
+    
     // @Transactional
     // public void AddContact(User NewContact){
     //     this.Contacts.add(NewContact);
     // }
-
-
-    public void AddJob(Job NewJob){
-        this.myJobs.add(NewJob);
-    }   
 }

@@ -90,4 +90,17 @@ export class UserService {
     const now = Math.floor(Date.now() / 1000); // Get the current time in seconds
     return now >= expiry; // Return if the token is expired
   }
+
+  // New methods for job functionalities
+  getAllJobs(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/jobs`);
+  }
+
+  getAppliedJobs(userId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/user/${userId}/applied-jobs`);
+  }
+
+  applyToJob(userId: number, jobId: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/user/${userId}/apply/${jobId}`, {});
+  }
 }

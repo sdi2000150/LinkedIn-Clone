@@ -54,17 +54,24 @@ public class LoadDatabase {
         User user2 = new User("jetlee", "Jet", encoder.encode("1234"), "ROLE_USER", "Lee", "jetlee@email.com");
 
         // Associate articles and jobs with users
-        user1.AddArticle(article1);
-        user1.AddArticle(article2);
+        user1.addArticle(article1);
+        user1.addArticle(article2);
         // user2.AddArticle(article2);
-        user1.AddJob(job1);
-        user1.AddJob(job2);
+        user1.addJob(job1);
+        user1.addJob(job2);
 
         // Save users to the repository
         userRepo.save(admin1);
         userRepo.save(admin2);
         userRepo.save(user1);
         userRepo.save(user2);
+
+        // problem occurs here, with user1 login (JSON infinite creation) -> solution: @JsonManagedReference and @JsonBackReference
+        // user2 applies to job1 (posted by user1)
+        user2.applyToJob(job1);
+        // Save the job and the user(again) to update the relationships
+        userRepo.save(user2);
+        jobRepo.save(job1);
       };
   }
 }

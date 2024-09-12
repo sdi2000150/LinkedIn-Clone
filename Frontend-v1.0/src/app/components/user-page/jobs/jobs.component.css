@@ -19,12 +19,13 @@ body {
 }
 
 #left-sidebar,
-#main-content {
+#main-content,
+#right-sidebar {
     background-color: white; /* Match background color */
 }
 
 #left-sidebar {
-    width: 30%;
+    width: 20%;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -53,7 +54,7 @@ body {
 }
 
 #main-content {
-    width: 70%;
+    width: 60%;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -135,4 +136,15 @@ body {
 
 #timeline .post button:hover {
     background: #005f8d;
+}
+#right-sidebar {
+    width: 20%;
+    background-color: white; /* Match background color */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#right-sidebar h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
 }
