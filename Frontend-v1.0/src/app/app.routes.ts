@@ -7,6 +7,9 @@ import { AdminHomeComponent } from './components/admin-page/admin-home/admin-hom
 import { ProfileComponent } from './components/user-page/profile/profile.component';
 import { SettingsComponent } from './components/user-page/settings/settings.component';
 import { NavbarComponent } from './components/user-page/navbar/navbar.component';
+import { JobsComponent } from './components/user-page/jobs/jobs.component';
+import { UsersListComponent } from './components/admin-page/users-list/users-list.component';
+
 import { authGuard } from './auth.guard';  // Import your guard
 
 export const routes: Routes = [
@@ -19,6 +22,9 @@ export const routes: Routes = [
   { path: 'user-page/navbar', component: NavbarComponent, canActivate: [authGuard] },
   { path: 'user-page/profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'user-page/settings', component: SettingsComponent, canActivate: [authGuard] },
+  { path: 'user-page/jobs', component: JobsComponent, canActivate: [authGuard] },
+
+  { path: 'admin-page/users-list', component: UsersListComponent, canActivate: [authGuard] },
 
   
   { path: 'user-page', redirectTo: '/user-page/user-home' },

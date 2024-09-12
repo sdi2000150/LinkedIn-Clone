@@ -6,6 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.Backend_v10.Articles.Article;
+import com.Backend_v10.Jobs.Job;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.ManyToMany;
    
 import jakarta.persistence.CascadeType;
@@ -23,6 +27,7 @@ import lombok.Data;
 
 
 
+
 @Entity             // This tells Hibernate to make a table out of this class
 @Data               // Lombok annotation to create all the getters, setters, toString methods based on the fields
 @AllArgsConstructor // Lombok annotation to create a constructor with all the arguments
@@ -34,13 +39,21 @@ public class User {
     private Long UserID;
     
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "article_id")
-    private List<Article> MyArticles;
+    @JoinColumn(name = "article_user_id")
+    private List<Article> myArticles;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "job_user_id")
+    private List<Job> myJobs;
+
+    @ManyToMany
+    @JsonBackReference // Breaks infinite recursion for jobs the user has applied to
+    private List<Job> appliedJobs; // Jobs the user has applied to
 
     // @ManyToMany
     // @JoinColumn(name = "ContactID")
     // private List<User> Contacts;
- 
+
     //rest of the fields (may be private)
     private String username;
     private String name;
@@ -52,7 +65,8 @@ public class User {
     private LocalDate birthdate;
     private byte[] CVFile;
     private String role;
-    
+
+     //simple constuctor for testing
     public User(String username, String name, String password, String role, String lastname, String email){
         this.name = name;
         this.lastname = lastname;
@@ -60,32 +74,41 @@ public class User {
         this.username = username;
         this.password = password;
         this.role = role;
-        this.MyArticles = new ArrayList<>();
-        // this.Contacts = new ArrayList<>();   
-        }
+        this.myArticles = new ArrayList<>();
+        this.myJobs = new ArrayList<>();
+        this.appliedJobs = new ArrayList<>();
+        // this.Contacts = new ArrayList<>();
+    }
 
-    // Getters and Setters are automaticaly created (in the background) by Lombok
+    // Getters, Setters and toString are automaticaly created (in the background) by Lombok
 
-    // @Override
-    // public String toString() {
-    //     return "User [UserID=" + UserID + ", Username=" + Username + ", Name=" + Name + ", Lastname=" + Lastname
-    //             + ", Email=" + Email + ", Photo=" + Arrays.toString(Photo) + ", BirthDate=" + BirthDate + ", CVFile="
-    //             + Arrays.toString(CVFile) + "]";
-    // }
+    // Articles methods:
 
     public void setMyArticles(List<Article> myArticles) {
-        MyArticles = myArticles;
+        myArticles = myArticles;
     }
 
     @Transactional
-    public void AddArticle(Article NewArticle){
-        this.MyArticles.add(NewArticle);
+    public void addArticle(Article NewArticle){
+        this.myArticles.add(NewArticle);
     }
     public List<Article> getMyArticles() {
-        return MyArticles;
+        return myArticles;
     }
 
+    // Jobs methods:
 
+    public void addJob(Job newJob) {
+        this.myJobs.add(newJob);
+    }
+
+    @Transactional
+    public void applyToJob(Job job) {
+        this.appliedJobs.add(job);
+        job.getApplicants().add(this); // Add this user to the list of applicants in the job
+    } 
+
+    
     // @Transactional
     // public void AddContact(User NewContact){
     //     this.Contacts.add(NewContact);

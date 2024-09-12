@@ -13,19 +13,18 @@
             <div class="media-inputs">
                 <label for="media-upload">📷🎥🎵 Media</label>
                 <input type="file" id="media-upload" accept="image/*,video/*,audio/*">
-                <button id="post-button">Post</button>
+                <button id="post-button">Post Article</button>
             </div>
         </div>
         <div id="timeline">
             <h2>Timeline</h2>
-            <!-- Example post -->
-            <div class="post">
-                <h3>Post 1</h3>
-                <p>Post content...</p>
+            <!-- Iterate over the articles and display them -->
+            <div *ngFor="let article of articles" class="post">
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.text }}</p>
                 <button>Comment</button>
                 <button>Like</button>
             </div>
-            <!-- Add more posts here -->
         </div>
     </div>
     <div id="right-sidebar">

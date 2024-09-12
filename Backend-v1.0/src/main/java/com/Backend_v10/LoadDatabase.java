@@ -9,6 +9,8 @@ import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Articles.ArticleRepository;
 import com.Backend_v10.User.User;
 import com.Backend_v10.User.UserRepository;
+import com.Backend_v10.Jobs.Job;
+import com.Backend_v10.Jobs.JobRepository;
 
 
 
@@ -22,29 +24,28 @@ public class LoadDatabase {
   @Autowired  // Inject ArticleRepository
   private ArticleRepository articleRepo;
 
+  @Autowired  // Inject JobRepository
+  private JobRepository jobRepo;
+
   @Autowired  // Inject PasswordEncoder
   private PasswordEncoder encoder;
 
-  public LoadDatabase(UserRepository userRepo, ArticleRepository articleRepo, PasswordEncoder encoder) {
+  public LoadDatabase(UserRepository userRepo, ArticleRepository articleRepo, JobRepository jobRepo, PasswordEncoder encoder) {
     this.userRepo = userRepo;
     this.articleRepo = articleRepo;
+    this.jobRepo = jobRepo;
     this.encoder = encoder;
   }
 
   @Bean  
   CommandLineRunner initDatabase(){
     return args -> {
-        // Classroom c = new Classroom(33, "George Giannakoopoulos");
-        // Srepository.save(new Student());
-        // Student s = new Student();
-        // s.setMyClassroom(c);
-        // Srepository.save(s);
-        //Crepository.save(c);
-        
-        // Create and save articles first
+
+        // Create articles and jobs first
         Article article1 = new Article("Just got my First Job!!", null);
-        Article article2 = new Article("Just got my First Job!!", null);
-        // articleRepo.save(article);
+        Article article2 = new Article("Just got my Second Job!!", null);
+        Job job1 = new Job("My first job offer");
+        Job job2 = new Job("My second job offer");
 
         // Create and save users
         User admin1 = new User("teomor", "Theodoros", encoder.encode("1234"), "ROLE_ADMIN", "Moraitis", "teomor@email.com");
@@ -52,17 +53,25 @@ public class LoadDatabase {
         User user1 = new User("bobross", "Bob", encoder.encode("1234"), "ROLE_USER", "Ross", "bobross@email.com");
         User user2 = new User("jetlee", "Jet", encoder.encode("1234"), "ROLE_USER", "Lee", "jetlee@email.com");
 
-        // Associate articles with users
-        admin1.AddArticle(article1);
-        admin2.AddArticle(article2);
-        // user1.AddArticle(article);
-        // user2.AddArticle(article);
+        // Associate articles and jobs with users
+        user1.addArticle(article1);
+        user1.addArticle(article2);
+        // user2.AddArticle(article2);
+        user1.addJob(job1);
+        user1.addJob(job2);
 
         // Save users to the repository
         userRepo.save(admin1);
         userRepo.save(admin2);
         userRepo.save(user1);
         userRepo.save(user2);
+
+        // problem occurs here, with user1 login (JSON infinite creation) -> solution: @JsonManagedReference and @JsonBackReference
+        // user2 applies to job1 (posted by user1)
+        user2.applyToJob(job1);
+        // Save the job and the user(again) to update the relationships
+        userRepo.save(user2);
+        jobRepo.save(job1);
       };
   }
 }
