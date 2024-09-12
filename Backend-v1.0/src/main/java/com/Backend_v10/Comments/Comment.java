@@ -35,10 +35,10 @@ public class Comment {
     Article CommentArticle;
 
 
-    public Comment(String content) {
-        Content = content;
-        // this.CommentOwner = commentOwner;
-        // this.CommentArticle = commentArticle;
+    public Comment(String content, User commentOwner, Article commentArticle) {
+         Content = content;
+         this.CommentOwner = commentOwner;
+         this.CommentArticle = commentArticle;
     }
 
     public String getContent() {

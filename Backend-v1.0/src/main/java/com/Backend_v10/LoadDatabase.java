@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Articles.ArticleRepository;
+import com.Backend_v10.Comments.Comment;
 import com.Backend_v10.User.User;
 import com.Backend_v10.User.UserRepository;
 import com.Backend_v10.Jobs.Job;
@@ -66,6 +67,11 @@ public class LoadDatabase {
         userRepo.save(user1);
         userRepo.save(user2);
 
+
+        //Add Comment to article1 from user 2
+
+        article1.AddComment("Great Article, helped me a lot!",user2,article1);
+        articleRepo.save(article1);
         // problem occurs here, with user1 login (JSON infinite creation) -> solution: @JsonManagedReference and @JsonBackReference
         // user2 applies to job1 (posted by user1)
         user2.applyToJob(job1);

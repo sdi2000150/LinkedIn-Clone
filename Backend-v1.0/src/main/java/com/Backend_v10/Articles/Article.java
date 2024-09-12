@@ -7,6 +7,7 @@ import java.util.List;
 import com.Backend_v10.Comments.Comment;
 import com.Backend_v10.User.User;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,7 +29,8 @@ public class Article {
     String Text;
     byte[] Photo;
 
-    @OneToMany(mappedBy = "commentID")
+    @OneToMany(cascade = CascadeType.ALL )
+    @JoinColumn(name = "article_id")
     List<Comment> ArticleComments;
 
     // @JoinColumn(name = "UserID")
@@ -70,8 +72,21 @@ public class Article {
         return "Article [articleID=" + articleID + ", Text=" + Text + ", Photo=" + Arrays.toString(Photo) + "]";
     }   
 
-    public void AddComment(Comment NewComment){
+    public void AddComment(String CommentContent,User CommentOwner, Article CommentArticle){
+        Comment NewComment = new Comment(CommentContent,CommentOwner, CommentArticle);
+
+        
         this.ArticleComments.add(NewComment);
 
+
     }
+
+    public List<Comment> getArticleComments() {
+        return ArticleComments;
+    }
+
+    public void setArticleComments(List<Comment> articleComments) {
+        ArticleComments = articleComments;
+    }
+
 }

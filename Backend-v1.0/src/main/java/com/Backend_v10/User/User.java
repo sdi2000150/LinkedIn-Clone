@@ -43,6 +43,11 @@ public class User {
     private List<Article> myArticles;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "article_user_id")
+    private List<Article> myComments;
+
+
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "job_user_id")
     private List<Job> myJobs;
 

@@ -43,9 +43,11 @@ public class SecurityConfig {
                 .requestMatchers("/auth/**").permitAll()    // Allow all requests to /auth
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Allow preflight requests
                 // .requestMatchers("/user/**").permitAll()  // For now allow all requests to /user
+                .requestMatchers("/article/**").permitAll()  // For now allow all requests to /user
+
                 // .requestMatchers("/auth/user/**").hasAuthority("ROLE_USER")
                 // .requestMatchers("/auth/admin/**").hasAuthority("ROLE_ADMIN")
-                .anyRequest().authenticated() // Protect all other endpoints
+                //.anyRequest().authenticated() // Protect all other endpoints
             )
             .sessionManagement(sess -> sess
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // No sessions
