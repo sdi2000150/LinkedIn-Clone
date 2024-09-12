@@ -1,11 +1,19 @@
 package com.Backend_v10.Articles;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import com.Backend_v10.Comments.Comment;
+import com.Backend_v10.User.User;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.NoArgsConstructor;
 
@@ -20,9 +28,17 @@ public class Article {
     String Text;
     byte[] Photo;
 
-    public Article(String text,byte[] photo){
+    @OneToMany(mappedBy = "commentID")
+    List<Comment> ArticleComments;
+
+    // @JoinColumn(name = "UserID")
+    // User ArticleOwner; 
+
+    public Article( String text,byte[] photo){
         this.Text = text;
         this.Photo = photo;
+        this.ArticleComments = new ArrayList<>();
+        //this.ArticleOwner = Owner;
     }
 
     public Long getArticleID() {
@@ -54,4 +70,8 @@ public class Article {
         return "Article [articleID=" + articleID + ", Text=" + Text + ", Photo=" + Arrays.toString(Photo) + "]";
     }   
 
+    public void AddComment(Comment NewComment){
+        this.ArticleComments.add(NewComment);
+
+    }
 }
