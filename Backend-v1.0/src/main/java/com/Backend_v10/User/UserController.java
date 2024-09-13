@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.jar.Attributes.Name;
@@ -60,17 +61,24 @@ public class UserController {
 
     //Get user Username and Email
     @GetMapping("/find_{username}")
-    public String[] getMethodName(@PathVariable String username) {
-        String[] NameEmail = new String[2];
+    public List<String[]> getMethodName(@PathVariable String username) {
         List<User> u = this.repository.findByUsername(username);
+        List<String[]> Results = new ArrayList<>();
+        
         if( u.isEmpty() == true)
-            return NameEmail;
-        String name = u.get(0).getUsername();
-        String email = u.get(0).getEmail();
-        NameEmail[0] = name;
-        NameEmail[1] = email;
+        return Results;
+        
+        
+        for(int i = 0; i < u.size(); i++){
+                String[] NameEmail = new String[2];
+                String name = u.get(i).getUsername();
+                String email = u.get(i).getEmail();
+                NameEmail[0] = name;
+                NameEmail[1] = email;
+                Results.add(i, NameEmail);
+        }
 
-        return NameEmail;
+        return Results;
     }
     
 

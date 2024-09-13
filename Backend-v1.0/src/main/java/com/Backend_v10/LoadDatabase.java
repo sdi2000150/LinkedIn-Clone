@@ -60,7 +60,8 @@ public class LoadDatabase {
         User admin2 = new User("nickmosch", "Nikitas", encoder.encode("1234"), "ROLE_ADMIN", "Moschos", "nickmosch@email.com");
         User user1 = new User("bobross", "Bob", encoder.encode("1234"), "ROLE_USER", "Ross", "bobross@email.com");
         User user2 = new User("jetlee", "Jet", encoder.encode("1234"), "ROLE_USER", "Lee", "jetlee@email.com");
-        
+        User user3 = new User("TC", "Thomas", encoder.encode("1234"), "ROLE_USER", "Charles", "thomasch@email.com");
+        User user4 = new User("TC", "Taylor", encoder.encode("1234"), "ROLE_USER", "Carlson", "taylorcar@email.com");
         // Create articles and jobs
         Article article1 = new Article("Just got my First Job!!", null);
         Article article2 = new Article("Just got my Second Job!!", null);
@@ -79,8 +80,9 @@ public class LoadDatabase {
         userRepo.save(admin2);
         userRepo.save(user1);
         userRepo.save(user2);
-
-        // Connect the two users...
+        userRepo.save(user3);
+        userRepo.save(user4);
+        // Connect the two users... 
         // user1.sendConnectionRequest(user2);
         // user2.acceptConnectionRequest(user1);
 

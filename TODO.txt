@@ -19,14 +19,14 @@
 
 
 8) (Network) Clicking on a connected User returns his personal information page
-8.5) BACK END:   -----//------
+8.5) [DONE] BACK END:   -----//------
 
 
 9) (Network) Click to start chatting with User
 9.5) BACK END:   -----//------
 
 10) (Network) Search Bar for new Users (using username or email etc.)
-10.5) BACK END:   -----//------
+10.5) [DONE] BACK END:   -----//------
 
 11) (Job Offers) Show Job Offers from Connected Users
 11.5) BACK END:   -----//------
