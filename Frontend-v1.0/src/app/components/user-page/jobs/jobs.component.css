@@ -40,19 +40,6 @@ body {
     padding: 0;
 }
 
-#left-sidebar li {
-    margin-bottom: 10px;
-}
-
-#left-sidebar a {
-    color: #0077B5;
-    text-decoration: none;
-}
-
-#left-sidebar a:hover {
-    text-decoration: underline;
-}
-
 #main-content {
     width: 60%;
     padding: 20px;
@@ -145,6 +132,11 @@ body {
 }
 
 #right-sidebar h2 {
-    font-size: 18px;
+    font-size: 21px;
     margin-bottom: 10px;
+}
+
+#right-sidebar ul {
+    list-style: none;
+    padding: 0;
 }
