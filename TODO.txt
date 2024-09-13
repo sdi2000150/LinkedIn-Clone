@@ -1,5 +1,6 @@
 --------TODO-------------------
-0.5) NEW PROBLEM. When i get request localhost:8080/articles/1 owner is opened recursive. Json result not good
+0.4) TODO: !!!!!!!!!!     Change of Email and Password     !!!!!!!!!!!
+0.5) [SOLVED] NEW PROBLEM. When i get request localhost:8080/articles/1 owner is opened recursive. Json result not good
 
 1)[DONE] Sign Up New User 
 

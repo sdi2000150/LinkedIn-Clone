@@ -163,7 +163,33 @@ public class UserController {
         }
     }
     
+    //Change Password and email 
 
+    @PutMapping("/settings/change_{email}")
+    public Boolean Change(@PathVariable String email, @RequestBody String[] EmailPassword) {
+
+        Optional<User> u = repository.findByEmail(email);
+        User user = u.get();
+        String NewEmail = EmailPassword[0];
+        
+        //!!!TODO
+        return true;
+        // repository.findById(id).map(u -> {
+        //     u.setName(updatedUser.getName());
+        //     u.setLastname(updatedUser.getLastname());
+        //     u.setEmail(updatedUser.getEmail());
+        //     u.setBirthdate(updatedUser.getBirthdate());
+        //     u.setCVFile(updatedUser.getCVFile());
+        //     u.setPhoto(updatedUser.getPhoto());
+        //     u.setUsername(updatedUser.getUsername());
+        //     repository.save(u);
+        //     return true;
+        // })
+        // .orElseGet(() -> {
+        //     return false;
+        // });
+        // return false;
+    }
     // Endpoint to apply to a job
     // @PostMapping("/user/{email}/apply/{jobId}")
     // public ResponseEntity<?> applyToJob(@PathVariable String email, @PathVariable Long jobId) {
