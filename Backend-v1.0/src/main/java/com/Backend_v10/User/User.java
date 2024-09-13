@@ -3,11 +3,15 @@ package com.Backend_v10.User;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.Backend_v10.Articles.Article;
+import com.Backend_v10.JobApplication.JobApplication;
 import com.Backend_v10.Jobs.Job;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.ManyToMany;
@@ -26,13 +30,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 
-
-
 @Entity             // This tells Hibernate to make a table out of this class
 @Data               // Lombok annotation to create all the getters, setters, toString methods based on the fields
 @AllArgsConstructor // Lombok annotation to create a constructor with all the arguments
 @NoArgsConstructor  // Lombok annotation to create a constructor with no arguments
 @Table(name = "Users")
+@JsonIgnoreProperties({"myJobs", "myJobApplications"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,20 +43,24 @@ public class User {
     
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "article_user_id")
+    // @JsonManagedReference
     private List<Article> myArticles;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "article_user_id")
+    // @JsonManagedReference
     private List<Article> myComments;
 
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "job_user_id")
+    // @JsonManagedReference
     private List<Job> myJobs;
 
-    @ManyToMany
-    @JsonBackReference // Breaks infinite recursion for jobs the user has applied to
-    private List<Job> appliedJobs; // Jobs the user has applied to
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "job_application_user_id")
+    // @JsonManagedReference
+    private List<JobApplication> myJobApplications;
 
     // @ManyToMany
     // @JoinColumn(name = "ContactID")
@@ -81,14 +88,13 @@ public class User {
         this.role = role;
         this.myArticles = new ArrayList<>();
         this.myJobs = new ArrayList<>();
-        this.appliedJobs = new ArrayList<>();
+        this.myJobApplications = new ArrayList<>();
         // this.Contacts = new ArrayList<>();
     }
 
     // Getters, Setters and toString are automaticaly created (in the background) by Lombok
 
     // Articles methods:
-
     public void setMyArticles(List<Article> myArticles) {
         this.myArticles = myArticles;
     }
@@ -102,18 +108,24 @@ public class User {
     }
 
     // Jobs methods:
-
+    public void setMyJobs(List<Job> myJobs) {
+        this.myJobs = myJobs;
+    }
+    @Transactional
     public void addJob(Job newJob) {
         this.myJobs.add(newJob);
     }
 
-    @Transactional
-    public void applyToJob(Job job) {
-        this.appliedJobs.add(job);
-        job.getApplicants().add(this); // Add this user to the list of applicants in the job
-    } 
-
+    public List<Job> getMyJobs() {
+        return myJobs;
+    }
     
+    // JobApplications methods:
+    public void addJobApplication(JobApplication jobApplication) {
+        this.myJobApplications.add(jobApplication);
+        jobApplication.setUser(this);
+    }
+
     // @Transactional
     // public void AddContact(User NewContact){
     //     this.Contacts.add(NewContact);

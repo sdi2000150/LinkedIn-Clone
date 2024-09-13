@@ -91,16 +91,44 @@ export class UserService {
     return now >= expiry; // Return if the token is expired
   }
 
-  // New methods for job functionalities
-  getAllJobs(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/jobs`);
+  // New methods for job functionalities:
+
+  // getAllJobs(): Observable<any> {
+  //   return this.http.get(`${this.baseUrl}/jobs`);
+  // }
+
+  getJobOffers(token: string): Observable<any> {
+      // Extract the email from the token
+      const email = this.extractEmailFromToken(token);
+
+      // Set up the headers with the token
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+  
+      // Append the email to the URL
+      const url = `${this.baseUrl}/user/${email}/job-offers`;
+  
+      // Send the GET request with the Authorization header
+      return this.http.get<any>(url, { headers });
+  }
+  getAppliedJobs(token: string): Observable<any> {
+    // Extract the email from the token
+    const email = this.extractEmailFromToken(token);
+
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    // Append the email to the URL
+    const url = `${this.baseUrl}/user/${email}/applied-jobs`;
+
+    // Send the GET request with the Authorization header
+    return this.http.get<any>(url, { headers });
   }
 
-  getAppliedJobs(userId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/user/${userId}/applied-jobs`);
-  }
-
-  applyToJob(userId: number, jobId: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/user/${userId}/apply/${jobId}`, {});
-  }
+  // applyToJob(userId: number, jobId: number): Observable<any> {
+  //   return this.http.post(`${this.baseUrl}/user/${userId}/apply/${jobId}`, {});
+  // }
 }

@@ -3,6 +3,7 @@ package com.Backend_v10.Comments;
 
 import com.Backend_v10.Articles.Article;
 import com.Backend_v10.User.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,10 +29,12 @@ public class Comment {
     //Many comments to one owner
     @ManyToOne
     @JoinColumn(name = "OwnerID")
+    @JsonBackReference
     User CommentOwner;
 
     @ManyToOne
     @JoinColumn(name = "ArticleID")
+    @JsonBackReference
     Article CommentArticle;
 
 
@@ -49,7 +52,7 @@ public class Comment {
         return CommentOwner;
     }
 
-    public Article getCommentArtcile() {
+    public Article getCommentArticle() {
         return  CommentArticle;
     }
     
@@ -62,7 +65,7 @@ public class Comment {
     }
 
 
-    public void setCommentArtcile(Article commentArticle) {
+    public void setCommentArticle(Article commentArticle) {
         this.CommentArticle =  commentArticle;
     }
 

@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common'; // Import CommonModule (for NgFo
 })
 export class JobsComponent {
   jobs: any[] = []; // Store articles of the user
+  appliedJobs: any[] = []; // Store jobs the user has applied for
 
   token: string | null = null; // Store token from localStorage
 
@@ -36,11 +37,21 @@ export class JobsComponent {
     const token = localStorage.getItem('token'); // Fetch the token from localStorage
   
     if (token) {
-      this.userService.getUserProfileFromToken(token).subscribe(
+      this.userService.getJobOffers(token).subscribe(
         (data: any) => {
           console.log('User Profile Data:', data);
           // Add any logic you want to execute after fetching the user profile
-          this.jobs = data.myJobs;
+          this.jobs = data;
+          this.userService.getAppliedJobs(token).subscribe(
+            (appliedJobs: any) => {
+              console.log('Applied Jobs:', appliedJobs);
+              this.appliedJobs = appliedJobs;
+            },
+            (error) => {
+              console.error('Error fetching applied jobs', error);
+              // Handle error, potentially navigate back to login
+            }
+          );
         },
         (error) => {
           console.error('Error fetching user data', error);

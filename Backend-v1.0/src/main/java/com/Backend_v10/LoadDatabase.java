@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Articles.ArticleRepository;
 import com.Backend_v10.Comments.Comment;
+import com.Backend_v10.JobApplication.JobApplication;
+import com.Backend_v10.JobApplication.JobApplicationRepository;
 import com.Backend_v10.User.User;
 import com.Backend_v10.User.UserRepository;
 import com.Backend_v10.Jobs.Job;
@@ -28,13 +30,17 @@ public class LoadDatabase {
   @Autowired  // Inject JobRepository
   private JobRepository jobRepo;
 
+  @Autowired
+  private JobApplicationRepository jobApplicationRepo;
+
   @Autowired  // Inject PasswordEncoder
   private PasswordEncoder encoder;
 
-  public LoadDatabase(UserRepository userRepo, ArticleRepository articleRepo, JobRepository jobRepo, PasswordEncoder encoder) {
+  public LoadDatabase(UserRepository userRepo, ArticleRepository articleRepo, JobRepository jobRepo, JobApplicationRepository jobApplicationRepo, PasswordEncoder encoder) {
     this.userRepo = userRepo;
     this.articleRepo = articleRepo;
     this.jobRepo = jobRepo;
+    this.jobApplicationRepo = jobApplicationRepo;
     this.encoder = encoder;
   }
 
@@ -68,16 +74,23 @@ public class LoadDatabase {
         userRepo.save(user2);
 
 
-        //Add Comment to article1 from user 2
+        // problem occurs, with user1 (who has the article/job) login (JSON infinite creation) 
+        // -> solution: @JsonManagedReference/@JsonBackReference in all involved entities + @JsonIgnoreProperties in User
 
-        article1.AddComment("Great Article, helped me a lot!",user2,article1);
-        articleRepo.save(article1);
-        // problem occurs here, with user1 login (JSON infinite creation) -> solution: @JsonManagedReference and @JsonBackReference
-        // user2 applies to job1 (posted by user1)
-        user2.applyToJob(job1);
-        // Save the job and the user(again) to update the relationships
+        //Add Comment to article1 from user 2
+        // article1.AddComment("Great Article, helped me a lot!",user2,article1);
+        // articleRepo.save(article1);
+
+        // Create a JobApplication for user2 applying to job1
+        JobApplication jobApplication = new JobApplication();
+        //User2 applies to job1 (posted by user1)
+        user2.addJobApplication(jobApplication);
+        job1.addJobApplication(jobApplication);
+        //Save the job and the user(again) to update the relationships
+        jobRepo.save(job1);  // This will also save jobApplication if cascading is enabled
         userRepo.save(user2);
-        jobRepo.save(job1);
+
+
       };
   }
 }

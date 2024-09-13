@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.Backend_v10.Comments.Comment;
 import com.Backend_v10.User.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -31,6 +32,7 @@ public class Article {
 
     @OneToMany(cascade = CascadeType.ALL )
     @JoinColumn(name = "article_id")
+    @JsonManagedReference
     List<Comment> ArticleComments;
 
     // @JoinColumn(name = "UserID")

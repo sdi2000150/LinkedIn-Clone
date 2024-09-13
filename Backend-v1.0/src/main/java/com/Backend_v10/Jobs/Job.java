@@ -1,14 +1,19 @@
 package com.Backend_v10.Jobs;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -16,18 +21,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
 
+import com.Backend_v10.Comments.Comment;
+import com.Backend_v10.JobApplication.JobApplication;
 import com.Backend_v10.User.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import static jakarta.persistence.FetchType.LAZY;
 
 
 @Entity             // This tells Hibernate to make a table out of this class
 @Data               // Lombok annotation to create all the getters, setters, toString methods based on the fields
-@AllArgsConstructor // Lombok annotation to create a constructor with all the arguments
+// @AllArgsConstructor // Lombok annotation to create a constructor with all the arguments
 @NoArgsConstructor  // Lombok annotation to create a constructor with no arguments
 @Table(name = "Jobs")
+@JsonIgnoreProperties({"JobApplications"})
 public class Job{
 
 
@@ -41,59 +52,74 @@ public class Job{
     Integer numOfLikes;
     Boolean fullTime;
 
-    @Enumerated(EnumType.STRING)
-    WorkFields fieldOfWork; 
+    // @Enumerated(EnumType.STRING)
+    // WorkFields fieldOfWork; 
 
-    @Enumerated(EnumType.STRING)
-    Regions region; 
+    // @Enumerated(EnumType.STRING)
+    // Regions region; 
 
-    @Enumerated(EnumType.STRING)
-    Experience levelOfExperience;
+    // @Enumerated(EnumType.STRING)
+    // Experience levelOfExperience;
 
-
-    @ManyToMany(mappedBy = "appliedJobs")
-    @JsonManagedReference // Manages applied jobs
-    private List<User> applicants = new ArrayList<>(); // Users who applied for this job
+    @OneToMany  //no cascade here, cascade for jobApplication is in the User
+    @JoinColumn(name = "job_id")
+    // @JsonManagedReference
+    List<JobApplication> JobApplications;
 
     //simple constuctor for testing
     public Job(String title) {
         this.title = title;
+        this.JobApplications = new ArrayList<>();
     }
 
-    public enum WorkFields{
-        Ecomomics,
-        Agriculture,
-        Health,
-        Consruction,
-        Marketing,
-        Art,
-        Law,
-        Diplomacy,
-        Teaching,
-        ComputerScience,
-        Psycology,
-        Medicine;
+    //all args contructor
+    public Job(String title, Boolean needOfDegree, String otherRequirements, Integer numOfLikes, Boolean fullTime) {
+        this.title = title;
+        this.needOfDegree = needOfDegree;
+        this.otherRequirements = otherRequirements;
+        this.numOfLikes = numOfLikes;
+        this.fullTime = fullTime;
+        this.JobApplications = new ArrayList<>();
     }
 
-    public enum Regions{
-        Athens,
-        Thessaloniki,
-        Patra,
-        Volos,
-        Trikala,
-        Chania,
-        Herakleion,
-        Rhodes,
-        Karditsa,
-        Larissa,
-        Nauplio,
-        Syros,
-        Mykonos,
-        Kimi;
-    }
-    public enum Experience{
-        Junior,
-        Mid,
-        Senior;
+    // public enum WorkFields{
+    //     Ecomomics,
+    //     Agriculture,
+    //     Health,
+    //     Consruction,
+    //     Marketing,
+    //     Art,
+    //     Law,
+    //     Diplomacy,
+    //     Teaching,
+    //     ComputerScience,
+    //     Psycology,
+    //     Medicine;
+    // }
+
+    // public enum Regions{
+    //     Athens,
+    //     Thessaloniki,
+    //     Patra,
+    //     Volos,
+    //     Trikala,
+    //     Chania,
+    //     Herakleion,
+    //     Rhodes,
+    //     Karditsa,
+    //     Larissa,
+    //     Nauplio,
+    //     Syros,
+    //     Mykonos,
+    //     Kimi;
+    // }
+    // public enum Experience{
+    //     Junior,
+    //     Mid,
+    //     Senior;
+    // }
+    public void addJobApplication(JobApplication jobApplication) {
+        this.JobApplications.add(jobApplication);
+        jobApplication.setJob(this);
     }
 }
