@@ -10,6 +10,7 @@ import java.util.Set;
 import com.Backend_v10.Articles.Article;
 import com.Backend_v10.JobApplication.JobApplication;
 import com.Backend_v10.Jobs.Job;
+import com.Backend_v10.UserConnection.UserConnection;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -65,6 +66,14 @@ public class User {
     // @JsonManagedReference
     private List<JobApplication> myJobApplications;
 
+    // "mapped by" It indicates that the current entity is not responsible for the relationship's persistence; 
+    // instead, the other entity is responsible.
+    @OneToMany(mappedBy = "user1", cascade = CascadeType.ALL)
+    private List<UserConnection> connectionsInitiated;
+
+    @OneToMany(mappedBy = "user2", cascade = CascadeType.ALL)
+    private List<UserConnection> connectionsReceived;
+
     // @ManyToMany
     // @JoinColumn(name = "ContactID")
     // private List<User> Contacts;
@@ -92,6 +101,8 @@ public class User {
         this.myArticles = new ArrayList<>();
         this.myJobs = new ArrayList<>();
         this.myJobApplications = new ArrayList<>();
+        this.connectionsInitiated = new ArrayList<>();
+        this.connectionsReceived = new ArrayList<>();
         // this.Contacts = new ArrayList<>();
     }
 
@@ -130,7 +141,29 @@ public class User {
     }
 
     // Connections methods:
-    
+    public void sendConnectionRequest(User user) {
+        UserConnection connection = new UserConnection();
+        connection.setUser1(this);
+        connection.setUser2(user);
+        connection.setPendingRequest(true);
+        this.connectionsInitiated.add(connection);
+        user.connectionsReceived.add(connection);
+    }
+
+    public void acceptConnectionRequest(User user) {
+        for (UserConnection connection : this.connectionsReceived) {
+            if (connection.getUser1().equals(user) && connection.isPendingRequest()) {
+                connection.setPendingRequest(false);
+                break;
+            }
+        }
+    }
+
+    public void removeConnection(User user) {
+        this.connectionsInitiated.removeIf(connection -> connection.getUser2().equals(user));
+        this.connectionsReceived.removeIf(connection -> connection.getUser1().equals(user));
+    }
+
     // @Transactional
     // public void AddContact(User NewContact){
     //     this.Contacts.add(NewContact);

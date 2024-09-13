@@ -62,9 +62,6 @@ public class LoadDatabase {
         Job job1 = new Job("In need of a Software Engineer");
         Job job2 = new Job("In need of a Data Scientist");
 
-        // Connect the two users...
-
-
         // Associate articles and jobs with users
         user1.addArticle(article1);
         user1.addArticle(article2);
@@ -78,6 +75,9 @@ public class LoadDatabase {
         userRepo.save(user1);
         userRepo.save(user2);
 
+        // Connect the two users...
+        user1.sendConnectionRequest(user2);
+        user2.acceptConnectionRequest(user1);
 
         // PROBLEM occurs, with user who owns the article/job (JSON infinite creation) 
         // -> SOLUTION: @JsonManagedReference/@JsonBackReference in all involved entities 
