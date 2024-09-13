@@ -76,20 +76,20 @@ public class LoadDatabase {
         userRepo.save(user2);
 
 
-        // problem occurs, with user who owns the article/job (JSON infinite creation) 
-        // -> solution: @JsonManagedReference/@JsonBackReference in all involved entities 
+        // PROBLEM occurs, with user who owns the article/job (JSON infinite creation) 
+        // -> SOLUTION: @JsonManagedReference/@JsonBackReference in all involved entities 
                     //  OR @JsonIgnoreProperties in all involved entities
 
-        //Add Comment to article1 from user 2
+        // Add Comment to article1 from user 2
         // article1.AddComment("Great Article, helped me a lot!",user2,article1);
         // articleRepo.save(article1);
 
         // Create a JobApplication for user2 applying to job1
         JobApplication jobApplication = new JobApplication();
-        //User2 applies to job1 (posted by user1)
+        // User2 applies to job1 (posted by user1)
         user2.addJobApplication(jobApplication);
         job1.addJobApplication(jobApplication);
-        //Save the job and the user(again) to update the relationships
+        // Save the job and the user(again) to update the relationships
         jobRepo.save(job1);  
         userRepo.save(user2); // This will also save jobApplication because cascading is enabled in user
       };
