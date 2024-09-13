@@ -1,6 +1,14 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <p>Network Coming Soon!</p>
+    <div class="search-container">
+        <input type="text" placeholder="Search users..." class="search-input" [(ngModel)]="searchQuery">
+        <button (click)="onSearch()">Search</button>
+    </div>
+    <ul class="results-list">
+        <li *ngFor="let result of searchResults">
+            {{ result.username }} {{ result.email }}
+        </li>
+    </ul>
 </div>
 
 <!-- so that the page can be scrolled -->

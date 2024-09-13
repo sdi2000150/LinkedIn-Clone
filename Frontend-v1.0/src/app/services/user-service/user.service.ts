@@ -47,6 +47,24 @@ export class UserService {
     return this.http.get<any>(url, { headers });
   }
 
+  // New method to fetch user profile by username
+  getUserName(username: string, token: string): Observable<any> {
+    const url = `${this.baseUrl}/user/find_${username}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(url, { headers });
+  }
+
+  // New method to fetch all users
+  getAllUsers(token: string): Observable<any> {
+    const url = `${this.baseUrl}/user/all_users`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(url, { headers });
+  }
+
   isUserAdmin(token: string): Observable<boolean> {
       const email = this.extractEmailFromToken(token);
       const headers = new HttpHeaders({
