@@ -9,6 +9,9 @@ import { SettingsComponent } from './components/user-page/settings/settings.comp
 import { NavbarComponent } from './components/user-page/navbar/navbar.component';
 import { JobsComponent } from './components/user-page/jobs/jobs.component';
 import { UsersListComponent } from './components/admin-page/users-list/users-list.component';
+import { NetworkComponent } from './components/user-page/network/network.component';
+import { NotificationsComponent } from './components/user-page/notifications/notifications.component';
+import { MessagingComponent } from './components/user-page/messaging/messaging.component';
 
 import { authGuard } from './auth.guard';  // Import your guard
 
@@ -23,6 +26,9 @@ export const routes: Routes = [
   { path: 'user-page/profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'user-page/settings', component: SettingsComponent, canActivate: [authGuard] },
   { path: 'user-page/jobs', component: JobsComponent, canActivate: [authGuard] },
+  { path: 'user-page/network', component: NetworkComponent, canActivate: [authGuard] },
+  { path: 'user-page/notifications', component: NotificationsComponent, canActivate: [authGuard] },
+  { path: 'user-page/messaging', component: MessagingComponent, canActivate: [authGuard] },
 
   { path: 'admin-page/users-list', component: UsersListComponent, canActivate: [authGuard] },
 
