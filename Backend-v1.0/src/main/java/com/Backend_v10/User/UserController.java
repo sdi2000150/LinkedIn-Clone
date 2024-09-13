@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.jar.Attributes.Name;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
@@ -56,6 +57,22 @@ public class UserController {
         System.out.println("Giving back user " + u.get().getMyArticles().size());
         return ResponseEntity.ok(u.get());
     }
+
+    //Get user Username and Email
+    @GetMapping("/find_{username}")
+    public String[] getMethodName(@PathVariable String username) {
+        String[] NameEmail = new String[2];
+        List<User> u = this.repository.findByUsername(username);
+        if( u.isEmpty() == true)
+            return NameEmail;
+        String name = u.get(0).getUsername();
+        String email = u.get(0).getEmail();
+        NameEmail[0] = name;
+        NameEmail[1] = email;
+
+        return NameEmail;
+    }
+    
 
     //updates User fields. Returns true if its done properly, false else
     @PutMapping("/{id}")

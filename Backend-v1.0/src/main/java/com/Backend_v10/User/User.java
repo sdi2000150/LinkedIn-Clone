@@ -159,4 +159,5 @@ public class User {
         this.connectionsInitiated.removeIf(connection -> connection.getUser2().equals(user));
         this.connectionsReceived.removeIf(connection -> connection.getUser1().equals(user));
     }
+
 }

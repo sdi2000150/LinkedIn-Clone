@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
+import java.util.List;
+
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long>{
@@ -15,6 +17,7 @@ public interface UserRepository extends JpaRepository<User,Long>{
     // Optional<User> findByName(String name);
     Optional<User> findByEmail(String Email);
 
+    List<User> findByUsername(String username);
     
 
 }

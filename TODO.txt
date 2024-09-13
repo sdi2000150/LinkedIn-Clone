@@ -14,7 +14,7 @@
 6) FRONT END: (ADMIN) Exporting Users data as JSON and XML 
 6.5) BACK END:   -----//------
 
-7) (Network) Show connections in grid structure 
+7) (Network) Show connections in list structure 
 7.5) BACK END:   -----//------
 
 
