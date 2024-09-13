@@ -48,17 +48,19 @@ public class LoadDatabase {
   CommandLineRunner initDatabase(){
     return args -> {
 
-        // Create articles and jobs first
-        Article article1 = new Article("Just got my First Job!!", null);
-        Article article2 = new Article("Just got my Second Job!!", null);
-        Job job1 = new Job("My first job offer");
-        Job job2 = new Job("My second job offer");
 
-        // Create and save users
+
+        // Create and save users first
         User admin1 = new User("teomor", "Theodoros", encoder.encode("1234"), "ROLE_ADMIN", "Moraitis", "teomor@email.com");
         User admin2 = new User("nickmosch", "Nikitas", encoder.encode("1234"), "ROLE_ADMIN", "Moschos", "nickmosch@email.com");
         User user1 = new User("bobross", "Bob", encoder.encode("1234"), "ROLE_USER", "Ross", "bobross@email.com");
         User user2 = new User("jetlee", "Jet", encoder.encode("1234"), "ROLE_USER", "Lee", "jetlee@email.com");
+        
+        // Create articles and jobs
+        Article article1 = new Article("Just got my First Job!!", null);
+        Article article2 = new Article("Just got my Second Job!!", null);
+        Job job1 = new Job("My first job offer");
+        Job job2 = new Job("My second job offer");
 
         // Associate articles and jobs with users
         user1.addArticle(article1);
@@ -74,7 +76,7 @@ public class LoadDatabase {
         userRepo.save(user2);
 
 
-        // problem occurs, with user (who owns the article/job) (JSON infinite creation) 
+        // problem occurs, with user who owns the article/job (JSON infinite creation) 
         // -> solution: @JsonManagedReference/@JsonBackReference in all involved entities 
                     //  OR @JsonIgnoreProperties in all involved entities
 
