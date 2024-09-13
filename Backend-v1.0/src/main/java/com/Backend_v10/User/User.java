@@ -11,6 +11,7 @@ import com.Backend_v10.Articles.Article;
 import com.Backend_v10.JobApplication.JobApplication;
 import com.Backend_v10.Jobs.Job;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -22,12 +23,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.transaction.Transactional;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 @Entity             // This tells Hibernate to make a table out of this class
@@ -126,6 +129,8 @@ public class User {
         jobApplication.setUser(this);
     }
 
+    // Connections methods:
+    
     // @Transactional
     // public void AddContact(User NewContact){
     //     this.Contacts.add(NewContact);

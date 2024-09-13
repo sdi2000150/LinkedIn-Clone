@@ -62,6 +62,9 @@ public class LoadDatabase {
         Job job1 = new Job("In need of a Software Engineer");
         Job job2 = new Job("In need of a Data Scientist");
 
+        // Connect the two users...
+
+
         // Associate articles and jobs with users
         user1.addArticle(article1);
         user1.addArticle(article2);
