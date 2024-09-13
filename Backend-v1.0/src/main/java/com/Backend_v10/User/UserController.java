@@ -61,7 +61,9 @@ public class UserController {
 
     //Get user Username and Email
     @GetMapping("/find_{username}")
-    public List<String[]> getMethodName(@PathVariable String username) {
+    public List<String[]> getUsernameEmail(@PathVariable String username){
+        
+        
         List<User> u = this.repository.findByUsername(username);
         List<String[]> Results = new ArrayList<>();
         
@@ -81,6 +83,28 @@ public class UserController {
         return Results;
     }
     
+    @GetMapping("/all_users")
+    public List<String[]> getAllUsers(){
+
+        List<User> u = this.repository.findAll();
+        List<String[]> Results = new ArrayList<>();
+        
+        if( u.isEmpty() == true)
+        return Results;
+        
+        
+        for(int i = 0; i < u.size(); i++){
+                String[] NameEmail = new String[2];
+                String name = u.get(i).getUsername();
+                String email = u.get(i).getEmail();
+                NameEmail[0] = name;
+                NameEmail[1] = email;
+                Results.add(i, NameEmail);
+        }
+
+        return Results;
+    }
+
 
     //updates User fields. Returns true if its done properly, false else
     @PutMapping("/{id}")
