@@ -59,8 +59,8 @@ public class LoadDatabase {
         // Create articles and jobs
         Article article1 = new Article("Just got my First Job!!", null);
         Article article2 = new Article("Just got my Second Job!!", null);
-        Job job1 = new Job("My first job offer");
-        Job job2 = new Job("My second job offer");
+        Job job1 = new Job("In need of a Software Engineer");
+        Job job2 = new Job("In need of a Data Scientist");
 
         // Associate articles and jobs with users
         user1.addArticle(article1);
@@ -84,11 +84,11 @@ public class LoadDatabase {
         // article1.AddComment("Great Article, helped me a lot!",user2,article1);
         // articleRepo.save(article1);
 
-        // Create a JobApplication for user2 applying to job1
+        // Create a JobApplication
         JobApplication jobApplication = new JobApplication();
-        // User2 applies to job1 (posted by user1)
-        user2.addJobApplication(jobApplication);
+        // Associate the jobApplication with the job and the user
         job1.addJobApplication(jobApplication);
+        user2.addJobApplication(jobApplication);
         // Save the job and the user(again) to update the relationships
         jobRepo.save(job1);  
         userRepo.save(user2); // This will also save jobApplication because cascading is enabled in user
