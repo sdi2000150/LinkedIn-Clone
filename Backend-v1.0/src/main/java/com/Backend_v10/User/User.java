@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.Backend_v10.Articles.Article;
+import com.Backend_v10.Comments.Comment;
 import com.Backend_v10.JobApplication.JobApplication;
 import com.Backend_v10.Jobs.Job;
 import com.Backend_v10.UserConnection.UserConnection;
@@ -39,7 +40,7 @@ import lombok.EqualsAndHashCode;
 @AllArgsConstructor // Lombok annotation to create a constructor with all the arguments
 @NoArgsConstructor  // Lombok annotation to create a constructor with no arguments
 @Table(name = "Users")
-@JsonIgnoreProperties({"myJobs", "myJobApplications"})
+@JsonIgnoreProperties({"myArticles", "myComments", "myJobs", "myJobApplications"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,10 +51,10 @@ public class User {
     // @JsonManagedReference
     private List<Article> myArticles;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany (cascade = CascadeType.ALL)
     @JoinColumn(name = "article_user_id")
     // @JsonManagedReference
-    private List<Article> myComments;
+    private List<Comment> myComments;
 
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -99,6 +100,7 @@ public class User {
         this.password = password;
         this.role = role;
         this.myArticles = new ArrayList<>();
+        this.myComments = new ArrayList<>();
         this.myJobs = new ArrayList<>();
         this.myJobApplications = new ArrayList<>();
         this.connectionsInitiated = new ArrayList<>();
@@ -109,35 +111,29 @@ public class User {
     // Getters, Setters and toString are automaticaly created (in the background) by Lombok
 
     // Articles methods:
-    public void setMyArticles(List<Article> myArticles) {
-        this.myArticles = myArticles;
+    @Transactional
+    public void addArticle(Article newArticle){
+        this.myArticles.add(newArticle);
     }
 
+    // Comments methods:
     @Transactional
-    public void addArticle(Article NewArticle){
-        this.myArticles.add(NewArticle);
-    }
-    public List<Article> getMyArticles() {
-        return myArticles;
+    public void addComment(Comment newComment){
+        this.myComments.add(newComment);
+        newComment.setCommentOwner(this);
     }
 
     // Jobs methods:
-    public void setMyJobs(List<Job> myJobs) {
-        this.myJobs = myJobs;
-    }
     @Transactional
     public void addJob(Job newJob) {
         this.myJobs.add(newJob);
     }
-
-    public List<Job> getMyJobs() {
-        return myJobs;
-    }
     
     // JobApplications methods:
-    public void addJobApplication(JobApplication jobApplication) {
-        this.myJobApplications.add(jobApplication);
-        jobApplication.setUser(this);
+    @Transactional
+    public void addJobApplication(JobApplication newjobApplication) {
+        this.myJobApplications.add(newjobApplication);
+        newjobApplication.setUser(this);
     }
 
     // Connections methods:
@@ -163,9 +159,4 @@ public class User {
         this.connectionsInitiated.removeIf(connection -> connection.getUser2().equals(user));
         this.connectionsReceived.removeIf(connection -> connection.getUser1().equals(user));
     }
-
-    // @Transactional
-    // public void AddContact(User NewContact){
-    //     this.Contacts.add(NewContact);
-    // }
 }

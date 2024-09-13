@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Articles.ArticleRepository;
 import com.Backend_v10.Comments.Comment;
+import com.Backend_v10.Comments.CommentRepository;
 import com.Backend_v10.JobApplication.JobApplication;
 import com.Backend_v10.JobApplication.JobApplicationRepository;
 import com.Backend_v10.User.User;
@@ -27,6 +28,9 @@ public class LoadDatabase {
   @Autowired  // Inject ArticleRepository
   private ArticleRepository articleRepo;
 
+  @Autowired  // Inject CommentRepository
+  private CommentRepository commentRepo;
+
   @Autowired  // Inject JobRepository
   private JobRepository jobRepo;
 
@@ -36,12 +40,13 @@ public class LoadDatabase {
   @Autowired  // Inject PasswordEncoder
   private PasswordEncoder encoder;
 
-  public LoadDatabase(UserRepository userRepo, ArticleRepository articleRepo, JobRepository jobRepo, JobApplicationRepository jobApplicationRepo, PasswordEncoder encoder) {
+  public LoadDatabase(UserRepository userRepo, ArticleRepository articleRepo, CommentRepository commentRepo, JobRepository jobRepo, JobApplicationRepository jobApplicationRepo, PasswordEncoder encoder) {
     this.userRepo = userRepo;
     this.articleRepo = articleRepo;
     this.jobRepo = jobRepo;
     this.jobApplicationRepo = jobApplicationRepo;
     this.encoder = encoder;
+    this.commentRepo = commentRepo;
   }
 
   @Bean  
@@ -76,22 +81,39 @@ public class LoadDatabase {
         userRepo.save(user2);
 
         // Connect the two users...
-        user1.sendConnectionRequest(user2);
-        user2.acceptConnectionRequest(user1);
+        // user1.sendConnectionRequest(user2);
+        // user2.acceptConnectionRequest(user1);
 
         // PROBLEM occurs, with user who owns the article/job (JSON infinite creation) 
         // -> SOLUTION: @JsonManagedReference/@JsonBackReference in all involved entities 
                     //  OR @JsonIgnoreProperties in all involved entities
 
-        // Add Comment to article1 from user 2
+        // OLD VERSION Add Comment to article1 from user 2
         // article1.AddComment("Great Article, helped me a lot!",user2,article1);
         // articleRepo.save(article1);
 
+        // NEW WAY
+        Comment comment = new Comment();
+        article1.addComment(comment);
+        user2.addComment(comment);
+
+        // Save the comment first to avoid duplication
+        commentRepo.save(comment);
+
+        articleRepo.save(article1);  
+        userRepo.save(user2); // This will also save Comment because cascading is enabled in user
+
+
+        
         // Create a JobApplication
         JobApplication jobApplication = new JobApplication();
         // Associate the jobApplication with the job and the user
         job1.addJobApplication(jobApplication);
         user2.addJobApplication(jobApplication);
+
+        // Save the jobApplication first to avoid duplication
+        jobApplicationRepo.save(jobApplication);
+
         // Save the job and the user(again) to update the relationships
         jobRepo.save(job1);  
         userRepo.save(user2); // This will also save jobApplication because cascading is enabled in user
