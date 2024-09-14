@@ -22,13 +22,11 @@ public class UserConnection {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long connectionID;
 
-    @ManyToOne
-    @JoinColumn(name = "user1_id")
-    private User user1;
+    @JoinColumn(name = "DidRequest_id")
+    private String user1;
 
-    @ManyToOne
-    @JoinColumn(name = "user2_id")
-    private User user2;
+    @JoinColumn(name = "GotRequested_id")
+    private String user2;
 
     private boolean pendingRequest;
 }
