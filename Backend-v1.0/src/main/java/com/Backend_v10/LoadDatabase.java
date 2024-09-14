@@ -126,9 +126,6 @@ public class LoadDatabase {
         jobRepo.save(job1);  
         userRepo.save(user2); // This will also save jobApplication because cascading is enabled in user
 
-<<<<<<< HEAD
-=======
-
 
         //Requests/Contacts
         //user1.sendConnectionRequest(user2);
@@ -144,7 +141,6 @@ public class LoadDatabase {
         //userRepo.save(user2);
         UserConnRepo.delete(conn);
 
->>>>>>> 2141a440e90d0058a7f73fb214878bfa4668c812
       };
   }
 }
