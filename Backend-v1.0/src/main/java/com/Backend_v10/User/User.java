@@ -5,13 +5,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Comments.Comment;
 import com.Backend_v10.JobApplication.JobApplication;
 import com.Backend_v10.Jobs.Job;
 import com.Backend_v10.UserConnection.UserConnection;
+import com.Backend_v10.UserConnection.UserConnectionRepository;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -69,17 +76,20 @@ public class User {
 
     // "mapped by" It indicates that the current entity is not responsible for the relationship's persistence; 
     // instead, the other entity is responsible.
-    @OneToMany(mappedBy = "user1", cascade = CascadeType.ALL)
-    private List<UserConnection> connectionsInitiated;
+    // @OneToMany(mappedBy = "user1", cascade = CascadeType.ALL)
+    // private List<UserConnection> connectionsInitiated;
 
-    @OneToMany(mappedBy = "user2", cascade = CascadeType.ALL)
-    private List<UserConnection> connectionsReceived;
+    // @OneToMany()
+    // private List<UserConnection> connectionsReceived;
 
     // @ManyToMany
     // @JoinColumn(name = "ContactID")
     // private List<User> Contacts;
 
     //rest of the fields (may be private)
+
+    //private UserConnectionRepository userConnRepo;
+    
     private String username;
     private String name;
     private String password;
@@ -103,8 +113,9 @@ public class User {
         this.myComments = new ArrayList<>();
         this.myJobs = new ArrayList<>();
         this.myJobApplications = new ArrayList<>();
-        this.connectionsInitiated = new ArrayList<>();
-        this.connectionsReceived = new ArrayList<>();
+
+        // this.connectionsInitiated = new ArrayList<>();
+        // this.connectionsReceived = new ArrayList<>();
         // this.Contacts = new ArrayList<>();
     }
 
@@ -137,27 +148,52 @@ public class User {
     }
 
     // Connections methods:
-    public void sendConnectionRequest(User user) {
-        UserConnection connection = new UserConnection();
-        connection.setUser1(this);
-        connection.setUser2(user);
-        connection.setPendingRequest(true);
-        this.connectionsInitiated.add(connection);
-        user.connectionsReceived.add(connection);
-    }
 
-    public void acceptConnectionRequest(User user) {
-        for (UserConnection connection : this.connectionsReceived) {
-            if (connection.getUser1().equals(user) && connection.isPendingRequest()) {
-                connection.setPendingRequest(false);
-                break;
-            }
-        }
-    }
 
-    public void removeConnection(User user) {
-        this.connectionsInitiated.removeIf(connection -> connection.getUser2().equals(user));
-        this.connectionsReceived.removeIf(connection -> connection.getUser1().equals(user));
-    }
+    // public void acceptConnectionRequest(User user) {
+    //     for (UserConnection connection : this.connectionsReceived) {
+    //         if (connection.getUser1().equals(user) && connection.isPendingRequest()) {
+    //             connection.setPendingRequest(false);
+    //             break;
+    //         }
+    //     }
+    // }
+
+    // public List<User> findUserConnections() {
+    //     List<User> myContacts = new ArrayList<>();
+    //     for (UserConnection connection : this.connectionsReceived) {
+    //         if (connection.isPendingRequest() == false) {
+    //             myContacts.add(connection.getUser1());  
+    //         }
+    //     }
+    //     for (UserConnection connection : this.connectionsInitiated) {
+    //         if (connection.isPendingRequest() == false) {
+    //             myContacts.add(connection.getUser2());
+    //         }
+    //     }
+    //     return myContacts;
+    // }
+    // public void sendConnectionRequest(User sending, User accepting) {
+
+    //     // this.connectionsInitiated.add(connection);
+    //     // user.connectionsReceived.add(connection);
+    // }
+    // public void removeConnection(User user) {
+    //     this.connectionsInitiated.removeIf(connection -> connection.getUser2().equals(user));
+    //     this.connectionsReceived.removeIf(connection -> connection.getUser1().equals(user));
+    // }
+
+    // public void sendConnectionRequest(User send_to) {
+    //     UserConnection connection = new UserConnection();
+        
+    
+    //     connection.setUser1(this.getEmail());
+    //     connection.setUser2(send_to.getEmail());
+    //     connection.setPendingRequest(true);
+        
+    //     // this.connectionsInitiated.add(connection);
+    //     // user.connectionsReceived.add(connection);
+    // }
+
 
 }

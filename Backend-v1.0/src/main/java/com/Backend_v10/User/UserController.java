@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Jobs.Job;
+import com.Backend_v10.UserConnection.UserConnection;
+import com.Backend_v10.UserConnection.UserConnectionRepository;
 import com.Backend_v10.JobApplication.JobApplication;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalLong;
 import java.util.jar.Attributes.Name;
 import java.util.stream.Collectors;
 
@@ -32,10 +35,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RequestMapping("/user")
 public class UserController {
     private final UserRepository repository;
+    private final UserConnectionRepository ConnectionRepo;
 
 
-    UserController(UserRepository repository){
+    UserController(UserRepository repository, UserConnectionRepository UconnRepo){
         this.repository = repository;
+        this.ConnectionRepo = UconnRepo;
     }
 
     //FILL ALL MAPPINGS(GET,POST,DELETE,PUT)
@@ -190,6 +195,25 @@ public class UserController {
         // });
         // return false;
     }
+
+
+
+    // @GetMapping("/request_{from}")
+    // public void sendConnectionRequest(@RequestParam String send_to, @PathVariable String from) {
+    //     UserConnection connection = new UserConnection();
+
+    //     Optional<User> sending = repository.findByEmail(from);
+    //     Optional<User> accepting = repository.findByEmail(send_to);
+
+
+
+    //     connection.setUser1(sending.get().getEmail());
+    //     connection.setUser2(accepting.get().getEmail());
+    //     connection.setPendingRequest(true);
+    //     this.ConnectionRepo.save(connection);
+    //     // this.connectionsInitiated.add(connection);
+    //     // user.connectionsReceived.add(connection);
+    // }
     // Endpoint to apply to a job
     // @PostMapping("/user/{email}/apply/{jobId}")
     // public ResponseEntity<?> applyToJob(@PathVariable String email, @PathVariable Long jobId) {

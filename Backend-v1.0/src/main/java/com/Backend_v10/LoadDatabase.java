@@ -13,6 +13,8 @@ import com.Backend_v10.JobApplication.JobApplication;
 import com.Backend_v10.JobApplication.JobApplicationRepository;
 import com.Backend_v10.User.User;
 import com.Backend_v10.User.UserRepository;
+import com.Backend_v10.UserConnection.UserConnection;
+import com.Backend_v10.UserConnection.UserConnectionRepository;
 import com.Backend_v10.Jobs.Job;
 import com.Backend_v10.Jobs.JobRepository;
 
@@ -24,6 +26,10 @@ public class LoadDatabase {
 
   @Autowired  // Inject UserRepository
   private UserRepository userRepo;
+
+
+  @Autowired  // Inject UserRepository
+  private UserConnectionRepository UserConnRepo;
 
   @Autowired  // Inject ArticleRepository
   private ArticleRepository articleRepo;
@@ -40,7 +46,7 @@ public class LoadDatabase {
   @Autowired  // Inject PasswordEncoder
   private PasswordEncoder encoder;
 
-  public LoadDatabase(UserRepository userRepo, ArticleRepository articleRepo, CommentRepository commentRepo, JobRepository jobRepo, JobApplicationRepository jobApplicationRepo, PasswordEncoder encoder) {
+  public LoadDatabase(UserConnectionRepository UserConnRepo, UserRepository userRepo, ArticleRepository articleRepo, CommentRepository commentRepo, JobRepository jobRepo, JobApplicationRepository jobApplicationRepo, PasswordEncoder encoder) {
     this.userRepo = userRepo;
     this.articleRepo = articleRepo;
     this.jobRepo = jobRepo;
@@ -119,7 +125,6 @@ public class LoadDatabase {
         // Save the job and the user(again) to update the relationships
         jobRepo.save(job1);  
         userRepo.save(user2); // This will also save jobApplication because cascading is enabled in user
-
       };
   }
 }
