@@ -7,7 +7,9 @@
             <label for="email"></label>
             <input type="text" id="email" placeholder="New email address" name="email">
         </div>
-        
+        <button type="button" (click)="changeEmail()">Change Email</button>
+        <br>
+
         <div class="form-group">
             <p>Change Password:</p>
             <div class="password-input">
@@ -24,6 +26,8 @@
                 <span class="toggle-password" (click)="showPasswordConf()">show</span>
             </div>
         </div>
+        <button type="button" (click)="changePassword()">Change Password</button>
+        <br>
 
         <div class="form-group">
             <a href="../../welcome-page">

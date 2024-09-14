@@ -146,6 +146,23 @@ export class UserService {
     return this.http.get<any>(url, { headers });
   }
 
+  //TODO
+  updateEmail(newEmail: string, token: string): Observable<any> {
+    const url = `${this.baseUrl}/user/update_email`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put(url, { email: newEmail }, { headers });
+  }
+  //TODO
+  updatePassword(newPassword: string, token: string): Observable<any> {
+    const url = `${this.baseUrl}/user/update_password`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put(url, { password: newPassword }, { headers });
+  }
+
   // applyToJob(userId: number, jobId: number): Observable<any> {
   //   return this.http.post(`${this.baseUrl}/user/${userId}/apply/${jobId}`, {});
   // }

@@ -119,6 +119,7 @@ public class LoadDatabase {
         // Save the job and the user(again) to update the relationships
         jobRepo.save(job1);  
         userRepo.save(user2); // This will also save jobApplication because cascading is enabled in user
+
       };
   }
 }
