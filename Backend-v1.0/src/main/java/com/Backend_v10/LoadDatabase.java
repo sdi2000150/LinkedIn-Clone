@@ -1,4 +1,6 @@
 package com.Backend_v10;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -139,8 +141,9 @@ public class LoadDatabase {
 
         UserConnRepo.save(conn);
         //userRepo.save(user2);
-        UserConnRepo.delete(conn);
-
+        //UserConnRepo.delete(conn);
+        List<String> Res = UserConnRepo.findUsersRequestingMe("jetlee@email.com");
+        System.out.println(Res);
       };
   }
 }

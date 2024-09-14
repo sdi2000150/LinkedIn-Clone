@@ -45,6 +45,8 @@ public class SecurityConfig {
                 .requestMatchers("/user/**").permitAll()  // For now allow all requests to /user
                 .requestMatchers("/article/**").permitAll()  // For now allow all requests to /article
                 .requestMatchers("/job/**").permitAll()  // For now allow all requests to /job
+                .requestMatchers("/request/**").permitAll()  // For now allow all requests to /job
+
 
                 // .requestMatchers("/auth/user/**").hasAuthority("ROLE_USER")
                 // .requestMatchers("/auth/admin/**").hasAuthority("ROLE_ADMIN")
