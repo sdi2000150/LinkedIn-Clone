@@ -125,6 +125,26 @@ public class LoadDatabase {
         // Save the job and the user(again) to update the relationships
         jobRepo.save(job1);  
         userRepo.save(user2); // This will also save jobApplication because cascading is enabled in user
+
+<<<<<<< HEAD
+=======
+
+
+        //Requests/Contacts
+        //user1.sendConnectionRequest(user2);
+        //userRepo.save(user1);
+        //user2.acceptConnectionRequest(user1);
+        //user2.sendConnectionRequest(user3);
+
+        UserConnection conn = new UserConnection();
+        conn.setUser1(user1.getEmail());
+        conn.setUser2(user2.getEmail());
+
+        UserConnRepo.save(conn);
+        //userRepo.save(user2);
+        UserConnRepo.delete(conn);
+
+>>>>>>> 2141a440e90d0058a7f73fb214878bfa4668c812
       };
   }
 }
