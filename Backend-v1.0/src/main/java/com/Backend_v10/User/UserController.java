@@ -133,6 +133,22 @@ public class UserController {
         return false;
     }
 
+    // Endpoint to get all contacts
+    @GetMapping("/{email}/contacts")
+    public ResponseEntity<List<User>> getContacts(@PathVariable String email) {
+        Optional<User> userOptional = this.repository.findByEmail(email);
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            List<User> contacts = user.getMyContacts();
+            
+            return  ResponseEntity.ok(contacts);
+        } else {
+            // Handle the case where the user is not found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+    
     // Endpoint to get all jobs a specific user has applied for
     @GetMapping("/{email}/applied-jobs")
     public ResponseEntity<Job[]> getAppliedJobs(@PathVariable String email) {

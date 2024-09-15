@@ -74,6 +74,13 @@ public class User {
     // @JsonManagedReference
     private List<JobApplication> myJobApplications;
 
+    @ManyToMany
+    @JoinTable(
+        name = "Contacts",
+        joinColumns = @JoinColumn(name = "user1"),
+        inverseJoinColumns = @JoinColumn(name = "user2")
+    )
+    private List<User> myContacts = new ArrayList<>();
     // "mapped by" It indicates that the current entity is not responsible for the relationship's persistence; 
     // instead, the other entity is responsible.
     // @OneToMany(mappedBy = "user1", cascade = CascadeType.ALL)
@@ -113,7 +120,7 @@ public class User {
         this.myComments = new ArrayList<>();
         this.myJobs = new ArrayList<>();
         this.myJobApplications = new ArrayList<>();
-
+        this.myContacts = new ArrayList<>();
         // this.connectionsInitiated = new ArrayList<>();
         // this.connectionsReceived = new ArrayList<>();
         // this.Contacts = new ArrayList<>();
@@ -148,7 +155,12 @@ public class User {
     }
 
     // Connections methods:
-
+    // Connections methods:
+    @Transactional
+    public void addContact(User user) {
+        this.myContacts.add(user);
+        user.getMyContacts().add(this);
+    }
 
     // public void acceptConnectionRequest(User user) {
     //     for (UserConnection connection : this.connectionsReceived) {
@@ -163,7 +175,7 @@ public class User {
     //     List<User> myContacts = new ArrayList<>();
     //     for (UserConnection connection : this.connectionsReceived) {
     //         if (connection.isPendingRequest() == false) {
-    //             myContacts.add(connection.getUser1());  
+                // myContacts.add(connection.getUser1());  
     //         }
     //     }
     //     for (UserConnection connection : this.connectionsInitiated) {

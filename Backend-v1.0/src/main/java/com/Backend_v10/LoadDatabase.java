@@ -135,6 +135,15 @@ public class LoadDatabase {
         //user2.acceptConnectionRequest(user1);
         //user2.sendConnectionRequest(user3);
 
+        //teo's contacts tests:
+        // user1.addContact(user2);
+        // userRepo.save(user1);
+        
+        // user2.addContact(user1);
+        // userRepo.save(user2);
+        // userRepo.save(user2);
+
+        //user connections tests:
         UserConnection conn = new UserConnection();
         conn.setUser1(user1.getEmail());
         conn.setUser2(user2.getEmail());
