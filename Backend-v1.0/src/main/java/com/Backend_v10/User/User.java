@@ -47,7 +47,7 @@ import lombok.EqualsAndHashCode;
 @AllArgsConstructor // Lombok annotation to create a constructor with all the arguments
 @NoArgsConstructor  // Lombok annotation to create a constructor with no arguments
 @Table(name = "Users")
-@JsonIgnoreProperties({"myArticles", "myComments", "myJobs", "myJobApplications"})
+@JsonIgnoreProperties({"myArticles", "myComments", "myJobs", "myJobApplications", "myContacts"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -158,8 +158,10 @@ public class User {
     // Connections methods:
     @Transactional
     public void addContact(User user) {
-        this.myContacts.add(user);
-        user.getMyContacts().add(this);
+        if (!this.myContacts.contains(user)) {
+            this.myContacts.add(user);
+            user.getMyContacts().add(this);
+        }
     }
 
     // public void acceptConnectionRequest(User user) {

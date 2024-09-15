@@ -136,12 +136,13 @@ public class LoadDatabase {
         //user2.sendConnectionRequest(user3);
 
         //teo's contacts tests:
-        // user1.addContact(user2);
-        // userRepo.save(user1);
-        
-        // user2.addContact(user1);
-        // userRepo.save(user2);
-        // userRepo.save(user2);
+        user1.addContact(user2);
+        // userRepo.save(user1);    //problem then saving here too
+        userRepo.save(user2);
+
+        user1.addContact(user3);
+        userRepo.save(user1);
+        userRepo.save(user3);
 
         //user connections tests:
         UserConnection conn = new UserConnection();
