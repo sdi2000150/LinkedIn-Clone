@@ -26,7 +26,7 @@
 9) (Network) Click to start chatting with User
 9.5) BACK END:   -----//------
 
-10) (Network) Search Bar for new Users (using username or email etc.)
+10) [DONE] (Network) Search Bar for new Users (using username or email etc.)
 10.5) [DONE] BACK END:   -----//------
 
 11) (Job Offers) Show Job Offers from Connected Users

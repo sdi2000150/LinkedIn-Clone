@@ -1,5 +1,7 @@
 package com.Backend_v10.Articles;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +38,7 @@ public class Article {
     private Long articleID;
     String Text;
     byte[] Photo;
-
+    LocalDateTime DateTime_of_Creation;
     @OneToMany //(cascade = CascadeType.ALL )
     @JoinColumn(name = "article_id")
     // @JsonManagedReference
@@ -49,6 +51,7 @@ public class Article {
         this.Text = text;
         this.Photo = photo;
         this.ArticleComments = new ArrayList<>();
+        this.DateTime_of_Creation = LocalDateTime.now();
         //this.ArticleOwner = Owner;
     }
     
@@ -63,4 +66,6 @@ public class Article {
         this.ArticleComments.add(newComment);
         newComment.setCommentArticle(this);
     }
+
+    
 }

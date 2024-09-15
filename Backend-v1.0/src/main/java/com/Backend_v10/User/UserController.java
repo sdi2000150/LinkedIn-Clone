@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -197,7 +198,33 @@ public class UserController {
     }
 
 
+    @PostMapping("/create_job/{owner_email}")
+    public boolean CreateJob(@RequestBody Job newJob, @PathVariable String owner_email){
+        
+        // Optional<Job> found_job = this.repository.findById(newJob.getJobID());
+        // if(found_job.isEmpty()){
+        Optional<User> u = this.repository.findByEmail(owner_email);
+        u.get().addJob(newJob);
+        //j.set
+        this.repository.save(u.get());
+        //this.repository.save(newJob);
+        return true;
+    }
 
+
+    @PostMapping("/create_article/{owner_email}")
+    public boolean CreateArticle(@RequestBody Article newArticle, @PathVariable String owner_email){
+        
+        // Optional<Job> found_job = this.repository.findById(newJob.getJobID());
+        // if(found_job.isEmpty()){
+        Optional<User> u = this.repository.findByEmail(owner_email);
+        u.get().addArticle(newArticle);
+        newArticle.setDateTime_of_Creation(LocalDateTime.now());
+        //j.set
+        this.repository.save(u.get());
+        //this.repository.save(newJob);
+        return true;
+    }
     // @GetMapping("/request_{from}")
     // public void sendConnectionRequest(@RequestParam String send_to, @PathVariable String from) {
     //     UserConnection connection = new UserConnection();

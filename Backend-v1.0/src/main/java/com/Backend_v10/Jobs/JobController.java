@@ -2,6 +2,7 @@ package com.Backend_v10.Jobs;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Backend_v10.User.User;
 import com.Backend_v10.User.UserRepository;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.lang.StackWalker.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,4 +35,7 @@ public class JobController {
         List<JobApplication>  jobApplications = a.get().getJobApplications();
         return jobApplications;
     }
+
+
+    
 }

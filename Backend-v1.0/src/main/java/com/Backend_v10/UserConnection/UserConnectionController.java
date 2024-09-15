@@ -28,4 +28,28 @@ public class UserConnectionController {
         this.Connrepository.save(conn);
         return true;
     }
+
+    @GetMapping("/accept/{user1}_{user2}")
+    public boolean AcceptConnection(@PathVariable("user1") String user1,@PathVariable("user2") String user2){
+        //UserConnection conn = new UserConnection();
+        this.Connrepository.findUsersRequestingMe(user1);
+        //conn.setUser1(user1);
+        //conn.setUser2(user2);
+        //this.Connrepository.save(conn);
+        this.Connrepository.DeleteRequest(user1, user2);
+
+        //Add to users Contacts 
+        return true;
+    }
+
+    @GetMapping("/decline/{user1}_{user2}")
+    public boolean DeclineConnection(@PathVariable("user1") String user1,@PathVariable("user2") String user2){
+        //UserConnection conn = new UserConnection();
+        this.Connrepository.findUsersRequestingMe(user1);
+        //conn.setUser1(user1);
+        //conn.setUser2(user2);
+        //this.Connrepository.save(conn);
+        this.Connrepository.DeleteRequest(user1, user2);
+        return true;
+    }
 }
