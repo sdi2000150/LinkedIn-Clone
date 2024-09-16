@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -35,6 +36,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.transaction.Transactional;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -74,13 +76,15 @@ public class User {
     // @JsonManagedReference
     private List<JobApplication> myJobApplications;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
         name = "Contacts",
         joinColumns = @JoinColumn(name = "user1"),
         inverseJoinColumns = @JoinColumn(name = "user2")
     )
-    private List<User> myContacts = new ArrayList<>();
+    private List<User> myContacts;
+
+    
     // "mapped by" It indicates that the current entity is not responsible for the relationship's persistence; 
     // instead, the other entity is responsible.
     // @OneToMany(mappedBy = "user1", cascade = CascadeType.ALL)
@@ -160,7 +164,9 @@ public class User {
     public void addContact(User user) {
         if (!this.myContacts.contains(user)) {
             this.myContacts.add(user);
-            user.getMyContacts().add(this);
+            if (!user.getMyContacts().contains(this)) {
+                user.getMyContacts().add(this);
+            }
         }
     }
 

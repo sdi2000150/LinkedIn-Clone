@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalLong;
+import java.util.Set;
 import java.util.jar.Attributes.Name;
 import java.util.stream.Collectors;
 
@@ -142,7 +143,7 @@ public class UserController {
             User user = userOptional.get();
             List<User> contacts = user.getMyContacts();
             
-            return  ResponseEntity.ok(contacts);
+            return ResponseEntity.ok(contacts);
         } else {
             // Handle the case where the user is not found
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

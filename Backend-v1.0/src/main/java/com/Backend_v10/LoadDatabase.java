@@ -15,6 +15,7 @@ import com.Backend_v10.JobApplication.JobApplication;
 import com.Backend_v10.JobApplication.JobApplicationRepository;
 import com.Backend_v10.User.User;
 import com.Backend_v10.User.UserRepository;
+import com.Backend_v10.User.UserService;
 import com.Backend_v10.UserConnection.UserConnection;
 import com.Backend_v10.UserConnection.UserConnectionRepository;
 import com.Backend_v10.Jobs.Job;
@@ -48,13 +49,17 @@ public class LoadDatabase {
   @Autowired  // Inject PasswordEncoder
   private PasswordEncoder encoder;
 
-  public LoadDatabase(UserConnectionRepository UserConnRepo, UserRepository userRepo, ArticleRepository articleRepo, CommentRepository commentRepo, JobRepository jobRepo, JobApplicationRepository jobApplicationRepo, PasswordEncoder encoder) {
+  @Autowired
+  private UserService userService;
+
+  public LoadDatabase(UserService userService, UserConnectionRepository UserConnRepo, UserRepository userRepo, ArticleRepository articleRepo, CommentRepository commentRepo, JobRepository jobRepo, JobApplicationRepository jobApplicationRepo, PasswordEncoder encoder) {
     this.userRepo = userRepo;
     this.articleRepo = articleRepo;
     this.jobRepo = jobRepo;
     this.jobApplicationRepo = jobApplicationRepo;
     this.encoder = encoder;
     this.commentRepo = commentRepo;
+    this.userService = userService;
   }
 
   @Bean  
@@ -70,19 +75,6 @@ public class LoadDatabase {
         User user2 = new User("jetlee", "Jet", encoder.encode("1234"), "ROLE_USER", "Lee", "jetlee@email.com");
         User user3 = new User("TC", "Thomas", encoder.encode("1234"), "ROLE_USER", "Charles", "thomasch@email.com");
         User user4 = new User("TC", "Taylor", encoder.encode("1234"), "ROLE_USER", "Carlson", "taylorcar@email.com");
-        // Create articles and jobs
-        Article article1 = new Article("Just got my First Job!!", null);
-        Article article2 = new Article("Just got my Second Job!!", null);
-        Job job1 = new Job("In need of a Software Engineer");
-        Job job2 = new Job("In need of a Data Scientist");
-        
-        // Associate articles and jobs with users
-        user1.addArticle(article1);
-        user1.addArticle(article2);
-        // user2.AddArticle(article2);
-        user1.addJob(job1);
-        user1.addJob(job2);
-
         // Save users to the repository
         userRepo.save(admin1);
         userRepo.save(admin2);
@@ -90,44 +82,33 @@ public class LoadDatabase {
         userRepo.save(user2);
         userRepo.save(user3);
         userRepo.save(user4);
-        // Connect the two users... 
-        // user1.sendConnectionRequest(user2);
-        // user2.acceptConnectionRequest(user1);
-
+        
         // PROBLEM occurs, with user who owns the article/job (JSON infinite creation) 
         // -> SOLUTION: @JsonManagedReference/@JsonBackReference in all involved entities 
                     //  OR @JsonIgnoreProperties in all involved entities
 
-        // OLD VERSION Add Comment to article1 from user 2
-        // article1.AddComment("Great Article, helped me a lot!",user2,article1);
-        // articleRepo.save(article1);
-
-        // NEW WAY
-        Comment comment = new Comment();
-        article1.addComment(comment);
-        user2.addComment(comment);
-
-        // Save the comment first to avoid duplication
-        commentRepo.save(comment);
-
-        articleRepo.save(article1);  
-        userRepo.save(user2); // This will also save Comment because cascading is enabled in user
-
-
+        // Create articles and jobs
+        Article article1 = new Article("Just got my First Job!!", null);
+        Article article2 = new Article("Just got my Second Job!!", null);
+        Job job1 = new Job("In need of a Software Engineer");
+        Job job2 = new Job("In need of a Data Scientist");
         
-        // Create a JobApplication
+        // Associate articles and jobs with users
+        userService.addArticle(user1, article1);
+        userService.addArticle(user1, article2);
+        userService.addJob(user1, job1);
+        userService.addJob(user1, job2);
+
+
+        // Create comments
+        Comment comment = new Comment();
+        //Assosiate comments with articles/users
+        userService.addComment(article1, user2, comment);
+
+        //Create jobapplications
         JobApplication jobApplication = new JobApplication();
-        // Associate the jobApplication with the job and the user
-        job1.addJobApplication(jobApplication);
-        user2.addJobApplication(jobApplication);
-
-        // Save the jobApplication first to avoid duplication
-        jobApplicationRepo.save(jobApplication);
-
-        // Save the job and the user(again) to update the relationships
-        jobRepo.save(job1);  
-        userRepo.save(user2); // This will also save jobApplication because cascading is enabled in user
-
+        //Assosiate jobapplications with jobs/users
+        userService.addJobApplication(job1, user2, jobApplication);
 
         //Requests/Contacts
         //user1.sendConnectionRequest(user2);
@@ -135,14 +116,10 @@ public class LoadDatabase {
         //user2.acceptConnectionRequest(user1);
         //user2.sendConnectionRequest(user3);
 
-        //teo's contacts tests:
-        user1.addContact(user2);
-        // userRepo.save(user1);    //problem then saving here too
-        userRepo.save(user2);
-
-        user1.addContact(user3);
-        userRepo.save(user1);
-        userRepo.save(user3);
+        //teo's contacts tests: (testing using UserService)
+        userService.addContact(user1, user2);
+        userService.addContact(user1, user3);
+        userService.addContact(user1, user4);
 
         //user connections tests:
         UserConnection conn = new UserConnection();
