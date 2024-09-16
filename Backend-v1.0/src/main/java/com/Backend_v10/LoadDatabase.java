@@ -66,8 +66,6 @@ public class LoadDatabase {
   CommandLineRunner initDatabase(){
     return args -> {
 
-
-
         // Create and save users first
         User admin1 = new User("teomor", "Theodoros", encoder.encode("1234"), "ROLE_ADMIN", "Moraitis", "teomor@email.com");
         User admin2 = new User("nickmosch", "Nikitas", encoder.encode("1234"), "ROLE_ADMIN", "Moschos", "nickmosch@email.com");
