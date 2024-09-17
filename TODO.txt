@@ -16,12 +16,11 @@
 6.5) BACK END:   -----//------
 
 7) (Network) Show connections in list structure 
-7.5) BACK END:   -----//------
+7.5)[DONE] BACK END:   -----//------
 
 
 8) (Network) Clicking on a connected User returns his personal information page
 8.5) [DONE] BACK END:   -----//------
-
 
 9) (Network) Click to start chatting with User
 9.5) BACK END:   -----//------
@@ -30,7 +29,7 @@
 10.5) [DONE] BACK END:   -----//------
 
 11) (Job Offers) Show Job Offers from Connected Users
-11.5) BACK END:   -----//------
+11.5) !!!DOESNT WORK(CHECK GETCONTACTARTICLES )BACK END:   -----//------
 
 12) (Job Offers) Upload own Job Offers
 12.5) BACK END:   -----//------

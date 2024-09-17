@@ -61,7 +61,7 @@ public class User {
     private List<Article> myArticles;
 
     @OneToMany (cascade = CascadeType.ALL)
-    @JoinColumn(name = "article_user_id")
+    @JoinColumn(name = "comment_user_id")
     // @JsonManagedReference
     private List<Comment> myComments;
 

@@ -1,6 +1,11 @@
 package com.Backend_v10.User;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -81,4 +86,17 @@ public class UserService {
         userRepo.save(userlocal1);
         userRepo.save(userlocal2);
     }
+
+    @Transactional
+    public List<Article> return_articles_of_contacts(String email){
+        Optional<User> user = userRepo.findByEmail(email);
+        List<Long> articles_of_contactsids = userRepo.findContactArticles(user.get().getUserID());
+        List<Article> articles_of_contacts = new ArrayList<>();
+        for(int i = 0; i < articles_of_contactsids.size(); i++){
+            articles_of_contacts.add(articleRepo.findById(articles_of_contactsids.get(i)).get());
+        }
+        System.out.println(articles_of_contacts);
+        return articles_of_contacts;
+    }
+
 }

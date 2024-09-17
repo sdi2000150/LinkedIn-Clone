@@ -38,11 +38,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class UserController {
     private final UserRepository repository;
     private final UserConnectionRepository ConnectionRepo;
+    private final UserService service;
 
-
-    UserController(UserRepository repository, UserConnectionRepository UconnRepo){
+    UserController(UserRepository repository, UserConnectionRepository UconnRepo, UserService service){
         this.repository = repository;
         this.ConnectionRepo = UconnRepo;
+        this.service = service;
     }
 
     //FILL ALL MAPPINGS(GET,POST,DELETE,PUT)
@@ -55,6 +56,15 @@ public class UserController {
         //unwrap Optional with .get
         System.out.println("Giving back user " + u.get().getMyArticles().size());
         return ResponseEntity.ok(u.get());
+    }
+
+
+    //GET ALL Articles from my CONTACTS
+    @GetMapping("/{email}/contact_articles")
+    public ResponseEntity<List<Article>> GetContactArticles(@PathVariable String email){
+        //Optional<User> userOptional = this.repository.findByEmail(email);
+        
+        return ResponseEntity.ok(service.return_articles_of_contacts(email));
     }
 
     //get user info by email

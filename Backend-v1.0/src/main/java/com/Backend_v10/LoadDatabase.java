@@ -106,6 +106,9 @@ public class LoadDatabase {
         // Create comments and save them to the repository
         Comment comment1 = new Comment();
         Comment comment2 = new Comment();
+        comment1.setContent("Nice Post");
+        comment2.setContent("I Agree Great Post");
+
         commentRepo.save(comment1);
         commentRepo.save(comment2);
         //Assosiate comments with articles/users
