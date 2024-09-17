@@ -16,6 +16,7 @@ import com.Backend_v10.Articles.ArticleRepository;
 import com.Backend_v10.JobApplication.JobApplicationRepository;
 import com.Backend_v10.Jobs.JobRepository;
 
+// To encapsulate the method calls + repository saves
 @Service
 public class UserService {
 
@@ -36,40 +37,48 @@ public class UserService {
 
     @Transactional
     public void addArticle(User user, Article newArticle) {
-        user.addArticle(newArticle);
-        userRepo.save(user);
+        User userlocal = userRepo.findByEmail(user.getEmail()).get();
+        userlocal.addArticle(newArticle);
+        userRepo.save(userlocal);
     }
 
     @Transactional
     public void addComment(Article article, User user, Comment newComment) {
-        article.addComment(newComment);
-        user.addComment(newComment);
+        Article articlelocal = articleRepo.findById(article.getArticleID()).get();
+        User userlocal = userRepo.findByEmail(user.getEmail()).get();
+        articlelocal.addComment(newComment);
+        userlocal.addComment(newComment);
         
         commentRepo.save(newComment);   //save the comment first to avoid duplication
-        articleRepo.save(article);
-        userRepo.save(user);
+        articleRepo.save(articlelocal);
+        userRepo.save(userlocal);
     }
 
     @Transactional
     public void addJob(User user, Job newJob) {
-        user.addJob(newJob);
-        userRepo.save(user);
+        User userlocal = userRepo.findByEmail(user.getEmail()).get();
+        userlocal.addJob(newJob);
+        userRepo.save(userlocal);
     }
 
     @Transactional
     public void addJobApplication(Job job, User user, JobApplication newJobApplication) {
-        job.addJobApplication(newJobApplication);
-        user.addJobApplication(newJobApplication);
+        Job joblocal = jobRepo.findById(job.getJobID()).get();
+        User userlocal = userRepo.findByEmail(user.getEmail()).get();
+        joblocal.addJobApplication(newJobApplication);
+        userlocal.addJobApplication(newJobApplication);
 
         jobApplicationRepo.save(newJobApplication);   //save the job application first to avoid duplication
-        jobRepo.save(job);
-        userRepo.save(user);
+        jobRepo.save(joblocal);
+        userRepo.save(userlocal);
     }
 
     @Transactional
     public void addContact(User user1, User user2) {
-        user1.addContact(user2);
-        userRepo.save(user1);
-        userRepo.save(user2);
+        User userlocal1 = userRepo.findByEmail(user1.getEmail()).get();
+        User userlocal2 = userRepo.findByEmail(user2.getEmail()).get();
+        userlocal1.addContact(userlocal2);
+        userRepo.save(userlocal1);
+        userRepo.save(userlocal2);
     }
 }

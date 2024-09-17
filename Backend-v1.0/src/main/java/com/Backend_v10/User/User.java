@@ -76,7 +76,7 @@ public class User {
     // @JsonManagedReference
     private List<JobApplication> myJobApplications;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) //these cascades for the auto save/addContact of user2, when saving user1
     @JoinTable(
         name = "Contacts",
         joinColumns = @JoinColumn(name = "user1"),
@@ -84,23 +84,7 @@ public class User {
     )
     private List<User> myContacts;
 
-    
-    // "mapped by" It indicates that the current entity is not responsible for the relationship's persistence; 
-    // instead, the other entity is responsible.
-    // @OneToMany(mappedBy = "user1", cascade = CascadeType.ALL)
-    // private List<UserConnection> connectionsInitiated;
-
-    // @OneToMany()
-    // private List<UserConnection> connectionsReceived;
-
-    // @ManyToMany
-    // @JoinColumn(name = "ContactID")
-    // private List<User> Contacts;
-
-    //rest of the fields (may be private)
-
-    //private UserConnectionRepository userConnRepo;
-    
+    // Rest of the fields (may be private)
     private String username;
     private String name;
     private String password;
@@ -112,7 +96,7 @@ public class User {
     private byte[] CVFile;
     private String role;
 
-     //simple constuctor for testing
+     // Simple constructor for testing
     public User(String username, String name, String password, String role, String lastname, String email){
         this.name = name;
         this.lastname = lastname;
@@ -158,8 +142,7 @@ public class User {
         newjobApplication.setUser(this);
     }
 
-    // Connections methods:
-    // Connections methods:
+    // Contacts methods:
     @Transactional
     public void addContact(User user) {
         if (!this.myContacts.contains(user)) {
@@ -169,51 +152,4 @@ public class User {
             }
         }
     }
-
-    // public void acceptConnectionRequest(User user) {
-    //     for (UserConnection connection : this.connectionsReceived) {
-    //         if (connection.getUser1().equals(user) && connection.isPendingRequest()) {
-    //             connection.setPendingRequest(false);
-    //             break;
-    //         }
-    //     }
-    // }
-
-    // public List<User> findUserConnections() {
-    //     List<User> myContacts = new ArrayList<>();
-    //     for (UserConnection connection : this.connectionsReceived) {
-    //         if (connection.isPendingRequest() == false) {
-                // myContacts.add(connection.getUser1());  
-    //         }
-    //     }
-    //     for (UserConnection connection : this.connectionsInitiated) {
-    //         if (connection.isPendingRequest() == false) {
-    //             myContacts.add(connection.getUser2());
-    //         }
-    //     }
-    //     return myContacts;
-    // }
-    // public void sendConnectionRequest(User sending, User accepting) {
-
-    //     // this.connectionsInitiated.add(connection);
-    //     // user.connectionsReceived.add(connection);
-    // }
-    // public void removeConnection(User user) {
-    //     this.connectionsInitiated.removeIf(connection -> connection.getUser2().equals(user));
-    //     this.connectionsReceived.removeIf(connection -> connection.getUser1().equals(user));
-    // }
-
-    // public void sendConnectionRequest(User send_to) {
-    //     UserConnection connection = new UserConnection();
-        
-    
-    //     connection.setUser1(this.getEmail());
-    //     connection.setUser2(send_to.getEmail());
-    //     connection.setPendingRequest(true);
-        
-    //     // this.connectionsInitiated.add(connection);
-    //     // user.connectionsReceived.add(connection);
-    // }
-
-
 }

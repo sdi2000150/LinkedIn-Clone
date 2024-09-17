@@ -81,7 +81,7 @@ public class LoadDatabase {
         userRepo.save(user3);
         userRepo.save(user4);
         
-        // PROBLEM occurs, with user who owns the article/job (JSON infinite creation) 
+        // [SOLVED] PROBLEM occurs, with user who owns the article/job (JSON infinite creation) 
         // -> SOLUTION: @JsonManagedReference/@JsonBackReference in all involved entities 
                     //  OR @JsonIgnoreProperties in all involved entities
 
@@ -90,6 +90,11 @@ public class LoadDatabase {
         Article article2 = new Article("Just got my Second Job!!", null);
         Job job1 = new Job("In need of a Software Engineer");
         Job job2 = new Job("In need of a Data Scientist");
+        // Save articles and jobs to the repository
+        articleRepo.save(article1);
+        articleRepo.save(article2);
+        jobRepo.save(job1);
+        jobRepo.save(job2);
         
         // Associate articles and jobs with users
         userService.addArticle(user1, article1);
@@ -98,33 +103,35 @@ public class LoadDatabase {
         userService.addJob(user1, job2);
 
 
-        // Create comments
-        Comment comment = new Comment();
+        // Create comments and save them to the repository
+        Comment comment1 = new Comment();
+        Comment comment2 = new Comment();
+        commentRepo.save(comment1);
+        commentRepo.save(comment2);
         //Assosiate comments with articles/users
-        userService.addComment(article1, user2, comment);
+        userService.addComment(article1, user2, comment1);
+        userService.addComment(article2, user2, comment2);
 
-        //Create jobapplications
-        JobApplication jobApplication = new JobApplication();
-        //Assosiate jobapplications with jobs/users
-        userService.addJobApplication(job1, user2, jobApplication);
+        // Create jobapplications and save them to the repository
+        JobApplication jobApplication1 = new JobApplication();
+        JobApplication jobApplication2 = new JobApplication();
+        jobApplicationRepo.save(jobApplication1);  
+        jobApplicationRepo.save(jobApplication2);
+        // Assosiate jobapplications with jobs/users
+        userService.addJobApplication(job1, user2, jobApplication1);
+        userService.addJobApplication(job2, user2, jobApplication2);
 
-        //Requests/Contacts
-        //user1.sendConnectionRequest(user2);
-        //userRepo.save(user1);
-        //user2.acceptConnectionRequest(user1);
-        //user2.sendConnectionRequest(user3);
-
-        //teo's contacts tests: (testing using UserService)
+        // Contacts tests:
         userService.addContact(user1, user2);
         userService.addContact(user1, user3);
         userService.addContact(user1, user4);
 
-        //user connections tests:
+        // UserConnections tests:
         UserConnection conn = new UserConnection();
         conn.setUser1(user1.getEmail());
         conn.setUser2(user2.getEmail());
-
         UserConnRepo.save(conn);
+
         //userRepo.save(user2);
         //UserConnRepo.delete(conn);
         List<String> Res = UserConnRepo.findUsersRequestingMe("jetlee@email.com");
