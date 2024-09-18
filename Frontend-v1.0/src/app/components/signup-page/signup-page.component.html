@@ -59,10 +59,6 @@
       <label for="birthdate">Birthdate:</label>
       <input type="date" id="birthdate" [(ngModel)]="birthdate" name="birthdate">
     </div>
-    <div>
-    <label for="image">Image:</label>
-      <input type="file" id="image" accept="image/*"><br>
-    </div>
     <!--Doesnt check erros. Bug on submit-->
     <form id="sign-up" (submit)="SignUp()">
      <button class="btn2" type="submit" value="SignUp">Sign Up</button>

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { UserService } from '../../../services/user-service/user.service';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { CommonModule } from '@angular/common'; // Import CommonModule
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [NavbarComponent],
+  imports: [NavbarComponent, FormsModule, CommonModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -19,6 +21,37 @@ export class ProfileComponent implements OnInit {
 
   token: string | null = null; // Store token from localStorage
 
+  coverPhotoUrl: string = 'assets/images/placeholder-cover.jpg'; // Default cover photo URL
+  profilePhotoUrl: string = 'assets/images/placeholder-profile.jpg'; // Default profile photo URL
+
+  experiences: string[] = ['INTERN', 'JUNIOR', 'MID_LEVEL', 'SENIOR', 'LEAD', 'MANAGER', 'DIRECTOR', 'EXECUTIVE'];
+  educations: string[] = ['HIGH_SCHOOL', 'ASSOCIATE_DEGREE', 'BACHELORS_DEGREE', 'MASTERS_DEGREE', 'DOCTORATE', 'PROFESSIONAL_CERTIFICATION'];
+  skills: string[] = [   
+    'PROGRAMMING',
+    'DATA_ANALYSIS',
+    'PROJECT_MANAGEMENT',
+    'COMMUNICATION',
+    'PROBLEM_SOLVING',
+    'TEAMWORK',
+    'LEADERSHIP',
+    'DESIGN',
+    'MARKETING',
+    'SALES',
+    'CUSTOMER_SERVICE',
+    'FINANCE',
+    'OPERATIONS',
+    'STRATEGIC_PLANNING',
+    'RESEARCH'
+  ];
+
+  about: string = ''; // Field for about
+
+  selectedExperience: string = '';
+  experienceDescription: string = ''; // Field for experience description
+  selectedEducation: string = '';
+  educationDescription: string = ''; // Field for education description
+  selectedSkills: string = '';  //this will change to string[] = []
+  
   constructor(private userService: UserService, private router: Router) {} //Inject the UserService
 
   ngOnInit(): void {
@@ -49,6 +82,12 @@ export class ProfileComponent implements OnInit {
           this.Email = data.email;
           this.Phone = data.phone;
           this.Birthdate = data.birthdate;
+          this.about = data.about;
+          this.selectedExperience = data.experience;
+          this.experienceDescription = data.experienceDescription;
+          this.selectedEducation = data.education;
+          this.educationDescription = data.educationDescription;
+          this.selectedSkills = data.skills;
           // Add any logic you want to execute after fetching the user profile
         },
         (error) => {
@@ -60,6 +99,50 @@ export class ProfileComponent implements OnInit {
       // Handle case where token is missing
       console.error('No token found');
     }
-
   }
+
+  updateUserProfile(): void {
+    if (this.token) {
+      const updateData = {
+        name: this.Name,
+        lastname: this.Surname,
+        email: this.Email,
+        phone: this.Phone,
+        birthdate: this.Birthdate,
+        about: this.about,
+        experience: this.selectedExperience,
+        experienceDescription: this.experienceDescription,
+        education: this.selectedEducation,
+        educationDescription: this.educationDescription,
+        skills: this.selectedSkills
+      };
+
+      this.userService.updateUserProfile(this.token, updateData).subscribe(
+        (response) => {
+          console.log('User profile updated successfully', response);
+        },
+        (error) => {
+          console.error('Error updating user profile', error);
+        }
+      );
+    }
+  }
+
+  updateAbout(): void {
+    this.updateUserProfile();
+  }
+
+  updateExperience(): void {
+    this.updateUserProfile();
+  }
+
+  updateEducation(): void {
+    this.updateUserProfile();
+  }
+
+  //this will change to access array of strings
+  updateSkills(): void {
+    this.updateUserProfile();
+  }
+
 }

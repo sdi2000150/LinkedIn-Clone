@@ -163,6 +163,18 @@ export class UserService {
     return this.http.put(url, { password: newPassword }, { headers });
   }
 
+  updateUserProfile(token: string, updateData: any): Observable<any> {
+    // Extract the email from the token
+    const email = this.extractEmailFromToken(token);
+
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put<any>(`${this.baseUrl}/user/${email}/profile`, updateData, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  }
   // applyToJob(userId: number, jobId: number): Observable<any> {
   //   return this.http.post(`${this.baseUrl}/user/${userId}/apply/${jobId}`, {});
   // }

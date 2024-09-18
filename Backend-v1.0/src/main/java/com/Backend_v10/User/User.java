@@ -28,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.ManyToMany;
    
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -87,14 +88,60 @@ public class User {
     // Rest of the fields (may be private)
     private String username;
     private String name;
-    private String password;
     private String lastname;
+    private String password;
     private String phone;
     private String email;
-    private byte[] photo;
+    private byte[] profilePhoto;
+    private byte[] coverPhoto;
     private LocalDate birthdate;
-    private byte[] CVFile;
+    private byte[] cvFile;
     private String role;
+
+    private String about;
+    private String experience;
+    private String experienceDescription;
+    private String education;
+    private String educationDescription;
+    private String skills;    //this will change to List<String>
+
+    // public enum Experience {
+    //     INTERN,
+    //     JUNIOR,
+    //     MID_LEVEL,
+    //     SENIOR,
+    //     LEAD,
+    //     MANAGER,
+    //     DIRECTOR,
+    //     EXECUTIVE
+    // }
+    
+    // public enum Education {
+    //     HIGH_SCHOOL,
+    //     ASSOCIATE_DEGREE,
+    //     BACHELORS_DEGREE,
+    //     MASTERS_DEGREE,
+    //     DOCTORATE,
+    //     PROFESSIONAL_CERTIFICATION
+    // }
+    
+    // public enum Skills {
+    //     PROGRAMMING,
+    //     DATA_ANALYSIS,
+    //     PROJECT_MANAGEMENT,
+    //     COMMUNICATION,
+    //     PROBLEM_SOLVING,
+    //     TEAMWORK,
+    //     LEADERSHIP,
+    //     DESIGN,
+    //     MARKETING,
+    //     SALES,
+    //     CUSTOMER_SERVICE,
+    //     FINANCE,
+    //     OPERATIONS,
+    //     STRATEGIC_PLANNING,
+    //     RESEARCH
+    // }
 
      // Simple constructor for testing
     public User(String username, String name, String password, String role, String lastname, String email){

@@ -38,36 +38,29 @@
               </li>
             </ul>
           </div>
-        <div class="profile-section">
+          <div class="profile-section">
             <h2>About</h2>
-            <textarea placeholder="Enter your professional summary..."></textarea>
+            <textarea [(ngModel)]="about" placeholder="Enter your professional summary..." (change)="updateAbout()"></textarea>
         </div>
         <div class="profile-section">
             <h2>Experience</h2>
-            <ul>
-                <label>
-                    <input type="checkbox"> Public
-                </label>
-                <!-- Add experience entries as needed -->
-            </ul>
+            <select [(ngModel)]="selectedExperience" (change)="updateExperience()">
+                <option *ngFor="let exp of experiences" [value]="exp">{{ exp }}</option>
+            </select>
+            <input type="text" [(ngModel)]="experienceDescription" placeholder="Enter experience description" (change)="updateExperience()">
         </div>
         <div class="profile-section">
             <h2>Education</h2>
-            <ul>
-                <label>
-                    <input type="checkbox"> Public
-                </label>
-                <!-- Add education entries as needed -->
-            </ul>
+            <select [(ngModel)]="selectedEducation" (change)="updateEducation()">
+                <option *ngFor="let edu of educations" [value]="edu">{{ edu }}</option>
+            </select>
+            <input type="text" [(ngModel)]="educationDescription" placeholder="Enter education description" (change)="updateEducation()">
         </div>
         <div class="profile-section">
             <h2>Skills</h2>
-            <ul>
-                <label>
-                    <input type="checkbox"> Public
-                </label>
-                <!-- Add skills as needed -->
-            </ul>
+            <select [(ngModel)]="selectedSkills" (change)="updateSkills()">
+                <option *ngFor="let skill of skills" [value]="skill">{{ skill }}</option>
+            </select>
         </div>
     </div>
 </div>

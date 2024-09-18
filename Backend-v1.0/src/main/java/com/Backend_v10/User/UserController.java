@@ -124,24 +124,31 @@ public class UserController {
 
 
     //updates User fields. Returns true if its done properly, false else
-    @PutMapping("/{id}")
-    public Boolean UpdateUser(@PathVariable Long id, @RequestBody User updatedUser) {
-
-        repository.findById(id).map(u -> {
-            u.setName(updatedUser.getName());
-            u.setLastname(updatedUser.getLastname());
-            u.setEmail(updatedUser.getEmail());
-            u.setBirthdate(updatedUser.getBirthdate());
-            u.setCVFile(updatedUser.getCVFile());
-            u.setPhoto(updatedUser.getPhoto());
-            u.setUsername(updatedUser.getUsername());
-            repository.save(u);
-            return true;
-        })
-        .orElseGet(() -> {
-            return false;
-        });
-        return false;
+    @PutMapping("/{email}/profile")
+    public ResponseEntity<Boolean> UpdateUser(@PathVariable String email, @RequestBody User updatedUser) {
+        Optional<User> userOptional = repository.findByEmail(email);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            // user.setUsername(updatedUser.getUsername());
+            user.setName(updatedUser.getName());
+            user.setLastname(updatedUser.getLastname());
+            user.setEmail(updatedUser.getEmail());
+            user.setPhone(updatedUser.getPhone());
+            user.setBirthdate(updatedUser.getBirthdate());
+            // user.setCvFile(updatedUser.getCvFile());
+            // user.setProfilePhoto(updatedUser.getProfilePhoto());
+            // user.setCoverPhoto(updatedUser.getCoverPhoto());
+            user.setAbout(updatedUser.getAbout());
+            user.setExperience(updatedUser.getExperience());
+            user.setExperienceDescription(updatedUser.getExperienceDescription());
+            user.setEducation(updatedUser.getEducation());
+            user.setEducationDescription(updatedUser.getEducationDescription());
+            user.setSkills(updatedUser.getSkills());
+            repository.save(user);
+            return ResponseEntity.ok(true);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
+        }
     }
 
     // Endpoint to get all contacts
