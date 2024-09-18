@@ -61,6 +61,13 @@ public class UserController {
         return ResponseEntity.ok(u.get());
     }
 
+    // Get profile-view of a user
+    @GetMapping("/view-profile/{email}")
+    public ResponseEntity<User> getProfileView(@PathVariable String email) {
+        Optional<User> u = this.repository.findByEmail(email);
+        // logic here
+        return ResponseEntity.ok(u.get());
+    }
 
     //Find Relationship with User
     @GetMapping("/identify/{myemail}/{useremail}")

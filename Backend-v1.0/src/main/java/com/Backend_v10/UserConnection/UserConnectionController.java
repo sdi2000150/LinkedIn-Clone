@@ -41,7 +41,7 @@ public class UserConnectionController {
     @GetMapping("/accept/{email1}/{email2}")
     public boolean AcceptConnection(@PathVariable("email1") String user1,@PathVariable("email2") String user2){
         //UserConnection conn = new UserConnection();
-        if( this.Connrepository.CheckIfRequestExists(user1, user2)){
+        if( this.Connrepository.CheckIfRequestExists(user1, user2) == 1){
             //request exists and we accept it. 
             //So we delete it 
             this.Connrepository.DeleteRequest(user1, user2);
@@ -95,7 +95,7 @@ public class UserConnectionController {
 
     @GetMapping("/decline/{user1}/{user2}")
     public boolean DeclineConnection(@PathVariable("user1") String user1,@PathVariable("user2") String user2){
-        if( this.Connrepository.CheckIfRequestExists(user1, user2)){
+        if( this.Connrepository.CheckIfRequestExists(user1, user2) == 1){
             //request exists and we decline it. 
             //So we delete it 
             this.Connrepository.DeleteRequest(user1, user2);      

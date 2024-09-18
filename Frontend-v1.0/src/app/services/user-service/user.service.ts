@@ -192,9 +192,23 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<any>(`${this.baseUrl}/user/user-profile?email=${email}`, { headers });
+    return this.http.get<any>(`${this.baseUrl}/user/view-profile/${email}`, { headers });
   }
 
+  getUsersRelation(token: string, useremail: string): Observable<String> {
+    // Extract the email from the token
+    const myemail = this.extractEmailFromToken(token);
+
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get<String>(`${this.baseUrl}/user/identify/${myemail}/${useremail}`, {
+      headers,
+      responseType: 'text' as 'json' // Tell HttpClient to expect a text response
+    });  
+  }
 
   // applyToJob(userId: number, jobId: number): Observable<any> {
   //   return this.http.post(`${this.baseUrl}/user/${userId}/apply/${jobId}`, {});

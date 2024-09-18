@@ -16,6 +16,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './profile-view.component.css'
 })
 export class ProfileViewComponent implements OnInit {
+  button1: string = 'Empty';
+  button2: string = 'Empty';
+
   Name: string = 'Empty'; //Placeholder for the user's name
   Surname: string = 'Empty'; //Placeholder for the user's surname
   Email: string = 'Empty'; //Placeholder for the user's email
@@ -44,12 +47,40 @@ export class ProfileViewComponent implements OnInit {
     if (this.token) {
       // Use token to fetch user data or perform other tasks
       this.fetchUserData();
+      this.fetchButtons();
     } else {
       // If no token found, redirect to login page
       this.router.navigate(['../../login-page']);
     }
 
 
+  }
+
+  fetchButtons(): void {
+    const token = localStorage.getItem('token'); // Fetch the token from localStorage
+
+    const email = this.route.snapshot.paramMap.get('email'); // Fetch the email from the URL
+
+  
+    if (token) {
+      if (email) {
+        this.userService.getUsersRelation(token, email).subscribe(
+          (data: any) => {
+            this.button1 = data;
+            this.button1 = data;
+          },
+          (error) => {
+            console.error('Error fetching user data', error);
+            // Handle error, potentially navigate back to login
+          }
+        );
+      } else {
+        console.error('No email found in the URL');
+      }
+    } else {
+      // Handle case where token is missing
+      console.error('No token found');
+    }
   }
 
   fetchUserData(): void {
