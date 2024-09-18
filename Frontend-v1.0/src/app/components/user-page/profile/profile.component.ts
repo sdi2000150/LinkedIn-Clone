@@ -129,7 +129,20 @@ export class ProfileComponent implements OnInit {
   }
 
   updateAbout(): void {
-    this.updateUserProfile();
+    if (this.token) {
+      const updateData = {
+        about: this.about
+      };
+
+      this.userService.updateUserProfile(this.token, updateData).subscribe(
+        (response) => {
+          console.log('User profile updated successfully', response);
+        },
+        (error) => {
+          console.error('Error updating user profile', error);
+        }
+      );
+    }
   }
 
   updateExperience(): void {

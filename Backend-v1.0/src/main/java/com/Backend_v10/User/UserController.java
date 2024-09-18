@@ -129,21 +129,51 @@ public class UserController {
         Optional<User> userOptional = repository.findByEmail(email);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            // user.setUsername(updatedUser.getUsername());
-            user.setName(updatedUser.getName());
-            user.setLastname(updatedUser.getLastname());
-            user.setEmail(updatedUser.getEmail());
-            user.setPhone(updatedUser.getPhone());
-            user.setBirthdate(updatedUser.getBirthdate());
-            // user.setCvFile(updatedUser.getCvFile());
-            // user.setProfilePhoto(updatedUser.getProfilePhoto());
-            // user.setCoverPhoto(updatedUser.getCoverPhoto());
-            user.setAbout(updatedUser.getAbout());
-            user.setExperience(updatedUser.getExperience());
-            user.setExperienceDescription(updatedUser.getExperienceDescription());
-            user.setEducation(updatedUser.getEducation());
-            user.setEducationDescription(updatedUser.getEducationDescription());
-            user.setSkills(updatedUser.getSkills());
+            if (updatedUser.getUsername() != null) {
+                user.setUsername(updatedUser.getUsername());
+            }
+            if (updatedUser.getName() != null) {
+                user.setName(updatedUser.getName());
+            }
+            if (updatedUser.getLastname() != null) {
+                user.setLastname(updatedUser.getLastname());
+            }
+            if (updatedUser.getEmail() != null) {
+                user.setEmail(updatedUser.getEmail());
+            }
+            if (updatedUser.getPhone() != null) {
+                user.setPhone(updatedUser.getPhone());
+            }
+            if (updatedUser.getBirthdate() != null) {
+                user.setBirthdate(updatedUser.getBirthdate());
+            }
+            if (updatedUser.getCvFile() != null) {
+                user.setCvFile(updatedUser.getCvFile());
+            }
+            if (updatedUser.getProfilePhoto() != null) {
+                user.setProfilePhoto(updatedUser.getProfilePhoto());
+            }
+            if (updatedUser.getCoverPhoto() != null) {
+                user.setCoverPhoto(updatedUser.getCoverPhoto());
+            }
+            if (updatedUser.getAbout() != null) {
+                user.setAbout(updatedUser.getAbout());
+            }
+            if (updatedUser.getExperience() != null) {
+                user.setExperience(updatedUser.getExperience());
+            }
+            if (updatedUser.getExperienceDescription() != null) {
+                user.setExperienceDescription(updatedUser.getExperienceDescription());
+            }
+            if (updatedUser.getEducation() != null) {
+                user.setEducation(updatedUser.getEducation());
+            }
+            if (updatedUser.getEducationDescription() != null) {
+                user.setEducationDescription(updatedUser.getEducationDescription());
+            }
+            if (updatedUser.getSkills() != null) {
+                user.setSkills(updatedUser.getSkills());
+            }
             repository.save(user);
             return ResponseEntity.ok(true);
         } else {
