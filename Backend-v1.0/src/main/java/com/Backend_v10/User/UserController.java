@@ -6,6 +6,9 @@ import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Jobs.Job;
 import com.Backend_v10.UserConnection.UserConnection;
 import com.Backend_v10.UserConnection.UserConnectionRepository;
+
+import ch.qos.logback.core.model.processor.PhaseIndicator;
+
 import com.Backend_v10.JobApplication.JobApplication;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,6 +61,12 @@ public class UserController {
         return ResponseEntity.ok(u.get());
     }
 
+
+    //Find Relationship with User
+    @GetMapping("/identify/{myemail}/{useremail}")
+    public String IdentifyUser(@PathVariable String myemail, @PathVariable String useremail){
+            return this.service.Identify_Connection(myemail, useremail);
+    }
 
     //GET ALL Articles from my CONTACTS
     @GetMapping("/{email}/contact_articles")
@@ -289,6 +298,11 @@ public class UserController {
         //this.repository.save(newJob);
         return true;
     }
+
+
+
+
+
     // @GetMapping("/request_{from}")
     // public void sendConnectionRequest(@RequestParam String send_to, @PathVariable String from) {
     //     UserConnection connection = new UserConnection();

@@ -14,8 +14,8 @@ public interface UserConnectionRepository extends JpaRepository<UserConnection,L
     @Query(value = "select  user_connection.user1 from user_connection  where user_connection.user2 = ?1", nativeQuery = true)
     List<String> findUsersRequestingMe(String email_requested);
     
-    @Query(value = "select case when count(req) > 0 then true else false end from user_connection where user_connection.user1 = ?1 and user_connection.user2 = ?2", nativeQuery = true)
-    Boolean CheckIfRequestExists(String email_did_request, String email_received_request);
+    @Query(value = "select case when count(*) > 0 then true else false end from user_connection where user_connection.user1 = ?1 and user_connection.user2 = ?2", nativeQuery = true)
+    Long CheckIfRequestExists(String email_did_request, String email_received_request);
 
     @Query(value = "select  user_connection.user2 from user_connection  where user_connection.user1 = ?1", nativeQuery = true)
     List<String> findUsersIRequested(String my_email);

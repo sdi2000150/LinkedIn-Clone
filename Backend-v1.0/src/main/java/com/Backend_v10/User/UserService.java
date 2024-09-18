@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.Backend_v10.User.User;
 import com.Backend_v10.User.UserRepository;
+import com.Backend_v10.UserConnection.UserConnectionRepository;
 import com.Backend_v10.Jobs.Job;
 import com.Backend_v10.JobApplication.JobApplication;
 import com.Backend_v10.Articles.Article;
@@ -39,6 +40,9 @@ public class UserService {
 
     @Autowired
     private JobRepository jobRepo;
+
+    @Autowired
+    private UserConnectionRepository ConnRepo;
 
     @Transactional
     public void addArticle(User user, Article newArticle) {
@@ -97,6 +101,32 @@ public class UserService {
         }
         System.out.println(articles_of_contacts);
         return articles_of_contacts;
+    }
+    
+    //Find What Kind of Connection relates 2 Users
+    @Transactional
+    public String Identify_Connection(String Myemail,String Useremail){
+        //Check if User is a Contact
+        Optional<User> Me = this.userRepo.findByEmail(Myemail);
+        List<User> myContacts = Me.get().getMyContacts();
+        for(User u: myContacts){
+            if( u.getEmail().equals(Useremail) == true){
+                    //User is Contact
+                    return "Connected";
+                }
+            }
+        //return "here?????";
+
+        //Check if We Have sent a Request to User
+        if(this.ConnRepo.CheckIfRequestExists(Myemail, Useremail) == 1L){
+            return "Request Sent";
+        }
+        //Check if We Have Received a Request from User
+        else if(this.ConnRepo.CheckIfRequestExists(Useremail, Myemail) == 1L)
+            return "Got Request";
+        else
+            return "Sent Request";
+        
     }
 
 }

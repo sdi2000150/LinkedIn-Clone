@@ -8,6 +8,9 @@
 
 3)[DONE] Use of JWT for the Requests 
 
+3.5)[DONE] Update User Fields
+3.5)[DONE] BACK END: ---//---
+
 4) SSL/TLS Integration
 
 5) Integration of the above also for ADMIN.
