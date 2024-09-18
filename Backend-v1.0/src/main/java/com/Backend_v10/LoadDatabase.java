@@ -131,8 +131,8 @@ public class LoadDatabase {
 
         // UserConnections tests:
         UserConnection conn = new UserConnection();
-        conn.setUser1(user1.getEmail());
-        conn.setUser2(user2.getEmail());
+        conn.setUser1(user3.getEmail());
+        conn.setUser2(user4.getEmail());
         UserConnRepo.save(conn);
 
         //userRepo.save(user2);
