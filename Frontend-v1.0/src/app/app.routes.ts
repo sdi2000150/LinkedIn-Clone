@@ -12,6 +12,7 @@ import { UsersListComponent } from './components/admin-page/users-list/users-lis
 import { NetworkComponent } from './components/user-page/network/network.component';
 import { NotificationsComponent } from './components/user-page/notifications/notifications.component';
 import { MessagingComponent } from './components/user-page/messaging/messaging.component';
+import { ProfileViewComponent } from './components/user-page/profile-view/profile-view.component';
 
 import { authGuard } from './auth.guard';  // Import your guard
 
@@ -29,6 +30,7 @@ export const routes: Routes = [
   { path: 'user-page/network', component: NetworkComponent, canActivate: [authGuard] },
   { path: 'user-page/notifications', component: NotificationsComponent, canActivate: [authGuard] },
   { path: 'user-page/messaging', component: MessagingComponent, canActivate: [authGuard] },
+  { path: 'user-page/profile-view/:email', component: ProfileViewComponent, canActivate: [authGuard] },
 
   { path: 'admin-page/users-list', component: UsersListComponent, canActivate: [authGuard] },
 

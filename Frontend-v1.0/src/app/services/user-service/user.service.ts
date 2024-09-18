@@ -175,6 +175,27 @@ export class UserService {
       headers: { Authorization: `Bearer ${token}` }
     });
   }
+
+  getContacts(token: string): Observable<any> {
+    // Extract the email from the token
+    const email = this.extractEmailFromToken(token);
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    // Append the email to the URL and send the GET request with the Authorization header
+    return this.http.get<any>(`${this.baseUrl}/user/${email}/contacts`, { headers });
+  }
+
+  getProfileViewByEmail(token: string, email: string): Observable<any> {
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(`${this.baseUrl}/user/user-profile?email=${email}`, { headers });
+  }
+
+
   // applyToJob(userId: number, jobId: number): Observable<any> {
   //   return this.http.post(`${this.baseUrl}/user/${userId}/apply/${jobId}`, {});
   // }

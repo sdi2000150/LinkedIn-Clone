@@ -192,14 +192,21 @@ public class UserController {
 
     // Endpoint to get all contacts
     @GetMapping("/{email}/contacts")
-    public ResponseEntity<List<User>> getContacts(@PathVariable String email) {
+    public ResponseEntity<List<String[]>> getContacts(@PathVariable String email) {
         Optional<User> userOptional = this.repository.findByEmail(email);
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             List<User> contacts = user.getMyContacts();
-            
-            return ResponseEntity.ok(contacts);
+            List<String[]> contactsInfo = new ArrayList<>();
+            for (User contact : contacts) {
+                String[] contactInfo = new String[2];
+                contactInfo[0] = contact.getUsername();
+                contactInfo[1] = contact.getEmail();
+                contactsInfo.add(contactInfo);
+            }
+
+            return ResponseEntity.ok(contactsInfo);
         } else {
             // Handle the case where the user is not found
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
