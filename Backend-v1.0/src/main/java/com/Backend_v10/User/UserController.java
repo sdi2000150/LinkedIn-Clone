@@ -278,6 +278,20 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
+    // Endpoint to get all liked articles of a user
+    @GetMapping("/{email}/liked-articles")
+    public ResponseEntity<List<Article>> getLikedArticles(@PathVariable String email) {
+        Optional<User> userOptional = this.repository.findByEmail(email);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            List<Article> likedArticles = user.getLikedArticles();
+            return ResponseEntity.ok(likedArticles);
+        } else {
+            // Handle the case where the user is not found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
     
     //Change Password and email 
 

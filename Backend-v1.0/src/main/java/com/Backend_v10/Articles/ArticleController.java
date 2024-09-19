@@ -27,8 +27,6 @@ public class ArticleController {
         this.UserRepo = URepo;
     }
 
-
-
     @GetMapping("{id}/comments")
     public List<Comment> GetArticleComments(@PathVariable String id) {
         Optional<Article> a = this.repository.findById(Long.parseLong(id));
@@ -36,6 +34,15 @@ public class ArticleController {
         List<Comment>  Comments = a.get().getArticleComments();
         return Comments;
     }
+
+    @GetMapping("{id}/likes")
+    public List<User> GetArticleLikes(@PathVariable String id) {
+        Optional<Article> a = this.repository.findById(Long.parseLong(id));
+        
+        List<User> likedByUsers = a.get().getLikedByUsers();
+        return likedByUsers;
+    }
+
 }
 
 

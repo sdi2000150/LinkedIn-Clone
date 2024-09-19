@@ -19,6 +19,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -39,10 +40,15 @@ public class Article {
     String Text;
     byte[] Photo;
     LocalDateTime DateTime_of_Creation;
+
     @OneToMany //(cascade = CascadeType.ALL )
     @JoinColumn(name = "article_id")
     // @JsonManagedReference
     List<Comment> ArticleComments;
+
+    @ManyToMany(mappedBy = "likedArticles")
+    private List<User> likedByUsers;
+
 
     // @JoinColumn(name = "UserID")
     // User ArticleOwner; 
@@ -52,6 +58,7 @@ public class Article {
         this.Photo = photo;
         this.ArticleComments = new ArrayList<>();
         this.DateTime_of_Creation = LocalDateTime.now();
+        this.likedByUsers = new ArrayList<>();
         //this.ArticleOwner = Owner;
     }
     

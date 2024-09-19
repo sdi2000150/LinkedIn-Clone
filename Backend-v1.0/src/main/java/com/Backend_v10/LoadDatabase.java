@@ -93,18 +93,24 @@ public class LoadDatabase {
         Article article1 = new Article("Just got my First Job!!", null);
         Article article2 = new Article("Just got my Second Job!!", null);
         Job job1 = new Job("Full Stack Developer", true, "Java, Spring, Angular", 0, true);
-        Job job2 = new Job("In need of a Data Scientist");
+        Job job2 = new Job("In need of a Data Analyst", false, "MS Office, Python", 0, false);
+        Job job3 = new Job("HR Manager", true, "Communication skills, MBA Masters", 0, true);
+        Job job4 = new Job ("Network Engineer", true, "Networks, C, Python, Protocols understanding", 0, true);
         // Save articles and jobs to the repository
         articleRepo.save(article1);
         articleRepo.save(article2);
         jobRepo.save(job1);
         jobRepo.save(job2);
+        jobRepo.save(job3);
+        jobRepo.save(job4);
         
         // Associate articles and jobs with users
         userService.addArticle(user1, article1);
         userService.addArticle(user1, article2);
         userService.addJob(user1, job1);
         userService.addJob(user1, job2);
+        userService.addJob(user3, job3);
+        userService.addJob(user4, job4);
 
 
         // Create comments and save them to the repository
@@ -125,7 +131,7 @@ public class LoadDatabase {
         jobApplicationRepo.save(jobApplication1);  
         jobApplicationRepo.save(jobApplication2);
         // Assosiate jobapplications with jobs/users
-        userService.addJobApplication(job1, user2, jobApplication1);
+        userService.addJobApplication(job3, user1, jobApplication1);
         userService.addJobApplication(job2, user2, jobApplication2);
 
         
@@ -146,6 +152,21 @@ public class LoadDatabase {
         conn2.setUser1(user6.getEmail());
         conn2.setUser2(user1.getEmail());
         UserConnRepo.save(conn2);
+
+        // Test likes
+        user1.likeArticle(article1);
+        user2.likeArticle(article1);
+        user3.likeArticle(article2);
+
+        // Save the updated users
+        userRepo.save(user1);
+        userRepo.save(user2);
+        userRepo.save(user3);
+        // Maybe dont need the below: (yes, not needed, maybe autosaved by the manytomany(mappedBy = "likedArticles")->(of user))
+        // articleRepo.save(article1);
+        // articleRepo.save(article2);
+
+
 
         //userRepo.save(user2);
         //UserConnRepo.delete(conn);

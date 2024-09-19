@@ -85,6 +85,15 @@ public class User {
     )
     private List<User> myContacts;
 
+    @ManyToMany
+    @JoinTable(
+        name = "User_Likes",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "article_id")
+    )
+    private List<Article> likedArticles;
+
+
     // Rest of the fields (may be private)
     private String username;
     private String name;
@@ -156,6 +165,7 @@ public class User {
         this.myJobs = new ArrayList<>();
         this.myJobApplications = new ArrayList<>();
         this.myContacts = new ArrayList<>();
+        this.likedArticles = new ArrayList<>();
         // this.connectionsInitiated = new ArrayList<>();
         // this.connectionsReceived = new ArrayList<>();
         // this.Contacts = new ArrayList<>();
@@ -198,5 +208,12 @@ public class User {
                 user.getMyContacts().add(this);
             }
         }
+    }
+
+    // Likes methods:
+    @Transactional
+    public void likeArticle(Article article) {
+        this.likedArticles.add(article);
+        article.getLikedByUsers().add(this);
     }
 }
