@@ -73,6 +73,8 @@ public class LoadDatabase {
         User user2 = new User("jetlee", "Jet", encoder.encode("1234"), "ROLE_USER", "Lee", "jetlee@email.com");
         User user3 = new User("TC", "Thomas", encoder.encode("1234"), "ROLE_USER", "Charles", "thomasch@email.com");
         User user4 = new User("TC", "Taylor", encoder.encode("1234"), "ROLE_USER", "Carlson", "taylorcar@email.com");
+        User user5 = new User("marial", "Maria", encoder.encode("1234"), "ROLE_USER", "Lazarou", "marial@email.com");
+        User user6 = new User("ketip", "Keti", encoder.encode("1234"), "ROLE_USER", "Perry", "ketip@email.com");
         // Save users to the repository
         userRepo.save(admin1);
         userRepo.save(admin2);
@@ -80,6 +82,8 @@ public class LoadDatabase {
         userRepo.save(user2);
         userRepo.save(user3);
         userRepo.save(user4);
+        userRepo.save(user5);
+        userRepo.save(user6);
         
         // [SOLVED] PROBLEM occurs, with user who owns the article/job (JSON infinite creation) 
         // -> SOLUTION: @JsonManagedReference/@JsonBackReference in all involved entities 
@@ -124,19 +128,29 @@ public class LoadDatabase {
         userService.addJobApplication(job1, user2, jobApplication1);
         userService.addJobApplication(job2, user2, jobApplication2);
 
+        
         // Contacts tests:
-        userService.addContact(user1, user2);
-        userService.addContact(user1, user3);
-        userService.addContact(user1, user4);
+        // userService.addContact(user1, user2); //for now jetlee is not a contact of bobross
+        userService.addContact(user1, user3); // thomasch is a contact of bobross
+        userService.addContact(user1, user4); // taylorcar is a contact of bobross
 
         // UserConnections tests:
-        UserConnection conn = new UserConnection();
-        conn.setUser1(user3.getEmail());
-        conn.setUser2(user4.getEmail());
-        UserConnRepo.save(conn);
+        // bobross have sent request to marial
+        UserConnection conn1 = new UserConnection();
+        conn1.setUser1(user1.getEmail());
+        conn1.setUser2(user5.getEmail());
+        UserConnRepo.save(conn1);
+
+        // bobross have received request from ketip
+        UserConnection conn2 = new UserConnection();
+        conn2.setUser1(user6.getEmail());
+        conn2.setUser2(user1.getEmail());
+        UserConnRepo.save(conn2);
 
         //userRepo.save(user2);
         //UserConnRepo.delete(conn);
+
+        // Other tests:
         List<String> Res = UserConnRepo.findUsersRequestingMe("jetlee@email.com");
         System.out.println(Res);
       };
