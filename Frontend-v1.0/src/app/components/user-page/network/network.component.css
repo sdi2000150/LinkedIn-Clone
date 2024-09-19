@@ -59,14 +59,50 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
-
-.contacts-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+ 
+.contacts-container h2 {
+    /* centered */
+    text-align: center;
+}
+.contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
 }
 
-.contacts-list li {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+.contact-card {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit text color */
+    display: block; /* Ensure the entire area is clickable */
+}
+
+.contact-card:hover {
+    background-color: #f4f4f4; /* Add a hover effect */
+}
+.contact-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.contact-username {
+    font-size: 14px;
+    color: #777;
+}
+
+.contact-email {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.contact-experience_description {
+    font-size: 14px;
+    color: #555;
 }

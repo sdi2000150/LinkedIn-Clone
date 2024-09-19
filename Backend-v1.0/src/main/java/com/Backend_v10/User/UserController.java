@@ -207,9 +207,12 @@ public class UserController {
             List<User> contacts = user.getMyContacts();
             List<String[]> contactsInfo = new ArrayList<>();
             for (User contact : contacts) {
-                String[] contactInfo = new String[2];
+                String[] contactInfo = new String[5];
                 contactInfo[0] = contact.getUsername();
                 contactInfo[1] = contact.getEmail();
+                contactInfo[2] = contact.getName();
+                contactInfo[3] = contact.getLastname();
+                contactInfo[4] = contact.getExperienceDescription();
                 contactsInfo.add(contactInfo);
             }
 

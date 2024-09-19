@@ -61,7 +61,7 @@ header {
 }
 
 .user-info h1 {
-    margin: 10px 200px 10px 0; /* Adjust the margin-right to move the h1 to the left */
+    margin: 10px 0 10px -20px; /* Adjust the margin-right to move the h1 to the left */
     font-size: 30px;
     color: #333;
 }
@@ -80,6 +80,8 @@ header {
     margin: 5px 5px 50px 0; /* Add margin-right for spacing between buttons */
     cursor: pointer;
     border-radius: 4px;
+    position: relative; /* Ensure the button is positioned relative to its container */
+    left: -10px; 
 }
 
 .user-info button:hover {

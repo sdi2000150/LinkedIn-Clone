@@ -66,8 +66,21 @@ export class ProfileViewComponent implements OnInit {
       if (email) {
         this.userService.getUsersRelation(token, email).subscribe(
           (data: any) => {
-            this.button1 = data;
-            this.button1 = data;
+            // logic here, data is the response from the server, and i one string ou of:
+            // 'Connected', 'Request Sent', 'Got Request', 'Sent Request'
+            if (data == 'Connected') {
+              this.button1 = data;
+              this.button2 = 'Disconnect';
+            } else if (data == 'Request Sent') {
+              this.button1 = data;
+              this.button2 = 'Cancel Request';
+            } else if (data == 'Got Request') {
+              this.button1 = 'Accept Request';
+              this.button2 = 'Decline Request';
+            } else if (data == 'Sent Request') {
+              this.button1 = 'Connect';
+              this.button2 = ':)';
+            }
           },
           (error) => {
             console.error('Error fetching user data', error);

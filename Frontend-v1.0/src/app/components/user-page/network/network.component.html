@@ -6,20 +6,20 @@
         <ul class="results-list">
             <li *ngFor="let result of searchResults">
                 <a [routerLink]="['/user-page/profile-view', result.email]">
-                    {{ result.username }} {{ result.email }}
+                    {{ result.username }} - {{ result.email }}
                 </a>
             </li>
         </ul>
     </div>
     <div class="contacts-container">
         <h2>Contacts</h2>
-        <ul class="contacts-list">
-            <li *ngFor="let contact of contacts">
-                <a [routerLink]="['/user-page/profile-view', contact.email]">
-                    {{ contact.username }} - {{ contact.email }}
-                </a>
-            </li>
-        </ul>
+        <div class="contacts-grid">
+            <a class="contact-card" *ngFor="let contact of contacts" [routerLink]="['/user-page/profile-view', contact.email]">
+                <div class="contact-name">{{ contact.name }} {{ contact.lastname }} <span class="contact-username">({{ contact.username }})</span></div>
+                <div class="contact-email">{{ contact.email }}</div>
+                <div class="contact-experience_description">{{ contact.experience_description }}</div>
+            </a>
+        </div>
     </div>
 </div>
 <!-- so that the page can be scrolled -->

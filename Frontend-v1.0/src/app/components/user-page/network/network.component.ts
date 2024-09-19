@@ -17,7 +17,7 @@ export class NetworkComponent {
   searchQuery: string = '';
   searchResults: { username: string, email: string }[] = [];
 
-  contacts: { username: string, email: string }[] = [];
+  contacts: { username: string, email: string, name: string, lastname: string, experience_description: string }[] = [];
 
   token: string = localStorage.getItem('token') || ''; // Store token from localStorage
 
@@ -31,9 +31,14 @@ export class NetworkComponent {
     this.userService.getContacts(this.token).subscribe(results => {
       this.contacts = results.map((result: any) => ({
         username: result[0],
-        email: result[1]
+        email: result[1],
+        name: result[2],
+        lastname: result[3],
+        experience_description: result[4]
       }));
+      console.log(this.contacts);
     });
+
   }
 
   onSearch() {
