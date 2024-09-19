@@ -18,7 +18,7 @@
             </div>
         </div>
         <div id="timeline">
-            <h2>Timeline</h2>
+            <h2>Posts Recommendations</h2>
             <!-- Iterate over the articles and display them -->
             <div *ngFor="let article of articles" class="post">
                 <h3>{{ article.title }}</h3>
@@ -30,7 +30,10 @@
     </div>
     <div id="right-sidebar">
         <h2>Additional Content</h2>
-        <!-- Additional content or advertisements -->
+        <ul>
+            <li><a href="../user-page/my-posts">📝 My Posts</a></li>
+            <li><a href="../user-page/contacts-posts">👥 My Contacts' Posts</a></li>
+        </ul>
     </div>
 
 </div>
