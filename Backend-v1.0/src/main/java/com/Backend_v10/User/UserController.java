@@ -223,6 +223,8 @@ public class UserController {
         }
     }
     
+
+
     // Endpoint to get all jobs a specific user has applied for
     @GetMapping("/{email}/applied-jobs")
     public ResponseEntity<Job[]> getAppliedJobs(@PathVariable String email) {
@@ -253,6 +255,24 @@ public class UserController {
             List<Job> jobOffers = user.getMyJobs();
             
             return ResponseEntity.ok(jobOffers);
+        } else {
+            // Handle the case where the user is not found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+    
+    // Endpoint to get all contacts' job offers
+    @GetMapping("/{email}/contacts-job-offers")
+    public ResponseEntity<List<Job>> getContactsJobOffers(@PathVariable String email) {
+        Optional<User> userOptional = this.repository.findByEmail(email);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            List<User> contacts = user.getMyContacts();
+            List<Job> contactsJobOffers = new ArrayList<>();
+            for (User contact : contacts) {
+                contactsJobOffers.addAll(contact.getMyJobs());
+            }
+            return ResponseEntity.ok(contactsJobOffers);
         } else {
             // Handle the case where the user is not found
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

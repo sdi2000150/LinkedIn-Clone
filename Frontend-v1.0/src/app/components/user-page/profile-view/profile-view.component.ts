@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
 export class ProfileViewComponent implements OnInit {
   button1: string = 'Empty';
   button2: string = 'Empty';
+  button3: string = 'Message';
 
   Name: string = 'Empty'; //Placeholder for the user's name
   Surname: string = 'Empty'; //Placeholder for the user's surname

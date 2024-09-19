@@ -56,21 +56,18 @@ header {
     border: 5px solid white;
 }
 
+.profile-picture h1 {
+    margin-top: 10px;
+    font-size: 30px;
+    color: #333;
+    text-align: center;
+}
+
 .user-info {
     text-align: center;
 }
 
-.user-info h1 {
-    margin: 10px 0 10px -20px; /* Adjust the margin-right to move the h1 to the left */
-    font-size: 30px;
-    color: #333;
-}
 
-.user-info h2 {
-    margin: 10px 200px 10px 0; /* Adjust the margin-right to move the h2 to the left */
-    font-size: 20px;
-    color: #333;
-}
 
 .user-info button {
     background-color: #0077B5;

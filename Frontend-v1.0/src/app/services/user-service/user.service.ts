@@ -210,6 +210,17 @@ export class UserService {
     });  
   }
 
+  getContactsJobOffers(token: string): Observable<any> {
+    // Extract the email from the token
+    const email = this.extractEmailFromToken(token);
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    // Append the email to the URL and send the GET request with the Authorization header
+    return this.http.get<any>(`${this.baseUrl}/user/${email}/contacts-job-offers`, { headers });
+  }
+
   // applyToJob(userId: number, jobId: number): Observable<any> {
   //   return this.http.post(`${this.baseUrl}/user/${userId}/apply/${jobId}`, {});
   // }

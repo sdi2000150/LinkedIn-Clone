@@ -13,14 +13,14 @@
                     <img [src]="'assets/images/placeholder-profile.jpg'" alt="Profile Picture" style="cursor: pointer;">
                 </label>
                 <input type="file" id="media-upload" accept="image/*" style="display: none;">
+                <h1>{{ Name }} {{ Surname }}</h1>
             </div>
             <div class="user-info">
-                <h1>{{ Name }} {{ Surname }}</h1>
                 <button (click)="fetchUserData()">Fetch User Data</button> <!-- New button to fetch user data -->
             </div>
         </div>
     </div>
-    <br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
     <div class="profile-content">
         <div class="profile-section">
             <h2>Contact info</h2>

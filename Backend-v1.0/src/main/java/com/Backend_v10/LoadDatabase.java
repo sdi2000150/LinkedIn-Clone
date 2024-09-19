@@ -92,7 +92,7 @@ public class LoadDatabase {
         // Create articles and jobs
         Article article1 = new Article("Just got my First Job!!", null);
         Article article2 = new Article("Just got my Second Job!!", null);
-        Job job1 = new Job("In need of a Software Engineer");
+        Job job1 = new Job("Full Stack Developer", true, "Java, Spring, Angular", 0, true);
         Job job2 = new Job("In need of a Data Scientist");
         // Save articles and jobs to the repository
         articleRepo.save(article1);

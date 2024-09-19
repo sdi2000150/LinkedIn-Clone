@@ -18,6 +18,15 @@ body {
     border-radius: 8px; /* Match border radius */
 }
 
+.post {
+    background-color: rgb(217, 233, 255); /* Match background color */
+    padding: 20px; /* Match padding */
+    margin-bottom: 20px; /* Space between job elements */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Match box shadow */
+    border-radius: 8px; /* Match border radius */
+    box-sizing: border-box;
+}
+
 #left-sidebar,
 #main-content,
 #right-sidebar {
@@ -124,6 +133,23 @@ body {
 #timeline .post button:hover {
     background: #005f8d;
 }
+
+#timeline h2 {
+    text-align: center;
+}
+
+#timeline ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+
+#timeline .post {
+    width: 80%; /* Adjust width as needed */
+    margin-bottom: 20px; /* Space between job elements */
+}
+
 #right-sidebar {
     width: 20%;
     background-color: white; /* Match background color */

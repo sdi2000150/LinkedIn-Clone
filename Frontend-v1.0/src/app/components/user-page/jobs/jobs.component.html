@@ -6,8 +6,13 @@
             <!-- Iterate over the articles and display them -->
             <div *ngFor="let job of jobs" class="post">
                 <h3>{{ job.title }}</h3>
-                <button>Comment</button>
-                <button>Like</button>
+                <p *ngIf="job.needOfDegree">Degree required</p> 
+                <p *ngIf="!job.needOfDegree">Degree not required</p>
+                <p>{{ job.otherRequirements }}</p>
+                <p *ngIf="job.fullTime">Full-time</p> 
+                <p *ngIf="!job.fullTime">Part-time</p>
+                <button>Edit Job Offer</button>
+                <button>Delete Job Offer</button>
             </div>
         </ul>
     </div>
@@ -22,16 +27,18 @@
                 </div>
             </div>
             <h2>Job listings</h2>
-            <!-- Example job -->
-            <div class="post">
-                <h3>Job 1</h3>
-                <p>Job content...</p>
-                <button>Apply</button>
-                <h3>Job 2</h3>
-                <p>Job content...</p>
-                <button>Apply</button>
-            </div>
-            <!-- Add more jobs here -->
+            <ul>
+                <!-- Iterate over the contacts job-offers and display them -->
+                <div *ngFor="let job of contactsJobs" class="post">
+                    <h3>{{ job.title }}</h3>
+                    <p *ngIf="job.needOfDegree">Degree required</p> 
+                    <p *ngIf="!job.needOfDegree">Degree not required</p>
+                    <p>{{ job.otherRequirements }}</p>
+                    <p *ngIf="job.fullTime">Full-time</p> 
+                    <p *ngIf="!job.fullTime">Part-time</p>
+                    <button>Apply</button>
+                </div>
+            </ul>
         </div>
     </div>
     <div id="right-sidebar">
@@ -40,6 +47,12 @@
             <!-- Iterate over the applied jobs and display them -->
             <div *ngFor="let job of appliedJobs" class="post">
                 <h3>{{ job.title }}</h3>
+                <p *ngIf="job.needOfDegree">Degree required</p> 
+                <p *ngIf="!job.needOfDegree">Degree not required</p>
+                <p>{{ job.otherRequirements }}</p>
+                <p *ngIf="job.fullTime">Full-time</p> 
+                <p *ngIf="!job.fullTime">Part-time</p>
+                <button>Cancel Application</button>
             </div>
         </ul>
     </div>
