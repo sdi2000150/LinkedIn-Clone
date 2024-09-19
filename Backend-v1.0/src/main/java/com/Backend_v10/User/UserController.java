@@ -61,6 +61,40 @@ public class UserController {
         return ResponseEntity.ok(u.get());
     }
 
+    //WORKS!!
+    @GetMapping("/NewR/{myemail}/{useremail}")
+    public void NewRequest(@PathVariable String myemail, @PathVariable String useremail){
+        //add the 2 emails in the table of requests with that order
+        this.service.addRequestPair(myemail, useremail);
+    }
+
+    //WORKS!!
+    @GetMapping("/RejectReceivedR/{myemail}/{useremail}")
+    public void RejectReceivedRequest(@PathVariable String myemail, @PathVariable String useremail){
+        this.service.DeleteRec(useremail,myemail);
+    }
+
+    //WORKS!!
+    @GetMapping("/AcceptReceivedR/{myemail}/{useremail}")
+    public void AcceptReceivedRequest(@PathVariable String myemail, @PathVariable String useremail){
+        //delete request
+        this.service.DeleteRec(useremail,myemail);
+        
+        //and add contact
+        Optional<User> u1 = this.repository.findByEmail(myemail);
+        Optional<User> u2 = this.repository.findByEmail(useremail);
+        this.service.addContact(u1.get(),u2.get());
+           
+    }
+    
+    //WORKS!!
+    @GetMapping("/DeleteSentR/{myemail}/{useremail}")
+    public void DeleteSentRequest(@PathVariable String myemail, @PathVariable String useremail){
+        this.service.DeleteRec(myemail,useremail);
+        
+    }
+
+
     // Get profile-view of a user
     @GetMapping("/view-profile/{email}")
     public ResponseEntity<User> getProfileView(@PathVariable String email) {

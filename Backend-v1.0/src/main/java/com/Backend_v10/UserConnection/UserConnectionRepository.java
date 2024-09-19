@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.text.StyledEditorKit.BoldAction;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +21,13 @@ public interface UserConnectionRepository extends JpaRepository<UserConnection,L
     @Query(value = "select  user_connection.user2 from user_connection  where user_connection.user1 = ?1", nativeQuery = true)
     List<String> findUsersIRequested(String my_email);
     
-     @Query(value = "delete from user_connection  where user_connection.user1 = ?1 and user_connection.user2 = ?2", nativeQuery = true)
-     List<String> DeleteRequest(String user1, String user2);
+    // @Modifying
+    // @Query(value = "delete from user_connection  where connectionid = ?1", nativeQuery = true)
+    // List<String> DeleteRequestFromId(Long id);
+
+    @Query(value = "select user_connection.connectionid from user_connection  where user_connection.user1 = ?1 and user_connection.user2 = ?2", nativeQuery = true)
+    Long FindIdFromEmails(String myemail, String useremail); 
+
+
+
 }

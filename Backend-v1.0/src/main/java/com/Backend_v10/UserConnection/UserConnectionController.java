@@ -28,41 +28,41 @@ public class UserConnectionController {
 
 
     //User1 REQUESTS User2 
-    @GetMapping("/create/{email1}/{email2}")
-    public boolean AddConnection(@PathVariable("email1") String user1,@PathVariable("email2") String user2){
-        UserConnection conn = new UserConnection();
-        conn.setUser1(user1);
-        conn.setUser2(user2);
-        this.Connrepository.save(conn);
-        return true;
-    }
+    // @GetMapping("/create/{email1}/{email2}")
+    // public boolean AddConnection(@PathVariable("email1") String user1,@PathVariable("email2") String user2){
+    //     UserConnection conn = new UserConnection();
+    //     conn.setUser1(user1);
+    //     conn.setUser2(user2);
+    //     this.Connrepository.save(conn);
+    //     return true;
+    // }
 
     //User2 ACCEPTS User1
-    @GetMapping("/accept/{email1}/{email2}")
-    public boolean AcceptConnection(@PathVariable("email1") String user1,@PathVariable("email2") String user2){
+   // @GetMapping("/accept/{email1}/{email2}")
+    //public boolean AcceptConnection(@PathVariable("email1") String user1,@PathVariable("email2") String user2){
         //UserConnection conn = new UserConnection();
-        if( this.Connrepository.CheckIfRequestExists(user1, user2) == 1){
-            //request exists and we accept it. 
-            //So we delete it 
-            this.Connrepository.DeleteRequest(user1, user2);
-            //and add it to contacts
-            Optional<User> u1 = this.UserRepo.findByEmail(user1);
-            Optional<User> u2 = this.UserRepo.findByEmail(user2);
+        // if( this.Connrepository.CheckIfRequestExists(user1, user2) == 1){
+        //     //request exists and we accept it. 
+        //     //So we delete it 
+        //     this.Connrepository.DeleteRequest(user1, user2);
+        //     //and add it to contacts
+        //     Optional<User> u1 = this.UserRepo.findByEmail(user1);
+        //     Optional<User> u2 = this.UserRepo.findByEmail(user2);
 
-            this.uService.addContact(u1.get(),u2.get());
+        //     this.uService.addContact(u1.get(),u2.get());
 
             
-            return true;
+        //     return true;
 
-        }
-        return false;
+        // }
+        // return false;
         //this.Connrepository.findUsersRequestingMe(user1);
         //conn.setUser1(user1);
         //conn.setUser2(user2);
         //this.Connrepository.save(conn);
 
         //Add to users Contacts 
-    }
+    //}
 
     // @GetMapping("/find_user_requesting_me/{email1}/")
     // public boolean AcceptConnection(@PathVariable("email1") String user1,@PathVariable("email2") String user2){
@@ -93,14 +93,14 @@ public class UserConnectionController {
     // }
 
 
-    @GetMapping("/decline/{user1}/{user2}")
-    public boolean DeclineConnection(@PathVariable("user1") String user1,@PathVariable("user2") String user2){
-        if( this.Connrepository.CheckIfRequestExists(user1, user2) == 1){
-            //request exists and we decline it. 
-            //So we delete it 
-            this.Connrepository.DeleteRequest(user1, user2);      
-            return true;
-        }
-        return false;
-    }
+    // @GetMapping("/decline/{user1}/{user2}")
+    // public boolean DeclineConnection(@PathVariable("user1") String user1,@PathVariable("user2") String user2){
+    //     if( this.Connrepository.CheckIfRequestExists(user1, user2) == 1){
+    //         //request exists and we decline it. 
+    //         //So we delete it 
+    //         this.Connrepository.DeleteRequest(user1, user2);      
+    //         return true;
+    //     }
+    //     return false;
+    // }
 }

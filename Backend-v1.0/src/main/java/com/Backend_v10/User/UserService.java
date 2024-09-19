@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.Backend_v10.User.User;
 import com.Backend_v10.User.UserRepository;
+import com.Backend_v10.UserConnection.UserConnection;
 import com.Backend_v10.UserConnection.UserConnectionRepository;
 import com.Backend_v10.Jobs.Job;
 import com.Backend_v10.JobApplication.JobApplication;
@@ -25,6 +26,7 @@ import com.Backend_v10.Jobs.JobRepository;
 // To encapsulate the method calls + repository saves
 @Service
 public class UserService {
+
 
     @Autowired
     private UserRepository userRepo;
@@ -103,6 +105,25 @@ public class UserService {
         return articles_of_contacts;
     }
     
+
+
+    //AddRequest
+    @Transactional
+    public void addRequestPair(String myemail, String useremail){
+        UserConnection newRequest = new UserConnection();
+        newRequest.setUser1(myemail);
+        newRequest.setUser2(useremail);
+        ConnRepo.save(newRequest);
+    }
+
+    //Delete Received Request
+    @Transactional
+    public void DeleteRec(String user1,String user2){
+        Long idToDelete = this.ConnRepo.FindIdFromEmails(user1, user2);
+        this.ConnRepo.deleteById(idToDelete);
+    }   
+
+
     //Find What Kind of Connection relates 2 Users
     @Transactional
     public String Identify_Connection(String Myemail,String Useremail){
