@@ -11,6 +11,7 @@
                 <p>{{ job.otherRequirements }}</p>
                 <p *ngIf="job.fullTime">Full-time</p> 
                 <p *ngIf="!job.fullTime">Part-time</p>
+                <p *ngIf="job.salary != '0'">Salary: {{ job.salary }}€</p>
                 <button>Edit Job Offer</button>
                 <button>Delete Job Offer</button>
             </div>
@@ -36,6 +37,7 @@
                     <p>{{ job.otherRequirements }}</p>
                     <p *ngIf="job.fullTime">Full-time</p> 
                     <p *ngIf="!job.fullTime">Part-time</p>
+                    <p *ngIf="job.salary != '0'">Salary: {{ job.salary }}€</p>
                     <button>Apply</button>
                 </div>
             </ul>
@@ -52,6 +54,7 @@
                 <p>{{ job.otherRequirements }}</p>
                 <p *ngIf="job.fullTime">Full-time</p> 
                 <p *ngIf="!job.fullTime">Part-time</p>
+                <p *ngIf="job.salary != '0'">Salary: {{ job.salary }}€</p>
                 <button>Cancel Application</button>
             </div>
         </ul>

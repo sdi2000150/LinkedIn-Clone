@@ -48,9 +48,9 @@ public class Job{
     Long jobID;
     String title;
     Boolean needOfDegree;
-    String otherRequirements;
-    Integer numOfLikes;
+    Integer salary;
     Boolean fullTime;
+    String otherRequirements;
 
     // @Enumerated(EnumType.STRING)
     // WorkFields fieldOfWork; 
@@ -73,11 +73,11 @@ public class Job{
     }
 
     //all args contructor
-    public Job(String title, Boolean needOfDegree, String otherRequirements, Integer numOfLikes, Boolean fullTime) {
+    public Job(String title, Boolean needOfDegree, String otherRequirements, Integer salary, Boolean fullTime) {
         this.title = title;
         this.needOfDegree = needOfDegree;
         this.otherRequirements = otherRequirements;
-        this.numOfLikes = numOfLikes;
+        this.salary = salary;
         this.fullTime = fullTime;
         this.JobApplications = new ArrayList<>();
     }

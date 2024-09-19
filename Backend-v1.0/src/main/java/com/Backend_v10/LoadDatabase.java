@@ -93,9 +93,9 @@ public class LoadDatabase {
         Article article1 = new Article("Just got my First Job!!", null);
         Article article2 = new Article("Just got my Second Job!!", null);
         Job job1 = new Job("Full Stack Developer", true, "Java, Spring, Angular", 0, true);
-        Job job2 = new Job("In need of a Data Analyst", false, "MS Office, Python", 0, false);
-        Job job3 = new Job("HR Manager", true, "Communication skills, MBA Masters", 0, true);
-        Job job4 = new Job ("Network Engineer", true, "Networks, C, Python, Protocols understanding", 0, true);
+        Job job2 = new Job("In need of a Data Analyst", false, "MS Office, Python", 850, false);
+        Job job3 = new Job("HR Manager", true, "Communication skills, MBA Masters", 1300, true);
+        Job job4 = new Job ("Network Engineer", true, "Networks, C, Python, Protocols understanding", 1000, true);
         // Save articles and jobs to the repository
         articleRepo.save(article1);
         articleRepo.save(article2);
