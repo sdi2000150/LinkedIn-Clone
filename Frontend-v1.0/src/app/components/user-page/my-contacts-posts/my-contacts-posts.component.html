@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <ul>
+       <li><a href="../user-page/home">All Posts ↩️</a></li>
+    </ul>
+    <div id="main-content">
+        <div id="timeline">
+            <h2>My Contacts' Posts</h2>
+            <!-- Iterate over the articles and display them -->
+            <div *ngFor="let article of articles" class="post">
+                <p>{{ article.text }}</p>
+                <div class="post-info">
+                    <div class="likes">
+                        <span>{{ article.likedByUsers.length }} Like(s)</span>
+                        <ul class="likes-list">
+                            <li *ngFor="let user of article.likedByUsers">
+                                {{ user.username }}
+                            </li>
+                        </ul>
+                        <button> Like</button>
+                    </div>
+                    <div class="comments">
+                        <span>{{ article.articleComments.length }} Comment(s)</span>
+                        <ul class="comments-list">
+                            <li *ngFor="let comment of article.articleComments">
+                                {{ comment.content }} - {{ comment.commentOwner.username }}
+                            </li>
+                        </ul>
+                        <button> Comment</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- so that the page can be scrolled -->
+<div style="margin-top:500px"></div>

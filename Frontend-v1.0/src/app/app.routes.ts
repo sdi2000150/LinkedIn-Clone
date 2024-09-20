@@ -13,6 +13,8 @@ import { NetworkComponent } from './components/user-page/network/network.compone
 import { NotificationsComponent } from './components/user-page/notifications/notifications.component';
 import { MessagingComponent } from './components/user-page/messaging/messaging.component';
 import { ProfileViewComponent } from './components/user-page/profile-view/profile-view.component';
+import { MyContactsPostsComponent } from './components/user-page/my-contacts-posts/my-contacts-posts.component';
+import { MyPostsComponent } from './components/user-page/my-posts/my-posts.component';
 
 import { authGuard } from './auth.guard';  // Import your guard
 
@@ -31,6 +33,8 @@ export const routes: Routes = [
   { path: 'user-page/notifications', component: NotificationsComponent, canActivate: [authGuard] },
   { path: 'user-page/messaging', component: MessagingComponent, canActivate: [authGuard] },
   { path: 'user-page/profile-view/:email', component: ProfileViewComponent, canActivate: [authGuard] },
+  { path: 'user-page/my-contacts-posts', component: MyContactsPostsComponent, canActivate: [authGuard] },
+  { path: 'user-page/my-posts', component: MyPostsComponent, canActivate: [authGuard] },
 
   { path: 'admin-page/users-list', component: UsersListComponent, canActivate: [authGuard] },
 

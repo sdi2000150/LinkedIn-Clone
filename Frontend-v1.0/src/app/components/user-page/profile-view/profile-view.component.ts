@@ -134,4 +134,40 @@ export class ProfileViewComponent implements OnInit {
     }
   }
 
+  handleButton1Click(): void {
+    const token = localStorage.getItem('token'); // Fetch the token from localStorage
+    const userEmail = this.route.snapshot.paramMap.get('email');
+
+    if (token && userEmail) {
+      if (this.button1 === 'Connect') {
+        this.userService.sendNewRequest(token, userEmail).subscribe(() => {
+          this.fetchButtons();
+        });
+      } else if (this.button1 === 'Accept Request') {
+        this.userService.acceptReceivedRequest(token, userEmail).subscribe(() => {
+          this.fetchButtons();
+        });
+      }
+    }
+  }
+
+  handleButton2Click(): void {
+    const token = localStorage.getItem('token'); // Fetch the token from localStorage
+    const userEmail = this.route.snapshot.paramMap.get('email');
+
+    if (token && userEmail) {
+      if (this.button2 === 'Disconnect') {
+        // Add logic to handle disconnect when backend is ready
+      } else if (this.button2 === 'Cancel Request') {
+        this.userService.deleteSentRequest(token, userEmail).subscribe(() => {
+          this.fetchButtons();
+        });
+      } else if (this.button2 === 'Decline Request') {
+        this.userService.rejectReceivedRequest(token, userEmail).subscribe(() => {
+          this.fetchButtons();
+        });
+      }
+    }
+  }
+
 }

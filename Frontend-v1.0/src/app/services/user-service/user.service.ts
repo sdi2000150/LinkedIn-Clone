@@ -221,6 +221,66 @@ export class UserService {
     return this.http.get<any>(`${this.baseUrl}/user/${email}/contacts-job-offers`, { headers });
   }
 
+  // Method to fetch contact articles
+  getContactArticles(token: string): Observable<any[]> {
+    // Extract the email from the token
+    const email = this.extractEmailFromToken(token);
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    // Append the email to the URL and send the GET request with the Authorization header
+    return this.http.get<any[]>(`${this.baseUrl}/user/${email}/contact_articles`, { headers });
+  }
+
+  // Method to send a new request
+  sendNewRequest(token: string, userEmail: string): Observable<void> {
+    // Extract the email from the token
+    const myEmail = this.extractEmailFromToken(token);
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    // Append the email to the URL and send the GET request with the Authorization header
+    return this.http.get<void>(`${this.baseUrl}/user/NewR/${myEmail}/${userEmail}`);
+  }
+
+  // Method to reject a received request
+  rejectReceivedRequest(token: string, userEmail: string): Observable<void> {
+    // Extract the email from the token
+    const myEmail = this.extractEmailFromToken(token);
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    // Append the email to the URL and send the GET request with the Authorization header
+    return this.http.get<void>(`${this.baseUrl}/user/RejectReceivedR/${myEmail}/${userEmail}`);
+  }
+
+  // Method to accept a received request
+  acceptReceivedRequest(token: string, userEmail: string): Observable<void> {
+    // Extract the email from the token
+    const myEmail = this.extractEmailFromToken(token);
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    // Append the email to the URL and send the GET request with the Authorization header
+    return this.http.get<void>(`${this.baseUrl}/user/AcceptReceivedR/${myEmail}/${userEmail}`);
+  }
+
+  // Method to delete a sent request
+  deleteSentRequest(token: string, userEmail: string): Observable<void> {
+    // Extract the email from the token
+    const myEmail = this.extractEmailFromToken(token);
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    // Append the email to the URL and send the GET request with the Authorization header
+    return this.http.get<void>(`${this.baseUrl}/user/DeleteSentR/${myEmail}/${userEmail}`);
+  }
+
   // applyToJob(userId: number, jobId: number): Observable<any> {
   //   return this.http.post(`${this.baseUrl}/user/${userId}/apply/${jobId}`, {});
   // }

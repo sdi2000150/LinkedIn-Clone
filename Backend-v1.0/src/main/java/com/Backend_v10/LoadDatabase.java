@@ -123,7 +123,7 @@ public class LoadDatabase {
         commentRepo.save(comment2);
         //Assosiate comments with articles/users
         userService.addComment(article1, user2, comment1);
-        userService.addComment(article2, user2, comment2);
+        userService.addComment(article1, user5, comment2);
 
         // Create jobapplications and save them to the repository
         JobApplication jobApplication1 = new JobApplication();
@@ -157,11 +157,15 @@ public class LoadDatabase {
         user1.likeArticle(article1);
         user2.likeArticle(article1);
         user3.likeArticle(article2);
+        user4.likeArticle(article1);
+        user5.likeArticle(article1);
 
         // Save the updated users
         userRepo.save(user1);
         userRepo.save(user2);
         userRepo.save(user3);
+        userRepo.save(user4);
+        userRepo.save(user5);
         // Maybe dont need the below: (yes, not needed, maybe autosaved by the manytomany(mappedBy = "likedArticles")->(of user))
         // articleRepo.save(article1);
         // articleRepo.save(article2);
