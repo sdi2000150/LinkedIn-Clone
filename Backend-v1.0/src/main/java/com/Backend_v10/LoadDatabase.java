@@ -156,8 +156,8 @@ public class LoadDatabase {
         // Test likes
         user1.likeArticle(article1);
         user2.likeArticle(article1);
-        user3.likeArticle(article2);
-        user4.likeArticle(article1);
+        // user3.likeArticle(article2);
+        // user4.likeArticle(article1);
         user5.likeArticle(article1);
 
         // Save the updated users

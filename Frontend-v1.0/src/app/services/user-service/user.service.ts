@@ -242,7 +242,7 @@ export class UserService {
       'Authorization': `Bearer ${token}`
     });
     // Append the email to the URL and send the GET request with the Authorization header
-    return this.http.get<void>(`${this.baseUrl}/user/NewR/${myEmail}/${userEmail}`);
+    return this.http.get<void>(`${this.baseUrl}/user/NewR/${myEmail}/${userEmail}`, { headers });
   }
 
   // Method to reject a received request
@@ -254,7 +254,7 @@ export class UserService {
       'Authorization': `Bearer ${token}`
     });
     // Append the email to the URL and send the GET request with the Authorization header
-    return this.http.get<void>(`${this.baseUrl}/user/RejectReceivedR/${myEmail}/${userEmail}`);
+    return this.http.get<void>(`${this.baseUrl}/user/RejectReceivedR/${myEmail}/${userEmail}`, { headers });
   }
 
   // Method to accept a received request
@@ -266,7 +266,7 @@ export class UserService {
       'Authorization': `Bearer ${token}`
     });
     // Append the email to the URL and send the GET request with the Authorization header
-    return this.http.get<void>(`${this.baseUrl}/user/AcceptReceivedR/${myEmail}/${userEmail}`);
+    return this.http.get<void>(`${this.baseUrl}/user/AcceptReceivedR/${myEmail}/${userEmail}`, { headers });
   }
 
   // Method to delete a sent request
@@ -278,7 +278,18 @@ export class UserService {
       'Authorization': `Bearer ${token}`
     });
     // Append the email to the URL and send the GET request with the Authorization header
-    return this.http.get<void>(`${this.baseUrl}/user/DeleteSentR/${myEmail}/${userEmail}`);
+    return this.http.get<void>(`${this.baseUrl}/user/DeleteSentR/${myEmail}/${userEmail}`, { headers });
+  }
+
+  // needs to be tested and used 
+  likeArticle(token: string, articleId: number): Observable<boolean> {
+    // Extract the email from the token
+    const myEmail = this.extractEmailFromToken(token);
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<boolean>(`${this.baseUrl}/user/${myEmail}/like/${articleId}`, { headers });
   }
 
   // applyToJob(userId: number, jobId: number): Observable<any> {

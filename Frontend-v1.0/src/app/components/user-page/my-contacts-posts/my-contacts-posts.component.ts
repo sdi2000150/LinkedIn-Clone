@@ -39,4 +39,31 @@ export class MyContactsPostsComponent implements OnInit {
       this.router.navigate(['../../login-page']);
     }
   }
+
+  // needs to be tested: issues occur
+  // likeArticle(articleId: number): void {
+  //   // Fetch the token from localStorage
+  //   this.token = localStorage.getItem('token');
+
+  //   if (this.token) {
+  //     this.userService.likeArticle(this.token, articleId).subscribe(
+  //       (response: boolean) => {
+  //         if (response) {
+  //           console.log('Article liked successfully');
+  //           // Refresh the page to reflect the like
+  //           this.ngOnInit();
+  //         } else {
+  //           console.error('Failed to like the article');
+  //         }
+  //       },
+  //       (error) => {
+  //         console.error('Error liking article', error);
+  //       }
+  //     );
+  //   } else {
+  //     // If no token found, redirect to login page
+  //     this.router.navigate(['../../login-page']);
+  //   }
+  // }
+
 }

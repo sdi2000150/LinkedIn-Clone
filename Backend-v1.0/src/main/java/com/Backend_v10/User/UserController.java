@@ -6,6 +6,7 @@ import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Jobs.Job;
 import com.Backend_v10.UserConnection.UserConnection;
 import com.Backend_v10.UserConnection.UserConnectionRepository;
+import com.Backend_v10.Articles.ArticleRepository;
 
 import ch.qos.logback.core.model.processor.PhaseIndicator;
 
@@ -24,6 +25,7 @@ import java.util.Set;
 import java.util.jar.Attributes.Name;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,14 +41,20 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+    @Autowired
     private final UserRepository repository;
+    @Autowired
     private final UserConnectionRepository ConnectionRepo;
+    @Autowired
+    private ArticleRepository articleRepository;
+    
     private final UserService service;
 
-    UserController(UserRepository repository, UserConnectionRepository UconnRepo, UserService service){
+    UserController(ArticleRepository articleRepository, UserRepository repository, UserConnectionRepository UconnRepo, UserService service){
         this.repository = repository;
         this.ConnectionRepo = UconnRepo;
         this.service = service;
+        this.articleRepository = articleRepository;
     }
 
     //FILL ALL MAPPINGS(GET,POST,DELETE,PUT)
@@ -384,7 +392,28 @@ public class UserController {
         return true;
     }
 
+    // needs to be tested
+    @GetMapping("/{email}/like/{articleID}")
+    public boolean likeArticle(@PathVariable String email, @PathVariable Long articleID) {
+        Optional<User> u = repository.findByEmail(email);
+        Optional<Article> a = articleRepository.findById(articleID);
+    
+        if (u.isPresent() && a.isPresent()) {
+            User user = u.get();
+            Article article = a.get();
 
+            // Check if the user has already liked the article
+            if (user.getLikedArticles().contains(article)) {
+                return false;
+            }
+
+            user.likeArticle(article);
+            repository.save(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 

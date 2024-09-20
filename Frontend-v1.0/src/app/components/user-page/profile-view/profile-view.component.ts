@@ -60,7 +60,7 @@ export class ProfileViewComponent implements OnInit {
   fetchButtons(): void {
     const token = localStorage.getItem('token'); // Fetch the token from localStorage
 
-    const email = this.route.snapshot.paramMap.get('email'); // Fetch the email from the URL
+    const email = this.route.snapshot.paramMap.get('email');  // Fetch the email from frontend URL
 
   
     if (token) {
@@ -80,12 +80,13 @@ export class ProfileViewComponent implements OnInit {
               this.button2 = 'Decline Request';
             } else if (data == 'Sent Request') {
               this.button1 = 'Connect';
-              this.button2 = ':)';
+              this.button2 = '◆';
             }
           },
           (error) => {
-            console.error('Error fetching user data', error);
-            // Handle error, potentially navigate back to login
+            console.error('Error fetching user data: buttons', error);
+            // Handle error, potentially navigate back to user-page
+            this.router.navigate(['../../user-page']);
           }
         );
       } else {
@@ -100,7 +101,7 @@ export class ProfileViewComponent implements OnInit {
   fetchUserData(): void {
     const token = localStorage.getItem('token'); // Fetch the token from localStorage
     
-    const email = this.route.snapshot.paramMap.get('email'); // Fetch the email from the URL
+    const email = this.route.snapshot.paramMap.get('email');  // Fetch the email from frontend URL
 
     if (token) {
       if (email) {
@@ -121,8 +122,9 @@ export class ProfileViewComponent implements OnInit {
             // Add any logic you want to execute after fetching the user profile
           },
           (error) => {
-            console.error('Error fetching user data', error);
-            // Handle error, potentially navigate back to login
+            console.error('Error fetching user data: userdata', error);
+            // Handle error, potentially navigate back to user-page
+            this.router.navigate(['../../user-page']);
           }
         );
       } else {
@@ -136,7 +138,7 @@ export class ProfileViewComponent implements OnInit {
 
   handleButton1Click(): void {
     const token = localStorage.getItem('token'); // Fetch the token from localStorage
-    const userEmail = this.route.snapshot.paramMap.get('email');
+    const userEmail = this.route.snapshot.paramMap.get('email');  // Fetch the email from frontend URL
 
     if (token && userEmail) {
       if (this.button1 === 'Connect') {
@@ -153,11 +155,12 @@ export class ProfileViewComponent implements OnInit {
 
   handleButton2Click(): void {
     const token = localStorage.getItem('token'); // Fetch the token from localStorage
-    const userEmail = this.route.snapshot.paramMap.get('email');
+    const userEmail = this.route.snapshot.paramMap.get('email');  // Fetch the email from frontend URL
 
     if (token && userEmail) {
       if (this.button2 === 'Disconnect') {
         // Add logic to handle disconnect when backend is ready
+        console.log('Disconnect option not working for now, coming soon...');
       } else if (this.button2 === 'Cancel Request') {
         this.userService.deleteSentRequest(token, userEmail).subscribe(() => {
           this.fetchButtons();
