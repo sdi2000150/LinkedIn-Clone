@@ -24,6 +24,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.Data;
 
 @Entity
@@ -42,11 +43,13 @@ public class Article {
     LocalDateTime DateTime_of_Creation;
 
     @OneToMany //(cascade = CascadeType.ALL )
+    @ToString.Exclude
     @JoinColumn(name = "article_id")
     // @JsonManagedReference
     List<Comment> ArticleComments;
 
     @ManyToMany(mappedBy = "likedArticles")
+    @ToString.Exclude
     private List<User> likedByUsers;
 
 

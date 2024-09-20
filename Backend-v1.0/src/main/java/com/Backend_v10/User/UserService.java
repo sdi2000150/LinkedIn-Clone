@@ -96,10 +96,14 @@ public class UserService {
     @Transactional
     public List<Article> return_articles_of_contacts(String email){
         Optional<User> user = userRepo.findByEmail(email);
+        System.out.println("here");
         List<Long> articles_of_contactsids = userRepo.findContactArticles(user.get().getUserID());
         List<Article> articles_of_contacts = new ArrayList<>();
         for(int i = 0; i < articles_of_contactsids.size(); i++){
-            articles_of_contacts.add(articleRepo.findById(articles_of_contactsids.get(i)).get());
+            Optional<Article> a = articleRepo.findById(articles_of_contactsids.get(i));
+            System.out.println(a);
+            articles_of_contacts.add(a.get());
+            //articles_of_contacts.add
         }
         System.out.println(articles_of_contacts);
         return articles_of_contacts;
