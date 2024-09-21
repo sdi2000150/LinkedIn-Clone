@@ -29,4 +29,12 @@ public class UserConnection {
     private String user2;
 
     private boolean pendingRequest;
+
+    @Override
+    public String toString() {
+        return "UserConnection [connectionID=" + connectionID + ", user1=" + user1 + ", user2=" + user2
+                + ", pendingRequest=" + pendingRequest + "]";
+    }
+
+    
 }

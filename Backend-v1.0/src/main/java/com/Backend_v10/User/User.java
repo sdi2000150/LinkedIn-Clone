@@ -56,26 +56,28 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long UserID;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "article_user_id")
-    // @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "Owner")
+    @JsonIgnore
     private List<Article> myArticles;
+    //@JoinColumn(name = "article_user_id")
+    // @JsonManagedReference
 
     @OneToMany (cascade = CascadeType.ALL)
     @JoinColumn(name = "comment_user_id")
+    @JsonIgnore
     // @JsonManagedReference
     private List<Comment> myComments;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "job_user_id")
-    // @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "Owner")
+    @JsonIgnore
     private List<Job> myJobs;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "job_application_user_id")
-    // @JsonManagedReference
+    @JsonIgnore
     private List<JobApplication> myJobApplications;
+    // @JsonManagedReference
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) //these cascades for the auto save/addContact of user2, when saving user1
     @JoinTable(
@@ -83,6 +85,7 @@ public class User {
         joinColumns = @JoinColumn(name = "user1"),
         inverseJoinColumns = @JoinColumn(name = "user2")
     )
+    @JsonIgnore
     private List<User> myContacts;
 
     @ManyToMany
@@ -91,6 +94,7 @@ public class User {
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "article_id")
     )
+    @JsonIgnore
     private List<Article> likedArticles;
 
 
@@ -216,4 +220,16 @@ public class User {
         this.likedArticles.add(article);
         article.getLikedByUsers().add(this);
     }
+
+    @Override
+    public String toString() {
+        return "User [UserID=" + UserID + ", username=" + username + ", name=" + name + ", lastname=" + lastname
+                + ", password=" + password + ", phone=" + phone + ", email=" + email + ", profilePhoto="
+                + Arrays.toString(profilePhoto) + ", coverPhoto=" + Arrays.toString(coverPhoto) + ", birthdate="
+                + birthdate + ", cvFile=" + Arrays.toString(cvFile) + ", role=" + role + ", about=" + about
+                + ", experience=" + experience + ", experienceDescription=" + experienceDescription + ", education="
+                + education + ", educationDescription=" + educationDescription + ", skills=" + skills + "]";
+    }
+
+
 }

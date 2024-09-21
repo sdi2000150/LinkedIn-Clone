@@ -115,9 +115,10 @@ public class UserController {
         // Optional<Job> found_job = this.repository.findById(newJob.getJobID());
         // if(found_job.isEmpty()){
         Optional<User> u = this.repository.findByEmail(owner_email);
-        u.get().addJob(newJob);
+        
+        this.service.addJob(u.get(), newJob);
         //j.set
-        this.repository.save(u.get());
+        //this.repository.save(u.get());
         //this.repository.save(newJob);
         return true;
     }
@@ -128,11 +129,12 @@ public class UserController {
     public boolean CreateArticle(@RequestBody Article newArticle, @PathVariable String owner_email){
 
         System.out.println("HERE "+newArticle.getText());
-        
+        Optional<User> u = this.repository.findByEmail(owner_email);
+
+        //newArticle.setOwner(u.get());
         articleRepo.save(newArticle);
         // Optional<Job> found_job = this.repository.findById(newJob.getJobID());
         // if(found_job.isEmpty()){
-        Optional<User> u = this.repository.findByEmail(owner_email);
        // u.get().addArticle(newArticle);
        // newArticle.setDateTime_of_Creation(LocalDateTime.now());
         //j.set

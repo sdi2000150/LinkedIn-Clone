@@ -45,4 +45,12 @@ public class Comment {
     @JoinColumn(name = "article_ID")
     // @JsonBackReference
     Article CommentArticle;
+
+    @Override
+    public String toString() {
+        return "Comment [commentID=" + commentID + ", Content=" + Content + ", CommentOwner=" + CommentOwner
+                + ", CommentArticle=" + CommentArticle + "]";
+    }
+
+    
 }

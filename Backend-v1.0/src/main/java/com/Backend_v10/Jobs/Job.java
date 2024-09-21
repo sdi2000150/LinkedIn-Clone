@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import com.Backend_v10.Comments.Comment;
 import com.Backend_v10.JobApplication.JobApplication;
 import com.Backend_v10.User.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -63,9 +64,13 @@ public class Job{
 
     @OneToMany  //no cascade here, cascade for jobApplication is in the User
     @JoinColumn(name = "job_id")
+    @JsonIgnore
     // @JsonManagedReference
     List<JobApplication> JobApplications;
 
+    @ManyToOne
+    @JoinColumn(name = "job_user_id",referencedColumnName = "UserID")
+    User Owner;
     //simple constuctor for testing
     public Job(String title) {
         this.title = title;
@@ -122,4 +127,12 @@ public class Job{
         this.JobApplications.add(jobApplication);
         jobApplication.setJob(this);
     }
+
+    @Override
+    public String toString() {
+        return "Job [jobID=" + jobID + ", title=" + title + ", needOfDegree=" + needOfDegree + ", salary=" + salary
+                + ", fullTime=" + fullTime + ", otherRequirements=" + otherRequirements + "]";
+    }
+
+
 }

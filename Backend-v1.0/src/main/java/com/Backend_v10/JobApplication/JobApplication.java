@@ -39,4 +39,11 @@ public class JobApplication {
     @JoinColumn(name = "job_id")
     // @JsonBackReference
     private Job job;
+
+    @Override
+    public String toString() {
+        return "JobApplication [jobApplicationID=" + jobApplicationID + ", user=" + user + ", job=" + job + "]";
+    }
+
+
 }

@@ -8,7 +8,9 @@ import java.util.List;
 
 import com.Backend_v10.Comments.Comment;
 import com.Backend_v10.User.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -44,14 +46,21 @@ public class Article {
     byte[] Photo;
     LocalDateTime DateTime_of_Creation;
 
+
+    @ManyToOne
+    @JoinColumn(name = "article_user_id",referencedColumnName = "UserID")
+    User Owner;
+
     @OneToMany //(cascade = CascadeType.ALL )
     @ToString.Exclude
     @JoinColumn(name = "article_id")
+    @JsonIgnore
     // @JsonManagedReference
     List<Comment> ArticleComments;
 
     @ManyToMany(mappedBy = "likedArticles")
     @ToString.Exclude
+    @JsonIgnore
     private List<User> likedByUsers;
 
 
@@ -84,6 +93,11 @@ public class Article {
     public void addComment(Comment newComment) {
         this.ArticleComments.add(newComment);
         newComment.setCommentArticle(this);
+    }
+    @Override
+    public String toString() {
+        return "Article [articleID=" + articleID + ", Text=" + Text + ", Photo=" + Arrays.toString(Photo)
+                + ", DateTime_of_Creation=" + DateTime_of_Creation + ", Owner=" + Owner + "]";
     }
 
 

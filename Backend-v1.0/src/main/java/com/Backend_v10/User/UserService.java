@@ -52,9 +52,10 @@ public class UserService {
         User userlocal = userRepo.findByEmail(user.getEmail()).get();
         userlocal.addArticle(newArticle);
         newArticle.setDateTime_of_Creation(LocalDateTime.now());
-        //maybe add save on article entity!!!!
+        newArticle.setOwner(user);
         userRepo.save(userlocal);
     }
+    //maybe add save on article entity!!!!
 
     @Transactional
     public void addComment(Article article, User user, Comment newComment) {
@@ -71,6 +72,7 @@ public class UserService {
     @Transactional
     public void addJob(User user, Job newJob) {
         User userlocal = userRepo.findByEmail(user.getEmail()).get();
+        newJob.setOwner(userlocal);
         userlocal.addJob(newJob);
         userRepo.save(userlocal);
     }
