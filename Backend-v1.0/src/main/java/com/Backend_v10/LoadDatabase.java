@@ -91,6 +91,8 @@ public class LoadDatabase {
 
         // Create articles and jobs
         Article article1 = new Article("Just got my First Job!!", null);
+        // Add a delay of 1 second (1000 milliseconds)
+        Thread.sleep(1000);
         Article article2 = new Article("Just got my Second Job!!", null);
         Job job1 = new Job("Full Stack Developer", true, "Java, Spring, Angular", 0, true);
         Job job2 = new Job("In need of a Data Analyst", false, "MS Office, Python", 850, false);

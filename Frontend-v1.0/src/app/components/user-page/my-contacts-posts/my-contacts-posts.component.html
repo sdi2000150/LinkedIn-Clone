@@ -9,7 +9,12 @@
             <h2>My Contacts' Posts</h2>
             <!-- Iterate over the articles and display them -->
             <div *ngFor="let article of articles" class="post">
+                <h4>Name Lastname <br>
+                    <!-- Display creation date and time in a more readable format -->
+                    <span class="text-muted" style="font-size: 0.8em; font-weight: normal;">{{ article.dateTime_of_Creation | date:'short' }}</span>
+                </h4> 
                 <p>{{ article.text }}</p>
+                <p>[Image]</p>
                 <div class="post-info">
                     <div class="likes">
                         <span>{{ article.likedByUsers.length }} Like(s)</span>

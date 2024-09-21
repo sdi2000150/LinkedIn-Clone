@@ -10,12 +10,14 @@
     </div>
     <div id="main-content">
         <div id="post-creation">
-            <textarea placeholder="Start a post..."></textarea>
+            <textarea [(ngModel)]="Text" placeholder="Start a post..."></textarea>
             <div class="media-inputs">
                 <label for="media-upload">📷🎥🎵 Media</label>
                 <input type="file" id="media-upload" accept="image/*,video/*,audio/*">
-                <button id="post-button">Post Article</button>
+                <button id="post-button" (click)="createArticle()">Post Article</button>
             </div>
+            <p *ngIf="msgSuccess" class="success-message">{{ msgSuccess }}</p>
+            <p *ngIf="msgError" class="error-message">{{ msgError }}</p>
         </div>
         <div id="timeline">
             <h2>Posts Recommendations</h2>

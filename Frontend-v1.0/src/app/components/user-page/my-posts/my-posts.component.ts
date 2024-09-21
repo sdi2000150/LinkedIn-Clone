@@ -24,12 +24,65 @@ export class MyPostsComponent implements OnInit {
 
     // Check if token is available
     if (this.token) {
-      //logic here...
-
-
+      // Fetch contact articles using the token
+      this.userService.getMyArticles(this.token).subscribe(
+        (data) => {
+          this.articles = data;
+          console.log('Contact articles fetched successfully', this.articles);
+        },
+        (error) => {
+          console.error('Error fetching contact articles', error);
+        }
+      );
     } else {
       // If no token found, redirect to login page
       this.router.navigate(['../../login-page']);
     }
   }
+
+//   // needs to be tested: issues occur
+//   likeArticle(articleId: number): void {
+//     // Fetch the token from localStorage
+//     this.token = localStorage.getItem('token');
+
+//     if (this.token) {
+//       this.userService.likeArticle(this.token, articleId).subscribe(
+//         (response: boolean) => {
+//           if (response) {
+//             console.log('Article liked successfully');
+
+//             // Do the local refresh of the updated article
+//             if (this.token) {
+//               // Fetch only the updated article from the backend
+//               this.userService.getArticleById(this.token, articleId).subscribe(
+//                 (updatedArticle) => {
+//                   // Update the article in the local articles array
+//                   const index = this.articles.findIndex(article => article.articleID === articleId);
+//                   if (index !== -1) {
+//                     this.articles[index] = updatedArticle;
+//                   }
+//                 },
+//                 (error) => {
+//                   console.error('Error fetching updated article', error);
+//                 }
+//               );
+//             } else {
+//               // If no token found, redirect to login page
+//               this.router.navigate(['../../login-page']);
+//             }
+
+//           } else {
+//             console.error('Failed to like the article');
+//           }
+//         },
+//         (error) => {
+//           console.error('Error liking article', error);
+//         }
+//       );
+//     } else {
+//       // If no token found, redirect to login page
+//       this.router.navigate(['../../login-page']);
+//     }
+//   }
+
 }

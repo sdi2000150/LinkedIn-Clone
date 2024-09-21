@@ -26,10 +26,12 @@ import jakarta.persistence.Table;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.Data;
+import lombok.AllArgsConstructor;
 
 @Entity
 @Table(name = "Articles")
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 // @JsonIgnoreProperties({"ArticleComments"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "articleID")
@@ -56,6 +58,13 @@ public class Article {
     // @JoinColumn(name = "UserID")
     // User ArticleOwner; 
 
+    public Article(String text) {
+        this.Text = text;
+        this.Photo = null;
+        this.ArticleComments = new ArrayList<>();
+        this.DateTime_of_Creation = LocalDateTime.now();
+        this.likedByUsers = new ArrayList<>();
+    }
     public Article( String text,byte[] photo){
         this.Text = text;
         this.Photo = photo;

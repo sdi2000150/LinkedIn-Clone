@@ -30,6 +30,15 @@ export class UserService {
     });
   }
 
+  createArticle(token: string, article: any): Observable<boolean> {
+    const email = this.extractEmailFromToken(token);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+      // 'Content-Type': 'application/json'
+    });
+    return this.http.post<boolean>(`${this.baseUrl}/user/create_article/${email}`, article, { headers });
+  }
+
   // Method to fetch user profile based on JWT token and extracted email
   getUserProfileFromToken(token: string): Observable<any> {
     // Extract the email from the token
@@ -219,6 +228,18 @@ export class UserService {
     });
     // Append the email to the URL and send the GET request with the Authorization header
     return this.http.get<any>(`${this.baseUrl}/user/${email}/contacts-job-offers`, { headers });
+  }
+
+  // Method to fetch my articles
+  getMyArticles(token: string): Observable<any[]> {
+    // Extract the email from the token
+    const email = this.extractEmailFromToken(token);
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    // Append the email to the URL and send the GET request with the Authorization header
+    return this.http.get<any[]>(`${this.baseUrl}/user/${email}/my_articles`, { headers });
   }
 
   // Method to fetch contact articles

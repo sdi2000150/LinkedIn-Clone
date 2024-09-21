@@ -18,6 +18,7 @@ body {
     border-radius: 8px; /* Match border radius */
 }
 
+
 #main-content {
     /* centered */
     margin: 0 auto;
@@ -40,9 +41,13 @@ body {
     position: relative;
 }
 
-
 #timeline .post {
     margin-bottom: 20px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #timeline .post h2 {
@@ -61,4 +66,57 @@ body {
 
 #timeline .post button:hover {
     background: #005f8d;
+}
+
+.post-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.likes, .comments {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 14px;
+    color: #363636;
+    cursor: pointer;
+}
+
+.likes span, .comments span {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.likes:hover span, .comments:hover span {
+    background-color: #ebebeb;
+}
+
+.likes-list, .comments-list {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 10;
+    overflow-y: auto; /* Add scroll if content overflows */
+    cursor: pointer; /* Change cursor to pointer (hand) */
+
+}
+
+.likes:hover .likes-list {
+    display: block;
+    /* larger box */
+    width: 100px;
+    cursor: pointer; /* Change cursor to pointer (hand) */
+}
+.comments:hover .comments-list {
+    display: block;
+    /* larger box */
+    width: 200px;
+    cursor: pointer;
 }

@@ -6,6 +6,7 @@ import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Jobs.Job;
 import com.Backend_v10.UserConnection.UserConnection;
 import com.Backend_v10.UserConnection.UserConnectionRepository;
+import com.Backend_v10.Articles.ArticleRepository;
 
 import ch.qos.logback.core.model.processor.PhaseIndicator;
 
@@ -42,12 +43,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 public class UserController {
     private final UserRepository repository;
     private final UserConnectionRepository ConnectionRepo;
+    private final ArticleRepository articleRepo;
     private final UserService service;
 
-    UserController(UserRepository repository, UserConnectionRepository UconnRepo, UserService service){
+    UserController(ArticleRepository articleRepo, UserRepository repository, UserConnectionRepository UconnRepo, UserService service){
         this.repository = repository;
         this.ConnectionRepo = UconnRepo;
         this.service = service;
+        this.articleRepo = articleRepo;
     }
 
     //FILL ALL MAPPINGS(GET,POST,DELETE,PUT)
@@ -390,7 +393,10 @@ public class UserController {
 
     @PostMapping("/create_article/{owner_email}")
     public boolean CreateArticle(@RequestBody Article newArticle, @PathVariable String owner_email){
+
+        System.out.println("HERE "+newArticle.getText());
         
+        articleRepo.save(newArticle);
         // Optional<Job> found_job = this.repository.findById(newJob.getJobID());
         // if(found_job.isEmpty()){
         Optional<User> u = this.repository.findByEmail(owner_email);
@@ -401,6 +407,7 @@ public class UserController {
 
         this.service.addArticle(u.get(), newArticle);
         //this.repository.save(newJob);
+        // return true;
         return true;
     }
 
