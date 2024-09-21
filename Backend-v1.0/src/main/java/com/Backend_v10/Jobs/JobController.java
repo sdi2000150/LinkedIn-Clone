@@ -18,16 +18,19 @@ import java.util.Optional;
 
 import com.Backend_v10.Articles.Article;
 import com.Backend_v10.JobApplication.JobApplication;
+import com.Backend_v10.JobApplication.JobApplicationRepository;
 
 @RestController
 @RequestMapping("/job")
 public class JobController {
     private JobRepository repository;
     private final UserRepository  UserRepo;
+    private final JobApplicationRepository JobAppRepo;
 
-    JobController(JobRepository repository, UserRepository URepo){
+    JobController(JobRepository repository, UserRepository URepo, JobApplicationRepository jobAppRepo){
         this.repository = repository;
         this.UserRepo = URepo;
+        this.JobAppRepo = jobAppRepo;
     }
 
     @GetMapping("{id}/jobapplications")
@@ -40,8 +43,11 @@ public class JobController {
 
     
     @DeleteMapping("/delete/{id}")
-    public void deleteStudent(@PathVariable Long id){
-        
+    public void deleteJob(@PathVariable Long id){
+        //delete all applications on this job 
+        this.JobAppRepo.DeleteApplicationsOfJob(id);
+        //for(app: )
+
         Optional<Job> found_job = this.repository.findById(id);
         if(found_job.isEmpty()){
             System.out.println("Job Not Found");

@@ -23,15 +23,15 @@ public class CommentController {
 
 
     @DeleteMapping("/delete/{id}")
-    public void deleteStudent(@PathVariable Long id){
+    public void deleteComment(@PathVariable Long id){
         
         Optional<Comment> found_comment = this.repository.findById(id);
         if(found_comment.isEmpty()){
-            System.out.println("Job Not Found");
+            System.out.println("Comment Not Found");
         }
         else{
             this.repository.deleteById(id);
-            System.out.println("Job Found in DB");    
+            System.out.println("Comment Found in DB");    
         }
     }
 
