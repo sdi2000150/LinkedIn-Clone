@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Jobs.Job;
+import com.Backend_v10.Jobs.JobRepository;
 import com.Backend_v10.UserConnection.UserConnection;
 import com.Backend_v10.UserConnection.UserConnectionRepository;
 import com.Backend_v10.Articles.ArticleRepository;
@@ -13,6 +14,7 @@ import com.Backend_v10.Comments.CommentRepository;
 import ch.qos.logback.core.model.processor.PhaseIndicator;
 
 import com.Backend_v10.JobApplication.JobApplication;
+import com.Backend_v10.JobApplication.JobApplicationRepository;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,13 +51,17 @@ public class UserController {
     private final ArticleRepository articleRepo;
     private final UserService service;
     private final CommentRepository CommRepo;
+    private final JobApplicationRepository JobAppRepo;
+    private final JobRepository JobRepo;
 
-    UserController(ArticleRepository articleRepo, UserRepository repository, UserConnectionRepository UconnRepo, UserService service, CommentRepository commRepo){
+    UserController(ArticleRepository articleRepo, JobRepository jobRepo, JobApplicationRepository jobApprepo, UserRepository repository, UserConnectionRepository UconnRepo, UserService service, CommentRepository commRepo){
         this.repository = repository;
         this.ConnectionRepo = UconnRepo;
         this.service = service;
         this.articleRepo = articleRepo;
         this.CommRepo = commRepo;
+        this.JobAppRepo = jobApprepo;
+        this.JobRepo = jobRepo;
 
     }
 
@@ -82,6 +88,63 @@ public class UserController {
         System.out.println("Giving back user " + u.get().getMyArticles().size());
         return ResponseEntity.ok(u.get());
     }
+
+
+    @PostMapping("/create_jobApp/")
+    public boolean CreateJob(@RequestBody JobApplication newJobApp, @RequestParam(name="email") String owner_email, @RequestParam(name="id") Long job_id){
+
+        this.JobAppRepo.save(newJobApp);
+        Optional<User> u = this.repository.findByEmail(owner_email);
+
+        Optional<Job> j = this.JobRepo.findById(job_id);
+        this.JobRepo.save(j.get());
+
+        // Assosiate jobapplications with jobs/users
+        this.service.addJobApplication(j.get(), u.get(), newJobApp); 
+
+        //this.repository.save(u.get());
+        //this.repository.save(newJob);
+        return true;
+    }
+
+
+
+    @PostMapping("/create_job/{owner_email}")
+    public boolean CreateJob(@RequestBody Job newJob, @PathVariable String owner_email){
+        
+        // Optional<Job> found_job = this.repository.findById(newJob.getJobID());
+        // if(found_job.isEmpty()){
+        Optional<User> u = this.repository.findByEmail(owner_email);
+        u.get().addJob(newJob);
+        //j.set
+        this.repository.save(u.get());
+        //this.repository.save(newJob);
+        return true;
+    }
+
+
+
+    @PostMapping("/create_article/{owner_email}")
+    public boolean CreateArticle(@RequestBody Article newArticle, @PathVariable String owner_email){
+
+        System.out.println("HERE "+newArticle.getText());
+        
+        articleRepo.save(newArticle);
+        // Optional<Job> found_job = this.repository.findById(newJob.getJobID());
+        // if(found_job.isEmpty()){
+        Optional<User> u = this.repository.findByEmail(owner_email);
+       // u.get().addArticle(newArticle);
+       // newArticle.setDateTime_of_Creation(LocalDateTime.now());
+        //j.set
+       // this.repository.save(u.get());
+
+        this.service.addArticle(u.get(), newArticle);
+        //this.repository.save(newJob);
+        // return true;
+        return true;
+    }
+
+
 
     //@newComment includes only the text 
     @PostMapping("/create_comment")
@@ -403,43 +466,8 @@ public class UserController {
     }
 
 
-    @PostMapping("/create_job/{owner_email}")
-    public boolean CreateJob(@RequestBody Job newJob, @PathVariable String owner_email){
-        
-        // Optional<Job> found_job = this.repository.findById(newJob.getJobID());
-        // if(found_job.isEmpty()){
-        Optional<User> u = this.repository.findByEmail(owner_email);
-        u.get().addJob(newJob);
-        //j.set
-        this.repository.save(u.get());
-        //this.repository.save(newJob);
-        return true;
-    }
 
-
-    @PostMapping("/create_article/{owner_email}")
-    public boolean CreateArticle(@RequestBody Article newArticle, @PathVariable String owner_email){
-
-        System.out.println("HERE "+newArticle.getText());
-        
-        articleRepo.save(newArticle);
-        // Optional<Job> found_job = this.repository.findById(newJob.getJobID());
-        // if(found_job.isEmpty()){
-        Optional<User> u = this.repository.findByEmail(owner_email);
-       // u.get().addArticle(newArticle);
-       // newArticle.setDateTime_of_Creation(LocalDateTime.now());
-        //j.set
-       // this.repository.save(u.get());
-
-        this.service.addArticle(u.get(), newArticle);
-        //this.repository.save(newJob);
-        // return true;
-        return true;
-    }
-
-
-
-
+ 
 
     // @GetMapping("/request_{from}")
     // public void sendConnectionRequest(@RequestParam String send_to, @PathVariable String from) {
