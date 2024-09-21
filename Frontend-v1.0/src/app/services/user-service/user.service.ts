@@ -38,7 +38,7 @@ export class UserService {
       'Authorization': `Bearer ${token}`
       // 'Content-Type': 'application/json'
     });
-    return this.http.post<boolean>(`${this.baseUrl}/user/create_article/${email}`, { text: "blabla" }, { headers });
+    return this.http.post<boolean>(`${this.baseUrl}/user/create_article/${email}`, article, { headers });
   }
 
   // Method to fetch user profile based on JWT token and extracted email

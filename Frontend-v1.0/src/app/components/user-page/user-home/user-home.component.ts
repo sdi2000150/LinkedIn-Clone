@@ -16,7 +16,7 @@ export class UserHomeComponent implements OnInit {
   articles: any[] = []; // Store articles of the user
   Text: string = '';
   //Photo on backend is type: byte[], so here:
-  // Photo: ArrayBuffer | null = null;
+  Photo: ArrayBuffer | null = null;
   msgError: string = '';
   msgSuccess: string = '';
 
@@ -61,8 +61,8 @@ export class UserHomeComponent implements OnInit {
 
   createArticle(): void {
     const newArticle = {
-      Text: this.Text
-      // Photo: this.Photo
+      text: this.Text,
+      photo: this.Photo
     };
 
     if (this.token) {
@@ -74,7 +74,7 @@ export class UserHomeComponent implements OnInit {
             setTimeout(() => this.msgSuccess = '', 3000);
             this.fetchUserData();
             this.Text = '';
-            // this.Photo = null;
+            this.Photo = null;
           } else {
             this.msgError = 'Failed to post article. Please try again.';
             setTimeout(() => this.msgError = '', 3000);
@@ -87,6 +87,18 @@ export class UserHomeComponent implements OnInit {
       );
     } else {
       console.error('No token found');
+    }
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.Photo = reader.result as ArrayBuffer;
+      };
+      reader.readAsArrayBuffer(file);
     }
   }
 
