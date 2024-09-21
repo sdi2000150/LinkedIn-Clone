@@ -125,9 +125,8 @@ public class UserController {
     }
     //Get My Articles 
     @GetMapping("/{email}/my_articles")
-    public List<Article> getMethodName(@RequestParam String email) {
-        Optional<User> u = this.repository.findByEmail(email);
-        return u.get().getMyArticles();
+    public ResponseEntity<List<Article>> GetMyArticles(@PathVariable String email) {
+        return ResponseEntity.ok(service.return_my_articles(email));
     }
     
 

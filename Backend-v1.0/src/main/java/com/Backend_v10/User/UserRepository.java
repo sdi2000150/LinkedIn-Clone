@@ -27,4 +27,8 @@ public interface UserRepository extends JpaRepository<User,Long>{
                 "  ) order by date_time_of_creation desc;", nativeQuery = true)
     List<Long> findContactArticles(Long id);
 
+
+
+    @Query(value = "select articleid from articles where articles.article_user_id = ?1 order by date_time_of_creation desc;", nativeQuery = true)
+    List<Long> findMyArticles(Long id);
 }
