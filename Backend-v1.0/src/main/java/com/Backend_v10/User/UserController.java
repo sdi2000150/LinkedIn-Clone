@@ -409,6 +409,7 @@ public class UserController {
 
             user.likeArticle(article);
             repository.save(user);
+            // articleRepository.save(article);
             return true;
         } else {
             return false;

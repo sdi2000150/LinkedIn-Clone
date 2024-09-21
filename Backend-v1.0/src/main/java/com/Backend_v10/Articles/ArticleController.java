@@ -43,6 +43,15 @@ public class ArticleController {
         return likedByUsers;
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<Article> GetArticle(@PathVariable String id) {
+        Optional<Article> a = this.repository.findById(Long.parseLong(id));
+        if (a.isPresent()) {
+            return ResponseEntity.ok(a.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
 
 

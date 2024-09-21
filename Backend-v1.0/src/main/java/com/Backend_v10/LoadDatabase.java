@@ -163,8 +163,8 @@ public class LoadDatabase {
         // Save the updated users
         userRepo.save(user1);
         userRepo.save(user2);
-        userRepo.save(user3);
-        userRepo.save(user4);
+        // userRepo.save(user3);
+        // userRepo.save(user4);
         userRepo.save(user5);
         // Maybe dont need the below: (yes, not needed, maybe autosaved by the manytomany(mappedBy = "likedArticles")->(of user))
         // articleRepo.save(article1);

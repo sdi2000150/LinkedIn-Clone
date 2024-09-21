@@ -291,6 +291,13 @@ export class UserService {
     });
     return this.http.get<boolean>(`${this.baseUrl}/user/${myEmail}/like/${articleId}`, { headers });
   }
+  getArticleById(token: string, articleId: number): Observable<any> {
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(`${this.baseUrl}/article/${articleId}`, { headers });
+  }
 
   // applyToJob(userId: number, jobId: number): Observable<any> {
   //   return this.http.post(`${this.baseUrl}/user/${userId}/apply/${jobId}`, {});

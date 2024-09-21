@@ -77,5 +77,5 @@ public class Article {
         newComment.setCommentArticle(this);
     }
 
-    
+
 }

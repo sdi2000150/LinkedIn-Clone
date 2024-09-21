@@ -18,11 +18,11 @@
 6) FRONT END: (ADMIN) Exporting Users data as JSON and XML 
 6.5) BACK END:   -----//------
 
-7) (Network) Show connections in list structure 
+7) [DONE] (Network) Show connections in list structure 
 7.5)[DONE] BACK END:   -----//------
 
 
-8) (Network) Clicking on a connected User returns his personal information page
+8) [DONE] (Network) Clicking on a connected User returns his personal information page
 8.5) [DONE] BACK END:   -----//------
 
 9) (Network) Click to start chatting with User
