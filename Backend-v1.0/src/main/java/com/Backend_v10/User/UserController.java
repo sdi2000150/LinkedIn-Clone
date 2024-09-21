@@ -7,6 +7,8 @@ import com.Backend_v10.Jobs.Job;
 import com.Backend_v10.UserConnection.UserConnection;
 import com.Backend_v10.UserConnection.UserConnectionRepository;
 import com.Backend_v10.Articles.ArticleRepository;
+import com.Backend_v10.Comments.Comment;
+import com.Backend_v10.Comments.CommentRepository;
 
 import ch.qos.logback.core.model.processor.PhaseIndicator;
 
@@ -15,6 +17,7 @@ import com.Backend_v10.JobApplication.JobApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -45,19 +48,31 @@ public class UserController {
     private final UserConnectionRepository ConnectionRepo;
     private final ArticleRepository articleRepo;
     private final UserService service;
+    private final CommentRepository CommRepo;
 
-    UserController(ArticleRepository articleRepo, UserRepository repository, UserConnectionRepository UconnRepo, UserService service){
+    UserController(ArticleRepository articleRepo, UserRepository repository, UserConnectionRepository UconnRepo, UserService service, CommentRepository commRepo){
         this.repository = repository;
         this.ConnectionRepo = UconnRepo;
         this.service = service;
         this.articleRepo = articleRepo;
+        this.CommRepo = commRepo;
+
     }
 
     //FILL ALL MAPPINGS(GET,POST,DELETE,PUT)
+    // @PostMapping("/api/foos")
+    // @ResponseBody
+    // public String addFoo(@RequestParam(name = "id") String fooId, @RequestParam String name) { 
+    //     return "ID: " + fooId + " Name: " + name;
+    // }
 
+    //FOR TESTING
+    @GetMapping("/api/foos")
+    @ResponseBody
+    public String getFoos(@RequestParam(name="email") String owner_email,@RequestParam(name="id") Long article_id) {
+        return "ID: " + article_id + owner_email;
+    }
 
-
-    
     //for testing
     @GetMapping("/1")
     public ResponseEntity<User> GetUser() {
@@ -66,6 +81,18 @@ public class UserController {
         //unwrap Optional with .get
         System.out.println("Giving back user " + u.get().getMyArticles().size());
         return ResponseEntity.ok(u.get());
+    }
+
+    //@newComment includes only the text 
+    @PostMapping("/create_comment")
+    public boolean CreateComment(@RequestBody Comment newComment, @RequestParam(name="email") String owner_email,@RequestParam(name="id") Long article_id){
+        //We need owner of comment
+        //article of comment
+        System.out.println("HERE "+newComment.getContent());
+        Optional<User> u = this.repository.findByEmail(owner_email);
+        Optional<Article> a = this.articleRepo.findById(article_id);
+        this.service.addComment(a.get(), u.get(), newComment);
+        return true;
     }
 
     //WORKS!!
