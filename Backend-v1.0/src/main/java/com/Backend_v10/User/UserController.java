@@ -6,7 +6,6 @@ import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Jobs.Job;
 import com.Backend_v10.UserConnection.UserConnection;
 import com.Backend_v10.UserConnection.UserConnectionRepository;
-import com.Backend_v10.Articles.ArticleRepository;
 
 import ch.qos.logback.core.model.processor.PhaseIndicator;
 
@@ -25,7 +24,6 @@ import java.util.Set;
 import java.util.jar.Attributes.Name;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +32,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 
 
@@ -41,24 +40,21 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
     private final UserRepository repository;
-    @Autowired
     private final UserConnectionRepository ConnectionRepo;
-    @Autowired
-    private ArticleRepository articleRepository;
-    
     private final UserService service;
 
-    UserController(ArticleRepository articleRepository, UserRepository repository, UserConnectionRepository UconnRepo, UserService service){
+    UserController(UserRepository repository, UserConnectionRepository UconnRepo, UserService service){
         this.repository = repository;
         this.ConnectionRepo = UconnRepo;
         this.service = service;
-        this.articleRepository = articleRepository;
     }
 
     //FILL ALL MAPPINGS(GET,POST,DELETE,PUT)
 
+
+
+    
     //for testing
     @GetMapping("/1")
     public ResponseEntity<User> GetUser() {
@@ -124,6 +120,20 @@ public class UserController {
         
         return ResponseEntity.ok(service.return_articles_of_contacts(email));
     }
+    //Get My Articles 
+    @GetMapping("/{email}/my_articles")
+    public List<Article> getMethodName(@RequestParam String email) {
+        Optional<User> u = this.repository.findByEmail(email);
+        return u.get().getMyArticles();
+    }
+    
+
+    @GetMapping("/delete/{email}")
+    public void DeleteUser(@PathVariable String email){
+        Optional<User> u = this.repository.findByEmail(email);
+        this.repository.deleteById(u.get().getUserID());
+    }
+
 
     //get user info by email
     @GetMapping("/{email}")
@@ -384,37 +394,17 @@ public class UserController {
         // Optional<Job> found_job = this.repository.findById(newJob.getJobID());
         // if(found_job.isEmpty()){
         Optional<User> u = this.repository.findByEmail(owner_email);
-        u.get().addArticle(newArticle);
-        newArticle.setDateTime_of_Creation(LocalDateTime.now());
+       // u.get().addArticle(newArticle);
+       // newArticle.setDateTime_of_Creation(LocalDateTime.now());
         //j.set
-        this.repository.save(u.get());
+       // this.repository.save(u.get());
+
+        this.service.addArticle(u.get(), newArticle);
         //this.repository.save(newJob);
         return true;
     }
 
-    // needs to be tested
-    @GetMapping("/{email}/like/{articleID}")
-    public boolean likeArticle(@PathVariable String email, @PathVariable Long articleID) {
-        Optional<User> u = repository.findByEmail(email);
-        Optional<Article> a = articleRepository.findById(articleID);
-    
-        if (u.isPresent() && a.isPresent()) {
-            User user = u.get();
-            Article article = a.get();
 
-            // Check if the user has already liked the article
-            if (user.getLikedArticles().contains(article)) {
-                return false;
-            }
-
-            user.likeArticle(article);
-            repository.save(user);
-            // articleRepository.save(article);
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
 

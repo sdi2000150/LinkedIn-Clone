@@ -1,5 +1,6 @@
 package com.Backend_v10.User;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +51,8 @@ public class UserService {
     public void addArticle(User user, Article newArticle) {
         User userlocal = userRepo.findByEmail(user.getEmail()).get();
         userlocal.addArticle(newArticle);
+        newArticle.setDateTime_of_Creation(LocalDateTime.now());
+        //maybe add save on article entity!!!!
         userRepo.save(userlocal);
     }
 

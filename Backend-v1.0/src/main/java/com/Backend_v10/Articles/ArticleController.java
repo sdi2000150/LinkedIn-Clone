@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,24 @@ public class ArticleController {
         this.UserRepo = URepo;
     }
 
+
+
+    
+    @DeleteMapping("/delete/{id}")
+    public void deleteStudent(@PathVariable Long id){
+        
+        Optional<Article> found_article = this.repository.findById(id);
+        if(found_article.isEmpty()){
+            System.out.println("Artile Not Found");
+        }
+        else{
+        this.repository.deleteById(id);
+        System.out.println("Article Found in DB");    }
+    }
+
+
+
+    
     @GetMapping("{id}/comments")
     public List<Comment> GetArticleComments(@PathVariable String id) {
         Optional<Article> a = this.repository.findById(Long.parseLong(id));

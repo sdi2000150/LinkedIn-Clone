@@ -6,6 +6,7 @@ import com.Backend_v10.User.User;
 import com.Backend_v10.User.UserRepository;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import java.lang.StackWalker.Option;
 import java.util.List;
 import java.util.Optional;
 
+import com.Backend_v10.Articles.Article;
 import com.Backend_v10.JobApplication.JobApplication;
 
 @RestController
@@ -35,6 +37,21 @@ public class JobController {
         List<JobApplication>  jobApplications = a.get().getJobApplications();
         return jobApplications;
     }
+
+    
+    @DeleteMapping("/delete/{id}")
+    public void deleteStudent(@PathVariable Long id){
+        
+        Optional<Job> found_job = this.repository.findById(id);
+        if(found_job.isEmpty()){
+            System.out.println("Job Not Found");
+        }
+        else{
+            this.repository.deleteById(id);
+            System.out.println("Job Found in DB");    
+        }
+    }
+
 
 
     
