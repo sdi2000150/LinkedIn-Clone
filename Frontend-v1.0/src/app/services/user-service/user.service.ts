@@ -14,9 +14,10 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
   private baseUrl = 'http://localhost:8080'; // base URL for backend springboot
-  
+
   constructor(private http: HttpClient) { }
 
   
@@ -31,12 +32,13 @@ export class UserService {
   }
 
   createArticle(token: string, article: any): Observable<boolean> {
+
     const email = this.extractEmailFromToken(token);
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
       // 'Content-Type': 'application/json'
     });
-    return this.http.post<boolean>(`${this.baseUrl}/user/create_article/${email}`, article, { headers });
+    return this.http.post<boolean>(`${this.baseUrl}/user/create_article/${email}`, { text: "blabla" }, { headers });
   }
 
   // Method to fetch user profile based on JWT token and extracted email
