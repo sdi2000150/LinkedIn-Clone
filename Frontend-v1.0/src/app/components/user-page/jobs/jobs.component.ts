@@ -3,15 +3,25 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { UserService } from '../../../services/user-service/user.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common'; // Import CommonModule (for NgFor... usage on the HTML)
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-jobs',
   standalone: true,
-  imports: [NavbarComponent, CommonModule],
+  imports: [NavbarComponent, CommonModule, FormsModule],
   templateUrl: './jobs.component.html',
   styleUrl: './jobs.component.css'
 })
 export class JobsComponent {
+  jobOfferTitle: string = ''; // Store the job offer title
+  jobOfferNeedOfDegree: boolean = false; // Store the job offer need of a degree
+  jobOfferFullTime: boolean = false; // Store the job offer type
+  jobOfferSalary: number = 0; // Store the job offer salary
+  jobOfferOtherRequirements: string = ''; // Store the job offer other requirements
+  
+  msgSuccess: string | null = null;
+  msgError: string | null = null;
+
   jobs: any[] = []; // Store job offers of the user
   appliedJobs: any[] = []; // Store jobs the user has applied for
   contactsJobs: any[] = []; // Store job offers of the user's contacts
@@ -80,6 +90,45 @@ export class JobsComponent {
       // Handle case where token is missing
       console.error('No token found');
     }
+  }
 
+  createJobOffer(): void {
+    const newjobOffer = {
+      title: this.jobOfferTitle,
+      needOfDegree: this.jobOfferNeedOfDegree,
+      fullTime: this.jobOfferFullTime,
+      salary: this.jobOfferSalary,
+      otherRequirements: this.jobOfferOtherRequirements
+    };
+
+    if (this.token) {
+      this.userService.createJobOffer(this.token, newjobOffer).subscribe(
+        (response) => {
+          if (response) {
+            console.log(newjobOffer);
+            this.msgSuccess = 'Job offer posted successfully!';
+            setTimeout(() => this.msgSuccess = '', 3000);
+            this.fetchUserData();
+            this.jobOfferTitle = '';
+            this.jobOfferNeedOfDegree = false;
+            this.jobOfferFullTime = false;
+            this.jobOfferSalary = 0;
+            this.jobOfferOtherRequirements = '';
+
+          } else {
+            this.msgError = 'Failed to post article. Please try again.';
+            setTimeout(() => this.msgError = '', 3000);
+          }
+        },
+        (error) => {
+          this.msgError = 'Failed to post article. Please try again.';
+          setTimeout(() => this.msgError = '', 3000);
+        }
+      );
+    } else {
+      this.msgError = 'No token found';
+      this.msgSuccess = null;
+      console.error('No token found');
+    }
   }
 }

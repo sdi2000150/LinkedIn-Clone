@@ -3,16 +3,19 @@ import { CommonModule } from '@angular/common'; // Import CommonModule (for NgFo
 import { NavbarComponent } from '../navbar/navbar.component';
 import { UserService } from '../../../services/user-service/user.service';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
 
 @Component({
   selector: 'app-my-posts',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, NavbarComponent, FormsModule],
   templateUrl: './my-posts.component.html',
   styleUrl: './my-posts.component.css'
 })
 export class MyPostsComponent implements OnInit {
   articles: any[] = []; // Store articles of the user
+  newComments: { [key: number]: string } = {}; // to store comment text for each article (based on key: articleId)
+  currentUser: any = {}; // Store the current user information
 
   token: string | null = null; // Store token from localStorage
 
@@ -24,6 +27,14 @@ export class MyPostsComponent implements OnInit {
 
     // Check if token is available
     if (this.token) {
+      this.userService.getUserProfileFromToken(this.token).subscribe(
+        (user) => {
+          this.currentUser = user;
+        },
+        (error) => {
+          console.error('Error fetching current user', error);
+        }
+      );
       // Fetch contact articles using the token
       this.userService.getMyArticles(this.token).subscribe(
         (data) => {
@@ -40,49 +51,97 @@ export class MyPostsComponent implements OnInit {
     }
   }
 
+  deleteArticle(articleID: number): void {
+    if (this.token) {
+      this.userService.deleteArticle(this.token, articleID).subscribe(
+        () => {
+          console.log('Article deleted successfully');
+          // Refresh the page after deleting the article
+          this.ngOnInit();
+          
+        },
+        (error) => {
+          console.error('Error deleting article', error);
+        }
+      );
+    } else {
+      // If no token found, redirect to login page
+      this.router.navigate(['../../login-page']);
+    }
+  }
+
 //   // needs to be tested: issues occur
-//   likeArticle(articleId: number): void {
-//     // Fetch the token from localStorage
-//     this.token = localStorage.getItem('token');
+  likeArticle(articleId: number): void {
+    // Fetch the token from localStorage
+    this.token = localStorage.getItem('token');
 
-//     if (this.token) {
-//       this.userService.likeArticle(this.token, articleId).subscribe(
-//         (response: boolean) => {
-//           if (response) {
-//             console.log('Article liked successfully');
+    if (this.token) {
+      this.userService.likeArticle(this.token, articleId).subscribe(
+        (response: boolean) => {
+          if (response) { //true
+            console.log('Article liked successfully');
 
-//             // Do the local refresh of the updated article
-//             if (this.token) {
-//               // Fetch only the updated article from the backend
-//               this.userService.getArticleById(this.token, articleId).subscribe(
-//                 (updatedArticle) => {
-//                   // Update the article in the local articles array
-//                   const index = this.articles.findIndex(article => article.articleID === articleId);
-//                   if (index !== -1) {
-//                     this.articles[index] = updatedArticle;
-//                   }
-//                 },
-//                 (error) => {
-//                   console.error('Error fetching updated article', error);
-//                 }
-//               );
-//             } else {
-//               // If no token found, redirect to login page
-//               this.router.navigate(['../../login-page']);
-//             }
+            // Do the local refresh of the updated article
+            this.ngOnInit(); // Refresh the articles after liking an article
 
-//           } else {
-//             console.error('Failed to like the article');
-//           }
-//         },
-//         (error) => {
-//           console.error('Error liking article', error);
-//         }
-//       );
-//     } else {
-//       // If no token found, redirect to login page
-//       this.router.navigate(['../../login-page']);
-//     }
-//   }
+          } else {  //false
+            console.log('Unliked article');
+            
+            // Do the local refresh of the updated article
+            this.ngOnInit(); // Refresh the articles after liking an article
+          }
+        },
+        (error) => {
+          console.error('Error liking article', error);
+        }
+      );
+    } else {
+      // If no token found, redirect to login page
+      this.router.navigate(['../../login-page']);
+    }
+  }
+  addComment(articleId: number): void {
+    // Fetch the token from localStorage
+    this.token = localStorage.getItem('token');
 
+    const commentText = this.newComments[articleId];
+    const newComment = { 
+      content: commentText
+    };
+    
+    if (this.token) {
+      this.userService.createComment(this.token, newComment, articleId).subscribe(
+        (response: boolean) => {
+          if (this.token && response) {
+            console.log('Comment added successfully');
+
+            this.ngOnInit(); // Refresh the articles after adding a comment
+            this.newComments[articleId] = ''; // Clear the input field after adding the comment
+
+
+          } else {
+            console.error('Failed to add comment');
+          }
+        },
+        (error) => {
+          console.error('Error adding comment', error);
+        }
+      );
+    }
+  }
+
+  deleteComment(articleId: number, commentId: number): void {
+    if (this.token) {
+      this.userService.deleteComment(this.token, commentId).subscribe(
+        (response) => {
+            console.log('Comment deleted successfully');
+            // Refresh the page after deleting the comment
+            this.ngOnInit();
+        },
+        (error) => {
+          console.error('Error deleting comment', error);
+        }
+      );
+    }
+  }
 }

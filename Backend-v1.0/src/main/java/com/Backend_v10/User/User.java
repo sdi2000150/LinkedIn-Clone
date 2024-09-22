@@ -220,6 +220,11 @@ public class User {
         this.likedArticles.add(article);
         article.getLikedByUsers().add(this);
     }
+    @Transactional
+    public void unlikeArticle(Article article) {
+        this.likedArticles.remove(article);
+        article.getLikedByUsers().remove(this);
+    }
 
     @Override
     public String toString() {

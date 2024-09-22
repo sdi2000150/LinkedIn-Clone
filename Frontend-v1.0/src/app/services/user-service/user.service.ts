@@ -31,6 +31,15 @@ export class UserService {
     });
   }
 
+  createJobOffer(token: string, jobOffer: any): Observable<boolean> {
+
+    const email = this.extractEmailFromToken(token);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<boolean>(`${this.baseUrl}/user/create_job/${email}`, jobOffer, { headers });
+  }
+
   createArticle(token: string, article: any): Observable<boolean> {
 
     const email = this.extractEmailFromToken(token);
@@ -321,6 +330,34 @@ export class UserService {
     });
     return this.http.get<any>(`${this.baseUrl}/article/${articleId}`, { headers });
   }
+
+  //DELETE article
+  deleteArticle(token: string, articleID: number): Observable<void> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete<void>(`${this.baseUrl}/article/delete/${articleID}`, { headers });
+  }
+
+  //POST comment
+  createComment(token: string, comment: any, articleId: number): Observable<boolean> {
+    const email = this.extractEmailFromToken(token);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<boolean>(`${this.baseUrl}/user/create_comment?email=${email}&id=${articleId}`, comment, { headers });
+  }
+
+  //DELETE comment
+  deleteComment(token: string, commentId: number): Observable<void> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete<void>(`${this.baseUrl}/comment/delete/${commentId}`, { headers });
+  }
+
+
 
   // applyToJob(userId: number, jobId: number): Observable<any> {
   //   return this.http.post(`${this.baseUrl}/user/${userId}/apply/${jobId}`, {});

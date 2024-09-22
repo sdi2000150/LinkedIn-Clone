@@ -54,13 +54,13 @@ public class Article {
     @OneToMany //(cascade = CascadeType.ALL )
     @ToString.Exclude
     @JoinColumn(name = "article_id")
-    @JsonIgnore
+    // @JsonIgnore
     // @JsonManagedReference
     List<Comment> ArticleComments;
 
     @ManyToMany(mappedBy = "likedArticles")
     @ToString.Exclude
-    @JsonIgnore
+    // @JsonIgnore
     private List<User> likedByUsers;
 
 

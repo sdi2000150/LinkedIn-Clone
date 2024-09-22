@@ -5,7 +5,9 @@
         <ul>
             <!-- Iterate over the articles and display them -->
             <div *ngFor="let job of jobs" class="post">
-                <h3>{{ job.title }}</h3>
+                <h3>{{ job.title }}<br>
+                    <span class="text-muted" style="font-size: 0.8em; font-weight: normal;">Offered by {{ job.owner.name }} {{ job.owner.lastname }}</span>
+                </h3>
                 <p *ngIf="job.needOfDegree">Degree required</p> 
                 <p *ngIf="!job.needOfDegree">Degree not required</p>
                 <p>{{ job.otherRequirements }}</p>
@@ -19,18 +21,34 @@
     <div id="main-content">
         <div id="timeline">
             <div id="job-creation">
-                <textarea placeholder="Upload a job offer..."></textarea>
-                <div class="media-inputs">
-                    <label for="media-upload">📷🎥🎵 Media</label>
-                    <input type="file" id="media-upload" accept="image/*,video/*,audio/*">
-                    <button id="post-button">Post Job</button>
+                <textarea [(ngModel)]="jobOfferTitle" placeholder="Job Title" name="jobOfferTitle" required></textarea>
+                
+                <div class="job-details">
+                    <label for="jobOfferNeedOfDegree">Need of Degree:</label>
+                    <input type="checkbox" id="jobOfferNeedOfDegree" [(ngModel)]="jobOfferNeedOfDegree" name="jobOfferNeedOfDegree">
+                    
+                    <label for="jobOfferFullTime">Full Time:</label>
+                    <input type="checkbox" id="jobOfferFullTime" [(ngModel)]="jobOfferFullTime" name="jobOfferFullTime">
+                    
+                    <label for="jobOfferSalary">Salary:</label>
+                    <input type="number" id="jobOfferSalary" [(ngModel)]="jobOfferSalary" name="jobOfferSalary" required>
                 </div>
+
+                <textarea [(ngModel)]="jobOfferOtherRequirements" placeholder="Other Requirements" name="jobOfferOtherRequirements"></textarea>
+            
+
+                <button id="post-button" (click)="createJobOffer()">Post Job</button>
+                
+                <p *ngIf="msgSuccess" class="success-message">{{ msgSuccess }}</p>
+                <p *ngIf="msgError" class="error-message">{{ msgError }}</p>
             </div>
             <h2>Job listings</h2>
             <ul>
                 <!-- Iterate over the contacts job-offers and display them -->
                 <div *ngFor="let job of contactsJobs" class="post">
-                    <h3>{{ job.title }}</h3>
+                    <h3>{{ job.title }}<br>
+                        <span class="text-muted" style="font-size: 0.8em; font-weight: normal;">Offered by {{ job.owner.name }} {{ job.owner.lastname }}</span>
+                    </h3>
                     <p *ngIf="job.needOfDegree">Degree required</p> 
                     <p *ngIf="!job.needOfDegree">Degree not required</p>
                     <p>{{ job.otherRequirements }}</p>
@@ -47,7 +65,9 @@
         <ul>
             <!-- Iterate over the applied jobs and display them -->
             <div *ngFor="let job of appliedJobs" class="post">
-                <h3>{{ job.title }}</h3>
+                <h3>{{ job.title }}<br>
+                    <span class="text-muted" style="font-size: 0.8em; font-weight: normal;">Offered by {{ job.owner.name }} {{ job.owner.lastname }}</span>
+                </h3>
                 <p *ngIf="job.needOfDegree">Degree required</p> 
                 <p *ngIf="!job.needOfDegree">Degree not required</p>
                 <p>{{ job.otherRequirements }}</p>

@@ -81,6 +81,8 @@ body {
     font-size: 14px;
     color: #363636;
     cursor: pointer;
+    padding-bottom: 20px; /* Add padding to create a buffer zone */
+
 }
 
 .likes span, .comments span {
@@ -108,15 +110,50 @@ body {
 
 }
 
-.likes:hover .likes-list {
+.likes:hover .likes-list,
+.likes-list:hover {
     display: block;
     /* larger box */
     width: 100px;
     cursor: pointer; /* Change cursor to pointer (hand) */
 }
-.comments:hover .comments-list {
+.comments:hover .comments-list,
+.comments-list:hover {
     display: block;
     /* larger box */
     width: 200px;
     cursor: pointer;
 }
+
+/* Remove existing styles for delete-button */
+#timeline .post .post-info .comments .delete-button {
+    all: unset; 
+    background: none;
+    color: red;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    position: relative; /* Position it relatively within the post */
+    float: right; /* Align it to the far right corner */
+}
+
+#timeline .post .post-info .comments .delete-button:hover {
+    color: darkred;
+}
+
+/* Remove existing styles for delete-button */
+#timeline .post .delete-button {
+    all: unset; 
+    color: red;
+    /* font size */
+    font-size: 14px;
+    cursor: pointer; /* Add pointer cursor */
+    position: relative; /* Position it relatively within the post */
+    float: right; /* Align it to the far right corner */
+}
+#timeline .post .delete-button:hover {
+    color: none;
+    background: none;
+    color: darkred;
+}
+

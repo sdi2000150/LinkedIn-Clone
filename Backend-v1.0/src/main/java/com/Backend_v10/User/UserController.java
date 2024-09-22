@@ -91,7 +91,7 @@ public class UserController {
 
 
     @PostMapping("/create_jobApp/")
-    public boolean CreateJob(@RequestBody JobApplication newJobApp, @RequestParam(name="email") String owner_email, @RequestParam(name="id") Long job_id){
+    public boolean CreateJobApplication(@RequestBody JobApplication newJobApp, @RequestParam(name="email") String owner_email, @RequestParam(name="id") Long job_id){
 
         this.JobAppRepo.save(newJobApp);
         Optional<User> u = this.repository.findByEmail(owner_email);
@@ -467,7 +467,21 @@ public class UserController {
         // return false;
     }
 
-
+    //user likes article
+    @GetMapping("/{email}/like/{article_id}")
+    public boolean LikeArticle(@PathVariable String email, @PathVariable Long article_id){
+        Optional<User> u = this.repository.findByEmail(email);
+        Optional<Article> a = this.articleRepo.findById(article_id);
+        //if already liked, return false
+        if(u.get().getLikedArticles().contains(a.get())){
+            u.get().unlikeArticle(a.get());
+            this.repository.save(u.get());
+            return false;
+        }
+        u.get().likeArticle(a.get());
+        this.repository.save(u.get());
+        return true;
+    }
 
  
 

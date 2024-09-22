@@ -67,6 +67,17 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Match box shadow */
 }
 
+.job-details {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust the gap between elements as needed */
+    margin-bottom: 10px; /* Add some space below the row */
+}
+
+.job-details label {
+    margin-right: 5px;
+}
+
 #job-creation textarea {
     width: 100%; /* Full width */
     height: 50px; /* Reduced height */
@@ -91,7 +102,7 @@ body {
     margin-right: auto;
 }
 
-.media-inputs button {
+#job-creation button {
     background: #0077B5;
     color: white;
     border: none;
@@ -100,7 +111,7 @@ body {
     border-radius: 4px; /* Match border radius */
 }
 
-.media-inputs button:hover {
+#job-creation button:hover {
     background: #005f8d;
 }
 

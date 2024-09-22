@@ -9,7 +9,7 @@
             <h2>My Contacts' Posts</h2>
             <!-- Iterate over the articles and display them -->
             <div *ngFor="let article of articles" class="post">
-                <h4>Name Lastname <br>
+                <h4>{{ article.owner.name }} {{ article.owner.lastname }}<br>
                     <!-- Display creation date and time in a more readable format -->
                     <span class="text-muted" style="font-size: 0.8em; font-weight: normal;">{{ article.dateTime_of_Creation | date:'short' }}</span>
                 </h4> 
@@ -31,9 +31,13 @@
                         <ul class="comments-list">
                             <li *ngFor="let comment of article.articleComments">
                                 {{ comment.content }} - {{ comment.commentOwner.username }}
+                                <button *ngIf="comment.commentOwner.userID === currentUser.userID" (click)="deleteComment(article.articleID, comment.commentID)" class="delete-button">Delete Comment</button>
+                                <!-- <button>Delete Comment</button> -->
                             </li>
                         </ul>
-                        <button> Comment</button>
+                        <input type="text" [(ngModel)]="newComments[article.articleID]" placeholder="Add a comment">
+                        <button (click)="addComment(article.articleID)">Comment</button>
+                        <!-- <button> Comment</button> -->
                     </div>
                 </div>
             </div>
