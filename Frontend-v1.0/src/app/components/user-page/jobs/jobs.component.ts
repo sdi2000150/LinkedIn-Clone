@@ -180,19 +180,19 @@ export class JobsComponent {
     }
   }
 
-  // deleteComment(articleId: number, commentId: number): void {
-  //   if (this.token) {
-  //     this.userService.deleteComment(this.token, commentId).subscribe(
-  //       (response) => {
-  //           console.log('Comment deleted successfully');
-  //           // Refresh the page after deleting the comment
-  //           this.ngOnInit();
-  //       },
-  //       (error) => {
-  //         console.error('Error deleting comment', error);
-  //       }
-  //     );
-  //   }
-  // }
+  deleteJobApplication(jobID: number): void {
+    if (this.token) {
+      this.userService.deleteJobApplication(this.token, jobID).subscribe(
+        (response) => {
+            console.log('Job Application deleted successfully');
+            // Refresh the page after deleting the comment
+            this.ngOnInit();
+        },
+        (error) => {
+          console.error('Error deleting jobApplication', error);
+        }
+      );
+    }
+  }
 
 }

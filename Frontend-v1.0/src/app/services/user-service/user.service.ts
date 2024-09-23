@@ -372,9 +372,18 @@ export class UserService {
       'Authorization': `Bearer ${token}`
       // 'Content-Type': 'application/json'
     });
+    //Send a empty JSON body, as jobApplication doesnot have any data
     return this.http.post<boolean>(`${this.baseUrl}/user/create_jobApp?email=${email}&id=${jobID}`, {}, { headers });
   }
 
+  //DELETE jobApplication
+  deleteJobApplication(token: string, jobID: number): Observable<void> {
+    const email = this.extractEmailFromToken(token);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete<void>(`${this.baseUrl}/application/${email}/delete/${jobID}`, { headers });
+  }
 
   // applyToJob(userId: number, jobId: number): Observable<any> {
   //   return this.http.post(`${this.baseUrl}/user/${userId}/apply/${jobId}`, {});
