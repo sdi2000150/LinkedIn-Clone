@@ -90,16 +90,23 @@ public class UserController {
     }
 
 
-    @PostMapping("/create_jobApp/")
+    @PostMapping("/create_jobApp")
     public boolean CreateJobApplication(@RequestBody JobApplication newJobApp, @RequestParam(name="email") String owner_email, @RequestParam(name="id") Long job_id){
 
-        this.JobAppRepo.save(newJobApp);
+        // this.JobAppRepo.save(newJobApp);
         Optional<User> u = this.repository.findByEmail(owner_email);
 
         Optional<Job> j = this.JobRepo.findById(job_id);
-        this.JobRepo.save(j.get());
+        // this.JobRepo.save(j.get());
 
-        // Assosiate jobapplications with jobs/users
+        //if user has already applied to this job, return false
+        for (JobApplication jobApp : u.get().getMyJobApplications()) {
+            if (jobApp.getJob().getJobID() == job_id) {
+                return false;
+            }
+        }
+        //else:
+        // Assosiate jobapplication with job/user
         this.service.addJobApplication(j.get(), u.get(), newJobApp); 
 
         //this.repository.save(u.get());

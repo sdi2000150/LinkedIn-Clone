@@ -34,7 +34,7 @@ public class JobController {
     }
 
     @GetMapping("{id}/jobapplications")
-    public List<JobApplication> GetJobComments(@PathVariable String id) {
+    public List<JobApplication> GetJobApplications(@PathVariable String id) {
         Optional<Job> a = this.repository.findById(Long.parseLong(id));
         //unwrap Optional with .get
         List<JobApplication>  jobApplications = a.get().getJobApplications();

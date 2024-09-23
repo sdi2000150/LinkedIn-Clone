@@ -14,7 +14,7 @@
                 <p *ngIf="job.fullTime">Full-time</p> 
                 <p *ngIf="!job.fullTime">Part-time</p>
                 <p *ngIf="job.salary != '0'">Salary: {{ job.salary }}€</p>
-                <button>Delete Job Offer</button>
+                <button (click)="deleteJobOffer(job.jobID)">Delete Job Offer</button>
             </div>
         </ul>
     </div>
@@ -55,8 +55,7 @@
                     <p *ngIf="job.fullTime">Full-time</p> 
                     <p *ngIf="!job.fullTime">Part-time</p>
                     <p *ngIf="job.salary != '0'">Salary: {{ job.salary }}€</p>
-                    <button>Apply</button>
-                </div>
+                    <button (click)="applyToJob(job.jobID)">Apply</button>                </div>
             </ul>
         </div>
     </div>

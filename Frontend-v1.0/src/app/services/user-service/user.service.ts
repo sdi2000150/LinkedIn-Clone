@@ -339,6 +339,14 @@ export class UserService {
     return this.http.delete<void>(`${this.baseUrl}/article/delete/${articleID}`, { headers });
   }
 
+  //DELETE job
+  deleteJobOffer(token: string, jobID: number): Observable<void> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete<void>(`${this.baseUrl}/job/delete/${jobID}`, { headers });
+  }
+
   //POST comment
   createComment(token: string, comment: any, articleId: number): Observable<boolean> {
     const email = this.extractEmailFromToken(token);
@@ -357,6 +365,15 @@ export class UserService {
     return this.http.delete<void>(`${this.baseUrl}/comment/delete/${commentId}`, { headers });
   }
 
+  //POST jobApplication
+  applyToJob(token: string, jobID: number): Observable<boolean> {
+    const email = this.extractEmailFromToken(token);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+      // 'Content-Type': 'application/json'
+    });
+    return this.http.post<boolean>(`${this.baseUrl}/user/create_jobApp?email=${email}&id=${jobID}`, {}, { headers });
+  }
 
 
   // applyToJob(userId: number, jobId: number): Observable<any> {

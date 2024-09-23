@@ -131,4 +131,68 @@ export class JobsComponent {
       console.error('No token found');
     }
   }
+
+  deleteJobOffer(jobID: number): void {
+    if (this.token) {
+      this.userService.deleteJobOffer(this.token, jobID).subscribe(
+        () => {
+          console.log('Job offer deleted successfully!');
+          setTimeout(() => this.msgSuccess = '', 3000);
+          this.fetchUserData();
+        },
+        (error) => {
+          setTimeout(() => this.msgError = '', 3000);
+          console.error('Error deleting job offer', error);
+        }
+      );
+    } else {
+      this.msgError = 'No token found';
+      this.msgSuccess = null;
+      console.error('No token found');
+    }
+  }
+
+
+  applyToJob(jobId: number): void {
+    // Fetch the token from localStorage
+    this.token = localStorage.getItem('token');
+
+    
+    if (this.token) {
+      this.userService.applyToJob(this.token, jobId).subscribe(
+        (response: boolean) => {
+          if (this.token && response) {
+            this.msgSuccess = 'Job Application added successfully!';
+            console.log('Job Application added successfully');
+
+            this.ngOnInit(); // Refresh the jobs after applying to job
+
+          } else { //response is false
+            // console.error('Failed to apply to job');
+            this.msgError = 'User already applied to this job';
+            console.log('User already applied to this job');
+          }
+        },
+        (error) => {
+          console.error('Error applying to job', error);
+        }
+      );
+    }
+  }
+
+  // deleteComment(articleId: number, commentId: number): void {
+  //   if (this.token) {
+  //     this.userService.deleteComment(this.token, commentId).subscribe(
+  //       (response) => {
+  //           console.log('Comment deleted successfully');
+  //           // Refresh the page after deleting the comment
+  //           this.ngOnInit();
+  //       },
+  //       (error) => {
+  //         console.error('Error deleting comment', error);
+  //       }
+  //     );
+  //   }
+  // }
+
 }
