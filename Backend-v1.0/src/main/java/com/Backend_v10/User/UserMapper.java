@@ -1,5 +1,6 @@
 package com.Backend_v10.User;
 
+// Mapper class for User, which is used to map User objects to UserDTO objects
 public class UserMapper {
     public static UserDTO toUserDTO(User user) {
         UserDTO dto = new UserDTO();

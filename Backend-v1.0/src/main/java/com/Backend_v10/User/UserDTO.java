@@ -10,6 +10,7 @@ import com.Backend_v10.Jobs.Job;
 
 import lombok.Data;
 
+// DTO for User, which is used to transfer user data between the frontend and the backend 
 @Data
 public class UserDTO {
     private Long UserID;
