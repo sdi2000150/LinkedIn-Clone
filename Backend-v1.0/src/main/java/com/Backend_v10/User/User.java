@@ -28,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.ManyToMany;
    
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +36,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -105,11 +107,14 @@ public class User {
     private String password;
     private String phone;
     private String email;
-    private byte[] profilePhoto;
-    private byte[] coverPhoto;
     private LocalDate birthdate;
-    private byte[] cvFile;
     private String role;
+
+    private String profilePhotoUrl;
+    private String coverPhotoUrl;
+    
+    @Lob
+    private byte[] cvFile;
 
     private String about;
     private String experience;
@@ -230,7 +235,7 @@ public class User {
     public String toString() {
         return "User [UserID=" + UserID + ", username=" + username + ", name=" + name + ", lastname=" + lastname
                 + ", password=" + password + ", phone=" + phone + ", email=" + email + ", profilePhoto="
-                + Arrays.toString(profilePhoto) + ", coverPhoto=" + Arrays.toString(coverPhoto) + ", birthdate="
+                + profilePhotoUrl + ", coverPhoto=" + coverPhotoUrl + ", birthdate="
                 + birthdate + ", cvFile=" + Arrays.toString(cvFile) + ", role=" + role + ", about=" + about
                 + ", experience=" + experience + ", experienceDescription=" + experienceDescription + ", education="
                 + education + ", educationDescription=" + educationDescription + ", skills=" + skills + "]";

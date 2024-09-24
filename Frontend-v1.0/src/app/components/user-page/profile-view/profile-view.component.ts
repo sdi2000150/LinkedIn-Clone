@@ -119,6 +119,12 @@ export class ProfileViewComponent implements OnInit {
             this.selectedEducation = data.education;
             this.educationDescription = data.educationDescription;
             this.selectedSkills = data.skills;
+            if (data.coverPhotoUrl) {
+              this.coverPhotoUrl = data.coverPhotoUrl;
+            }
+            if (data.profilePhotoUrl) {
+              this.profilePhotoUrl = data.profilePhotoUrl;
+            }
             // Add any logic you want to execute after fetching the user profile
           },
           (error) => {

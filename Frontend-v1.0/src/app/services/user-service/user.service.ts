@@ -50,6 +50,26 @@ export class UserService {
     return this.http.post<boolean>(`${this.baseUrl}/user/create_article/${email}`, article, { headers });
   }
 
+  //////////////////////// ADMIN METHODS ////////////////////////
+  // New method to fetch user data in JSON format
+  getUserDataJson(token: string, email: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json'
+    });
+    return this.http.get<any>(`${this.baseUrl}/user/${email}/all-data/json`, { headers });
+  }
+
+  // New method to fetch user data in XML format
+  getUserDataXml(token: string, email: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/xml'
+    });
+    return this.http.get(`${this.baseUrl}/user/${email}/all-data/xml`, { headers });
+  }
+  //////////////////////////////////////////////////////////////
+
   // Method to fetch user profile based on JWT token and extracted email
   getUserProfileFromToken(token: string): Observable<any> {
     // Extract the email from the token

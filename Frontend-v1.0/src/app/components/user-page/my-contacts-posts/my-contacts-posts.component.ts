@@ -66,7 +66,10 @@ export class MyContactsPostsComponent implements OnInit {
             this.ngOnInit(); // Refresh the articles after liking an article
 
           } else {
-            console.error('Failed to like the article');
+            console.log('Unliked article');
+            
+            // Do the local refresh of the updated article
+            this.ngOnInit(); // Refresh the articles after liking an article
           }
         },
         (error) => {

@@ -2,17 +2,19 @@
 <div class="profile-container">
     <div class="profile-header">
         <div class="cover-photo">
-            <label for="media-upload">
-                <img [src]="'assets/images/placeholder-cover.jpg'" alt="Cover Picture" style="cursor: pointer;">
+            <label for="cover-media-upload">
+                <img [src]="coverPhotoUrl" alt="Cover Picture" style="cursor: pointer;">
+                <!-- <img [src]="'assets/images/placeholder-cover.jpg'" alt="Cover Picture" style="cursor: pointer;"> -->
             </label>
-            <input type="file" id="media-upload" accept="image/*" style="display: none;">
+            <input type="file" id="cover-media-upload" accept="image/*" style="display: none;" (change)="onCoverPhotoSelected($event)">
         </div>
         <div class="profile-info">
             <div class="profile-picture">
-                <label for="media-upload">
-                    <img [src]="'assets/images/placeholder-profile.jpg'" alt="Profile Picture" style="cursor: pointer;">
+                <label for="profile-media-upload">
+                    <img [src]="profilePhotoUrl" alt="Profile Picture" style="cursor: pointer;">
+                    <!-- <img [src]="'assets/images/placeholder-profile.jpg'" alt="Profile Picture" style="cursor: pointer;"> -->
                 </label>
-                <input type="file" id="media-upload" accept="image/*" style="display: none;">
+                <input type="file" id="profile-media-upload" accept="image/*" style="display: none;" (change)="onProfilePhotoSelected($event)">
                 <h1>{{ Name }} {{ Surname }}</h1>
             </div>
             <div class="user-info">

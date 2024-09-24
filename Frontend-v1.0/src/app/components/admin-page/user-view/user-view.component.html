@@ -1,0 +1,85 @@
+<header id="main-header">
+    <div class="container">
+        <div class="logo">
+            <a href="../../admin-page/">
+              <img src="assets/logos/mainMiniLogo.png" alt="LinkedIn-Clone">
+            </a>
+        </div>  
+        <h1>Admin's User-View Page</h1>
+        <div class="form-group">
+            <a href="../../welcome-page">
+                <button id="logOut" type="button">Log Out!</button>
+            </a>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    
+    <section id="main">
+
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="cover-photo">
+                    <img [src]="coverPhotoUrl" alt="Cover Picture">
+                </div>
+                <div class="profile-info">
+                    <div class="profile-picture">
+                        <img [src]="profilePhotoUrl" alt="Profile Picture">
+                        <h1>{{ Name }} {{ Surname }}</h1>
+                    </div>
+                </div>
+            </div>
+            <br><br><br><br><br><br><br>
+            <div class="profile-content">
+                <div class="profile-section">
+                    <h2>Contact info</h2>
+                    <ul>
+                      <li>
+                        <label>Email: {{ Email }}</label>
+                      </li>
+                      <li>
+                        <label>Phone: {{ Phone }}</label>
+                      </li>
+                      <li>
+                        <label>Birthdate: {{ Birthdate }}</label>
+                      </li>
+                    </ul>
+                </div>
+                <div class="profile-section">
+                    <h2>About</h2>
+                    <p>{{ about }}</p>
+                </div>
+                <div class="profile-section">
+                    <h2>Experience</h2>
+                    <p>{{ selectedExperience }}</p>
+                    <p>{{ experienceDescription }}</p>
+                </div>
+                <div class="profile-section">
+                    <h2>Education</h2>
+                    <p>{{ selectedEducation }}</p>
+                    <p>{{ educationDescription }}</p>
+                </div>
+                <div class="profile-section">
+                    <h2>Skills</h2>
+                    <p>{{ selectedSkills }}</p>
+                    <!-- for now only 1 skill, later to be able to have more -->
+                    <!-- <ul>
+                        <li *ngFor="let skill of selectedSkills">{{ skill }}</li>
+                    </ul> -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+    
+    <aside id="sidebar">
+        <h2>Quick Links:</h2>
+        <ul>
+            <li><a href="../admin-page/admin-home">Return Home</a></li>
+            <li><a href="../admin-page/users-list">Manage All Users</a></li>
+            <!-- <li><a href="../users-reports">View Reports</a></li> -->
+            <!-- <li><a href="../settings">Settings</a></li> -->
+        </ul>
+    </aside>
+</div>

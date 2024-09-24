@@ -1,6 +1,7 @@
 package com.Backend_v10.User;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Jobs.Job;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +33,9 @@ import java.util.jar.Attributes.Name;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -80,15 +84,40 @@ public class UserController {
     }
 
     //for testing
-    @GetMapping("/1")
-    public ResponseEntity<User> GetUser() {
-        //Optional<User> u = this.repository.findByEmail(Email);
-        Optional<User> u = this.repository.findById(1L);
-        //unwrap Optional with .get
-        System.out.println("Giving back user " + u.get().getMyArticles().size());
-        return ResponseEntity.ok(u.get());
+    // @GetMapping("/1")
+    // public ResponseEntity<User> GetUser() {
+    //     //Optional<User> u = this.repository.findByEmail(Email);
+    //     Optional<User> u = this.repository.findById(1L);
+    //     //unwrap Optional with .get
+    //     System.out.println("Giving back user " + u.get().getMyArticles().size());
+    //     return ResponseEntity.ok(u.get());
+    // }
+
+    //////////////////////// ADMIN METHODS ////////////////////////
+    @PreAuthorize("hasRole('ROLE_ADMIN')")  //only admin can access
+    @GetMapping(value = "/{email}/all-data/json", produces = MediaType.APPLICATION_JSON_VALUE)  //return JSON
+    public ResponseEntity<UserDTO> getAllUserDataJson(@PathVariable String email) {
+        Optional<User> userOptional = repository.findByEmail(email);
+        if (userOptional.isPresent()) {
+            UserDTO userDTO = UserMapper.toUserDTO(userOptional.get());
+            return ResponseEntity.ok(userDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")  //only admin can access
+    @GetMapping(value = "/{email}/all-data/xml", produces = MediaType.APPLICATION_XML_VALUE)    //return XML (not working, needs fix)
+    public ResponseEntity<UserDTO> getAllUserDataXml(@PathVariable String email) {
+        Optional<User> userOptional = repository.findByEmail(email);
+        if (userOptional.isPresent()) {
+            UserDTO userDTO = UserMapper.toUserDTO(userOptional.get());
+            return ResponseEntity.ok(userDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+    ///////////////////////////////////////////////////////////////
 
     @PostMapping("/create_jobApp")
     public boolean CreateJobApplication(@RequestBody JobApplication newJobApp, @RequestParam(name="email") String owner_email, @RequestParam(name="id") Long job_id){
@@ -316,14 +345,14 @@ public class UserController {
             if (updatedUser.getBirthdate() != null) {
                 user.setBirthdate(updatedUser.getBirthdate());
             }
-            if (updatedUser.getCvFile() != null) {
-                user.setCvFile(updatedUser.getCvFile());
+            // if (updatedUser.getCvFile() != null) {
+            //     user.setCvFile(updatedUser.getCvFile());
+            // }
+            if (updatedUser.getProfilePhotoUrl() != null) {
+                user.setProfilePhotoUrl(updatedUser.getProfilePhotoUrl());
             }
-            if (updatedUser.getProfilePhoto() != null) {
-                user.setProfilePhoto(updatedUser.getProfilePhoto());
-            }
-            if (updatedUser.getCoverPhoto() != null) {
-                user.setCoverPhoto(updatedUser.getCoverPhoto());
+            if (updatedUser.getCoverPhotoUrl() != null) {
+                user.setCoverPhotoUrl(updatedUser.getCoverPhotoUrl());
             }
             if (updatedUser.getAbout() != null) {
                 user.setAbout(updatedUser.getAbout());
@@ -349,6 +378,35 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
         }
     }
+
+    // @PutMapping("/{email}/profile/files")
+    // public ResponseEntity<Boolean> updateUserFiles(@PathVariable String email, 
+    //                                 @RequestParam(value = "profilePhotoUrl", required = false) String profilePhotoUrl, 
+    //                                 @RequestParam(value = "coverPhotoUrl", required = false) String coverPhotoUrl, 
+    //                                 @RequestParam(value = "cvFile", required = false) MultipartFile cvFile) throws IOException {
+    //     Optional<User> userOptional = repository.findByEmail(email);
+    
+    //     if (userOptional.isPresent()) {
+    //         User user = userOptional.get();
+    
+    //         // Update profile photo URL if provided
+    //         if (profilePhotoUrl != null && !profilePhotoUrl.isEmpty()) {
+    //             user.setProfilePhotoUrl(profilePhotoUrl);
+    //         }
+    //         // Update cover photo URL if provided
+    //         if (coverPhotoUrl != null && !coverPhotoUrl.isEmpty()) {
+    //             user.setCoverPhotoUrl(coverPhotoUrl);
+    //         }
+    //         // Update CV file if provided
+    //         if (cvFile != null && !cvFile.isEmpty()) {
+    //             user.setCvFile(cvFile.getBytes());
+    //         }
+    //         repository.save(user);
+    //         return ResponseEntity.ok(true);
+    //     } else {
+    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
+    //     }
+    // }
 
     // Endpoint to get all contacts
     @GetMapping("/{email}/contacts")

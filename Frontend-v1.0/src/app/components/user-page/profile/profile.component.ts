@@ -52,6 +52,9 @@ export class ProfileComponent implements OnInit {
   educationDescription: string = ''; // Field for education description
   selectedSkills: string = '';  //this will change to string[] = []
   
+  profilePhotoFile: File | null = null;
+  coverPhotoFile: File | null = null;
+
   constructor(private userService: UserService, private router: Router) {} //Inject the UserService
 
   ngOnInit(): void {
@@ -88,6 +91,12 @@ export class ProfileComponent implements OnInit {
           this.selectedEducation = data.education;
           this.educationDescription = data.educationDescription;
           this.selectedSkills = data.skills;
+          if (data.coverPhotoUrl) {
+            this.coverPhotoUrl = data.coverPhotoUrl;
+          }
+          if (data.profilePhotoUrl) {
+            this.profilePhotoUrl = data.profilePhotoUrl;
+          }
           // Add any logic you want to execute after fetching the user profile
         },
         (error) => {
@@ -156,6 +165,66 @@ export class ProfileComponent implements OnInit {
   //this will change to access array of strings
   updateSkills(): void {
     this.updateUserProfile();
+  }
+  
+
+  onCoverPhotoSelected(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      this.coverPhotoFile = event.target.files[0];
+      if (this.coverPhotoFile) {
+        const coverPhotoFileName = this.coverPhotoFile.name;
+        this.coverPhotoUrl = `assets/database_photos/covers/${coverPhotoFileName}`;
+      }
+  
+      const updateData = {
+        coverPhotoUrl: this.coverPhotoUrl
+      };
+  
+      if (this.token) {
+        this.userService.updateUserProfile(this.token, updateData).subscribe(
+          (response) => {
+            console.log('User files updated successfully', response);
+            // Refresh the page
+            this.ngOnInit();
+          },
+          (error) => {
+            console.error('Error updating user files', error);
+          }
+        );
+      }
+    } else {
+      console.error('No cover photo selected');
+    }
+  }
+  
+  onProfilePhotoSelected(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      this.profilePhotoFile = event.target.files[0];
+      if (this.profilePhotoFile) {
+        const profilePhotoFileName = this.profilePhotoFile.name;
+        this.profilePhotoUrl = profilePhotoFileName;
+        this.profilePhotoUrl = `assets/database_photos/profiles/${profilePhotoFileName}`;
+      }
+  
+      const updateData = {
+        profilePhotoUrl: this.profilePhotoUrl
+      };
+  
+      if (this.token) {
+        this.userService.updateUserProfile(this.token, updateData).subscribe(
+          (response) => {
+            console.log('User files updated successfully', response);
+            // Refresh the page
+            this.ngOnInit();
+          },
+          (error) => {
+            console.error('Error updating user files', error);
+          }
+        );
+      }
+    } else {
+      console.error('No profile photo selected');
+    }
   }
 
 }

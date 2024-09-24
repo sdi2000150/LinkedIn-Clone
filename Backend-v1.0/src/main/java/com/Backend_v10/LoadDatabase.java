@@ -66,7 +66,7 @@ public class LoadDatabase {
   CommandLineRunner initDatabase(){
     return args -> {
 
-        // Create and save users first
+        // Create and save users firsT
         User admin1 = new User("teomor", "Theodoros", encoder.encode("1234"), "ROLE_ADMIN", "Moraitis", "teomor@email.com");
         User admin2 = new User("nickmosch", "Nikitas", encoder.encode("1234"), "ROLE_ADMIN", "Moschos", "nickmosch@email.com");
         User user1 = new User("bobross", "Bob", encoder.encode("1234"), "ROLE_USER", "Ross", "bobross@email.com");
@@ -172,12 +172,11 @@ public class LoadDatabase {
         // articleRepo.save(article1);
         // articleRepo.save(article2);
 
-
+        // Other tests:
 
         //userRepo.save(user2);
         //UserConnRepo.delete(conn);
 
-        // Other tests:
         List<String> Res = UserConnRepo.findUsersRequestingMe("jetlee@email.com");
         System.out.println(Res);
       };

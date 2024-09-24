@@ -21,7 +21,9 @@
         <h2>Users List</h2>
         <ul>
             <li *ngFor="let user of users">
-                {{ user.username }} - {{ user.email }}
+                <a [routerLink]="['../user-view', user.email]">{{ user.username }} - {{ user.email }}</a>
+                <button (click)="exportUserData(user, 'xml')">XML</button>
+                <button (click)="exportUserData(user, 'json')">JSON</button>
             </li>
         </ul>
     </section>

@@ -15,6 +15,7 @@ import { MessagingComponent } from './components/user-page/messaging/messaging.c
 import { ProfileViewComponent } from './components/user-page/profile-view/profile-view.component';
 import { MyContactsPostsComponent } from './components/user-page/my-contacts-posts/my-contacts-posts.component';
 import { MyPostsComponent } from './components/user-page/my-posts/my-posts.component';
+import { UserViewComponent } from './components/admin-page/user-view/user-view.component';
 
 import { authGuard } from './auth.guard';  // Import your guard
 
@@ -37,6 +38,7 @@ export const routes: Routes = [
   { path: 'user-page/my-posts', component: MyPostsComponent, canActivate: [authGuard] },
 
   { path: 'admin-page/users-list', component: UsersListComponent, canActivate: [authGuard] },
+  { path: 'admin-page/user-view/:email', component: UserViewComponent, canActivate: [authGuard] },
 
   
   { path: 'user-page', redirectTo: '/user-page/user-home' },

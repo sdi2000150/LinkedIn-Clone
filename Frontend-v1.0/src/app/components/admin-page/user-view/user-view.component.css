@@ -1,0 +1,239 @@
+/* General Styles */
+body {
+    background-color: #e0e0e0; /* Light grey background */
+    color: #333; /* Darker text color */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.6em;
+    margin: 0;
+    height: 100%;
+}
+.container {
+    display: flex;
+    width: 80%;
+    margin: 20px auto; /* Center the container */
+    background-color: #fff; /* White background for contrast */
+    padding: 20px; /* Padding inside the container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Slightly darker shadow */
+    border-radius: 8px; /* Rounded corners */
+}
+.logo img {
+    max-height: 40px;
+    width: auto;
+    margin-right: 5px; /* Reduce space between logo image and text */
+}
+/* Header Styles */
+#main-header {
+    background-color: #f9f9f9; /* Light grey background */
+    padding: 10px 0;
+    border-bottom: 1px solid rgb(220, 220, 220); /* Darker blue border */
+}
+
+#main-header h1 {
+    flex: 2; /* Grow to fill the available space (to center) */
+    text-align: center;
+    /* text-transform: uppercase; */
+    margin: 0;
+    font-size: 24px;
+}
+.form-group {
+    margin-left: auto; /* Pushes the form group to the right edge */
+}
+
+#logOut {
+    background-color: #460000; /* Darker blue */
+    color: #ffffff; /* White text color */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px;
+}
+
+#logOut:hover {
+    background-color: #000000; /* Even darker blue on hover */
+}
+
+/* Main Section Styles */
+#main {
+    width: 80%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#main h2 {
+    margin-top: 0;
+}
+
+/* Sidebar Styles */
+#sidebar {
+    width: 20%;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-left: auto;
+}
+#sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #00094a; /* Dark blue color */
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+
+#sidebar ul li a {
+    color: #000b4c; /* Dark blue color */
+    text-decoration: none;
+}
+
+#sidebar ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Clearfix */
+.container::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* extra */
+
+.container #main .profile-container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.container #main .profile-header {
+    position: relative;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.container #main .cover-photo img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.container #main .profile-info {
+    display: flex;
+    align-items: flex-start;
+    position: absolute;
+    top: 150px; /* Adjust based on the height of the cover photo */
+    left: 20px;
+    flex-direction: column;
+}
+
+.container #main .profile-picture {
+    margin-bottom: 10px;
+}
+
+.container #main .profile-picture img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+}
+
+.container #main .profile-picture h1 {
+    margin-top: 10px;
+    font-size: 30px;
+    color: #333;
+    text-align: center;
+}
+
+.container #main .user-info {
+    text-align: center;
+}
+
+
+
+.container #main .user-info button {
+    background-color: #0077B5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px 5px 50px 0; /* Add margin-right for spacing between buttons */
+    cursor: pointer;
+    border-radius: 4px;
+    position: relative; /* Ensure the button is positioned relative to its container */
+    left: -10px; 
+}
+
+.container #main .user-info button:hover {
+    background-color: #005f8d;
+}
+
+.container #main .profile-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.container #main .profile-section {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.container #main .profile-section h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #333;
+}
+
+.container #main .profile-section textarea,
+.container #main .profile-section input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.container #main .profile-section label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+}
+
+.container #main .profile-section label input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.container #main .skills-list {
+    list-style: none;
+    padding: 0;
+}
+
+.container #main .skills-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.container #main .skills-list li input[type="text"] {
+    flex: 1;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+}
