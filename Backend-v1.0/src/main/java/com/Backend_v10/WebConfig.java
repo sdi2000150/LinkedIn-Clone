@@ -11,7 +11,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override   //customize how CORS requests are handled by springboot
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("http://localhost:4200")  //allow CORS for all paths and for the angular frontend
+        //allow CORS for all paths and for the angular frontend (changed to https after the SSL/TLS integration)
+        registry.addMapping("/**").allowedOrigins("https://localhost:4200")
         //allow specific methods, all headers, and cookies/HTTP authentication files, to be sent too:
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
