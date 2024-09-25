@@ -16,7 +16,9 @@ const httpOptions = {
 })
 
 export class UserService {
-  private baseUrl = 'http://localhost:8080'; // base URL for backend springboot
+  // private baseUrl = 'http://localhost:8080'; // base URL for backend springboot
+  private baseUrl = 'https://localhost:8443'; // base URL for backend springboot (updated SSL/TLS secured)
+
 
   constructor(private http: HttpClient) { }
 
