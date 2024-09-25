@@ -31,6 +31,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -90,7 +91,7 @@ public class User {
     @JsonIgnore
     private List<User> myContacts;
 
-    @ManyToMany
+    @ManyToMany( fetch = FetchType.EAGER)
     @JoinTable(
         name = "User_Likes",
         joinColumns = @JoinColumn(name = "user_id"),

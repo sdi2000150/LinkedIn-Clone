@@ -20,6 +20,7 @@ import com.Backend_v10.UserConnection.UserConnection;
 import com.Backend_v10.UserConnection.UserConnectionRepository;
 import com.Backend_v10.Jobs.Job;
 import com.Backend_v10.Jobs.JobRepository;
+import com.Backend_v10.RecommendationSystem.RecommendationSystem;
 
 
 
@@ -94,6 +95,8 @@ public class LoadDatabase {
         // Add a delay of 1 second (1000 milliseconds)
         Thread.sleep(1000);
         Article article2 = new Article("Just got my Second Job!!", null);
+        Article article3 = new Article("Third Job SOOO EXCITING!!", null);
+
         Job job1 = new Job("Full Stack Developer", true, "Java, Spring, Angular", 0, true);
         Job job2 = new Job("In need of a Data Analyst", false, "MS Office, Python", 850, false);
         Job job3 = new Job("HR Manager", true, "Communication skills, MBA Masters", 1300, true);
@@ -101,6 +104,8 @@ public class LoadDatabase {
         // Save articles and jobs to the repository
         articleRepo.save(article1);
         articleRepo.save(article2);
+        articleRepo.save(article3);
+
         jobRepo.save(job1);
         jobRepo.save(job2);
         jobRepo.save(job3);
@@ -176,9 +181,25 @@ public class LoadDatabase {
 
         //userRepo.save(user2);
         //UserConnRepo.delete(conn);
+        System.out.println("check1");
+        System.out.println(admin1.getLikedArticles().size());
+        System.out.println("check2");
 
         List<String> Res = UserConnRepo.findUsersRequestingMe("jetlee@email.com");
         System.out.println(Res);
+
+
+
+        //Testing Recommendation System
+        RecommendationSystem R = new RecommendationSystem(5, 10);
+        R.UpdateArticleRecommendationMatrix(userRepo.findAll(), articleRepo.findAll());
+
+
+        //Testing Results 
+
+        List<Long> res = R.RecommendArticles(user6);
+        System.out.println("RESULTS FOR USER:  " + res.toString());
+
       };
   }
 }
