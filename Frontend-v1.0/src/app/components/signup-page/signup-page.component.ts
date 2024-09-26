@@ -68,13 +68,19 @@ export class SignupPageComponent {
 
       // Use UserService to send a signup request
       this.userService.signup(user).subscribe(
-        (response: string) => {
-          console.log('User added successfully', response);
-          this.msgSuccess = 'Signup successful! Redirecting to login...';
-          setTimeout(() => {
-            this.msgError = '';
-            this.router.navigate(['../login-page']);  // Redirect to login page
-          }, 2000);
+        (response: boolean) => {
+          if (response) {
+            console.log('User added successfully', response);
+            this.msgSuccess = 'Signup successful! Redirecting to login...';
+            setTimeout(() => {
+              this.msgError = '';
+              this.router.navigate(['../login-page']);  // Redirect to login page
+            }, 2000);
+          } else {
+            console.error('Error adding user: email already in use', response);
+            this.msgError = 'Signup failed! Please try again with another email.';
+            setTimeout(() => this.msgError = '', 3000);  // Clear the message after 3 seconds
+          }
         },
         (error) => {
           console.error('Error adding user', error);
