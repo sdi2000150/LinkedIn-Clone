@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import jakarta.transaction.Transactional;
+
 @Repository
 public interface UserConnectionRepository extends JpaRepository<UserConnection,Long>{
 
@@ -29,5 +31,14 @@ public interface UserConnectionRepository extends JpaRepository<UserConnection,L
     Long FindIdFromEmails(String myemail, String useremail); 
 
 
+    @Transactional
+    @Modifying
+    @Query(value = "update user_connection  SET user1 = ?2 where user1 = ?1", nativeQuery = true)
+    void ChangeUsers1WithEmail(String OldEmail, String NewEmail); 
+
+    @Transactional
+    @Modifying
+    @Query(value = "update user_connection  SET user2 = ?2 where user2 = ?1", nativeQuery = true)
+    void ChangeUsers2WithEmail(String OldEmail, String NewEmail); 
 
 }

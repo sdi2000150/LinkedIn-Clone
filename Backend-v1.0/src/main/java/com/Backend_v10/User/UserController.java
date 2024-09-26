@@ -13,6 +13,7 @@ import com.Backend_v10.Comments.Comment;
 import com.Backend_v10.Comments.CommentRepository;
 
 import ch.qos.logback.core.model.processor.PhaseIndicator;
+import jakarta.transaction.Transactional;
 
 import com.Backend_v10.JobApplication.JobApplication;
 import com.Backend_v10.JobApplication.JobApplicationRepository;
@@ -331,6 +332,7 @@ public class UserController {
 
 
     //Change Email and Password 
+    @Transactional
     @PutMapping("/ChangeEmailPassword/{email}")
     public ResponseEntity<Boolean> UpdateEmailPassword(@PathVariable String email, @RequestBody Map<String, Object> json){
         
@@ -341,8 +343,15 @@ public class UserController {
                 String NewEmail = (String) json.get("NewEmail");
 
         if(this.encoder.matches(OldPassword, u.get().getPassword()) == true){
-            if( NewEmail.equals("") == false)
+            if( NewEmail.equals("") == false){
+                
                 u.get().setEmail(NewEmail);
+                
+                //Replace emails in Requests Table
+                this.ConnectionRepo.ChangeUsers1WithEmail(email, NewEmail);
+                this.ConnectionRepo.ChangeUsers2WithEmail(email, NewEmail);
+
+            }
             if( NewPassword.equals("") == false)
                 u.get().setPassword(this.encoder.encode(NewPassword));
             this.repository.save(u.get());
