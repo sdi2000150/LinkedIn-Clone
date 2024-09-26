@@ -42,14 +42,13 @@ export class UserService {
     return this.http.post<boolean>(`${this.baseUrl}/user/create_job/${email}`, jobOffer, { headers });
   }
 
-  createArticle(token: string, article: any): Observable<boolean> {
+  createArticle(token: string, article: any): Observable<number> {
 
     const email = this.extractEmailFromToken(token);
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
-      // 'Content-Type': 'application/json'
     });
-    return this.http.post<boolean>(`${this.baseUrl}/user/create_article/${email}`, article, { headers });
+    return this.http.post<number>(`${this.baseUrl}/user/create_article/${email}`, article, { headers });
   }
 
   //////////////////////// ADMIN METHODS ////////////////////////
@@ -446,16 +445,79 @@ export class UserService {
     return this.http.get<any[]>(`${this.baseUrl}/job/${jobId}/jobapplications`, { headers });
   }
 
-  updateUserPhoto(token:string, formData: FormData): Observable<any> {
+  updateProfilePhoto(token:string, formData: FormData): Observable<any> {
     const email = this.extractEmailFromToken(token);
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
       // 'Content-Type': 'application/json'
     });
-    return this.http.post<any>(`${this.baseUrl}/user/uploadPhoto`, formData, { headers });
-
+    return this.http.post<any>(`${this.baseUrl}/user/${email}/uploadProfilePhoto`, formData, { headers });
   }
-  // applyToJob(userId: number, jobId: number): Observable<any> {
-  //   return this.http.post(`${this.baseUrl}/user/${userId}/apply/${jobId}`, {});
-  // }
+
+  updateCoverPhoto(token:string, formData: FormData): Observable<any> {
+    const email = this.extractEmailFromToken(token);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+      // 'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(`${this.baseUrl}/user/${email}/uploadCoverPhoto`, formData, { headers });
+  }
+
+  updateCV(token:string, formData: FormData): Observable<any> {
+    const email = this.extractEmailFromToken(token);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+      // 'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(`${this.baseUrl}/user/${email}/uploadCVFile`, formData, { headers });
+  }
+
+  updateArticlePhoto(token:string, formData: FormData, articleID: number): Observable<any> {
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+      // 'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(`${this.baseUrl}/article/${articleID}/uploadPhoto`, formData, { headers });
+  }
+
+  downloadProfilePhoto(token: string, email: string): Observable<any> {
+    let useremail: string | null = email;
+    if (useremail === '') { //if not given email, get the current user's email
+      useremail = this.extractEmailFromToken(token);
+    }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.baseUrl}/user/${useremail}/downloadProfilePhoto`, { headers, responseType: 'blob' });
+  }
+
+  downloadCoverPhoto(token: string, email: string): Observable<any> {
+    let useremail: string | null = email;
+    if (useremail === '') { //if not given email, get the current user's email
+      useremail = this.extractEmailFromToken(token);
+    }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.baseUrl}/user/${useremail}/downloadCoverPhoto`, { headers, responseType: 'blob' });
+  }
+
+  downloadCV(token: string, email: string): Observable<any> {
+    let useremail: string | null = email;
+    if (useremail === '') { //if not given email, get the current user's email
+      useremail = this.extractEmailFromToken(token);
+    }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.baseUrl}/user/${useremail}/downloadCVFile`, { headers, responseType: 'blob' });
+  }
+
+  downloadArticlePhoto(token: string, articleId: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.baseUrl}/article/${articleId}/downloadPhoto`, { headers, responseType: 'blob' });
+  }
 }

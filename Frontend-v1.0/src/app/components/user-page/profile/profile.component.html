@@ -34,10 +34,16 @@
                 <label>Birthdate: {{ Birthdate }}</label>
               </li>
             </ul>
-          </div>
-          <div class="profile-section">
+        </div>
+        <div class="profile-section">
             <h2>About</h2>
             <textarea [(ngModel)]="about" placeholder="Enter your professional summary..." (change)="updateAbout()"></textarea>
+        </div>
+        <div class="profile-section">
+            <h2>My CV</h2>
+            <p id="cvfilep">{{ CVfile }}</p>
+            <input type="file" id="cv-media-upload" accept=".pdf" (change)="onCVSelected($event)">
+            <button (click)="downloadCV()">Download CV</button>
         </div>
         <div class="profile-section">
             <h2>Experience</h2>

@@ -15,10 +15,10 @@ import { Router } from '@angular/router';
 export class UserHomeComponent implements OnInit {
   articles: any[] = []; // Store articles of the user
   Text: string = '';
-  //Photo on backend is type: byte[], so here:
-  Photo: ArrayBuffer | null = null;
   msgError: string = '';
   msgSuccess: string = '';
+
+  articlePhotoFile: File | null = null;
 
   token: string | null = null; // Store token from localStorage
 
@@ -58,27 +58,46 @@ export class UserHomeComponent implements OnInit {
       console.error('No token found');
     }
   }
+  
+  formData = new FormData();
+
+  onArticlePhotoSelected(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      this.articlePhotoFile = event.target.files[0];
+
+      // const formData = new FormData();
+      if(this.articlePhotoFile) {
+        this.formData.append('image', this.articlePhotoFile);
+      }
+    } else {
+      console.error('No profile photo selected');
+    }
+  }
 
   createArticle(): void {
     const newArticle = {
-      text: this.Text,
-      photo: this.Photo
+      text: this.Text
     };
 
     if (this.token) {
       this.userService.createArticle(this.token, newArticle).subscribe(
-        (response) => {
-          if (response) {
+        (response: number) => {
+            if (this.token && this.formData.has('image')) {
+              this.userService.updateArticlePhoto(this.token, this.formData, response).subscribe(
+                (updateResponse) => {
+                  console.log('Photo uploaded successfully');
+                  this.formData = new FormData(); // Clear formData after use
+                },
+                (updateError) => {
+                  console.error('Error uploading photo', updateError);
+                }
+              );
+            }
             console.log(newArticle);
             this.msgSuccess = 'Article posted successfully!';
             setTimeout(() => this.msgSuccess = '', 3000);
             this.fetchUserData();
             this.Text = '';
-            this.Photo = null;
-          } else {
-            this.msgError = 'Failed to post article. Please try again.';
-            setTimeout(() => this.msgError = '', 3000);
-          }
         },
         (error) => {
           this.msgError = 'Failed to post article. Please try again.';

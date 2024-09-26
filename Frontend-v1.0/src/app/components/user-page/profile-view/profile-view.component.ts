@@ -26,6 +26,8 @@ export class ProfileViewComponent implements OnInit {
   Phone: string = 'Empty'; //Placeholder for the user's phone number
   Birthdate: string = 'Empty'; //Placeholder for the user's birthdate
 
+  CVfile: string = 'No CV available for download'; //Placeholder for the user's CV file
+
   token: string | null = null; // Store token from localStorage
 
   coverPhotoUrl: string = 'assets/images/placeholder-cover.jpg'; // Default cover photo URL
@@ -119,13 +121,41 @@ export class ProfileViewComponent implements OnInit {
             this.selectedEducation = data.education;
             this.educationDescription = data.educationDescription;
             this.selectedSkills = data.skills;
+            if (data.cvFileUrl) {
+              // Just show a different text on top of the CV upload
+              this.CVfile = "Download the user's CV file:";
+            }
             if (data.coverPhotoUrl) {
-              this.coverPhotoUrl = data.coverPhotoUrl;
+              this.userService.downloadCoverPhoto(token, this.Email).subscribe(
+                (response) => {
+                  // Convert the image to base64
+                  const reader = new FileReader();
+                  reader.readAsDataURL(response);
+                  reader.onloadend = () => {
+                    this.coverPhotoUrl = reader.result as string;
+                  };
+                },
+                (error) => {
+                  console.error('Error fetching cover photo', error);
+                }
+              );
             }
             if (data.profilePhotoUrl) {
-              this.profilePhotoUrl = data.profilePhotoUrl;
+              this.userService.downloadProfilePhoto(token, this.Email).subscribe(
+                (response) => {
+                  // Convert the image to base64
+                  const reader = new FileReader();
+                  reader.readAsDataURL(response);
+                  reader.onloadend = () => {
+                    this.profilePhotoUrl = reader.result as string;
+                  };
+                },
+                (error) => {
+                  console.error('Error fetching profile photo', error);
+                }
+              );
             }
-            // Add any logic you want to execute after fetching the user profile
+
           },
           (error) => {
             console.error('Error fetching user data: userdata', error);
@@ -181,6 +211,33 @@ export class ProfileViewComponent implements OnInit {
         // or...do something fancy!
         console.log('Secret button!🤫');
         this.playSound();
+      }
+    }
+  }
+
+  downloadCV(): void {
+    if (this.CVfile === 'No CV available for download') {
+      console.log("No CV available for download");
+    } else {
+      if (this.token) {
+          this.userService.downloadCV(this.token, this.Email).subscribe(
+              (response) => {
+                  // Create a URL for the response blob
+                  const url = window.URL.createObjectURL(response);
+                  // Create an anchor element, which will be used to download the file
+                  const a = document.createElement('a');
+                  a.href = url;
+                  // Set the download attribute to the file name
+                  a.download = 'CV.pdf';
+                  // Simulate a click on the anchor element
+                  a.click();
+                  // Revoke the URL to prevent memory leaks(?)
+                  window.URL.revokeObjectURL(url);
+              },
+              (error) => {
+                  console.error('Error fetching CV file', error);
+              }
+          );
       }
     }
   }

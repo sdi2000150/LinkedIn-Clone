@@ -39,6 +39,9 @@ export class MyPostsComponent implements OnInit {
       this.userService.getMyArticles(this.token).subscribe(
         (data) => {
           this.articles = data;
+          this.articles.forEach(article => {
+            this.loadArticlePhoto(article);
+          });
           console.log('Contact articles fetched successfully', this.articles);
         },
         (error) => {
@@ -48,6 +51,28 @@ export class MyPostsComponent implements OnInit {
     } else {
       // If no token found, redirect to login page
       this.router.navigate(['../../login-page']);
+    }
+  }
+
+  loadArticlePhoto(article: any): void {
+    if (this.token) {
+      if (article.photoUrl) {
+        this.userService.downloadArticlePhoto(this.token, article.articleID).subscribe(
+          (blob) => {
+            // Convert the image to base64
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = () => {
+              article.photoUrl = reader.result as string;
+            };
+            // const url = URL.createObjectURL(blob);
+            // article.photoUrl = url;
+          },
+          (error) => {
+            console.error('Error fetching article photo', error);
+          }
+        );
+      }
     }
   }
 

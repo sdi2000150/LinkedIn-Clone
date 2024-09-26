@@ -51,6 +51,11 @@
                     <p>{{ about }}</p>
                 </div>
                 <div class="profile-section">
+                    <h2>My CV</h2>
+                    <p id="cvfilep">{{ CVfile }}</p>
+                    <button (click)="downloadCV()">Download CV</button>
+                </div>
+                <div class="profile-section">
                     <h2>Experience</h2>
                     <p>{{ selectedExperience }}</p>
                     <p>{{ experienceDescription }}</p>

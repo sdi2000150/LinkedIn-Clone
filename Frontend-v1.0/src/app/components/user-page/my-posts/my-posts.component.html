@@ -15,7 +15,7 @@
                     <span class="text-muted" style="font-size: 0.8em; font-weight: normal;">{{ article.dateTime_of_Creation | date:'short' }}</span>
                 </h4> 
                 <p>{{ article.text }}</p>
-                <p>[Image]</p>
+                <img *ngIf="article.photoUrl" [src]="article.photoUrl" alt="Article Image"  class="article-image"/>
                 <div class="post-info">
                     <div class="likes">
                         <span>{{ article.likedByUsers.length }} Like(s)</span>
