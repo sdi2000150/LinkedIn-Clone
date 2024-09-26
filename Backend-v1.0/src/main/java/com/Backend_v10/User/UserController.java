@@ -53,7 +53,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import java.nio.file.Path;
@@ -71,6 +71,9 @@ public class UserController {
     private final JobApplicationRepository JobAppRepo;
     private final JobRepository JobRepo;
     private final PasswordEncoder encoder;
+
+    @Value("${file.upload-dir}")
+    private String uploadDir;
 
     UserController(PasswordEncoder encoder, ArticleRepository articleRepo, JobRepository jobRepo, JobApplicationRepository jobApprepo, UserRepository repository, UserConnectionRepository UconnRepo, UserService service, CommentRepository commRepo){
         this.repository = repository;
@@ -634,7 +637,7 @@ public class UserController {
         }
 
 
-        Path path = Paths.get("C:\\Users\\user\\Desktop\\PhotosData");
+        Path path = Paths.get(uploadDir);
         // Ensure the directory exists or create it
         if (!Files.exists(path)) {
             Files.createDirectories(path);
