@@ -229,6 +229,11 @@ public class UserController {
         
     }
 
+    @GetMapping("/DeleteConnection/{myemail}/{useremail}")
+    public void DeleteConnection(@PathVariable String myemail, @PathVariable String useremail){
+        this.service.DeleteConnection(myemail,useremail);
+    }
+
 
     // Get profile-view of a user
     @GetMapping("/view-profile/{email}")

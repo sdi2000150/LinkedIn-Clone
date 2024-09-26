@@ -148,6 +148,18 @@ public class UserService {
     }   
 
 
+    @Transactional
+    public void  DeleteConnection(String email1, String email2){
+        Optional<User> u1 = this.userRepo.findByEmail(email1);
+        Optional<User> u2 = this.userRepo.findByEmail(email2);
+        System.out.println("CHECKKK" + u1.get().getMyContacts().size());
+        u1.get().getMyContacts().remove(u2.get());
+        u2.get().getMyContacts().remove(u1.get());
+
+
+    }
+
+
     //Find What Kind of Connection relates 2 Users
     @Transactional
     public String Identify_Connection(String Myemail,String Useremail){
