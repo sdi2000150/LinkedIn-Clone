@@ -646,17 +646,16 @@ public class UserController {
         }
 
         // Get the original file name (consider using a unique name to avoid conflicts)
-        String originalFileName = email;
-        String total_path = uploadDir + originalFileName + "Profile";
+        Optional<User> u = this.repository.findByEmail(email);
+        String originalFileName = u.get().getUserID() + "Profile" + ".jpg";
         // Resolve the file path (directory + file name)
-        Path filePath = path.resolve(total_path);
+        Path filePath = path.resolve(originalFileName);
         // Save the file to the local file system
         Files.write(filePath, imageFile.getBytes());
         System.out.println("File uploaded successfully");
 
         //Save path in User Entity 
-        Optional<User> u = this.repository.findByEmail(email);
-        u.get().setProfilePhotoUrl(total_path);
+        u.get().setProfilePhotoUrl(originalFileName);
         this.repository.save(u.get());
 
        }
@@ -685,7 +684,7 @@ public class UserController {
 
         Optional<User> u = this.repository.findByEmail(email);
         // Get the original file name (consider using a unique name to avoid conflicts)
-        String originalFileName = u.get().getUserID() + "Cover";   // ---> IDCover
+        String originalFileName = u.get().getUserID() + "Cover" + ".jpg";   // ---> IDCover
         // Resolve the file path (directory + file name)
         Path filePath = path.resolve(originalFileName);               
         // Save the file to the local file system
@@ -707,11 +706,39 @@ public class UserController {
 
 
 
-    @GetMapping("/downloadPhoto")
-    public ResponseEntity<Resource> DownloadPhoto() {
+    @GetMapping("/{email}/downloadProfilePhoto")
+    public ResponseEntity<Resource> DownloadProfilePhoto(@PathVariable String email) {
+        Optional<User> u = this.repository.findByEmail(email);
+        
         try {
             // Build the path to the image
-            Path path = Paths.get(uploadDir).resolve("Aristocats-cat-names-hit-cat.png");
+            String originalFileName = u.get().getUserID() + "Profile" + ".jpg";
+
+            Path path = Paths.get(uploadDir).resolve(originalFileName);
+            Resource resource = new UrlResource(path.toUri());
+    
+            if (resource.exists() && resource.isReadable()) {
+                // Return the image with appropriate headers
+                return ResponseEntity.ok()
+                        // .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename="" + resource.getFilename() + """)
+                        .body(resource);
+            } else {
+                throw new RuntimeException("File not found or not readable");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/{email}/downloadCoverPhoto")
+    public ResponseEntity<Resource> DownloadCoverPhoto(@PathVariable String email) {
+        Optional<User> u = this.repository.findByEmail(email);
+        
+        try {
+            // Build the path to the image
+            String originalFileName = u.get().getUserID() + "Cover" + ".jpg";
+
+            Path path = Paths.get(uploadDir).resolve(originalFileName);
             Resource resource = new UrlResource(path.toUri());
     
             if (resource.exists() && resource.isReadable()) {
