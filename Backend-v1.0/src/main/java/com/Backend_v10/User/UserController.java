@@ -13,6 +13,8 @@ import com.Backend_v10.Comments.Comment;
 import com.Backend_v10.Comments.CommentRepository;
 
 import ch.qos.logback.core.model.processor.PhaseIndicator;
+import ch.qos.logback.core.util.StringUtil;
+import io.micrometer.common.util.StringUtils;
 import jakarta.transaction.Transactional;
 
 import com.Backend_v10.JobApplication.JobApplication;
@@ -24,6 +26,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +39,8 @@ import java.util.Set;
 import java.util.jar.Attributes.Name;
 import java.util.stream.Collectors;
 
+import org.apache.tomcat.util.file.ConfigurationSource.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -613,7 +620,29 @@ public class UserController {
         return true;
     }
 
- 
+    //----------Photos and Files -------------//
+
+    @PostMapping("/uploadPhoto")
+    public Boolean UploadPhoto(@RequestParam("image") MultipartFile imageFile){
+        //String path ="c:/UNI2/Web/Photos";
+       try{
+        if(imageFile.isEmpty() == true)
+            return false;
+
+        //String Filename = "C:\UNI2\"
+
+        Path path = Paths.get("aaaa");
+        Files.createDirectories(path.getParent());
+
+       //Resource resource = new UrlResource(path.toUri());
+        Files.write(path, imageFile.getBytes());
+       }
+       catch(IOException e){
+        return false;
+       }
+
+        return true;
+    }
 
     // @GetMapping("/request_{from}")
     // public void sendConnectionRequest(@RequestParam String send_to, @PathVariable String from) {
