@@ -23,8 +23,8 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   
-  signup(user: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/auth/addNewUser`, user, { responseType: 'text' }); // The backend returns as a plain string a "User Added Successfully"
+  signup(user: any): Observable<boolean> {
+    return this.http.post<boolean>(`${this.baseUrl}/auth/addNewUser`, user); // The backend returns as a plain string a "User Added Successfully"
   }
 
   login(authRequest: any): Observable<any> {
