@@ -182,7 +182,7 @@ public class UserController {
 
 
     @PostMapping("/create_article/{owner_email}")
-    public boolean CreateArticle(@RequestBody Article newArticle, @PathVariable String owner_email){
+    public Long CreateArticle(@RequestBody Article newArticle, @PathVariable String owner_email){
 
         System.out.println("HERE "+newArticle.getText());
         Optional<User> u = this.repository.findByEmail(owner_email);
@@ -196,10 +196,13 @@ public class UserController {
         //j.set
        // this.repository.save(u.get());
 
-        this.service.addArticle(u.get(), newArticle);
+        return this.service.addArticle(u.get(), newArticle);
+
+    
+
+
         //this.repository.save(newJob);
         // return true;
-        return true;
     }
 
 

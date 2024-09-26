@@ -47,7 +47,7 @@ public class Article {
     String Text;
 
     @Lob    // Large Object
-    byte[] Photo;
+    String PhotoUrl;
     
     LocalDateTime DateTime_of_Creation;
 
@@ -74,14 +74,14 @@ public class Article {
 
     public Article(String text) {
         this.Text = text;
-        this.Photo = null;
+        this.PhotoUrl = null;
         this.ArticleComments = new ArrayList<>();
         this.DateTime_of_Creation = LocalDateTime.now();
         this.likedByUsers = new ArrayList<>();
     }
-    public Article( String text,byte[] photo){
+    public Article( String text,String photo){
         this.Text = text;
-        this.Photo = photo;
+        this.PhotoUrl = photo;
         this.ArticleComments = new ArrayList<>();
         this.DateTime_of_Creation = LocalDateTime.now();
         this.likedByUsers = new ArrayList<>();
@@ -101,7 +101,7 @@ public class Article {
     }
     @Override
     public String toString() {
-        return "Article [articleID=" + articleID + ", Text=" + Text + ", Photo=" + Arrays.toString(Photo)
+        return "Article [articleID=" + articleID + ", Text=" + Text + ", Photo=" + PhotoUrl
                 + ", DateTime_of_Creation=" + DateTime_of_Creation + ", Owner=" + Owner + "]";
     }
 

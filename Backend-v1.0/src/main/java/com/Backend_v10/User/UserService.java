@@ -48,12 +48,14 @@ public class UserService {
     private UserConnectionRepository ConnRepo;
 
     @Transactional
-    public void addArticle(User user, Article newArticle) {
+    public Long addArticle(User user, Article newArticle) {
         User userlocal = userRepo.findByEmail(user.getEmail()).get();
         userlocal.addArticle(newArticle);
         newArticle.setDateTime_of_Creation(LocalDateTime.now());
         newArticle.setOwner(user);
         userRepo.save(userlocal);
+        int just_added_article = userlocal.getMyArticles().size() - 1;
+        return userlocal.getMyArticles().get(just_added_article).getArticleID();
     }
     //maybe add save on article entity!!!!
 
