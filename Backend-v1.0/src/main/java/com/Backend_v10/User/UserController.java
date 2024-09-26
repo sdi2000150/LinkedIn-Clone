@@ -664,7 +664,7 @@ public class UserController {
     public ResponseEntity<Resource> DownloadPhoto() {
         try {
             // Build the path to the image
-            Path path = Paths.get("C:\\Users\\user\\Desktop\\PhotosData").resolve("Aristocats-cat-names-hit-cat.png");
+            Path path = Paths.get(uploadDir).resolve("Aristocats-cat-names-hit-cat.png");
             Resource resource = new UrlResource(path.toUri());
     
             if (resource.exists() && resource.isReadable()) {
