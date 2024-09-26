@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table (name = "JobApplications")
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"user", "job"})
+@JsonIgnoreProperties({"job"})
 public class JobApplication {
 
     @Id

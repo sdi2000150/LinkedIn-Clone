@@ -33,9 +33,9 @@ public class JobController {
         this.JobAppRepo = jobAppRepo;
     }
 
-    @GetMapping("{id}/jobapplications")
-    public List<JobApplication> GetJobApplications(@PathVariable String id) {
-        Optional<Job> a = this.repository.findById(Long.parseLong(id));
+    @GetMapping("{job_id}/jobapplications")
+    public List<JobApplication> GetJobApplications(@PathVariable String job_id) {
+        Optional<Job> a = this.repository.findById(Long.parseLong(job_id));
         //unwrap Optional with .get
         List<JobApplication>  jobApplications = a.get().getJobApplications();
         return jobApplications;

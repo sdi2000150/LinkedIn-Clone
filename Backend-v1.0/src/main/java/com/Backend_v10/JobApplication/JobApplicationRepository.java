@@ -14,4 +14,15 @@ public interface JobApplicationRepository extends JpaRepository<JobApplication,L
     @Modifying
     @Query(value = "delete from job_applications ja where ja.job_id = ?1",nativeQuery = true)
     void DeleteApplicationsOfJob(@Param("id") Long id);
+
+
+    @Transactional
+    @Modifying
+    @Query(value = "delete from job_applications ja where ja.job_id = ?1 and ja.user_id = ?2",nativeQuery = true)
+    void DeleteApplicationsOfJobWithUserID(@Param("job_id") Long job_id, @Param("user_id") Long user_id);
+
+
+    @Query(value = "select * from job_applications ja where ja.job_id = ?1 and ja.user_id = ?2",nativeQuery = true)
+    JobApplication GetApplicationOfJobWithUserID(@Param("job_id") Long job_id, @Param("user_id") Long user_id);
+
 }
