@@ -4,11 +4,13 @@ import { UserService } from '../../../services/user-service/user.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common'; // Import CommonModule (for NgFor... usage on the HTML)
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-jobs',
   standalone: true,
-  imports: [NavbarComponent, CommonModule, FormsModule],
+  imports: [NavbarComponent, CommonModule, FormsModule, RouterModule],
   templateUrl: './jobs.component.html',
   styleUrl: './jobs.component.css'
 })
@@ -30,6 +32,9 @@ export class JobsComponent {
   fulltime: string = 'Empty'; // Store the job type
 
   token: string | null = null; // Store token from localStorage
+
+  jobApplications: { [key: number]: any[] } = {}; // Store job applications for each job
+
 
   constructor(private userService: UserService, private router: Router) {} //Inject the UserService
 
@@ -195,4 +200,18 @@ export class JobsComponent {
     }
   }
 
+
+  fetchJobApplications(jobId: number): void {
+    if (this.token) {
+      this.userService.getJobApplications(this.token, jobId).subscribe(
+        (applications) => {
+          this.jobApplications[jobId] = applications;
+        },
+        (error) => {
+          console.error('Error fetching job applications', error);
+        }
+      );
+    }
+  }
+  
 }

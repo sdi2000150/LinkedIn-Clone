@@ -171,17 +171,21 @@ export class ProfileComponent implements OnInit {
   onCoverPhotoSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
       this.coverPhotoFile = event.target.files[0];
+      // if (this.coverPhotoFile) {
+      //   const coverPhotoFileName = this.coverPhotoFile.name;
+      //   this.coverPhotoUrl = `assets/database_photos/covers/${coverPhotoFileName}`;
+      // }
+  
+      // const updateData = {
+      //   coverPhotoUrl: this.coverPhotoUrl
+      // };
+      const formData = new FormData();
       if (this.coverPhotoFile) {
-        const coverPhotoFileName = this.coverPhotoFile.name;
-        this.coverPhotoUrl = `assets/database_photos/covers/${coverPhotoFileName}`;
+        formData.append('image', this.coverPhotoFile);
       }
   
-      const updateData = {
-        coverPhotoUrl: this.coverPhotoUrl
-      };
-  
       if (this.token) {
-        this.userService.updateUserProfile(this.token, updateData).subscribe(
+        this.userService.updateUserPhoto(this.token, formData).subscribe(
           (response) => {
             console.log('User files updated successfully', response);
             // Refresh the page
@@ -200,18 +204,23 @@ export class ProfileComponent implements OnInit {
   onProfilePhotoSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
       this.profilePhotoFile = event.target.files[0];
-      if (this.profilePhotoFile) {
-        const profilePhotoFileName = this.profilePhotoFile.name;
-        this.profilePhotoUrl = profilePhotoFileName;
-        this.profilePhotoUrl = `assets/database_photos/profiles/${profilePhotoFileName}`;
-      }
+      // if (this.profilePhotoFile) {
+      //   const profilePhotoFileName = this.profilePhotoFile.name;
+      //   this.profilePhotoUrl = profilePhotoFileName;
+      //   this.profilePhotoUrl = `assets/database_photos/profiles/${profilePhotoFileName}`;
+      // }
   
-      const updateData = {
-        profilePhotoUrl: this.profilePhotoUrl
-      };
+      // const updateData = {
+      //   profilePhotoUrl: this.profilePhotoUrl
+      // };
+      const formData = new FormData();
+      if(this.profilePhotoFile) {
+        formData.append('image', this.profilePhotoFile);
+      }
+
   
       if (this.token) {
-        this.userService.updateUserProfile(this.token, updateData).subscribe(
+        this.userService.updateUserPhoto(this.token, formData).subscribe(
           (response) => {
             console.log('User files updated successfully', response);
             // Refresh the page

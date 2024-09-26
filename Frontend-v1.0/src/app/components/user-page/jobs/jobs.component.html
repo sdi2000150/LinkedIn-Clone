@@ -15,6 +15,17 @@
                 <p *ngIf="!job.fullTime">Part-time</p>
                 <p *ngIf="job.salary != '0'">Salary: {{ job.salary }}€</p>
                 <button (click)="deleteJobOffer(job.jobID)">Delete Job Offer</button>
+                <button (click)="fetchJobApplications(job.jobID)">View Applicants</button>
+                <div *ngIf="jobApplications[job.jobID]">
+                    <h4>Applicants:</h4>
+                    <ul>
+                        <li *ngFor="let applicant of jobApplications[job.jobID]">
+                            <a [routerLink]="['/user-page/profile-view', applicant.user.email]">
+                                {{ applicant.user.name }} {{ applicant.user.lastname }} ({{ applicant.user.email }})
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </ul>
     </div>

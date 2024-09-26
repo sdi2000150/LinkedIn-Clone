@@ -39,7 +39,7 @@ import java.util.Set;
 import java.util.jar.Attributes.Name;
 import java.util.stream.Collectors;
 
-import org.apache.tomcat.util.file.ConfigurationSource.Resource;
+// import org.apache.tomcat.util.file.ConfigurationSource.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -54,7 +54,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
-
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @CrossOrigin(origins = "https://localhost:4200")
 @RestController
@@ -624,24 +627,54 @@ public class UserController {
 
     @PostMapping("/uploadPhoto")
     public Boolean UploadPhoto(@RequestParam("image") MultipartFile imageFile){
-        //String path ="c:/UNI2/Web/Photos";
        try{
-        if(imageFile.isEmpty() == true)
+        if(imageFile.isEmpty() == true) {
+            System.out.println("EMPTY FILE");
             return false;
+        }
 
-        //String Filename = "C:\UNI2\"
 
-        Path path = Paths.get("aaaa");
-        Files.createDirectories(path.getParent());
+        Path path = Paths.get("C:\\Users\\user\\Desktop\\PhotosData");
+        // Ensure the directory exists or create it
+        if (!Files.exists(path)) {
+            Files.createDirectories(path);
+        }
 
-       //Resource resource = new UrlResource(path.toUri());
-        Files.write(path, imageFile.getBytes());
+        // Get the original file name (consider using a unique name to avoid conflicts)
+        String originalFileName = imageFile.getOriginalFilename();
+        // Resolve the file path (directory + file name)
+        Path filePath = path.resolve(originalFileName);
+        // Save the file to the local file system
+        Files.write(filePath, imageFile.getBytes());
+        System.out.println("File uploaded successfully");
        }
        catch(IOException e){
+        System.out.println("IOException uploading file");
         return false;
        }
 
         return true;
+    }
+
+
+    @GetMapping("/downloadPhoto")
+    public ResponseEntity<Resource> DownloadPhoto() {
+        try {
+            // Build the path to the image
+            Path path = Paths.get("C:\\Users\\user\\Desktop\\PhotosData").resolve("Aristocats-cat-names-hit-cat.png");
+            Resource resource = new UrlResource(path.toUri());
+    
+            if (resource.exists() && resource.isReadable()) {
+                // Return the image with appropriate headers
+                return ResponseEntity.ok()
+                        // .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename="" + resource.getFilename() + """)
+                        .body(resource);
+            } else {
+                throw new RuntimeException("File not found or not readable");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     // @GetMapping("/request_{from}")

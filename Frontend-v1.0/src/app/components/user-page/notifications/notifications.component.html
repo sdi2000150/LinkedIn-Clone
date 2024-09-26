@@ -1,6 +1,30 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <p>Notifications Coming Soon!</p>
+    <div class="section">
+        <h2>Invitations (to me)</h2>
+        <ul class="notification-list">
+          <li class="notification-item" *ngFor="let user of usersRequestingMe">
+            <a [routerLink]="['/user-page/profile-view', user.email]">
+                {{ user.name }} {{user.lastname}} ({{ user.email }})
+            </a>
+            <button (click)="handleButton1Click(user.email)"> {{ button1 }} </button>
+            <button (click)="handleButton2Click(user.email)"> {{ button2 }} </button>
+          </li>
+        </ul>
+    </div>
+</div>
+<div class="container">
+    <div class="section">
+        <h2>Pending Requests (from me)</h2>
+        <ul class="notification-list">
+        <li class="notification-item" *ngFor="let user of myRequests">
+            <a [routerLink]="['/user-page/profile-view', user.email]">
+                {{ user.name }} {{user.lastname}} ({{ user.email }})
+            </a>
+            <button (click)="handleButton3Click(user.email)"> {{ button3 }} </button>
+        </li>
+        </ul>
+    </div>
 </div>
 
 <!-- so that the page can be scrolled -->

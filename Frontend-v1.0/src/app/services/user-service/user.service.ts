@@ -346,6 +346,26 @@ export class UserService {
     return this.http.get<void>(`${this.baseUrl}/user/DeleteSentR/${myEmail}/${userEmail}`, { headers });
   }
 
+  getUsersRequestingMe(token: string): Observable<any> {
+    // Extract the email from the token
+    const myEmail = this.extractEmailFromToken(token);
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(`${this.baseUrl}/user/RequestingMe/${myEmail}`);
+  }
+
+  getMyRequests(token: string): Observable<any> {
+    // Extract the email from the token
+    const myEmail = this.extractEmailFromToken(token);
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(`${this.baseUrl}/user/MyRequests/${myEmail}`);
+  }
+
   // needs to be tested and used 
   likeArticle(token: string, articleId: number): Observable<boolean> {
     // Extract the email from the token
@@ -418,6 +438,23 @@ export class UserService {
     return this.http.delete<void>(`${this.baseUrl}/application/${email}/delete/${jobID}`, { headers });
   }
 
+  //given a job, return the jobapplications in that job
+  getJobApplications(token: string, jobId: number): Observable<any[]> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any[]>(`${this.baseUrl}/job/${jobId}/jobapplications`, { headers });
+  }
+
+  updateUserPhoto(token:string, formData: FormData): Observable<any> {
+    const email = this.extractEmailFromToken(token);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+      // 'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(`${this.baseUrl}/user/uploadPhoto`, formData, { headers });
+
+  }
   // applyToJob(userId: number, jobId: number): Observable<any> {
   //   return this.http.post(`${this.baseUrl}/user/${userId}/apply/${jobId}`, {});
   // }
