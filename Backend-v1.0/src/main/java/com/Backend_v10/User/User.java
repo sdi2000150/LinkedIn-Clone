@@ -1,5 +1,6 @@
 package com.Backend_v10.User;
 
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -113,9 +114,7 @@ public class User {
 
     private String profilePhotoUrl;
     private String coverPhotoUrl;
-    
-    @Lob
-    private byte[] cvFile;
+    private String cvFileUrl;
 
     private String about;
     private String experience;
@@ -237,7 +236,7 @@ public class User {
         return "User [UserID=" + UserID + ", username=" + username + ", name=" + name + ", lastname=" + lastname
                 + ", password=" + password + ", phone=" + phone + ", email=" + email + ", profilePhoto="
                 + profilePhotoUrl + ", coverPhoto=" + coverPhotoUrl + ", birthdate="
-                + birthdate + ", cvFile=" + Arrays.toString(cvFile) + ", role=" + role + ", about=" + about
+                + birthdate + ", cvFile=" + cvFileUrl + ", role=" + role + ", about=" + about
                 + ", experience=" + experience + ", experienceDescription=" + experienceDescription + ", education="
                 + education + ", educationDescription=" + educationDescription + ", skills=" + skills + "]";
     }

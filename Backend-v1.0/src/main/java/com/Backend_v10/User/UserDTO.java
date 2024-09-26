@@ -24,7 +24,7 @@ public class UserDTO {
     private String role;
     private String profilePhotoUrl;
     private String coverPhotoUrl;
-    private byte[] cvFile;
+    private String cvFileUrl;
     private String about;
     private String experience;
     private String experienceDescription;

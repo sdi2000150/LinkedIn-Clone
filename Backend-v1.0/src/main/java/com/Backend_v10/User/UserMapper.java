@@ -15,7 +15,7 @@ public class UserMapper {
         dto.setRole(user.getRole());
         dto.setProfilePhotoUrl(user.getProfilePhotoUrl());
         dto.setCoverPhotoUrl(user.getCoverPhotoUrl());
-        dto.setCvFile(user.getCvFile());
+        dto.setCvFileUrl(user.getCvFileUrl());
         dto.setAbout(user.getAbout());
         dto.setExperience(user.getExperience());
         dto.setExperienceDescription(user.getExperienceDescription());

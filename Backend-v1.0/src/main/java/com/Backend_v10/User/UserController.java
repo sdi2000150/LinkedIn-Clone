@@ -628,8 +628,8 @@ public class UserController {
 
     //----------Photos and Files -------------//
 
-    @PostMapping("/uploadPhoto")
-    public Boolean UploadPhoto(@RequestParam("image") MultipartFile imageFile){
+    @PostMapping("/{email}/uploadPhoto")
+    public Boolean UploadPhoto(@RequestParam("image") MultipartFile imageFile, @PathVariable String email){
        try{
         if(imageFile.isEmpty() == true) {
             System.out.println("EMPTY FILE");
@@ -644,12 +644,19 @@ public class UserController {
         }
 
         // Get the original file name (consider using a unique name to avoid conflicts)
-        String originalFileName = imageFile.getOriginalFilename();
+        String originalFileName = email;
+        String total_path = uploadDir + originalFileName;
         // Resolve the file path (directory + file name)
-        Path filePath = path.resolve(originalFileName);
+        Path filePath = path.resolve(total_path);
         // Save the file to the local file system
         Files.write(filePath, imageFile.getBytes());
         System.out.println("File uploaded successfully");
+
+        //Save path in User Entity 
+        Optional<User> u = this.repository.findByEmail(email);
+        u.get().setCvFileUrl(total_path);
+        this.repository.save(u.get());
+
        }
        catch(IOException e){
         System.out.println("IOException uploading file");
