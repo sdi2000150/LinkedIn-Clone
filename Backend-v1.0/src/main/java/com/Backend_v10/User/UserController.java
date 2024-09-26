@@ -704,6 +704,45 @@ public class UserController {
         return true;
     }
 
+    @PostMapping("/{email}/uploadCVFile")
+    public Boolean UploadCVFile(@RequestParam("file") MultipartFile File, @PathVariable String email){
+       try{
+        if(File.isEmpty() == true) {
+            System.out.println("EMPTY FILE");
+            return false;
+        }
+
+
+        Path path = Paths.get(uploadDir);
+        // Ensure the directory exists or create it
+        if (!Files.exists(path)) {
+            Files.createDirectories(path);
+        }
+
+        Optional<User> u = this.repository.findByEmail(email);
+        // Get the original file name (consider using a unique name to avoid conflicts)
+        String originalFileName = u.get().getUserID() + "CV" + ".pdf";   // ---> IDCover
+        // Resolve the file path (directory + file name)
+        Path filePath = path.resolve(originalFileName);               
+        // Save the file to the local file system
+        Files.write(filePath, File.getBytes());
+        System.out.println("File uploaded successfully");
+        
+        //Save path in User Entity 
+        u.get().setCvFileUrl(originalFileName);
+        this.repository.save(u.get());
+
+       }
+       catch(IOException e){
+        System.out.println("IOException uploading file");
+        return false;
+       }
+
+        return true;
+    }
+
+
+
 
 
     @GetMapping("/{email}/downloadProfilePhoto")
@@ -754,6 +793,29 @@ public class UserController {
         }
     }
 
+    @GetMapping("/{email}/downloadCVFile")
+    public ResponseEntity<Resource> DownloadCVFile(@PathVariable String email) {
+        Optional<User> u = this.repository.findByEmail(email);
+        
+        try {
+            // Build the path to the image
+            String originalFileName = u.get().getUserID() + "CV" + ".pdf";
+
+            Path path = Paths.get(uploadDir).resolve(originalFileName);
+            Resource resource = new UrlResource(path.toUri());
+    
+            if (resource.exists() && resource.isReadable()) {
+                // Return the image with appropriate headers
+                return ResponseEntity.ok()
+                        // .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename="" + resource.getFilename() + """)
+                        .body(resource);
+            } else {
+                throw new RuntimeException("File not found or not readable");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
     // @GetMapping("/request_{from}")
     // public void sendConnectionRequest(@RequestParam String send_to, @PathVariable String from) {
     //     UserConnection connection = new UserConnection();
