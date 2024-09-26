@@ -201,6 +201,30 @@ public class UserController {
         return true;
     }
 
+//----------------REQUESTS----------------------//
+    @GetMapping("/RequestingMe/{myemail}")
+    public List<User> UsersRequestingMe(@PathVariable String myemail){
+        
+        List<String> RequestingMeEmails = this.ConnectionRepo.findUsersRequestingMe(myemail);
+        List<User> RequestingMe = new ArrayList<>();
+        for(String email: RequestingMeEmails)
+            RequestingMe.add(this.repository.findByEmail(email).get());
+
+        return RequestingMe;
+    }
+
+    @GetMapping("/MyRequests/{myemail}")
+    public List<User> MyRequests(@PathVariable String myemail){
+        
+        List<String> MyRequestsEmails = this.ConnectionRepo.findUsersIRequested(myemail);
+        List<User> MyRequests = new ArrayList<>();
+        for(String email: MyRequestsEmails)
+        MyRequests.add(this.repository.findByEmail(email).get());
+
+        return MyRequests;
+    }
+
+
     //WORKS!!
     @GetMapping("/NewR/{myemail}/{useremail}")
     public void NewRequest(@PathVariable String myemail, @PathVariable String useremail){
