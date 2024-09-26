@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalLong;
 import java.util.Set;
@@ -36,6 +37,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,8 +59,9 @@ public class UserController {
     private final CommentRepository CommRepo;
     private final JobApplicationRepository JobAppRepo;
     private final JobRepository JobRepo;
+    private final PasswordEncoder encoder;
 
-    UserController(ArticleRepository articleRepo, JobRepository jobRepo, JobApplicationRepository jobApprepo, UserRepository repository, UserConnectionRepository UconnRepo, UserService service, CommentRepository commRepo){
+    UserController(PasswordEncoder encoder, ArticleRepository articleRepo, JobRepository jobRepo, JobApplicationRepository jobApprepo, UserRepository repository, UserConnectionRepository UconnRepo, UserService service, CommentRepository commRepo){
         this.repository = repository;
         this.ConnectionRepo = UconnRepo;
         this.service = service;
@@ -66,6 +69,7 @@ public class UserController {
         this.CommRepo = commRepo;
         this.JobAppRepo = jobApprepo;
         this.JobRepo = jobRepo;
+        this.encoder = encoder;
 
     }
 
@@ -325,6 +329,29 @@ public class UserController {
         return Results;
     }
 
+
+    //Change Email and Password 
+    @PutMapping("/ChangeEmailPassword/{email}")
+    public ResponseEntity<Boolean> UpdateEmailPassword(@PathVariable String email, @RequestBody Map<String, Object> json){
+        
+        Optional<User> u = repository.findByEmail(email);
+        
+                String OldPassword = (String) json.get("OldPassword");
+                String NewPassword = (String) json.get("NewPassword");
+                String NewEmail = (String) json.get("NewEmail");
+
+        if(this.encoder.matches(OldPassword, u.get().getPassword()) == true){
+            if( NewEmail.equals("") == false)
+                u.get().setEmail(NewEmail);
+            if( NewPassword.equals("") == false)
+                u.get().setPassword(this.encoder.encode(NewPassword));
+            this.repository.save(u.get());
+            return ResponseEntity.ok(true);    
+        }
+        return ResponseEntity.ok(false);
+
+        
+    }
 
     //updates User fields. Returns true if its done properly, false else
     @PutMapping("/{email}/profile")

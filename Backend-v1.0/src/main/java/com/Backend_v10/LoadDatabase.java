@@ -68,14 +68,14 @@ public class LoadDatabase {
     return args -> {
 
         // Create and save users firsT
-        User admin1 = new User("teomor", "Theodoros", encoder.encode("1234"), "ROLE_ADMIN", "Moraitis", "teomor@email.com");
-        User admin2 = new User("nickmosch", "Nikitas", encoder.encode("1234"), "ROLE_ADMIN", "Moschos", "nickmosch@email.com");
-        User user1 = new User("bobross", "Bob", encoder.encode("1234"), "ROLE_USER", "Ross", "bobross@email.com");
-        User user2 = new User("jetlee", "Jet", encoder.encode("1234"), "ROLE_USER", "Lee", "jetlee@email.com");
-        User user3 = new User("TC", "Thomas", encoder.encode("1234"), "ROLE_USER", "Charles", "thomasch@email.com");
-        User user4 = new User("TC", "Taylor", encoder.encode("1234"), "ROLE_USER", "Carlson", "taylorcar@email.com");
-        User user5 = new User("marial", "Maria", encoder.encode("1234"), "ROLE_USER", "Lazarou", "marial@email.com");
-        User user6 = new User("ketip", "Keti", encoder.encode("1234"), "ROLE_USER", "Perry", "ketip@email.com");
+        User admin1 = new User("teomor", "Theodoros", this.encoder.encode("12345"), "ROLE_ADMIN", "Moraitis", "teomor@email.com");
+        User admin2 = new User("nickmosch", "Nikitas", this.encoder.encode("12345"), "ROLE_ADMIN", "Moschos", "nickmosch@email.com");
+        User user1 = new User("bobross", "Bob", this.encoder.encode("12345"), "ROLE_USER", "Ross", "bobross@email.com");
+        User user2 = new User("jetlee", "Jet", this.encoder.encode("12345"), "ROLE_USER", "Lee", "jetlee@email.com");
+        User user3 = new User("TC", "Thomas", this.encoder.encode("12345"), "ROLE_USER", "Charles", "thomasch@email.com");
+        User user4 = new User("TC", "Taylor", this.encoder.encode("12345"), "ROLE_USER", "Carlson", "taylorcar@email.com");
+        User user5 = new User("marial", "Maria", this.encoder.encode("12345"), "ROLE_USER", "Lazarou", "marial@email.com");
+        User user6 = new User("ketip", "Keti", this.encoder.encode("12345"), "ROLE_USER", "Perry", "ketip@email.com");
         // Save users to the repository
         userRepo.save(admin1);
         userRepo.save(admin2);

@@ -28,7 +28,7 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/addNewUser")
-    public String addNewUser(@RequestBody User userInfo) {
+    public Boolean addNewUser(@RequestBody User userInfo) {
         return service.addUser(userInfo);
     }
 

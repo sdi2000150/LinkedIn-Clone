@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 // Handles user-related operations, including authentication and user data management
@@ -32,11 +33,17 @@ public class UserInfoService implements UserDetailsService {    // Implementing 
     }
 
     // Add a new user
-    public String addUser(User userInfo) {
+    public Boolean addUser(User userInfo) {
+        List<User> allUsers = this.repository.findAll();
+        for(User user: allUsers){
+            if(user.getEmail().equals(userInfo.getEmail()) == true)
+                return false;
+        }
         // Encode password before saving the user
+        
         userInfo.setPassword(encoder.encode(userInfo.getPassword()));
         repository.save(userInfo);
-        return "User Added Successfully";
+        return true;
     }
 
     // Get user by username
