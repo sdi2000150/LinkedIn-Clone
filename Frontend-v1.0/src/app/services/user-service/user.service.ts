@@ -189,20 +189,19 @@ export class UserService {
   }
 
   //TODO
-  updateEmail(newEmail: string, token: string): Observable<any> {
-    const url = `${this.baseUrl}/user/update_email`;
+  updateEmailPassword(token: string, oldPassword: string, newEmail: string, newPassword: string): Observable<boolean> {
+    // Extract the email from the token
+    const email = this.extractEmailFromToken(token);
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
     });
-    return this.http.put(url, { email: newEmail }, { headers });
-  }
-  //TODO
-  updatePassword(newPassword: string, token: string): Observable<any> {
-    const url = `${this.baseUrl}/user/update_password`;
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-    return this.http.put(url, { password: newPassword }, { headers });
+    const body = {
+      OldPassword: oldPassword,
+      NewEmail: newEmail,
+      NewPassword: newPassword
+    };
+    return this.http.put<boolean>(`${this.baseUrl}/user/ChangeEmailPassword/${email}`, body, { headers });
   }
 
   updateUserProfile(token: string, updateData: any): Observable<any> {
@@ -287,6 +286,18 @@ export class UserService {
     return this.http.get<any[]>(`${this.baseUrl}/user/${email}/contact_articles`, { headers });
   }
 
+  // Method to delete a contact
+  deleteContact(token: string, userEmail: string): Observable<void> {
+    // Extract the email from the token
+    const myEmail = this.extractEmailFromToken(token);
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    // Append the email to the URL and send the GET request with the Authorization header
+    return this.http.get<void>(`${this.baseUrl}/user/DeleteConnection/${myEmail}/${userEmail}`, { headers });
+  }
+  
   // Method to send a new request
   sendNewRequest(token: string, userEmail: string): Observable<void> {
     // Extract the email from the token

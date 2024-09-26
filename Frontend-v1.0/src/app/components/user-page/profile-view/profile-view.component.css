@@ -85,6 +85,12 @@ header {
     background-color: #005f8d;
 }
 
+#button3 {
+    /* no underline */
+    text-decoration: none;
+    color: white;
+}
+
 .profile-content {
     display: flex;
     flex-direction: column;

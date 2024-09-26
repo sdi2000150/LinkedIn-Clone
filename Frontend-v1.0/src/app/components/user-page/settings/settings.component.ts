@@ -16,7 +16,11 @@ export class SettingsComponent {
   email: string = '';
   password: string = '';
   passwordConf: string = '';
+  oldPassword: string = '';
   token: string = localStorage.getItem('token') || '';
+
+  msgError: string = '';
+  msgSuccess: string = '';
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -31,28 +35,29 @@ export class SettingsComponent {
     setTimeout(() => passwordInput.type = 'password', 2000);  //set a timer for the time the password will show
   }
 
-    //TODO
-  changeEmail() {
-    if (this.email) {
-      this.userService.updateEmail(this.email, this.token).subscribe(response => {
-        alert('Email updated successfully');
+  changeEmailPassword() {
+    // Old password MUST be provided, then email or password or both can be changed
+    if (this.oldPassword && (this.email || (this.password && (this.password === this.passwordConf)))) {
+      this.userService.updateEmailPassword(this.token, this.oldPassword, this.email, this.password).subscribe(response => {
+        if (response) {
+          this.msgSuccess = 'Email and/or Password updated successfully';
+          setTimeout(() => this.msgSuccess = '', 3000);  // Clear the message after 3 seconds
+        } else {
+          this.msgError = 'Failed to update Email and/or Password';
+          setTimeout(() => this.msgError = '', 3000);  // Clear the message after 3 seconds
+        }
       }, error => {
-        alert('Failed to update email');
+        this.msgError = 'Failed to update Email and/or Password';
+        setTimeout(() => this.msgError = '', 3000);  // Clear the message after 3 seconds
       });
     } else {
-      alert('Please enter a new email address');
+      this.msgError = 'Please fill in the required fields';
+      setTimeout(() => this.msgError = '', 3000);  // Clear the message after 3 seconds
     }
+    this.oldPassword = '';
+    this.email = '';
+    this.password = '';
+    this.passwordConf = '';
   }
-  //TODO
-  changePassword() {
-    if (this.password && this.password === this.passwordConf) {
-      this.userService.updatePassword(this.password, this.token).subscribe(response => {
-        alert('Password updated successfully');
-      }, error => {
-        alert('Failed to update password');
-      });
-    } else {
-      alert('Passwords do not match');
-    }
-  }
+
 }

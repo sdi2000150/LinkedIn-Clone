@@ -1,15 +1,21 @@
 <app-navbar></app-navbar>
 <section class="settings-container">
     <h1>Settings</h1>
+    <div *ngIf="msgError" class="msgError error">{{ msgError }}</div>
+    <div class="msgError"></div>
+    <div *ngIf="msgSuccess" class="msgSuccess success">{{ msgSuccess }}</div>
+    <div class="msgSuccess"></div>
     <form>
+        <div class="form-group">
+            <p>Old Password:</p>
+            <label for="oldPassword"></label>
+            <input type="password" id="oldPassword" placeholder="Old Password" [(ngModel)]="oldPassword" name="oldPassword">
+        </div>
         <div class="form-group">
             <p>Change Email:</p>
             <label for="email"></label>
-            <input type="text" id="email" placeholder="New email address" name="email">
+            <input type="text" id="email" placeholder="New email address" [(ngModel)]="email" name="email">
         </div>
-        <button type="button" (click)="changeEmail()">Change Email</button>
-        <br>
-
         <div class="form-group">
             <p>Change Password:</p>
             <div class="password-input">
@@ -18,7 +24,6 @@
                 <span class="toggle-password" (click)="showPassword()">show</span>
             </div>
         </div>
-
         <div class="form-group">
             <div class="password-input">
                 <label for="passwordConf"></label>
@@ -26,9 +31,8 @@
                 <span class="toggle-password" (click)="showPasswordConf()">show</span>
             </div>
         </div>
-        <button type="button" (click)="changePassword()">Change Password</button>
-        <br>
-
+        <button type="button" (click)="changeEmailPassword()" id="changeButton">Change Email/Password</button>
+        <br><br><br>
         <div class="form-group">
             <a href="../../welcome-page">
                 <button id="logOut" type="button">Log Out!</button>

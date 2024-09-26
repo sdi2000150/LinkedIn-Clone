@@ -165,8 +165,9 @@ export class ProfileViewComponent implements OnInit {
 
     if (token && userEmail) {
       if (this.button2 === 'Disconnect') {
-        // Add logic to handle disconnect when backend is ready
-        console.log('Disconnect option not working for now, coming soon...');
+        this.userService.deleteContact(token, userEmail).subscribe(() => {
+          this.fetchButtons();
+        });
       } else if (this.button2 === 'Cancel Request') {
         this.userService.deleteSentRequest(token, userEmail).subscribe(() => {
           this.fetchButtons();
@@ -175,8 +176,18 @@ export class ProfileViewComponent implements OnInit {
         this.userService.rejectReceivedRequest(token, userEmail).subscribe(() => {
           this.fetchButtons();
         });
+      } else if (this.button2 === '◆') {
+        // do nothing
+        // or...do something fancy!
+        console.log('Secret button!🤫');
+        this.playSound();
       }
     }
+  }
+
+  playSound(): void {
+    const audio = new Audio('assets/sounds/duck-quack.mp3');
+    audio.play();
   }
 
 }

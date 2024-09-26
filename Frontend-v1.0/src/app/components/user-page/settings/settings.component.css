@@ -86,6 +86,25 @@ body {
   background-color: #005f8d;
 }
 
+#changeButton {
+  background-color: #0077B5;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;   /* centered */
+  width: 75%;
+  font-size: 16px;
+  margin-top: 20px;
+  
+}
+
+#changeButton:hover {
+  background-color: #005f8d;
+}
+
 #logOut {
   background-color: #ec4a45; /* Typical logout button color */
   color: white;
@@ -95,7 +114,7 @@ body {
   border-radius: 4px;
   display: block;
   margin: 0 auto;   /* centered */
-  width: 75%;
+  width: 55%;
   font-size: 16px;
   margin-top: 20px;
 }
@@ -107,4 +126,18 @@ body {
 /* Add this to remove underline from the <a> tag */
 a {
   text-decoration: none;
+}
+
+.error {
+  background: orangered;
+  color: #fff;
+  padding: 5px;
+  margin: 5px;
+}
+
+.success {
+  background: green;
+  color: #fff;
+  padding: 5px;
+  margin: 5px;
 }
