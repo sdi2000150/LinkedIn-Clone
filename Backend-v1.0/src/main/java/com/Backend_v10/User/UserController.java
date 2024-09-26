@@ -39,6 +39,8 @@ import java.util.Set;
 import java.util.jar.Attributes.Name;
 import java.util.stream.Collectors;
 
+import javax.print.attribute.standard.OrientationRequested;
+
 // import org.apache.tomcat.util.file.ConfigurationSource.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
@@ -628,8 +630,8 @@ public class UserController {
 
     //----------Photos and Files -------------//
 
-    @PostMapping("/{email}/uploadPhoto")
-    public Boolean UploadPhoto(@RequestParam("image") MultipartFile imageFile, @PathVariable String email){
+    @PostMapping("/{email}/uploadProfilePhoto")
+    public Boolean UploadProfilePhoto(@RequestParam("image") MultipartFile imageFile, @PathVariable String email){
        try{
         if(imageFile.isEmpty() == true) {
             System.out.println("EMPTY FILE");
@@ -645,7 +647,7 @@ public class UserController {
 
         // Get the original file name (consider using a unique name to avoid conflicts)
         String originalFileName = email;
-        String total_path = uploadDir + originalFileName;
+        String total_path = uploadDir + originalFileName + "Profile";
         // Resolve the file path (directory + file name)
         Path filePath = path.resolve(total_path);
         // Save the file to the local file system
@@ -654,7 +656,7 @@ public class UserController {
 
         //Save path in User Entity 
         Optional<User> u = this.repository.findByEmail(email);
-        u.get().setCvFileUrl(total_path);
+        u.get().setProfilePhotoUrl(total_path);
         this.repository.save(u.get());
 
        }
@@ -665,6 +667,44 @@ public class UserController {
 
         return true;
     }
+
+    @PostMapping("/{email}/uploadCoverPhoto")
+    public Boolean UploadCoverPhoto(@RequestParam("image") MultipartFile imageFile, @PathVariable String email){
+       try{
+        if(imageFile.isEmpty() == true) {
+            System.out.println("EMPTY FILE");
+            return false;
+        }
+
+
+        Path path = Paths.get(uploadDir);
+        // Ensure the directory exists or create it
+        if (!Files.exists(path)) {
+            Files.createDirectories(path);
+        }
+
+        Optional<User> u = this.repository.findByEmail(email);
+        // Get the original file name (consider using a unique name to avoid conflicts)
+        String originalFileName = u.get().getUserID() + "Cover";   // ---> IDCover
+        // Resolve the file path (directory + file name)
+        Path filePath = path.resolve(originalFileName);               
+        // Save the file to the local file system
+        Files.write(filePath, imageFile.getBytes());
+        System.out.println("File uploaded successfully");
+        
+        //Save path in User Entity 
+        u.get().setCoverPhotoUrl(originalFileName);
+        this.repository.save(u.get());
+
+       }
+       catch(IOException e){
+        System.out.println("IOException uploading file");
+        return false;
+       }
+
+        return true;
+    }
+
 
 
     @GetMapping("/downloadPhoto")
