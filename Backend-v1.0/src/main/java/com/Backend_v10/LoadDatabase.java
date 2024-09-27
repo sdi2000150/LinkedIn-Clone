@@ -1,4 +1,5 @@
 package com.Backend_v10;
+import java.nio.file.OpenOption;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -115,6 +116,7 @@ public class LoadDatabase {
         // Associate articles and jobs with users
         userService.addArticle(user1, article1);
         userService.addArticle(user1, article2);
+        userService.addArticle(user3, article3);
         userService.addJob(user1, job1);
         userService.addJob(user1, job2);
         userService.addJob(user3, job3);
@@ -327,10 +329,14 @@ public class LoadDatabase {
     Godel.likeArticle(T5);
     Planck.likeArticle(T4);
     Oppenh.likeArticle(T5);
-    userRepo.save(Godel);
-    userRepo.save(Bohr);
-    userRepo.save(Planck);
-    userRepo.save(Oppenh);
+    Oppenh.likeArticle(T6);
+    Planck.likeArticle(T7);
+    Godel.likeArticle(T8);
+    Bohr.likeArticle(T9);
+    Planck.likeArticle(T10);
+    Bohr.likeArticle(T11);
+    Planck.likeArticle(T12);
+    Oppenh.likeArticle(T13);
     // ADD COMMENTS ON ARTICLES
     Comment comment = new Comment();
     comment.setContent("Deserves A Read");
@@ -364,6 +370,17 @@ public class LoadDatabase {
     userService.addArticle(Farmer, A8);
     userService.addArticle(Farmer, A9);
     userService.addArticle(Farmer, A10);
+    // ADD LIKES ON ARTICLES
+    Farmer.likeArticle(A1);
+    Farmer.likeArticle(A2);
+    Farmer.likeArticle(A3);
+    Farmer.likeArticle(A4);
+    Farmer.likeArticle(A5);
+    Farmer.likeArticle(A6);
+    Farmer.likeArticle(A7);
+    Farmer.likeArticle(A8);
+    Farmer.likeArticle(A9);
+    Farmer.likeArticle(A10);
     //Architecture
     Article Arch1 = articleRepo.save(new Article("Unlock the secrets of sustainable architecture. Dive into green building at https://greenbuild.com!!", null));
     Article Arch2 = articleRepo.save(new Article("Explore the role of sustainable materials in modern architecture at https://sustainablearchmaterials.com!!", null));
@@ -376,15 +393,18 @@ public class LoadDatabase {
     userService.addArticle(Jackie, Arch1);
     userService.addArticle(Jackie, Arch2);
     userService.addArticle(Jackie, Arch3);
-    userService.addArticle(JLo, Arch2);
     userService.addArticle(JLo, Arch4);
     userService.addArticle(JLo, Arch5);
-    userService.addArticle(WD, Arch3);
-    userService.addArticle(WD, Arch5);
     userService.addArticle(WD, Arch6);
-    userService.addArticle(WS, Arch1);
-    userService.addArticle(WS, Arch4);
     userService.addArticle(WS, Arch7);
+    // ADD LIKES ON ARTICLES
+    JLo.likeArticle(Arch1);
+    JLo.likeArticle(Arch2);
+    JLo.likeArticle(Arch3);
+    Jackie.likeArticle(Arch4);
+    Jackie.likeArticle(Arch5);
+    Jackie.likeArticle(Arch6);
+    JLo.likeArticle(Arch7);
     //Finance
     Article F1 = articleRepo.save(new Article("Get the inside scoop on financial technologies and cryptocurrencies at https://fintechrevolution.com!!", null));
     Article F2 = articleRepo.save(new Article("Attend our lecture on financial risk management in a volatile economy. Register now at https://riskmanagementlecture.com!!", null));
@@ -405,6 +425,16 @@ public class LoadDatabase {
     userService.addArticle(Einstein, F7);
     userService.addArticle(Tesla, F8);
     userService.addArticle(Franklin, F9);
+    // ADD LIKES ON ARTICLES
+    Tesla.likeArticle(F1);
+    Tesla.likeArticle(F2);
+    Einstein.likeArticle(F3);
+    Franklin.likeArticle(F4);
+    Tesla.likeArticle(F5);
+    Einstein.likeArticle(F6);
+    Franklin.likeArticle(F7);
+    Franklin.likeArticle(F8);
+    Einstein.likeArticle(F9);
     //Literacy
     Article L1 = articleRepo.save(new Article("Enhance your creative writing skills with experts. Learn more at https://creativewriters.com!!", null));
     Article L2 = articleRepo.save(new Article("Discover the transformative power of literacy in 'The Literacy Myth' by Harvey J. Graff. Read more at https://literacymyth.com!!", null));
@@ -429,6 +459,18 @@ public class LoadDatabase {
     userService.addArticle(Nietzsche, L9);
     userService.addArticle(Galilei, L10);
     userService.addArticle(Nietzsche, L11);    
+    // ADD LIKES ON ARTICLES
+    Nietzsche.likeArticle(L1);
+    Nietzsche.likeArticle(L2);
+    Franklin.likeArticle(L3);
+    Franklin.likeArticle(L4);
+    MorganF.likeArticle(L5);
+    Nietzsche.likeArticle(L6);
+    Galilei.likeArticle(L7);
+    Curie.likeArticle(L8);
+    Galilei.likeArticle(L9);
+    Curie.likeArticle(L10);
+    Mendel.likeArticle(L11);
     //Engineering
     Article E1 = articleRepo.save(new Article("The wonders of renewable energy await. Discover solar, wind, and hydro at https://renewablepower.com!!", null));
     Article E2 =articleRepo.save(new Article("Explore biotechnology breakthroughs that are changing the world. Learn more at https://biotechleaders.com!!", null));
@@ -457,6 +499,20 @@ public class LoadDatabase {
     userService.addArticle(Tesla, E11);
     userService.addArticle(Tesla, E12);
     userService.addArticle(Fermi, E13);
+    // ADD LIKES ON ARTICLES
+    Tesla.likeArticle(E1);
+    Babbage.likeArticle(E2);
+    Babbage.likeArticle(E3);
+    Tesla.likeArticle(E4);
+    Oppenh.likeArticle(E5);
+    Dirac.likeArticle(E6);
+    Tesla.likeArticle(E7);
+    Crick.likeArticle(E8);
+    Fermi.likeArticle(E9);
+    Tesla.likeArticle(E10);
+    Fermi.likeArticle(E11);
+    Fermi.likeArticle(E12);
+    Heisenberg.likeArticle(E13);
     //Marketing
     Article M1 = articleRepo.save(new Article("Master the art of digital marketing with us. Dive in at https://digitalmarketingpro.com!!", null));
     Article M2 = articleRepo.save(new Article("Discover how digital transformation is changing industries at https://digitalchange.com!!", null));
@@ -483,6 +539,19 @@ public class LoadDatabase {
     userService.addArticle(Hawking, M10);
     userService.addArticle(Fleming, M11);
     userService.addArticle(GrahamBell, M12);    
+    // ADD LIKES ON ARTICLES
+    Messi.likeArticle(M1);
+    JLo.likeArticle(M2);
+    WD.likeArticle(M3);
+    WS.likeArticle(M4);
+    Jackie.likeArticle(M5);
+    MorganF.likeArticle(M6);
+    Napoleon.likeArticle(M7);
+    DaVinci.likeArticle(M8);
+    Fleming.addArticle(M9);
+    Einstein.likeArticle(M10);
+    Hawking.likeArticle(M11);
+    GrahamBell.likeArticle(M12);
     //Law
     Article Law1 = articleRepo.save(new Article("Artificial Intelligence and the future of law. See more at https://lawtechai.com!!", null));
     Article Law2 = articleRepo.save(new Article("Don’t miss our seminar on privacy laws in the age of data breaches. Learn more at https://privacylawseminar.com!!", null));
@@ -617,8 +686,51 @@ public class LoadDatabase {
     userService.addArticle(Bohr, S29);
     userService.addArticle(Planck, S30);
 
-
-
+    // SAVE USERS (1 TIME TO AVOID DUBLICATES ON LIKES, ETC)
+    userRepo.save(Jackie);
+    userRepo.save(JLo);
+    userRepo.save(WD);
+    userRepo.save(WS);
+    userRepo.save(WSJr);
+    userRepo.save(MorganF);
+    userRepo.save(Messi);
+    userRepo.save(MuhammedALi);
+    userRepo.save(Washington);
+    userRepo.save(Napoleon);
+    userRepo.save(GrahamBell);
+    userRepo.save(Einstein);
+    userRepo.save(Newton);
+    userRepo.save(Curie);
+    userRepo.save(Tesla);
+    userRepo.save(Galilei);
+    userRepo.save(DaVinci);
+    userRepo.save(Darwin);
+    userRepo.save(Hawking);
+    userRepo.save(Turing);
+    userRepo.save(Lovelace);
+    userRepo.save(Franklin);
+    userRepo.save(Pasteur);
+    userRepo.save(Mendel);
+    userRepo.save(Fleming);
+    userRepo.save(Copernicus);
+    userRepo.save(Kepler);
+    userRepo.save(Babbage);
+    userRepo.save(Bohr);
+    userRepo.save(Planck);
+    userRepo.save(Fermi);
+    userRepo.save(Oppenh);
+    userRepo.save(Heisenberg);
+    userRepo.save(Euler);
+    userRepo.save(Rutherford);
+    userRepo.save(Feynman);
+    userRepo.save(Faraday);
+    userRepo.save(Dirac);
+    userRepo.save(Hubble);
+    userRepo.save(Watson);
+    userRepo.save(Crick);
+    userRepo.save(Godel);
+    userRepo.save(Nietzsche);
+    userRepo.save(Farmer);
   }
 
 
