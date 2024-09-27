@@ -5,43 +5,24 @@ Mock LinkedIn-Clone Web Application - Project for Uni Course
 Δουλεουμε σε Angular για Front-End (Javascript/Typescript)<br>
 και SpringBoot για Back-End (Java)
 
-# Project description
+## Project description
 
 
+## Some technical details
 
+## The app
+### Welcome-Page
 
+### Login-Page
 
-## TODO
+### Signup-Page
 
-1) Build Article
-2) Integrate All Entities and their Request and Queries
-3) Integrate associations between entities through JPA
+### User-Page
+#### Home
+#### Network
+#### Jobs
+#### Notifications
+#### Profile
+#### Settings
 
-log In 
-
-
-My Page 
-
----> User username = ' ' AND password = ' ' Query --> User
-
-
-Hello Nikitas Thodoris 
-
-url ---> 'App/UserPage'
-
-FRONT
-4200/welcome-page
-4200/login-page
-.../signup-page
-.../user-page/user-home
-            /settings
-            /job
-
-
-BACK 
-
-.../User-{email} --> User.json Name Surname Email Photo 
-
-../check
-
-
+### Admin-Page
