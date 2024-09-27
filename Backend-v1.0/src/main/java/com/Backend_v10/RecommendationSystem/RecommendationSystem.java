@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.AccessType;
+import org.springframework.stereotype.Component;
 
 import java.util.Enumeration;
 
@@ -16,8 +17,11 @@ import com.Backend_v10.Jobs.Job;
 import com.Backend_v10.User.User;
 import com.Backend_v10.User.UserRepository;
 
+import lombok.Data;
 
 
+@Component
+@Data
 public class RecommendationSystem {
     private int bigK;
     private int total_epochs;
@@ -38,9 +42,9 @@ public class RecommendationSystem {
     // private UserRepository userRepo;
     
     //private double S[][] = new double[Math.toIntExact(jobs)][bigK]; // 100 number of articles    //call construction during loading database
-    public RecommendationSystem(int bigK, int total_epochs) {
-        this.bigK = bigK;
-        this.total_epochs = total_epochs;
+    public RecommendationSystem() {
+        this.bigK = 5;
+        this.total_epochs = 100;
     }
 
     public void UpdateArticleRecommendationMatrix(List<User> AllUsers, List<Article> AllArticles){
@@ -131,8 +135,8 @@ public class RecommendationSystem {
         //Calculate Loss
 
         //Form Predict Matrix 
-		double lr = 0.1;
-		double reg = 0.01;
+		this.lr = 0.1;
+		this.reg = 0.01;
 		for(int u = 0; u < users; u++){
 			for(int j = 0; j < this.bigK; j++){
 				P[u][j] = Math.random();

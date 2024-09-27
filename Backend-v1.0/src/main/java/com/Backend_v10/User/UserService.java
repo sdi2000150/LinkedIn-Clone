@@ -23,11 +23,15 @@ import com.Backend_v10.Comments.CommentRepository;
 import com.Backend_v10.Articles.ArticleRepository;
 import com.Backend_v10.JobApplication.JobApplicationRepository;
 import com.Backend_v10.Jobs.JobRepository;
+import com.Backend_v10.RecommendationSystem.RecommendationSystem;
 
 // To encapsulate the method calls + repository saves
 @Service
 public class UserService {
 
+
+    @Autowired 
+    private RecommendationSystem Recommendationsystem;
 
     @Autowired
     private UserRepository userRepo;
@@ -46,6 +50,26 @@ public class UserService {
 
     @Autowired
     private UserConnectionRepository ConnRepo;
+
+
+    @Transactional
+    public List<Article> RecommendArticles(String email){
+
+        //Update First 
+        this.Recommendationsystem.UpdateArticleRecommendationMatrix(this.userRepo.findAll(), this.articleRepo.findAll());
+
+        List<Article> recommened_articles = new ArrayList<>();
+        Optional<User> u = this.userRepo.findByEmail(email);
+        System.out.println("Users is " + this.Recommendationsystem.getLr());
+
+        List<Long> ids = this.Recommendationsystem.RecommendArticles(u.get());
+        for(Long id: ids)
+            recommened_articles.add(this.articleRepo.findById(id).get());
+        
+
+        return recommened_articles;
+    }
+
 
     @Transactional
     public Long addArticle(User user, Article newArticle) {

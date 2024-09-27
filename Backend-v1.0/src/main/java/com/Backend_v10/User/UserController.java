@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.Backend_v10.Articles.Article;
 import com.Backend_v10.Jobs.Job;
 import com.Backend_v10.Jobs.JobRepository;
+import com.Backend_v10.RecommendationSystem.RecommendationSystem;
 import com.Backend_v10.UserConnection.UserConnection;
 import com.Backend_v10.UserConnection.UserConnectionRepository;
 import com.Backend_v10.Articles.ArticleRepository;
@@ -55,6 +56,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -73,11 +75,11 @@ public class UserController {
     private final JobApplicationRepository JobAppRepo;
     private final JobRepository JobRepo;
     private final PasswordEncoder encoder;
-
+    private final RecommendationSystem recommendationSystem;
     @Value("${file.upload-dir}")
     private String uploadDir;
 
-    UserController(PasswordEncoder encoder, ArticleRepository articleRepo, JobRepository jobRepo, JobApplicationRepository jobApprepo, UserRepository repository, UserConnectionRepository UconnRepo, UserService service, CommentRepository commRepo){
+    UserController(RecommendationSystem recommendationSystem,PasswordEncoder encoder, ArticleRepository articleRepo, JobRepository jobRepo, JobApplicationRepository jobApprepo, UserRepository repository, UserConnectionRepository UconnRepo, UserService service, CommentRepository commRepo){
         this.repository = repository;
         this.ConnectionRepo = UconnRepo;
         this.service = service;
@@ -86,6 +88,7 @@ public class UserController {
         this.JobAppRepo = jobApprepo;
         this.JobRepo = jobRepo;
         this.encoder = encoder;
+        this.recommendationSystem = recommendationSystem;
 
     }
 
@@ -138,6 +141,15 @@ public class UserController {
         }
     }
     ///////////////////////////////////////////////////////////////
+
+    //-----------Recommandations------------//
+
+    @Transactional
+    @GetMapping("/{email}/RecommendArticles")
+    public List<Article> RecommendArticles(@PathVariable String email){
+        
+        return this.service.RecommendArticles(email);
+    }
 
     @PostMapping("/create_jobApp")
     public boolean CreateJobApplication(@RequestBody JobApplication newJobApp, @RequestParam(name="email") String owner_email, @RequestParam(name="id") Long job_id){
