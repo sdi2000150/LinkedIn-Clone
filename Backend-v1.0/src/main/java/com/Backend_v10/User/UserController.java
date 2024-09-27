@@ -146,9 +146,9 @@ public class UserController {
 
     @Transactional
     @GetMapping("/{email}/RecommendArticles")
-    public List<Article> RecommendArticles(@PathVariable String email){
+    public ResponseEntity<List<Article>> RecommendArticles(@PathVariable String email){
         
-        return this.service.RecommendArticles(email);
+        return ResponseEntity.ok(this.service.RecommendArticles(email));
     }
 
     @PostMapping("/create_jobApp")

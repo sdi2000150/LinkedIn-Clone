@@ -23,10 +23,34 @@
             <h2>Posts Recommendations</h2>
             <!-- Iterate over the articles and display them -->
             <div *ngFor="let article of articles" class="post">
-                <h3>{{ article.title }}</h3>
+                <h4>{{ article.owner.name }} {{ article.owner.lastname }}<br>
+                    <!-- Display creation date and time in a more readable format -->
+                    <span class="text-muted" style="font-size: 0.8em; font-weight: normal;">{{ article.dateTime_of_Creation | date:'short' }}</span>
+                </h4> 
                 <p>{{ article.text }}</p>
-                <button>Comment</button>
-                <button>Like</button>
+                <img *ngIf="article.photoUrl" [src]="article.photoUrl" alt="Article Image"  class="article-image"/>
+                <div class="post-info">
+                    <div class="likes">
+                        <span>{{ article.likedByUsers.length }} Like(s)</span>
+                        <ul class="likes-list">
+                            <li *ngFor="let user of article.likedByUsers">
+                                {{ user.username }}
+                            </li>
+                        </ul>
+                        <button (click)="likeArticle(article.articleID)">Like</button>
+                    </div>
+                    <div class="comments">
+                        <span>{{ article.articleComments.length }} Comment(s)</span>
+                        <ul class="comments-list">
+                            <li *ngFor="let comment of article.articleComments">
+                                {{ comment.content }} - {{ comment.commentOwner.username }}
+                                <button *ngIf="comment.commentOwner.userID === currentUser.userID" (click)="deleteComment(article.articleID, comment.commentID)" class="delete-button">Delete Comment</button>
+                            </li>
+                        </ul>
+                        <input type="text" [(ngModel)]="newComments[article.articleID]" placeholder="Add a comment">
+                        <button (click)="addComment(article.articleID)">Comment</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

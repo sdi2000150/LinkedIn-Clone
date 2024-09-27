@@ -117,6 +117,11 @@ body {
 
 #timeline .post {
     margin-bottom: 20px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #timeline .post h3 {
@@ -135,6 +140,80 @@ body {
 
 #timeline .post button:hover {
     background: #005f8d;
+}
+
+.post-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.likes, .comments {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 14px;
+    color: #363636;
+    cursor: pointer;
+    padding-bottom: 20px; /* add padding to create a buffer zone */
+
+}
+
+.likes span, .comments span {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.likes:hover span, .comments:hover span {
+    background-color: #ebebeb;
+}
+
+.likes-list, .comments-list {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 10;
+    overflow-y: auto; /* add scroll if content overflows */
+    cursor: pointer; /* change cursor to pointer (hand) */
+
+}
+
+.likes:hover .likes-list,
+.likes-list:hover {
+    display: block;
+    width: 100px;    /* larger box */
+    cursor: pointer; /* change cursor to pointer (hand) */
+}
+.comments:hover .comments-list,
+.comments-list:hover {
+    display: block;
+    width: 200px;    /* larger box */
+    cursor: pointer;
+}
+
+#timeline .post .post-info .comments .delete-button {
+    all: unset; /* remove existing styles for delete-button */
+    background: none;
+    color: red;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    position: relative; /* position it relatively within the post */
+    float: right; /* move it to the far right corner */
+}
+
+#timeline .post .post-info .comments .delete-button:hover {
+    color: darkred;
+}
+.article-image {
+    width: 400px; /* set the width */
+    height: auto; /* maintain the image's aspect ratio */
 }
 
 #right-sidebar {
