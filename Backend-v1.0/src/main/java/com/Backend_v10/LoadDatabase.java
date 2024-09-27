@@ -192,7 +192,7 @@ public class LoadDatabase {
         //ADDING DATA (MOSTLY FOR THE RECOMMENDATION SYSTEM)
         CreateData(userService, UserConnRepo, userRepo, articleRepo, commentRepo, jobRepo, jobApplicationRepo, encoder);
         //Testing Recommendation System
-        RecommendationSystem R = new RecommendationSystem(5, 10);
+        RecommendationSystem R = new RecommendationSystem();
         R.UpdateArticleRecommendationMatrix(userRepo.findAll(), articleRepo.findAll());
 
 
