@@ -10,19 +10,24 @@ Mock LinkedIn-Clone Web Application - Project for Uni Course
 
 ## Some technical details
 
-## The app
+## The app:
 ### Welcome-Page
 
 ### Login-Page
 
 ### Signup-Page
 
-### User-Page
+### User-Page:
 #### Home
+
 #### Network
+
 #### Jobs
+
 #### Notifications
+
 #### Profile
+
 #### Settings
 
 ### Admin-Page
