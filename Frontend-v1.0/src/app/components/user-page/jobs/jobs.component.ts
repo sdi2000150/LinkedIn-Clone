@@ -27,6 +27,7 @@ export class JobsComponent {
   jobs: any[] = []; // Store job offers of the user
   appliedJobs: any[] = []; // Store jobs the user has applied for
   contactsJobs: any[] = []; // Store job offers of the user's contacts
+  recommendedJobs: any[] = []; // Store recommended job offers for the user
 
   needOfDegree: string = 'Empty'; // Store the user's need of a degree
   fulltime: string = 'Empty'; // Store the job type
@@ -84,6 +85,16 @@ export class JobsComponent {
         },
         (error) => {
           console.error('Error fetching contacts job offers', error);
+        }
+      );
+      // Get recommended job offers
+      this.userService.getRecommendedJobOffers(token).subscribe(
+        (recommendedJobOffers: any) => {
+          console.log('Recommended Job Offers:', recommendedJobOffers);
+          this.recommendedJobs = recommendedJobOffers
+        },
+        (error) => {
+          console.error('Error fetching recommended job offers', error);
         }
       );
     } else {
