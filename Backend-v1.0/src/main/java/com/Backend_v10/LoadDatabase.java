@@ -608,7 +608,7 @@ public class LoadDatabase {
     userService.addArticle(Einstein, Law9);
     userService.addArticle(Hawking, Law10);
     userService.addArticle(Fleming, Law11);    
-
+    // ADD LIKES ON ARTICLES
     Lincoln.likeArticle(Law1);
     Lincoln.likeArticle(Law4);
     Lincoln.likeArticle(Law6);
@@ -649,8 +649,7 @@ public class LoadDatabase {
     userService.addArticle(MuhammedALi, Med8);
     userService.addArticle(Washington, Med9);
     userService.addArticle(Napoleon, Med10);    
-
-
+    // ADD LIKES ON ARTICLES
     Papanikolaou.likeArticle(Med1);
     Papanikolaou.likeArticle(Med4);
     Papanikolaou.likeArticle(Med5);

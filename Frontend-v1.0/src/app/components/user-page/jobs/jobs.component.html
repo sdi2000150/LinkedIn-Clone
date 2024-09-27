@@ -53,7 +53,22 @@
                 <p *ngIf="msgSuccess" class="success-message">{{ msgSuccess }}</p>
                 <p *ngIf="msgError" class="error-message">{{ msgError }}</p>
             </div>
-            <h2>Job listings</h2>
+            <h2>Jobs Recommendations</h2>
+            <ul>
+                <!-- Iterate over the contacts job-offers and display them -->
+                <div *ngFor="let job of contactsJobs" class="post">
+                    <h3>{{ job.title }}<br>
+                        <span class="text-muted" style="font-size: 0.8em; font-weight: normal;">Offered by {{ job.owner.name }} {{ job.owner.lastname }}</span>
+                    </h3>
+                    <p *ngIf="job.needOfDegree">Degree required</p> 
+                    <p *ngIf="!job.needOfDegree">Degree not required</p>
+                    <p>{{ job.otherRequirements }}</p>
+                    <p *ngIf="job.fullTime">Full-time</p> 
+                    <p *ngIf="!job.fullTime">Part-time</p>
+                    <p *ngIf="job.salary != '0'">Salary: {{ job.salary }}€</p>
+                    <button (click)="applyToJob(job.jobID)">Apply</button>                </div>
+            </ul>
+            <h2>Jobs by my Contacts</h2>
             <ul>
                 <!-- Iterate over the contacts job-offers and display them -->
                 <div *ngFor="let job of contactsJobs" class="post">

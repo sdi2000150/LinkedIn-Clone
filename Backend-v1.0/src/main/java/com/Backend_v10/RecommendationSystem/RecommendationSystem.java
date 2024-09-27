@@ -48,7 +48,7 @@ public class RecommendationSystem {
     
     //private double S[][] = new double[Math.toIntExact(jobs)][bigK]; // 100 number of articles    //call construction during loading database
     public RecommendationSystem() {
-        this.bigK = 5;
+        this.bigK = 10;
         this.total_epochs = 100;
     }
 
@@ -140,8 +140,8 @@ public class RecommendationSystem {
         //Calculate Loss
 
         //Form Predict Matrix 
-		this.lr = 0.1;
-		this.reg = 0.01;
+		this.lr = 0.05;
+		this.reg = 0.001;
 		for(int u = 0; u < users; u++){
 			for(int j = 0; j < this.bigK; j++){
 				P[u][j] = Math.random();
@@ -153,7 +153,7 @@ public class RecommendationSystem {
 			}
 		}
 
-		int total_epochs = 100;
+		int total_epochs = 150;
 		for(int epoch = 0; epoch < total_epochs; epoch++){
 			for(int u = 0; u < users; u++){
 				for(int j = 0; j < articles; j++){
