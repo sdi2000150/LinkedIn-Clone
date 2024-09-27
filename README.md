@@ -1,5 +1,5 @@
-# LinkedInApp
-Mock LinkedIn App - Project for Uni Course
+# LinkedIn-Clone
+Mock LinkedIn-Clone Web Application - Project for Uni Course
 
 
 Δουλεουμε σε Angular για Front-End (Javascript/Typescript)<br>
