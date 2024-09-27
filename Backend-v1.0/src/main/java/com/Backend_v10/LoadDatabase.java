@@ -222,12 +222,12 @@ public class LoadDatabase {
       userRepo.save(new User("Einstein", "Albert", this.encoder.encode("12345"), "ROLE_USER", "Albert Einstein", "einstein@email.com"));
       userRepo.save(new User("Newton", "Isaac", this.encoder.encode("12345"), "ROLE_USER", "Isaac Newton", "newton@email.com"));
       userRepo.save(new User("Curie", "Marie", this.encoder.encode("12345"), "ROLE_USER", "Marie Curie", "curie@email.com"));
-      userRepo.save(new User("Tesla", "Nikola", this.encoder.encode("12345"), "ROLE_USER", "Nikola Tesla", "tesla@email.com"));
+      User Tesla = userRepo.save(new User("Tesla", "Nikola", this.encoder.encode("12345"), "ROLE_USER", "Nikola Tesla", "tesla@email.com"));
       userRepo.save(new User("Galilei", "Galileo", this.encoder.encode("12345"), "ROLE_USER", "Galileo Galilei", "galilei@email.com"));
-      userRepo.save(new User("DaVinci", "Leonardo", this.encoder.encode("12345"), "ROLE_USER", "Leonardo Da Vinci", "davinci@email.com"));
-      userRepo.save(new User("Darwin", "Charles", this.encoder.encode("12345"), "ROLE_USER", "Charles Darwin", "darwin@email.com"));
-      userRepo.save(new User("Hawking", "Stephen", this.encoder.encode("12345"), "ROLE_USER", "Stephen Hawking", "hawking@email.com"));
-      userRepo.save(new User("Turing", "Alan", this.encoder.encode("12345"), "ROLE_USER", "Alan Turing", "turing@email.com"));
+      User DaVinci = userRepo.save(new User("DaVinci", "Leonardo", this.encoder.encode("12345"), "ROLE_USER", "Leonardo Da Vinci", "davinci@email.com"));
+      User Darwin = userRepo.save(new User("Darwin", "Charles", this.encoder.encode("12345"), "ROLE_USER", "Charles Darwin", "darwin@email.com"));
+      User Hawking = userRepo.save(new User("Hawking", "Stephen", this.encoder.encode("12345"), "ROLE_USER", "Stephen Hawking", "hawking@email.com"));
+      User Turing = userRepo.save(new User("Turing", "Alan", this.encoder.encode("12345"), "ROLE_USER", "Alan Turing", "turing@email.com"));
       userRepo.save(new User("Lovelace", "Ada", this.encoder.encode("12345"), "ROLE_USER", "Ada Lovelace", "lovelace@email.com"));
       userRepo.save(new User("Franklin", "Rosalind", this.encoder.encode("12345"), "ROLE_USER", "Rosalind Franklin", "franklin@email.com"));
       userRepo.save(new User("Pasteur", "Louis", this.encoder.encode("12345"), "ROLE_USER", "Louis Pasteur", "pasteur@email.com"));
@@ -236,29 +236,78 @@ public class LoadDatabase {
       userRepo.save(new User("Copernicus", "Nicolaus", this.encoder.encode("12345"), "ROLE_USER", "Nicolaus Copernicus", "copernicus@email.com"));
       userRepo.save(new User("Kepler", "Johannes", this.encoder.encode("12345"), "ROLE_USER", "Johannes Kepler", "kepler@email.com"));
       userRepo.save(new User("Babbage", "Charles", this.encoder.encode("12345"), "ROLE_USER", "Charles Babbage", "babbage@email.com"));
-      userRepo.save(new User("Bohr", "Niels", this.encoder.encode("12345"), "ROLE_USER", "Niels Bohr", "bohr@email.com"));
-      userRepo.save(new User("Planck", "Max", this.encoder.encode("12345"), "ROLE_USER", "Max Planck", "planck@email.com"));
+      User Bohr = userRepo.save(new User("Bohr", "Niels", this.encoder.encode("12345"), "ROLE_USER", "Niels Bohr", "bohr@email.com"));
+      User Planck = userRepo.save(new User("Planck", "Max", this.encoder.encode("12345"), "ROLE_USER", "Max Planck", "planck@email.com"));
       userRepo.save(new User("Fermi", "Enrico", this.encoder.encode("12345"), "ROLE_USER", "Enrico Fermi", "fermi@email.com"));
-      userRepo.save(new User("Oppenheimer", "Robert", this.encoder.encode("12345"), "ROLE_USER", "Robert Oppenheimer", "oppenheimer@email.com"));
-      userRepo.save(new User("Heisenberg", "Werner", this.encoder.encode("12345"), "ROLE_USER", "Werner Heisenberg", "heisenberg@email.com"));
+      User Oppenh = userRepo.save(new User("Oppenheimer", "Robert", this.encoder.encode("12345"), "ROLE_USER", "Robert Oppenheimer", "oppenheimer@email.com"));
+      User Heisenberg = userRepo.save(new User("Heisenberg", "Werner", this.encoder.encode("12345"), "ROLE_USER", "Werner Heisenberg", "heisenberg@email.com"));
       userRepo.save(new User("Euler", "Leonhard", this.encoder.encode("12345"), "ROLE_USER", "Leonhard Euler", "euler@email.com"));
       userRepo.save(new User("Rutherford", "Ernest", this.encoder.encode("12345"), "ROLE_USER", "Ernest Rutherford", "rutherford@email.com"));
-      userRepo.save(new User("Feynman", "Richard", this.encoder.encode("12345"), "ROLE_USER", "Richard Feynman", "feynman@email.com"));
-      userRepo.save(new User("Godel", "Kurt", this.encoder.encode("12345"), "ROLE_USER", "Kurt Godel", "godel@email.com"));
+      User Feynman = userRepo.save(new User("Feynman", "Richard", this.encoder.encode("12345"), "ROLE_USER", "Richard Feynman", "feynman@email.com"));
       userRepo.save(new User("Faraday", "Michael", this.encoder.encode("12345"), "ROLE_USER", "Michael Faraday", "faraday@email.com"));
-      userRepo.save(new User("Dirac", "Paul", this.encoder.encode("12345"), "ROLE_USER", "Paul Dirac", "dirac@email.com"));
+      User Dirac = userRepo.save(new User("Dirac", "Paul", this.encoder.encode("12345"), "ROLE_USER", "Paul Dirac", "dirac@email.com"));
       userRepo.save(new User("Hubble", "Edwin", this.encoder.encode("12345"), "ROLE_USER", "Edwin Hubble", "hubble@email.com"));
       userRepo.save(new User("Watson", "James", this.encoder.encode("12345"), "ROLE_USER", "James Watson", "watson@email.com"));
       userRepo.save(new User("Crick", "Francis", this.encoder.encode("12345"), "ROLE_USER", "Francis Crick", "crick@email.com"));
-      
+      User Godel = userRepo.save(new User("Godel", "Kurt", this.encoder.encode("12345"), "ROLE_USER", "Kurt Godel", "godel@email.com"));
+      User Nietzsche = userRepo.save(new User("FriedrichN", "Friedrich", this.encoder.encode("12345"), "ROLE_USER", "Nietzsche", "FNietzsche@email.com"));
+      User Farmer = userRepo.save(new User("Georger Farmer", "George", this.encoder.encode("12345"), "ROLE_USER", "Adams", "AdamsG@email.com"));
+     
+     
+    //CREATE CONNECTIONS 
+
+    userService.addContact(Bohr, Planck);
+    userService.addContact(Bohr, Heisenberg);
+    userService.addContact(Planck, Heisenberg);
+    userService.addContact(Planck, Dirac);
+    userService.addContact(Bohr, Dirac);
+    userService.addContact(Bohr, Oppenh);
+    userService.addContact(Bohr, Feynman);
+    
+    //CREATE REQUESTS
+    UserConnection conn = new UserConnection();
+    conn.setUser1(Hawking.getEmail());
+    conn.setUser2(Turing.getEmail());
+    UserConnRepo.save(conn);
+    
+    conn = new UserConnection();
+    conn.setUser1(Bohr.getEmail());
+    conn.setUser2(Turing.getEmail());
+    UserConnRepo.save(conn);
+
+    conn = new UserConnection();
+    conn.setUser1(Bohr.getEmail());
+    conn.setUser2(Darwin.getEmail());
+    UserConnRepo.save(conn);
+    
+    conn = new UserConnection();
+    conn.setUser1(Tesla.getEmail());
+    conn.setUser2(Bohr.getEmail());
+    UserConnRepo.save(conn);
+    
+    conn = new UserConnection();
+    conn.setUser1(DaVinci.getEmail());
+    conn.setUser2(Bohr.getEmail());
+    UserConnRepo.save(conn);
+     
+    
+     
+     
+     
+     
+     
+     
+     
+     
+     
       //Create Articles
 
 
       //Agriculture
-      articleRepo.save(new Article("Find the Amazing Opportities of Thessaly. Follow us in this link https://www.uth.gr/en/jobs!!", null));
-      articleRepo.save(new Article("Revolutionize agriculture with modern technology. Get involved at https://agritech.com!!", null));
-      articleRepo.save(new Article("Breaking: New Sustainable Farming Techniques Show Promising Results for Increased Crop Yields. Read more at https://sustainablefarmingnews.com!!", null));
-      articleRepo.save(new Article("Latest Research: The Impact of Climate Change on Global Agriculture Trends. Learn more at https://climateagriculture.com!!", null));
+      Article A1 = articleRepo.save(new Article("Find the Amazing Opportities of Thessaly. Follow us in this link https://www.uth.gr/en/jobs!!", null));
+      Article A2 = articleRepo.save(new Article("Revolutionize agriculture with modern technology. Get involved at https://agritech.com!!", null));
+      Article A3 = articleRepo.save(new Article("Breaking: New Sustainable Farming Techniques Show Promising Results for Increased Crop Yields. Read more at https://sustainablefarmingnews.com!!", null));
+      Article A4 = articleRepo.save(new Article("Latest Research: The Impact of Climate Change on Global Agriculture Trends. Learn more at https://climateagriculture.com!!", null));
       articleRepo.save(new Article("Join us for the National Agricultural Expo 2024, showcasing the latest innovations in farming technology. More info at https://agriculturalexpo.com!!", null));
       articleRepo.save(new Article("Emergency Alert: Severe Drought Conditions Affecting Major Farming Regions. Find updates and support at https://droughtresponse.com!!", null));
       articleRepo.save(new Article("Promote Your Organic Products! Join our marketplace and reach eco-conscious consumers. More details at https://organicmarketplace.com!!", null));
@@ -266,12 +315,19 @@ public class LoadDatabase {
       articleRepo.save(new Article("Upcoming Symposium: Innovations in Precision Agriculture – How Technology is Changing the Face of Farming. Register at https://precisionagriculturesymposium.com!!", null));
       articleRepo.save(new Article("Attend the Global Symposium on Sustainable Agriculture Practices to address food security challenges. Details at https://sustainableagriculturesymposium.com!!", null));
 
+      Farmer.likeArticle(A1);
+      Farmer.likeArticle(A2);
+      Farmer.likeArticle(A3);
+      Farmer.likeArticle(A4);
+      userRepo.save(Farmer);
+
+
       //Technology
-      articleRepo.save(new Article("Discover the future of AI in healthcare. Join us at this link https://aihealthcare.com/learn more!!", null));
-      articleRepo.save(new Article("Explore the world of quantum computing. Visit us at https://quantumworld.com to stay ahead!!", null));
-      articleRepo.save(new Article("The future of autonomous driving is here! Discover more at https://autonomousdrive.com!!", null));
-      articleRepo.save(new Article("Discover the breakthrough in nanotechnology. Explore the possibilities at https://nanotechfuture.com!!", null));
-      articleRepo.save(new Article("Step into the world of robotics and automation. Begin your journey at https://roboticsrevolution.com!!", null));
+      Article T1 = articleRepo.save(new Article("Discover the future of AI in healthcare. Join us at this link https://aihealthcare.com/learn more!!", null));
+      Article T2 = articleRepo.save(new Article("Explore the world of quantum computing. Visit us at https://quantumworld.com to stay ahead!!", null));
+      Article T3 = articleRepo.save(new Article("The future of autonomous driving is here! Discover more at https://autonomousdrive.com!!", null));
+      Article T4 = articleRepo.save(new Article("Discover the breakthrough in nanotechnology. Explore the possibilities at https://nanotechfuture.com!!", null));
+      Article T5 = articleRepo.save(new Article("Step into the world of robotics and automation. Begin your journey at https://roboticsrevolution.com!!", null));
       articleRepo.save(new Article("Step into the world of game development. Begin your journey at https://gamedevworld.com!!", null));
       articleRepo.save(new Article("Explore cutting-edge advancements in cybersecurity. Stay protected at https://cybersecure.com!!", null));
       articleRepo.save(new Article("Learn the secrets of machine learning and artificial intelligence at https://mlaiacademy.com!!", null));
@@ -281,6 +337,13 @@ public class LoadDatabase {
       articleRepo.save(new Article("Build a career in UX/UI design. Learn from the best at https://uxdesignpro.com!!", null));
       articleRepo.save(new Article("Discover the power of virtual reality in entertainment and beyond. Learn more at https://vrworld.com!!", null));
       
+      Godel.likeArticle(T1);
+      Godel.likeArticle(T2);
+      Godel.likeArticle(T3);
+      Godel.likeArticle(T4);
+      Godel.likeArticle(T5);
+      userRepo.save(Godel);
+
       //Architecture
       articleRepo.save(new Article("Unlock the secrets of sustainable architecture. Dive into green building at https://greenbuild.com!!", null));
       articleRepo.save(new Article("Explore the role of sustainable materials in modern architecture at https://sustainablearchmaterials.com!!", null));
@@ -302,11 +365,11 @@ public class LoadDatabase {
       articleRepo.save(new Article("Breaking: Global Supply Chain Disruptions Impacting Commodity Prices. Stay updated at https://commoditypricewatch.com!!", null));
 
       //Literacy
-      articleRepo.save(new Article("Enhance your creative writing skills with experts. Learn more at https://creativewriters.com!!", null));
-      articleRepo.save(new Article("Discover the transformative power of literacy in 'The Literacy Myth' by Harvey J. Graff. Read more at https://literacymyth.com!!", null));
-      articleRepo.save(new Article("Explore Paulo Freire's revolutionary ideas in 'Pedagogy of the Oppressed'. Find insights at https://pedagogyoftheoppressed.com!!", null));
-      articleRepo.save(new Article("Unpack the social significance of literacy in 'Literacy in American Lives' by Deborah Brandt. Learn more at https://literacyinamericanlives.com!!", null));
-      articleRepo.save(new Article("Delve into the origins of writing with 'Reading the Past: Writing and Image in the Ancient Near East' by C.B.F. Walker. Details at https://readingthepast.com!!", null));
+      Article L1 = articleRepo.save(new Article("Enhance your creative writing skills with experts. Learn more at https://creativewriters.com!!", null));
+      Article L2 = articleRepo.save(new Article("Discover the transformative power of literacy in 'The Literacy Myth' by Harvey J. Graff. Read more at https://literacymyth.com!!", null));
+      Article L3 = articleRepo.save(new Article("Explore Paulo Freire's revolutionary ideas in 'Pedagogy of the Oppressed'. Find insights at https://pedagogyoftheoppressed.com!!", null));
+      Article L4 = articleRepo.save(new Article("Unpack the social significance of literacy in 'Literacy in American Lives' by Deborah Brandt. Learn more at https://literacyinamericanlives.com!!", null));
+      Article L5 = articleRepo.save(new Article("Delve into the origins of writing with 'Reading the Past: Writing and Image in the Ancient Near East' by C.B.F. Walker. Details at https://readingthepast.com!!", null));
       articleRepo.save(new Article("Inspire a love for reading with 'The Book Whisperer' by Donalyn Miller. Discover tips at https://thebookwhisperer.com!!", null));
       articleRepo.save(new Article("Join us for an exploration of Plato's 'Allegory of the Cave' and its implications for knowledge. More at https://allegoryofthecavelecture.com!!", null));
       articleRepo.save(new Article("Attend a lecture on Aristotle's ethics and the pursuit of the good life. Learn more at https://aristotlesethicslecture.com!!", null));
@@ -314,6 +377,13 @@ public class LoadDatabase {
       articleRepo.save(new Article("Dive into Jean-Paul Sartre's existentialism and the essence of freedom at https://sartreexistentialismlecture.com!!", null));
       articleRepo.save(new Article("Explore Kant's ethical theories on duty and moral law in our latest lecture. More info at https://kantsmoralphilosophy.com!!", null));
       
+      Nietzsche.likeArticle(L1);
+      Nietzsche.likeArticle(L2);
+      Nietzsche.likeArticle(L3);
+      Nietzsche.likeArticle(L4);
+      Nietzsche.likeArticle(L5);
+      userRepo.save(Nietzsche);
+
       //Engineering
       articleRepo.save(new Article("The wonders of renewable energy await. Discover solar, wind, and hydro at https://renewablepower.com!!", null));
       articleRepo.save(new Article("Explore biotechnology breakthroughs that are changing the world. Learn more at https://biotechleaders.com!!", null));
@@ -382,6 +452,53 @@ public class LoadDatabase {
       articleRepo.save(new Article("Upcoming Lecture: 'The Future of Education: Embracing Digital Learning Environments' - Join us for insights. Register at https://digitallearninglecture.com!!", null));
       articleRepo.save(new Article("Attend a lecture on 'The Importance of Emotional Intelligence in Education' to learn about its impact on student success. More info at https://emotionalintelligenceineducation.com!!", null));
 
+      //Soft Skills and Others
+      // Communication Skills Articles
+      articleRepo.save(new Article("Master Effective Communication Skills for Workplace Success. Learn more at https://communicationsuccess.com!!", null));
+      articleRepo.save(new Article("The Importance of Non-Verbal Communication: How Body Language Impacts Your Message. Read more at https://nonverbalcommunication.com!!", null));
+      articleRepo.save(new Article("Public Speaking Tips to Boost Your Confidence and Deliver Powerful Presentations. Find tips at https://publicspeakingmastery.com!!", null));
+      articleRepo.save(new Article("How Active Listening Can Transform Your Relationships and Career. Discover techniques at https://activelistening.com!!", null));
+      articleRepo.save(new Article("Breaking Down Barriers: Effective Cross-Cultural Communication in Global Teams. Learn more at https://crossculturalcommunication.com!!", null));
+      articleRepo.save(new Article("Why Emotional Intelligence is the Key to Leadership and Career Success. Read more at https://emotionalintelligenceleadership.com!!", null));
+      articleRepo.save(new Article("The Top 5 Soft Skills Every Professional Should Develop in 2024. Find out at https://topsoftskills.com!!", null));
+      articleRepo.save(new Article("Critical Thinking and Problem-Solving: How to Excel in Complex Situations. Learn techniques at https://criticalthinking101.com!!", null));
+      articleRepo.save(new Article("Building Resilience: How to Thrive Under Pressure at Work. Explore strategies at https://resilienceatwork.com!!", null));
+      articleRepo.save(new Article("Collaboration Skills: How to Work Effectively in a Team Environment. More at https://teamcollaborationskills.com!!", null));
+      articleRepo.save(new Article("Ace Your Next Interview: Top Questions and How to Answer Them. Prepare at https://interviewquestionsguide.com!!", null));
+      articleRepo.save(new Article("Behavioral Interview Techniques: How to Showcase Your Experience with STAR Method. Learn more at https://behavioralinterviewsuccess.com!!", null));
+      articleRepo.save(new Article("The Power of Storytelling in Interviews: How to Frame Your Responses for Impact. Explore tips at https://interviewstorytelling.com!!", null));
+      articleRepo.save(new Article("How to Overcome Interview Anxiety and Impress Your Potential Employer. Read tips at https://interviewanxietytips.com!!", null));
+      articleRepo.save(new Article("Remote Job Interviews: How to Prepare and Present Yourself Virtually. More info at https://remoteinterviewsuccess.com!!", null));
+      articleRepo.save(new Article("How to Create a Standout CV that Gets You Noticed. Learn more at https://standoutcv.com!!", null));
+      articleRepo.save(new Article("The Perfect CV Format for 2024: What Recruiters Are Looking For. Explore formats at https://cvformatguide.com!!", null));
+      articleRepo.save(new Article("Top 10 Words to Include in Your CV to Make an Impact. Discover them at https://cvimpactwords.com!!", null));
+      articleRepo.save(new Article("Tailoring Your Resume for Each Job Application: Why It Matters and How to Do It. Find tips at https://tailoredresume.com!!", null));
+      articleRepo.save(new Article("How to Highlight Your Soft Skills on Your Resume to Stand Out. Learn more at https://highlightsoftskills.com!!", null));
+      articleRepo.save(new Article("How to Build a Personal Brand that Enhances Your Career Prospects. More info at https://personalbrandingguide.com!!", null));
+      articleRepo.save(new Article("Why Networking is Critical to Your Career Growth and How to Do It Right. Explore strategies at https://networkingsuccess.com!!", null));
+      articleRepo.save(new Article("How to Stay Relevant in Your Career with Continuous Learning and Development. Learn more at https://careerlearninghub.com!!", null));
+      articleRepo.save(new Article("The Benefits of Mentorship: How to Find and Work with a Mentor. Discover more at https://mentorshipbenefits.com!!", null));
+      articleRepo.save(new Article("Upskilling in 2024: What Skills to Focus On for Career Advancement. Learn more at https://upskilling2024.com!!", null));
+      articleRepo.save(new Article("Get 50% Off on Our New Online Course 'Mastering Communication in the Workplace'. Enroll now at https://communicationcoursepromo.com!!", null));
+      articleRepo.save(new Article("Sign Up for Our CV Writing Workshop and Get a Free Resume Review. Learn more at https://cvworkshoppromo.com!!", null));
+      articleRepo.save(new Article("Improve Your Interview Skills with Our One-on-One Coaching Sessions. Book now at https://interviewcoachingpromo.com!!", null));
+      articleRepo.save(new Article("Upgrade Your Public Speaking Skills with Our Virtual Training Program. Register at https://publicspeakingtraining.com!!", null));
+      articleRepo.save(new Article("Don't Miss Out on Our Soft Skills Bootcamp! Limited spots available at https://softskillsbootcamp.com!!", null));
+
+
+      //Create Relationships User-Likes-Article
+
+      //ADD COMMETS ON ARTICLES
+      Comment comment = new Comment();
+      comment.setContent("Deserves A Read");
+      commentRepo.save(comment);
+      userService.addComment(T1, Bohr, comment);
+      
+      comment = new Comment();
+      comment.setContent("Truely Helpful!");
+      commentRepo.save(comment);
+      userService.addComment(T1, Oppenh, comment);
+      //Assosiate comments with articles/users
     }
 
 
