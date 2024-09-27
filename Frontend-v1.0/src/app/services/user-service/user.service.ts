@@ -282,6 +282,18 @@ export class UserService {
     return this.http.get<any[]>(`${this.baseUrl}/user/${email}/contact_articles`, { headers });
   }
 
+  // Method to fetch all recommended articles
+  getRecommendedArticles(token: string): Observable<any[]> {
+    // Extract the email from the token
+    const email = this.extractEmailFromToken(token);
+    // Set up the headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    // Append the email to the URL and send the GET request with the Authorization header
+    return this.http.get<any[]>(`${this.baseUrl}/user/${email}/RecommendArticles`, { headers });
+  }
+
   // Method to like an article
   likeArticle(token: string, articleId: number): Observable<boolean> {
     // Extract the email from the token
