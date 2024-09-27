@@ -254,7 +254,20 @@ public class LoadDatabase {
     User Godel = userRepo.save(new User("Godel", "Kurt", this.encoder.encode("12345"), "ROLE_USER", "Godel", "godel@email.com", LocalDate.of(1980, 2, 15), "(555) 678-9016"));
     User Nietzsche = userRepo.save(new User("FriedrichN", "Friedrich", this.encoder.encode("12345"), "ROLE_USER", "Nietzsche", "FNietzsche@email.com", LocalDate.of(1989, 1, 4), "(555) 789-0127"));
     User Farmer = userRepo.save(new User("Georger Farmer", "George", this.encoder.encode("12345"), "ROLE_USER", "Adams", "AdamsG@email.com", LocalDate.of(1997, 11, 11), "(555) 890-1238"));
-   
+    //
+    User Lincoln = userRepo.save(new User("AbrahamL", "Abraham", this.encoder.encode("12345"), "ROLE_USER", "Lincoln", "LincolnA@email.com", LocalDate.of(1965, 8, 15), "(555) 890-1578"));
+    User Shapiro =  userRepo.save(new User("ShaprioR", "Robert", this.encoder.encode("12345"), "ROLE_USER", "Shapiro", "RSA@email.com", LocalDate.of(1955, 5, 22), "(555) 726-7856"));
+    User Woodrow =  userRepo.save(new User("WWoodrow", "Wilson", this.encoder.encode("12345"), "ROLE_USER", "Woodrow", "WW@email.com", LocalDate.of(1979, 1, 7), "(555) 890-1578"));
+    User WGary =  userRepo.save(new User("WEGarry", "Willy E.", this.encoder.encode("12345"), "ROLE_USER", "Gary", "Gary@email.com", LocalDate.of(1974, 9, 1), "(555) 788-6549")); 
+    //
+    User ASmith = userRepo.save(new User("Smith.A", "Adam", this.encoder.encode("12345"), "ROLE_USER", "Smith", "AdamS@email.com", LocalDate.of(1952, 3, 10), "(555) 892-888"));
+    User Marx =  userRepo.save(new User("KM", "Karl", this.encoder.encode("12345"), "ROLE_USER", "Marx", "KM@email.com", LocalDate.of(1945, 4, 12), "(555) 822-1118"));
+    User Morgan =  userRepo.save(new User("JPMorgan", "JP", this.encoder.encode("12345"), "ROLE_USER", "Morgan", "JMorgan@email.com", LocalDate.of(1947, 2, 11), "(555) 890-1566"));
+    User Musk =  userRepo.save(new User("ElonMusk", "Elon", this.encoder.encode("12345"), "ROLE_USER", "Musk", "EMu@email.com", LocalDate.of(1987, 8, 20), "(555) 923-1738"));
+    //
+    User Hippocrates =  userRepo.save(new User("HippoCr", "HippoCrates", this.encoder.encode("12345"), "ROLE_USER", "Unknown", "Hippo@email.com", LocalDate.of(1987, 3, 28), "(555) 890-1213"));
+    User Papanikolaou = userRepo.save(new User("PapanikolaouG", "George", this.encoder.encode("12345"), "ROLE_USER", "Papanikoalou", "PapaNikolaou@email.com", LocalDate.of(1982, 11, 13), "(555) 890-1989"));
+    
     // CREATE CONTACTS
     userService.addContact(Bohr, Planck);
     userService.addContact(Bohr, Heisenberg);
@@ -435,6 +448,25 @@ public class LoadDatabase {
     Franklin.likeArticle(F7);
     Franklin.likeArticle(F8);
     Einstein.likeArticle(F9);
+
+
+  
+    ASmith.likeArticle(F2);
+    ASmith.likeArticle(F5);
+    ASmith.likeArticle(F8);
+    Marx.likeArticle(F1);
+    Marx.likeArticle(F7);
+    Marx.likeArticle(F5);
+    Marx.likeArticle(F4);
+    Morgan.likeArticle(F2);
+    Morgan.likeArticle(F3);
+    Morgan.likeArticle(F4);
+    Musk.likeArticle(F1);
+    Musk.likeArticle(F2);
+    Musk.likeArticle(F5);
+    Musk.likeArticle(F8);
+    Musk.likeArticle(F9);
+
     //Literacy
     Article L1 = articleRepo.save(new Article("Enhance your creative writing skills with experts. Learn more at https://creativewriters.com!!", null));
     Article L2 = articleRepo.save(new Article("Discover the transformative power of literacy in 'The Literacy Myth' by Harvey J. Graff. Read more at https://literacymyth.com!!", null));
@@ -576,6 +608,25 @@ public class LoadDatabase {
     userService.addArticle(Einstein, Law9);
     userService.addArticle(Hawking, Law10);
     userService.addArticle(Fleming, Law11);    
+
+    Lincoln.likeArticle(Law1);
+    Lincoln.likeArticle(Law4);
+    Lincoln.likeArticle(Law6);
+    Lincoln.likeArticle(Law7);
+    Shapiro.likeArticle(Law9);
+    Shapiro.likeArticle(Law6);
+    Shapiro.likeArticle(Law5);
+    Woodrow.likeArticle(Law6);
+    Woodrow.likeArticle(Law7);
+    Woodrow.likeArticle(Law1);
+    Woodrow.likeArticle(Law1);
+    Woodrow.likeArticle(Law2);
+    WGary.likeArticle(Law3);
+    WGary.likeArticle(Law5);
+    WGary.likeArticle(Law4);
+    WGary.likeArticle(Law10);
+
+
     //Medicine
     Article Med1 = articleRepo.save(new Article("The next wave in biomedical engineering is here. Get involved at https://biomedfuture.com!!", null));
     Article Med2 = articleRepo.save(new Article("Get the latest on breakthroughs in medical research at https://medresearchtoday.com!!", null));
@@ -598,6 +649,26 @@ public class LoadDatabase {
     userService.addArticle(MuhammedALi, Med8);
     userService.addArticle(Washington, Med9);
     userService.addArticle(Napoleon, Med10);    
+
+
+    Papanikolaou.likeArticle(Med1);
+    Papanikolaou.likeArticle(Med4);
+    Papanikolaou.likeArticle(Med5);
+    Papanikolaou.likeArticle(Med7);
+    Fleming.likeArticle(Med1);
+    Fleming.likeArticle(Med3);
+    Fleming.likeArticle(Med2);
+    Hippocrates.likeArticle(Med5);
+    Hippocrates.likeArticle(Med6);
+    Hippocrates.likeArticle(Med8);
+    Hippocrates.likeArticle(Med9);
+    Hippocrates.likeArticle(Med10);
+    Hippocrates.likeArticle(Med3);
+    
+
+
+
+
     //Education
     Article Ed1 = articleRepo.save(new Article("Unlock your potential in the world of e-learning technologies at https://elearninginnovations.com!!", null));
     Article Ed2 = articleRepo.save(new Article("Breaking: New National Curriculum Guidelines Released to Enhance Student Learning Outcomes. Read more at https://educationnews.com!!", null));
@@ -731,6 +802,17 @@ public class LoadDatabase {
     userRepo.save(Godel);
     userRepo.save(Nietzsche);
     userRepo.save(Farmer);
+    userRepo.save(Lincoln);
+    userRepo.save(Shapiro);
+    userRepo.save(Woodrow);
+    userRepo.save(WGary);
+    userRepo.save(ASmith);
+    userRepo.save(Marx);
+    userRepo.save(Morgan);
+    userRepo.save(Musk);
+    userRepo.save(Hippocrates);
+    userRepo.save(Papanikolaou);
+
   }
 
 
