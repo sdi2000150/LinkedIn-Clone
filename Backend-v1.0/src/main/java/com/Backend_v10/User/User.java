@@ -77,7 +77,7 @@ public class User {
     @JsonIgnore
     private List<Job> myJobs;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
     @JoinColumn(name = "job_application_user_id")
     @JsonIgnore
     private List<JobApplication> myJobApplications;

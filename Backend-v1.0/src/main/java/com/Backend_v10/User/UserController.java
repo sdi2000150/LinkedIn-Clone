@@ -150,6 +150,13 @@ public class UserController {
         
         return ResponseEntity.ok(this.service.RecommendArticles(email));
     }
+    @Transactional
+    @GetMapping("/{email}/RecommendJobs")
+    public ResponseEntity<List<Job>> RecommendJobs(@PathVariable String email){
+        
+        return ResponseEntity.ok(this.service.RecommendJobs(email));
+    }
+
 
     @PostMapping("/create_jobApp")
     public boolean CreateJobApplication(@RequestBody JobApplication newJobApp, @RequestParam(name="email") String owner_email, @RequestParam(name="id") Long job_id){

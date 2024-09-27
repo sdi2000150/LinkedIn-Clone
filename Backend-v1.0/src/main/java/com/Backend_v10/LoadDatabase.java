@@ -196,13 +196,14 @@ public class LoadDatabase {
         //Testing Recommendation System
         RecommendationSystem R = new RecommendationSystem();
         R.UpdateArticleRecommendationMatrix(userRepo.findAll(), articleRepo.findAll());
-
+        R.UpdateJobsRecommendationMatrix(userRepo.findAll(), jobRepo.findAll());
 
         //Testing Results 
 
         List<Long> res = R.RecommendArticles(user6);
         System.out.println("RESULTS FOR USER:  " + res.toString());
-
+        List<Long> res2 = R.RecommendArticles(user6);
+        System.out.println("RESULTS FOR USER:  " + res2.toString());
       };
   }
 

@@ -40,43 +40,15 @@ public class JobApplicationController {
         //Find user
         Optional<User> user = this.UserRepo.findByEmail(userEmail);
         Optional<Job> job = this.JobRepo.findById(jobID);
-        System.out.println("SIzee? User " + user.get().getMyJobApplications().size());
-        System.out.println("SIzee? Job  " + job.get().getJobApplications().size());
 
         //Find job
         //Optional<Job> job = this.JobRepo.findById(jobID);
         //Find application based on job's apllications machting user's application
         JobApplication application_to_delete = this.JobApplicationRepo.GetApplicationOfJobWithUserID(jobID, user.get().getUserID());
-        System.out.println("check!!");
         user.get().getMyJobApplications().remove(application_to_delete);
         this.JobApplicationRepo.DeleteApplicationsOfJobWithUserID(jobID, user.get().getUserID());
         job.get().getJobApplications().remove(application_to_delete);        
 
-        System.out.println("SIzee? User " + user.get().getMyJobApplications().size());
-        System.out.println("SIzee? Job  " + job.get().getJobApplications().size());
-
-        // for (JobApplication application : job.get().getJobApplications()) {
-        //     if(application.getUser().equals(user.get())){
-
-                //....
-                //here need to be done the deletion of the application
-                //from job and from user respectively
-                //....
-
-        //         System.out.println("JobApplication Found in DB");
-        //         return;
-        //     }
-        // }
-        //System.out.println("JobApplication Not Found");
-
-        // Optional<JobApplication> found_application = this.JobApplicationRepo.findById(id);
-        // if(found_application.isEmpty()){
-        //     System.out.println("JobApplication Not Found");
-        // }
-        // else{
-        //     this.JobApplicationRepo.deleteById(id);
-        //     System.out.println("JobApplication Found in DB");    
-        // }
     }
     
 }

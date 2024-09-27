@@ -61,9 +61,7 @@ public class ArticleController {
             this.CommRepo.delete(comm);
         }
         //First we delete all article's comments
-        System.out.println(found_article.get().getArticleComments().size());
         found_article.get().getArticleComments().clear();
-        System.out.println(found_article.get().getArticleComments());
 
         //Then we delete all likes 
         this.repository.DeleteLikes(id);

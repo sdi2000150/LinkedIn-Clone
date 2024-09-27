@@ -70,6 +70,24 @@ public class UserService {
         return recommened_articles;
     }
 
+    @Transactional
+    public List<Job> RecommendJobs(String email){
+
+        //Update First 
+        this.Recommendationsystem.UpdateJobsRecommendationMatrix(this.userRepo.findAll(), this.jobRepo.findAll());
+
+        List<Job> recommened_jobs = new ArrayList<>();
+        Optional<User> u = this.userRepo.findByEmail(email);
+        System.out.println("Users is " + this.Recommendationsystem.getLr());
+
+        List<Long> ids = this.Recommendationsystem.RecommendJobs(u.get());
+        for(Long id: ids)
+            recommened_jobs.add(this.jobRepo.findById(id).get());
+        
+
+        return recommened_jobs;
+    }
+
 
     @Transactional
     public Long addArticle(User user, Article newArticle) {

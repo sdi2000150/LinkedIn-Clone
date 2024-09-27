@@ -220,9 +220,9 @@ public class RecommendationSystem {
 			}
 			
 		}
-		System.out.println("Actual Array " + Arrays.deepToString(ActualArray));
+		//System.out.println("Actual Array " + Arrays.deepToString(ActualArray));
 
-		System.out.println("Predicted Array " + Arrays.deepToString(PredictedArticles));
+		//System.out.println("Predicted Array " + Arrays.deepToString(PredictedArticles));
 
 	}	
 
@@ -400,9 +400,9 @@ public class RecommendationSystem {
 			}
 			
 		}
-		System.out.println("Actual Array " + Arrays.deepToString(ActualArray));
+	//	System.out.println("Actual Array " + Arrays.deepToString(ActualArray));
 
-		System.out.println("Predicted Array " + Arrays.deepToString(PredictedJobs));
+	//	System.out.println("Predicted Array " + Arrays.deepToString(PredictedJobs));
 
 	}	
 
@@ -500,10 +500,10 @@ public class RecommendationSystem {
 
         //And now we get the indexes back
         int max;
-        if(JobRatingsForUser.length < 20)
+        if(JobRatingsForUser.length < 8)
             max = JobRatingsForUser.length;
         else   
-            max = 20;
+            max = 8;
         for(int j = 0; j < max; j++){
             //Find actual index
             int Index = RatingToIndex.get(JobRatingsForUser[JobRatingsForUser.length - 1 - j]);
