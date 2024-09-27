@@ -30,4 +30,10 @@ Mock LinkedIn-Clone Web Application - Project for Uni Course
 
 #### Settings
 
-### Admin-Page
+### Admin-Page:
+#### Home
+
+#### Users-List
+
+#### User-View
+
