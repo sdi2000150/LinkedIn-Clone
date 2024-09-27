@@ -32,18 +32,6 @@ public class AuthController {
         return service.addUser(userInfo);
     }
 
-    // @GetMapping("/user/userProfile")
-    // @PreAuthorize("hasAuthority('ROLE_USER')")  // Check if the user has the 'ROLE_USER' authority
-    // public String userProfile() {
-    //     return "Welcome to User Profile";
-    // }
-
-    // @GetMapping("/admin/adminProfile")
-    // @PreAuthorize("hasAuthority('ROLE_ADMIN')") // Check if the user has the 'ROLE_ADMIN' authority
-    // public String adminProfile() {
-    //     return "Welcome to Admin Profile";
-    // }
-
     @PostMapping("/generateToken")
     public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {   // Authenticate user and generate token
         Authentication authentication = authenticationManager.authenticate( // Authenticate user

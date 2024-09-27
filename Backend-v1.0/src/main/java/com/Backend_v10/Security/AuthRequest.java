@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor // Lombok annotation to create a constructor with all the arguments
 @NoArgsConstructor  // Lombok annotation to create a constructor with no arguments
 public class AuthRequest {  // Class to hold the login credentials
-
-    // private String username;    // "Username" is the name
     private String email;
     private String password;    // "Password" is the password
 

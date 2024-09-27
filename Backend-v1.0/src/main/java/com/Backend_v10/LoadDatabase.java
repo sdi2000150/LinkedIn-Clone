@@ -87,10 +87,7 @@ public class LoadDatabase {
         userRepo.save(user4);
         userRepo.save(user5);
         userRepo.save(user6);
-        
-        // [SOLVED] PROBLEM occurs, with user who owns the article/job (JSON infinite creation) 
-        // -> SOLUTION: @JsonManagedReference/@JsonBackReference in all involved entities 
-                    //  OR @JsonIgnoreProperties in all involved entities
+    
 
         // Create articles and jobs
         Article article1 = new Article("Just got my First Job!!", null);
@@ -166,27 +163,14 @@ public class LoadDatabase {
         // Test likes
         user1.likeArticle(article1);
         user2.likeArticle(article1);
-        // user3.likeArticle(article2);
-        // user4.likeArticle(article1);
         user5.likeArticle(article1);
 
         // Save the updated users
         userRepo.save(user1);
         userRepo.save(user2);
-        // userRepo.save(user3);
-        // userRepo.save(user4);
         userRepo.save(user5);
         // Maybe dont need the below: (yes, not needed, maybe autosaved by the manytomany(mappedBy = "likedArticles")->(of user))
-        // articleRepo.save(article1);
-        // articleRepo.save(article2);
 
-        // Other tests:
-
-        //userRepo.save(user2);
-        //UserConnRepo.delete(conn);
-        System.out.println("check1");
-        System.out.println(admin1.getLikedArticles().size());
-        System.out.println("check2");
 
         List<String> Res = UserConnRepo.findUsersRequestingMe("jetlee@email.com");
         System.out.println(Res);

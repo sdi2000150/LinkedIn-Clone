@@ -25,7 +25,6 @@ import com.Backend_v10.JobApplication.JobApplicationRepository;
 import com.Backend_v10.Jobs.JobRepository;
 import com.Backend_v10.RecommendationSystem.RecommendationSystem;
 
-// To encapsulate the method calls + repository saves
 @Service
 public class UserService {
 
@@ -57,15 +56,11 @@ public class UserService {
 
         //Update First 
         this.Recommendationsystem.UpdateArticleRecommendationMatrix(this.userRepo.findAll(), this.articleRepo.findAll());
-
         List<Article> recommened_articles = new ArrayList<>();
         Optional<User> u = this.userRepo.findByEmail(email);
-        System.out.println("Users is " + this.Recommendationsystem.getLr());
-
         List<Long> ids = this.Recommendationsystem.RecommendArticles(u.get());
         for(Long id: ids)
             recommened_articles.add(this.articleRepo.findById(id).get());
-        
 
         return recommened_articles;
     }
@@ -73,9 +68,7 @@ public class UserService {
     @Transactional
     public List<Job> RecommendJobs(String email){
 
-        //Update First 
         this.Recommendationsystem.UpdateJobsRecommendationMatrix(this.userRepo.findAll(), this.jobRepo.findAll());
-
         List<Job> recommened_jobs = new ArrayList<>();
         Optional<User> u = this.userRepo.findByEmail(email);
         System.out.println("Users is " + this.Recommendationsystem.getLr());
@@ -108,7 +101,7 @@ public class UserService {
         articlelocal.addComment(newComment);
         userlocal.addComment(newComment);
         
-        commentRepo.save(newComment);   //save the comment first to avoid duplication
+        commentRepo.save(newComment);   
         articleRepo.save(articlelocal);
         userRepo.save(userlocal);
     }
@@ -128,7 +121,7 @@ public class UserService {
         joblocal.addJobApplication(newJobApplication);
         userlocal.addJobApplication(newJobApplication);
 
-        jobApplicationRepo.save(newJobApplication);   //save the job application first to avoid duplication
+        jobApplicationRepo.save(newJobApplication);   
         jobRepo.save(joblocal);
         userRepo.save(userlocal);
     }
@@ -145,14 +138,11 @@ public class UserService {
     @Transactional
     public List<Article> return_articles_of_contacts(String email){
         Optional<User> user = userRepo.findByEmail(email);
-        System.out.println("here");
         List<Long> articles_of_contactsids = userRepo.findContactArticles(user.get().getUserID());
         List<Article> articles_of_contacts = new ArrayList<>();
         for(int i = 0; i < articles_of_contactsids.size(); i++){
             Optional<Article> a = articleRepo.findById(articles_of_contactsids.get(i));
-            System.out.println(a);
             articles_of_contacts.add(a.get());
-            //articles_of_contacts.add
         }
         System.out.println(articles_of_contacts);
         return articles_of_contacts;
@@ -161,14 +151,11 @@ public class UserService {
     @Transactional
     public List<Article> return_my_articles(String email){
         Optional<User> user = userRepo.findByEmail(email);
-        System.out.println("here");
         List<Long> articles_of_contactsids = userRepo.findMyArticles(user.get().getUserID());
         List<Article> articles_of_contacts = new ArrayList<>();
         for(int i = 0; i < articles_of_contactsids.size(); i++){
             Optional<Article> a = articleRepo.findById(articles_of_contactsids.get(i));
-            System.out.println(a);
             articles_of_contacts.add(a.get());
-            //articles_of_contacts.add
         }
         System.out.println(articles_of_contacts);
         return articles_of_contacts;
@@ -196,7 +183,6 @@ public class UserService {
     public void  DeleteConnection(String email1, String email2){
         Optional<User> u1 = this.userRepo.findByEmail(email1);
         Optional<User> u2 = this.userRepo.findByEmail(email2);
-        System.out.println("CHECKKK" + u1.get().getMyContacts().size());
         u1.get().getMyContacts().remove(u2.get());
         u2.get().getMyContacts().remove(u1.get());
 
@@ -216,8 +202,6 @@ public class UserService {
                     return "Connected";
                 }
             }
-        //return "here?????";
-
         //Check if We Have sent a Request to User
         if(this.ConnRepo.CheckIfRequestExists(Myemail, Useremail) == 1L){
             return "Request Sent";

@@ -92,29 +92,6 @@ public class UserController {
 
     }
 
-    //FILL ALL MAPPINGS(GET,POST,DELETE,PUT)
-    // @PostMapping("/api/foos")
-    // @ResponseBody
-    // public String addFoo(@RequestParam(name = "id") String fooId, @RequestParam String name) { 
-    //     return "ID: " + fooId + " Name: " + name;
-    // }
-
-    //FOR TESTING
-    @GetMapping("/api/foos")
-    @ResponseBody
-    public String getFoos(@RequestParam(name="email") String owner_email,@RequestParam(name="id") Long article_id) {
-        return "ID: " + article_id + owner_email;
-    }
-
-    //for testing
-    // @GetMapping("/1")
-    // public ResponseEntity<User> GetUser() {
-    //     //Optional<User> u = this.repository.findByEmail(Email);
-    //     Optional<User> u = this.repository.findById(1L);
-    //     //unwrap Optional with .get
-    //     System.out.println("Giving back user " + u.get().getMyArticles().size());
-    //     return ResponseEntity.ok(u.get());
-    // }
 
     //////////////////////// ADMIN METHODS ////////////////////////
     @PreAuthorize("hasRole('ROLE_ADMIN')")  //only admin can access
@@ -160,12 +137,8 @@ public class UserController {
 
     @PostMapping("/create_jobApp")
     public boolean CreateJobApplication(@RequestBody JobApplication newJobApp, @RequestParam(name="email") String owner_email, @RequestParam(name="id") Long job_id){
-
-        // this.JobAppRepo.save(newJobApp);
         Optional<User> u = this.repository.findByEmail(owner_email);
-
         Optional<Job> j = this.JobRepo.findById(job_id);
-        // this.JobRepo.save(j.get());
 
         //if user has already applied to this job, return false
         for (JobApplication jobApp : u.get().getMyJobApplications()) {
@@ -176,9 +149,6 @@ public class UserController {
         //else:
         // Assosiate jobapplication with job/user
         this.service.addJobApplication(j.get(), u.get(), newJobApp); 
-
-        //this.repository.save(u.get());
-        //this.repository.save(newJob);
         return true;
     }
 
@@ -187,14 +157,8 @@ public class UserController {
     @PostMapping("/create_job/{owner_email}")
     public boolean CreateJob(@RequestBody Job newJob, @PathVariable String owner_email){
         
-        // Optional<Job> found_job = this.repository.findById(newJob.getJobID());
-        // if(found_job.isEmpty()){
         Optional<User> u = this.repository.findByEmail(owner_email);
-        
         this.service.addJob(u.get(), newJob);
-        //j.set
-        //this.repository.save(u.get());
-        //this.repository.save(newJob);
         return true;
     }
 
@@ -205,23 +169,8 @@ public class UserController {
 
         System.out.println("HERE "+newArticle.getText());
         Optional<User> u = this.repository.findByEmail(owner_email);
-
-        //newArticle.setOwner(u.get());
         articleRepo.save(newArticle);
-        // Optional<Job> found_job = this.repository.findById(newJob.getJobID());
-        // if(found_job.isEmpty()){
-       // u.get().addArticle(newArticle);
-       // newArticle.setDateTime_of_Creation(LocalDateTime.now());
-        //j.set
-       // this.repository.save(u.get());
-
         return this.service.addArticle(u.get(), newArticle);
-
-    
-
-
-        //this.repository.save(newJob);
-        // return true;
     }
 
 
@@ -241,7 +190,7 @@ public class UserController {
 //----------------REQUESTS----------------------//
     @GetMapping("/RequestingMe/{myemail}")
     public List<User> UsersRequestingMe(@PathVariable String myemail){
-        
+
         List<String> RequestingMeEmails = this.ConnectionRepo.findUsersRequestingMe(myemail);
         List<User> RequestingMe = new ArrayList<>();
         for(String email: RequestingMeEmails)
@@ -262,20 +211,17 @@ public class UserController {
     }
 
 
-    //WORKS!!
     @GetMapping("/NewR/{myemail}/{useremail}")
     public void NewRequest(@PathVariable String myemail, @PathVariable String useremail){
         //add the 2 emails in the table of requests with that order
         this.service.addRequestPair(myemail, useremail);
     }
 
-    //WORKS!!
     @GetMapping("/RejectReceivedR/{myemail}/{useremail}")
     public void RejectReceivedRequest(@PathVariable String myemail, @PathVariable String useremail){
         this.service.DeleteRec(useremail,myemail);
     }
 
-    //WORKS!!
     @GetMapping("/AcceptReceivedR/{myemail}/{useremail}")
     public void AcceptReceivedRequest(@PathVariable String myemail, @PathVariable String useremail){
         //delete request
@@ -288,7 +234,6 @@ public class UserController {
            
     }
     
-    //WORKS!!
     @GetMapping("/DeleteSentR/{myemail}/{useremail}")
     public void DeleteSentRequest(@PathVariable String myemail, @PathVariable String useremail){
         this.service.DeleteRec(myemail,useremail);
@@ -317,9 +262,7 @@ public class UserController {
 
     //GET ALL Articles from my CONTACTS
     @GetMapping("/{email}/contact_articles")
-    public ResponseEntity<List<Article>> GetContactArticles(@PathVariable String email){
-        //Optional<User> userOptional = this.repository.findByEmail(email);
-        
+    public ResponseEntity<List<Article>> GetContactArticles(@PathVariable String email){        
         return ResponseEntity.ok(service.return_articles_of_contacts(email));
     }
     //Get My Articles 
@@ -340,7 +283,6 @@ public class UserController {
     @GetMapping("/{email}")
     public ResponseEntity<User> GetUser(@PathVariable String email) {
         Optional<User> u = this.repository.findByEmail(email);
-        //unwrap Optional with .get
         System.out.println("Giving back user " + u.get().getMyArticles().size());
         return ResponseEntity.ok(u.get());
     }
@@ -447,9 +389,6 @@ public class UserController {
             if (updatedUser.getBirthdate() != null) {
                 user.setBirthdate(updatedUser.getBirthdate());
             }
-            // if (updatedUser.getCvFile() != null) {
-            //     user.setCvFile(updatedUser.getCvFile());
-            // }
             if (updatedUser.getProfilePhotoUrl() != null) {
                 user.setProfilePhotoUrl(updatedUser.getProfilePhotoUrl());
             }
@@ -480,35 +419,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
         }
     }
-
-    // @PutMapping("/{email}/profile/files")
-    // public ResponseEntity<Boolean> updateUserFiles(@PathVariable String email, 
-    //                                 @RequestParam(value = "profilePhotoUrl", required = false) String profilePhotoUrl, 
-    //                                 @RequestParam(value = "coverPhotoUrl", required = false) String coverPhotoUrl, 
-    //                                 @RequestParam(value = "cvFile", required = false) MultipartFile cvFile) throws IOException {
-    //     Optional<User> userOptional = repository.findByEmail(email);
-    
-    //     if (userOptional.isPresent()) {
-    //         User user = userOptional.get();
-    
-    //         // Update profile photo URL if provided
-    //         if (profilePhotoUrl != null && !profilePhotoUrl.isEmpty()) {
-    //             user.setProfilePhotoUrl(profilePhotoUrl);
-    //         }
-    //         // Update cover photo URL if provided
-    //         if (coverPhotoUrl != null && !coverPhotoUrl.isEmpty()) {
-    //             user.setCoverPhotoUrl(coverPhotoUrl);
-    //         }
-    //         // Update CV file if provided
-    //         if (cvFile != null && !cvFile.isEmpty()) {
-    //             user.setCvFile(cvFile.getBytes());
-    //         }
-    //         repository.save(user);
-    //         return ResponseEntity.ok(true);
-    //     } else {
-    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
-    //     }
-    // }
 
     // Endpoint to get all contacts
     @GetMapping("/{email}/contacts")
@@ -608,32 +518,7 @@ public class UserController {
     
     //Change Password and email 
 
-    @PutMapping("/settings/change_{email}")
-    public Boolean Change(@PathVariable String email, @RequestBody String[] EmailPassword) {
-
-        Optional<User> u = repository.findByEmail(email);
-        User user = u.get();
-        String NewEmail = EmailPassword[0];
-        
-        //!!!TODO
-        return true;
-        // repository.findById(id).map(u -> {
-        //     u.setName(updatedUser.getName());
-        //     u.setLastname(updatedUser.getLastname());
-        //     u.setEmail(updatedUser.getEmail());
-        //     u.setBirthdate(updatedUser.getBirthdate());
-        //     u.setCVFile(updatedUser.getCVFile());
-        //     u.setPhoto(updatedUser.getPhoto());
-        //     u.setUsername(updatedUser.getUsername());
-        //     repository.save(u);
-        //     return true;
-        // })
-        // .orElseGet(() -> {
-        //     return false;
-        // });
-        // return false;
-    }
-
+ 
     //user likes article
     @GetMapping("/{email}/like/{article_id}")
     public boolean LikeArticle(@PathVariable String email, @PathVariable Long article_id){
@@ -742,11 +627,8 @@ public class UserController {
         }
 
         Optional<User> u = this.repository.findByEmail(email);
-        // Get the original file name (consider using a unique name to avoid conflicts)
         String originalFileName = u.get().getUserID() + "CV" + ".pdf";   // ---> IDCover
-        // Resolve the file path (directory + file name)
         Path filePath = path.resolve(originalFileName);               
-        // Save the file to the local file system
         Files.write(filePath, File.getBytes());
         System.out.println("File uploaded successfully");
         
@@ -772,17 +654,12 @@ public class UserController {
         Optional<User> u = this.repository.findByEmail(email);
         
         try {
-            // Build the path to the image
             String originalFileName = u.get().getUserID() + "Profile" + ".jpg";
-
             Path path = Paths.get(uploadDir).resolve(originalFileName);
             Resource resource = new UrlResource(path.toUri());
-    
             if (resource.exists() && resource.isReadable()) {
                 // Return the image with appropriate headers
-                return ResponseEntity.ok()
-                        // .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename="" + resource.getFilename() + """)
-                        .body(resource);
+                return ResponseEntity.ok().body(resource);
             } else {
                 throw new RuntimeException("File not found or not readable");
             }
@@ -804,9 +681,7 @@ public class UserController {
     
             if (resource.exists() && resource.isReadable()) {
                 // Return the image with appropriate headers
-                return ResponseEntity.ok()
-                        // .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename="" + resource.getFilename() + """)
-                        .body(resource);
+                return ResponseEntity.ok().body(resource);
             } else {
                 throw new RuntimeException("File not found or not readable");
             }
@@ -828,9 +703,7 @@ public class UserController {
     
             if (resource.exists() && resource.isReadable()) {
                 // Return the image with appropriate headers
-                return ResponseEntity.ok()
-                        // .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename="" + resource.getFilename() + """)
-                        .body(resource);
+                return ResponseEntity.ok().body(resource);
             } else {
                 throw new RuntimeException("File not found or not readable");
             }
@@ -838,29 +711,4 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
     }
-    // @GetMapping("/request_{from}")
-    // public void sendConnectionRequest(@RequestParam String send_to, @PathVariable String from) {
-    //     UserConnection connection = new UserConnection();
-
-    //     Optional<User> sending = repository.findByEmail(from);
-    //     Optional<User> accepting = repository.findByEmail(send_to);
-
-
-
-    //     connection.setUser1(sending.get().getEmail());
-    //     connection.setUser2(accepting.get().getEmail());
-    //     connection.setPendingRequest(true);
-    //     this.ConnectionRepo.save(connection);
-    //     // this.connectionsInitiated.add(connection);
-    //     // user.connectionsReceived.add(connection);
-    // }
-    // Endpoint to apply to a job
-    // @PostMapping("/user/{email}/apply/{jobId}")
-    // public ResponseEntity<?> applyToJob(@PathVariable String email, @PathVariable Long jobId) {
-    //     User user = userService.getUserById(userId);
-    //     Job job = jobService.getJobById(jobId);
-    //     jobService.applyToJob(user, job);
-    //     return ResponseEntity.ok().build();
-    // }
-
 }

@@ -46,7 +46,6 @@ public class JobController {
     public void deleteJob(@PathVariable Long id){
         //delete all applications on this job 
         this.JobAppRepo.DeleteApplicationsOfJob(id);
-        //for(app: )
 
         Optional<Job> found_job = this.repository.findById(id);
         if(found_job.isEmpty()){
@@ -54,11 +53,6 @@ public class JobController {
         }
         else{
             this.repository.deleteById(id);
-            System.out.println("Job Found in DB");    
         }
     }
-
-
-
-    
 }

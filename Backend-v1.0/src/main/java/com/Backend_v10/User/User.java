@@ -63,13 +63,10 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "Owner")
     @JsonIgnore
     private List<Article> myArticles;
-    //@JoinColumn(name = "article_user_id")
-    // @JsonManagedReference
 
     @OneToMany (cascade = CascadeType.ALL)
     @JoinColumn(name = "comment_user_id")
     @JsonIgnore
-    // @JsonManagedReference
     private List<Comment> myComments;
 
 
@@ -81,7 +78,6 @@ public class User {
     @JoinColumn(name = "job_application_user_id")
     @JsonIgnore
     private List<JobApplication> myJobApplications;
-    // @JsonManagedReference
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) //these cascades for the auto save/addContact of user2, when saving user1
     @JoinTable(
@@ -121,45 +117,7 @@ public class User {
     private String experienceDescription;
     private String education;
     private String educationDescription;
-    private String skills;    //this will change to List<String>
-
-    // public enum Experience {
-    //     INTERN,
-    //     JUNIOR,
-    //     MID_LEVEL,
-    //     SENIOR,
-    //     LEAD,
-    //     MANAGER,
-    //     DIRECTOR,
-    //     EXECUTIVE
-    // }
-    
-    // public enum Education {
-    //     HIGH_SCHOOL,
-    //     ASSOCIATE_DEGREE,
-    //     BACHELORS_DEGREE,
-    //     MASTERS_DEGREE,
-    //     DOCTORATE,
-    //     PROFESSIONAL_CERTIFICATION
-    // }
-    
-    // public enum Skills {
-    //     PROGRAMMING,
-    //     DATA_ANALYSIS,
-    //     PROJECT_MANAGEMENT,
-    //     COMMUNICATION,
-    //     PROBLEM_SOLVING,
-    //     TEAMWORK,
-    //     LEADERSHIP,
-    //     DESIGN,
-    //     MARKETING,
-    //     SALES,
-    //     CUSTOMER_SERVICE,
-    //     FINANCE,
-    //     OPERATIONS,
-    //     STRATEGIC_PLANNING,
-    //     RESEARCH
-    // }
+    private String skills;    
 
      // Simple constructor for testing
     public User(String username, String name, String password, String role, String lastname, String email, LocalDate birthdate, String phone) {
@@ -177,9 +135,6 @@ public class User {
         this.myJobApplications = new ArrayList<>();
         this.myContacts = new ArrayList<>();
         this.likedArticles = new ArrayList<>();
-        // this.connectionsInitiated = new ArrayList<>();
-        // this.connectionsReceived = new ArrayList<>();
-        // this.Contacts = new ArrayList<>();
     }
 
     // Getters, Setters and toString are automaticaly created (in the background) by Lombok

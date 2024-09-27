@@ -41,12 +41,6 @@ public class RecommendationSystem {
     private double PredictedArticles[][];
     private double PredictedJobs[][];
 
-    
-    
-    // @Autowired  // Inject UserRepository
-    // private UserRepository userRepo;
-    
-    //private double S[][] = new double[Math.toIntExact(jobs)][bigK]; // 100 number of articles    //call construction during loading database
     public RecommendationSystem() {
         this.bigK = 10;
         this.total_epochs = 100;
@@ -59,10 +53,7 @@ public class RecommendationSystem {
         this.IndexToUserDict = new Hashtable<>();
         this.ArticleToIndexDict = new Hashtable<>();
         this.IndexToArticleDict = new Hashtable<>();
-        // Long UsersDict[][] = new Long[AllUsers.size()][2];
-        // Long ArticlesDict[][] = new Long[AllArticles.size()][2];
 
-        
         int  i = 0;
         //Create Dictionaries
         
@@ -70,8 +61,6 @@ public class RecommendationSystem {
         for(User user: AllUsers){
             this.IndexToUserDict.put(i, user.getUserID());
             this.UserToIndexDict.put(user.getUserID(), i);
-            // UsersDict[i][0] = Long.valueOf(i);
-            // UsersDict[i][0] = user.getUserID();
             i += 1;
         }
         this.users = Long.valueOf(i);
@@ -80,8 +69,6 @@ public class RecommendationSystem {
         for(Article article: AllArticles){
             this.IndexToArticleDict.put(i, article.getArticleID());
             this.ArticleToIndexDict.put(article.getArticleID(), i);
-            // ArticlesDict[i][0] = Long.valueOf(i);
-            // ArticlesDict[i][0] = user.getUserID();
             i += 1;
         }
         this.articles = Long.valueOf(i);
@@ -91,8 +78,8 @@ public class RecommendationSystem {
         System.out.println("Index to Article Dictionary:\n" + this.IndexToArticleDict.toString());
         System.out.println("Article to Index Dictionary:\n" + this.ArticleToIndexDict.toString());
 
-        double P[][] = new double[Math.toIntExact(users)][bigK]; //100 number of users
-        double Q[][] = new double[Math.toIntExact(articles)][bigK]; // 100 number of articles    //call construction during loading database
+        double P[][] = new double[Math.toIntExact(users)][bigK]; 
+        double Q[][] = new double[Math.toIntExact(articles)][bigK]; 
         Integer ActualArray[][] = new Integer [Math.toIntExact(users)][Math.toIntExact(articles)];
         this.PredictedArticles = new double[Math.toIntExact(users)][Math.toIntExact(articles)];
 
@@ -103,19 +90,12 @@ public class RecommendationSystem {
             for(int j = 0; j < articles; j++)
                 ActualArray[s][j] = 0;
         System.out.println("Actual Array:\n" + Arrays.deepToString(ActualArray));
-        System.out.println("HERE");
         //For each like of a user to an article,
         //set 1 in the respective cell
         for(User user: AllUsers){
-            System.out.println("Inside");
-
             List<Article> liked_articles = new ArrayList<>();
             liked_articles = user.getLikedArticles();
             System.out.println(liked_articles.size());
-            for(Article article: liked_articles)
-                System.out.println("Liked Articles for User " + article.getArticleID());
-
-            System.out.println("Inside2");
 
             //Found Liked Articles for a certain user
             //UserID ---> UserIndex
@@ -132,14 +112,8 @@ public class RecommendationSystem {
 
         }
         //Here we have the Intial array with all User-Article Interactions
-        System.out.println("Actual Array:\n" + Arrays.deepToString(ActualArray));
-        
-        
-        //Do Training
-        
-        //Calculate Loss
+        //System.out.println("Actual Array:\n" + Arrays.deepToString(ActualArray));
 
-        //Form Predict Matrix 
 		this.lr = 0.05;
 		this.reg = 0.001;
 		for(int u = 0; u < users; u++){
@@ -172,15 +146,9 @@ public class RecommendationSystem {
 							Q[j][k] += lr * (error_ij * P[u][k] - reg * Q[j][k]);
 						}
 
-
-						//P[i, :] += alpha * (error_ij * Q[j, :] - beta * P[i, :])
-						//Q[j, :] += alpha * (error_ij * P[i, :] - beta * Q[j, :])
-						//error_ij = R[i][j] - np.dot(P[i, :], Q[j, :].T)
 					}
 				}
 			}
-			//System.out.println(P[5][10]);
-
 			double loss = 0.0;
 			for (int u = 0; u < users; u++) {
 				for (int j = 0; j < articles; j++) {
@@ -193,9 +161,7 @@ public class RecommendationSystem {
 						}
 						error_ij = ActualArray[u][j] - dot;
 						double error_sq = error_ij * error_ij;
-						loss += error_sq;
-						//loss += error_ij * error_ij;
-						
+						loss += error_sq;						
 						// Regularization penalty
 						for (int k = 0; k < bigK; k++) {
 							loss +=  reg * (P[u][k] * P[u][k] + Q[j][k] * Q[j][k]);
@@ -207,8 +173,6 @@ public class RecommendationSystem {
 
 
 		}
-		//System.out.println(Arrays.deepToString(Q));
-		//double Predicted[][] = new double[users][articles];
 
 		for(int u = 0; u < users; u++){
 			for(int j = 0; j < articles; j++){
@@ -240,19 +204,13 @@ public class RecommendationSystem {
         this.IndexToUserDict = new Hashtable<>();
         this.JobToIndexDict = new Hashtable<>();
         this.IndexToJobDict = new Hashtable<>();
-        // Long UsersDict[][] = new Long[AllUsers.size()][2];
-        // Long ArticlesDict[][] = new Long[AllArticles.size()][2];
-
-        
+ 
         int  i = 0;
         //Create Dictionaries
-        
         //User Dictionaries
         for(User user: AllUsers){
             this.IndexToUserDict.put(i, user.getUserID());
             this.UserToIndexDict.put(user.getUserID(), i);
-            // UsersDict[i][0] = Long.valueOf(i);
-            // UsersDict[i][0] = user.getUserID();
             i += 1;
         }
         this.users = Long.valueOf(i);
@@ -261,8 +219,6 @@ public class RecommendationSystem {
         for(Job job: AllJobs){
             this.IndexToJobDict.put(i, job.getJobID());
             this.JobToIndexDict.put(job.getJobID(), i);
-            // ArticlesDict[i][0] = Long.valueOf(i);
-            // ArticlesDict[i][0] = user.getUserID();
             i += 1;
         }
         this.jobs = Long.valueOf(i);
@@ -272,8 +228,8 @@ public class RecommendationSystem {
         System.out.println("Index to Job Dictionary:\n" + this.IndexToJobDict.toString());
         System.out.println("Job to Index Dictionary:\n" + this.JobToIndexDict.toString());
 
-        double P[][] = new double[Math.toIntExact(users)][bigK]; //100 number of users
-        double Q[][] = new double[Math.toIntExact(jobs)][bigK]; // 100 number of articles    //call construction during loading database
+        double P[][] = new double[Math.toIntExact(users)][bigK]; 
+        double Q[][] = new double[Math.toIntExact(jobs)][bigK]; 
         Integer ActualArray[][] = new Integer [Math.toIntExact(users)][Math.toIntExact(jobs)];
         this.PredictedJobs = new double[Math.toIntExact(users)][Math.toIntExact(jobs)];
 
@@ -304,7 +260,6 @@ public class RecommendationSystem {
             for(Long jobID: JobsIAppliedIDs){
                 //JobID ---> JobIndex
                 int JobIndex = this.JobToIndexDict.get(jobID);
-                
                 //Fill the correct cell with 1
                 ActualArray[userIndex][JobIndex] = 1;
                 
@@ -312,14 +267,8 @@ public class RecommendationSystem {
 
         }
         //Here we have the Intial array with all User-Article Interactions
-        System.out.println("Actual Array:\n" + Arrays.deepToString(ActualArray));
+        //System.out.println("Actual Array:\n" + Arrays.deepToString(ActualArray));
         
-        
-        //Do Training
-        
-        //Calculate Loss
-
-        //Form Predict Matrix 
 		this.lr = 0.1;
 		this.reg = 0.01;
 		for(int u = 0; u < users; u++){
@@ -351,15 +300,9 @@ public class RecommendationSystem {
 							P[u][k] += lr * (error_ij * Q[j][k] - reg * P[u][k]);
 							Q[j][k] += lr * (error_ij * P[u][k] - reg * Q[j][k]);
 						}
-
-
-						//P[i, :] += alpha * (error_ij * Q[j, :] - beta * P[i, :])
-						//Q[j, :] += alpha * (error_ij * P[i, :] - beta * Q[j, :])
-						//error_ij = R[i][j] - np.dot(P[i, :], Q[j, :].T)
 					}
 				}
 			}
-			//System.out.println(P[5][10]);
 
 			double loss = 0.0;
 			for (int u = 0; u < users; u++) {
@@ -373,9 +316,7 @@ public class RecommendationSystem {
 						}
 						error_ij = ActualArray[u][j] - dot;
 						double error_sq = error_ij * error_ij;
-						loss += error_sq;
-						//loss += error_ij * error_ij;
-						
+						loss += error_sq;						
 						// Regularization penalty
 						for (int k = 0; k < bigK; k++) {
 							loss +=  reg * (P[u][k] * P[u][k] + Q[j][k] * Q[j][k]);
@@ -387,8 +328,7 @@ public class RecommendationSystem {
 
 
 		}
-		//System.out.println(Arrays.deepToString(Q));
-		//double Predicted[][] = new double[users][articles];
+
 
 		for(int u = 0; u < users; u++){
 			for(int j = 0; j < jobs; j++){
@@ -406,32 +346,9 @@ public class RecommendationSystem {
 
 	}	
 
-    // public List<Long> sort_article_ids(double Article_scores[]){
-    //         List<Long> SortedList = new ArrayList<>();
-    //         double max = 0;
-    //         int max_index = 0;
-            
-    //         for(int i = 0; i < 30; i++){
-    //             for(int j = 0; j < Article_scores.length; j++){
-    //                 if(max < Article_scores[j]){
-    //                     //found new max 
-    //                     max_index = j;
-    //                 }
-    //             }
-    //             Article_scores[max_index] = 0;
-    //           //  SortedList.add();
-    //         }
-    //     }
     public List<Long> RecommendArticles(User user){
-        // List<Article> best_articles = new ArrayList<>();
-
-        //find user index 
-        //this.UsersDict.
-        //sort recommendations
-
+        
         int UserIndex = this.UserToIndexDict.get(user.getUserID());
-
-
         double ArticleRatingsForUser[] = this.PredictedArticles[UserIndex];
         List<Long> BestArticles = new ArrayList<>();
 
@@ -460,26 +377,12 @@ public class RecommendationSystem {
             BestArticles.add(best_id);
         }
 
-        System.out.println(BestArticles.toString());
-        //avoid articles already liked(?)
-        
+        System.out.println(BestArticles.toString());        
         return BestArticles;
         
     }
 
     public List<Long> RecommendJobs(User user){
-    //     List<Job> best_jobs = new ArrayList<>();
-
-    //     //find user index 
-
-    //     //sort recommendations
-        
-    //     //avoid jobs already liked
-
-
-    //     return best_jobs;
-
-    
         int UserIndex = this.UserToIndexDict.get(user.getUserID());
 
 
@@ -510,10 +413,7 @@ public class RecommendationSystem {
             Long best_id = this.IndexToJobDict.get(Index);
             BestJobs.add(best_id);
         }
-
         System.out.println(BestJobs.toString());
-        //avoid articles already liked(?)
-        
         return BestJobs;
         
     }

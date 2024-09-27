@@ -24,11 +24,8 @@ import lombok.Data;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-// @JsonIgnoreProperties({"CommentOwner", "CommentArticle"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "commentID")
 public class Comment {
-
-
     @Id 
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long commentID;
@@ -38,12 +35,10 @@ public class Comment {
     //Many comments to one owner
     @ManyToOne
     @JoinColumn(name = "owner_ID")
-    // @JsonBackReference
     User CommentOwner;
 
     @ManyToOne
     @JoinColumn(name = "article_ID")
-    // @JsonBackReference
     Article CommentArticle;
 
     @Override

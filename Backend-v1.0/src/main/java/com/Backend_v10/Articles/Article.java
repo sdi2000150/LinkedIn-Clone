@@ -59,18 +59,11 @@ public class Article {
     @OneToMany //(cascade = CascadeType.ALL )
     @ToString.Exclude
     @JoinColumn(name = "article_id")
-    // @JsonIgnore
-    // @JsonManagedReference
     List<Comment> ArticleComments;
 
     @ManyToMany(mappedBy = "likedArticles")
     @ToString.Exclude
-    // @JsonIgnore
     private List<User> likedByUsers;
-
-
-    // @JoinColumn(name = "UserID")
-    // User ArticleOwner; 
 
     public Article(String text) {
         this.Text = text;
@@ -85,17 +78,8 @@ public class Article {
         this.ArticleComments = new ArrayList<>();
         this.DateTime_of_Creation = LocalDateTime.now();
         this.likedByUsers = new ArrayList<>();
-        //this.ArticleOwner = Owner;
     }
-    
-    // OLD VERSION
-    // public void AddComment(String CommentContent,User CommentOwner, Article CommentArticle){
-    //     Comment NewComment = new Comment(CommentContent,CommentOwner, CommentArticle);
-    //     this.ArticleComments.add(NewComment);
-    // }
-
-    //NEW WAY
-    public void addComment(Comment newComment) {
+        public void addComment(Comment newComment) {
         this.ArticleComments.add(newComment);
         newComment.setCommentArticle(this);
     }

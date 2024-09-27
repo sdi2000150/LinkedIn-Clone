@@ -36,14 +36,10 @@ import static jakarta.persistence.FetchType.LAZY;
 
 @Entity             // This tells Hibernate to make a table out of this class
 @Data               // Lombok annotation to create all the getters, setters, toString methods based on the fields
-// @AllArgsConstructor // Lombok annotation to create a constructor with all the arguments
 @NoArgsConstructor  // Lombok annotation to create a constructor with no arguments
 @Table(name = "Jobs")
 @JsonIgnoreProperties({"JobApplications"})
 public class Job{
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long jobID;
@@ -53,19 +49,9 @@ public class Job{
     Boolean fullTime;
     String otherRequirements;
 
-    // @Enumerated(EnumType.STRING)
-    // WorkFields fieldOfWork; 
-
-    // @Enumerated(EnumType.STRING)
-    // Regions region; 
-
-    // @Enumerated(EnumType.STRING)
-    // Experience levelOfExperience;
-
     @OneToMany  //no cascade here, cascade for jobApplication is in the User
     @JoinColumn(name = "job_id")
     @JsonIgnore
-    // @JsonManagedReference
     List<JobApplication> JobApplications;
 
     @ManyToOne
@@ -87,42 +73,6 @@ public class Job{
         this.JobApplications = new ArrayList<>();
     }
 
-    // public enum WorkFields{
-    //     Ecomomics,
-    //     Agriculture,
-    //     Health,
-    //     Consruction,
-    //     Marketing,
-    //     Art,
-    //     Law,
-    //     Diplomacy,
-    //     Teaching,
-    //     ComputerScience,
-    //     Psycology,
-    //     Medicine;
-    // }
-
-    // public enum Regions{
-    //     Athens,
-    //     Thessaloniki,
-    //     Patra,
-    //     Volos,
-    //     Trikala,
-    //     Chania,
-    //     Herakleion,
-    //     Rhodes,
-    //     Karditsa,
-    //     Larissa,
-    //     Nauplio,
-    //     Syros,
-    //     Mykonos,
-    //     Kimi;
-    // }
-    // public enum Experience{
-    //     Junior,
-    //     Mid,
-    //     Senior;
-    // }
     public void addJobApplication(JobApplication jobApplication) {
         this.JobApplications.add(jobApplication);
         jobApplication.setJob(this);

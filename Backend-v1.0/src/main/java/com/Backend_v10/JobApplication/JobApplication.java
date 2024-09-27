@@ -25,7 +25,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @AllArgsConstructor
 @JsonIgnoreProperties({"job"})
 public class JobApplication {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long jobApplicationID;
@@ -44,6 +43,5 @@ public class JobApplication {
     public String toString() {
         return "JobApplication [jobApplicationID=" + jobApplicationID + ", user=" + user + ", job=" + job + "]";
     }
-
 
 }

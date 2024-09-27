@@ -22,7 +22,6 @@ import com.Backend_v10.Jobs.Job;
 @RequestMapping("/application")
 public class JobApplicationController {
     private JobApplicationRepository JobApplicationRepo;
-    //private JobRepository JobRepo;
     private final UserRepository  UserRepo;
     private final JobRepository JobRepo;
     
@@ -30,19 +29,16 @@ public class JobApplicationController {
         this.JobApplicationRepo = JobApplicationRepo;
         this.UserRepo = URepo;
         this.JobRepo = jobRepo;
-        //this.JobRepo = JobRepo;
     }
 
     @Transactional
     @DeleteMapping("/{userEmail}/delete/{jobID}")
     public void deleteJobApplication(@PathVariable String userEmail, @PathVariable Long jobID){
-        
         //Find user
         Optional<User> user = this.UserRepo.findByEmail(userEmail);
         Optional<Job> job = this.JobRepo.findById(jobID);
 
         //Find job
-        //Optional<Job> job = this.JobRepo.findById(jobID);
         //Find application based on job's apllications machting user's application
         JobApplication application_to_delete = this.JobApplicationRepo.GetApplicationOfJobWithUserID(jobID, user.get().getUserID());
         user.get().getMyJobApplications().remove(application_to_delete);
