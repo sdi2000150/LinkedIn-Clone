@@ -7,13 +7,13 @@
 
 :host {
     display: block;
-    background-color: white; /* Override with white */
+    background-color: white; /* override with white */
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6;
-    font-size: 1.1em; /* Slightly increase base font size */
+    font-size: 1.1em; /* increase a little base font size */
 }
 
 header {
@@ -30,9 +30,9 @@ header {
     font-weight: bold;
 }
 .logo img {
-    max-height: 40px; /* Adjust the height as needed */
+    max-height: 40px;
     width: auto;
-    margin-top: 10px; /* Add margin to move it slightly to the bottom */
+    margin-top: 10px; /* add margin to move it slightly to the bottom */
 }
 
 .header-buttons {
@@ -41,12 +41,12 @@ header {
 }
 
 .btn, .btn2 {
-    padding: 10px 20px; /* Increase padding */
+    padding: 10px 20px;
     border: none;
     background: #0077B5;
     color: #fff;
     border-radius: 5px;
-    margin: 10px 0; /* Increase margin */
+    margin: 10px 0;
     cursor: pointer;
 }
 
@@ -58,23 +58,23 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 4rem 3rem; /* Increase padding */
+    padding: 4rem 3rem;
 }
 
 .container {
-    width: 60%; /* Adjust width as needed */
+    width: 60%;
     margin-left: 10%;    /* position: more to the right */
 }
 
 h1 {
-    font-size: 2.8em; /* Increase font size */
-    font-weight: normal; /* Make text less bold */
+    font-size: 2.8em;
+    font-weight: normal; /* make text less bold */
     margin-bottom: 2rem;
-    line-height: 1.2; /* Adjust line height to take up two lines */
+    line-height: 1.2; /* adjust line height to take up two lines */
 }
 
 .image-container {
-    width: 40%; /* Adjust width as needed */
+    width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,37 +88,37 @@ h1 {
 
 
 #login .btn2 {
-    background: #fff; /* White background */
-    color: #0077B5; /* Blue text */
-    border: 2px solid #0077B5; /* Blue border */
-    width: 50%; /* Adjust width */
-    padding: 12px 24px; /* Increase padding */
-    border-radius: 10px; /* Make button softer */
+    background: #fff;
+    color: #0077B5;
+    border: 2px solid #0077B5;
+    width: 50%;
+    padding: 12px 24px;
+    border-radius: 10px; /* make button softer */
 }
 
 #sign-up .btn2 {
-    background: #fff; /* White background */
-    color: #0077B5; /* Blue text */
-    border: 2px solid #0077B5; /* Blue border */
-    width: auto; /* Adjust width */
-    padding: 12px 24px; /* Increase padding */
-    border-radius: 10px; /* Make button softer */
+    background: #fff;
+    color: #0077B5;
+    border: 2px solid #0077B5;
+    width: auto;
+    padding: 12px 24px;
+    border-radius: 10px;
 }
 
 #login .btn2:hover, #sign-up .btn2:hover {
-    background: #0077B5; /* Blue background on hover */
-    color: #fff; /* White text on hover */
+    background: #0077B5;
+    color: #fff;
 }
 
 .sign-up-container {
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between text and button */
-  }
-  
-  .new-to-linkedin {
-    margin-bottom: 0; /* Remove bottom margin */
-  }
+    gap: 10px; /* space between text and button */
+}
+
+.new-to-linkedin {
+  margin-bottom: 0;
+}
 
 .error {
   background: orangered;

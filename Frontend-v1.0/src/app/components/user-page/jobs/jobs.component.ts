@@ -36,7 +36,7 @@ export class JobsComponent {
   jobApplications: { [key: number]: any[] } = {}; // Store job applications for each job
 
 
-  constructor(private userService: UserService, private router: Router) {} //Inject the UserService
+  constructor(private userService: UserService, private router: Router) {} // Inject the UserService
 
   ngOnInit(): void {
     // Fetch the token from localStorage
@@ -60,12 +60,10 @@ export class JobsComponent {
       this.userService.getJobOffers(token).subscribe(
         (data: any) => {
           console.log('User Profile Data:', data);
-          // Add any logic you want to execute after fetching the user profile
           this.jobs = data;
         },
         (error) => {
           console.error('Error fetching user data', error);
-          // Handle error, potentially navigate back to login
         }
       );
       // Get applied jobs
@@ -76,7 +74,6 @@ export class JobsComponent {
         },
         (error) => {
           console.error('Error fetching applied jobs', error);
-          // Handle error, potentially navigate back to login
         }
       );
       // Get my contacts' job offers
@@ -84,15 +81,12 @@ export class JobsComponent {
         (contactsJobOffers: any) => {
           console.log('Contacts Job Offers:', contactsJobOffers);
           this.contactsJobs = contactsJobOffers;
-          // Add any logic you want to execute after fetching the user profile
         },
         (error) => {
           console.error('Error fetching contacts job offers', error);
-          // Handle error, potentially navigate back to login
         }
       );
     } else {
-      // Handle case where token is missing
       console.error('No token found');
     }
   }
@@ -166,14 +160,13 @@ export class JobsComponent {
     if (this.token) {
       this.userService.applyToJob(this.token, jobId).subscribe(
         (response: boolean) => {
-          if (this.token && response) {
+          if (this.token && response) { //response is true
             this.msgSuccess = 'Job Application added successfully!';
             console.log('Job Application added successfully');
 
             this.ngOnInit(); // Refresh the jobs after applying to job
 
           } else { //response is false
-            // console.error('Failed to apply to job');
             this.msgError = 'User already applied to this job';
             console.log('User already applied to this job');
           }

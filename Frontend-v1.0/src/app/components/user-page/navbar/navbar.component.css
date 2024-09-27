@@ -7,17 +7,16 @@
 #navbar-container {
     width: 100%;
     display: flex;
-    justify-content: center; /* Center the navbar container */
+    justify-content: center; /* center the navbar container */
     background-color: white;
 }
 
 #navbar {
     display: flex;
-    justify-content: flex-start; /* Align items to the left */
+    justify-content: flex-start; /* align items to the left */
     align-items: center;
-    width: 80%; /* Adjust the width to fit your design */
-    max-width: 1200px; /* Optional: set a max width for large screens */
-    padding: 10px 0; /* Increase padding to make the navbar fatter */
+    width: 80%;
+    padding: 10px 0; /* increase padding to make the navbar fatter */
 }
 
 .logo {
@@ -25,14 +24,14 @@
   color: #0077B5;
   font-weight: bold;
   display: flex;
-  align-items: center; /* Align logo and text vertically */
-  margin-right: 20px; /* Reduce space between logo and nav items */
+  align-items: center; /* align logo and text vertically */
+  margin-right: 20px; /* reduce space between logo and nav items */
 }
 
 .logo img {
   max-height: 40px;
   width: auto;
-  margin-right: 5px; /* Reduce space between logo image and text */
+  margin-right: 5px; /* reduce space between logo image and text */
 }
 
 #navbar ul {
@@ -41,12 +40,12 @@
     display: flex;
     align-items: center;
     margin: 0;
-    margin-left: 90px; /* Reduce space between logo and ul */
+    margin-left: 90px; /* reduce space between logo and ul */
 }
 
 #navbar li {
     display: inline;
-    margin-right: 15px; /* Reduce space between items */
+    margin-right: 15px; /* reduce space between items */
     font-size: 16px;
 }
 
@@ -58,7 +57,6 @@
     display: block;
 }
 
-/* Active class for selected link */
 #navbar a.active {
     background-color: #0077B5;
     color: white;
@@ -69,5 +67,5 @@
 .container a:hover {
     background-color: #0077B5; /* LinkedIn's hover color */
     border-radius: 4px;
-    color: white; /* Change text color on hover */
+    color: white; /* change text color on hover */
 }

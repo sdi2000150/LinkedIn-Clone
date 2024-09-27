@@ -41,7 +41,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable()) // Disable CSRF for stateless APIs
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/**").permitAll()    // Allow all requests to /auth
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Allow preflight requests
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Allow preflight requests (this is required for CORS)
                 .requestMatchers("/user/**").permitAll()  // For now allow all requests to /user
                 .requestMatchers("/article/**").permitAll()  // For now allow all requests to /article
                 .requestMatchers("/job/**").permitAll()  // For now allow all requests to /job

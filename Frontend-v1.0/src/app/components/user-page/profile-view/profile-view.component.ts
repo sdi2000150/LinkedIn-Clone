@@ -20,13 +20,13 @@ export class ProfileViewComponent implements OnInit {
   button2: string = 'Empty';
   button3: string = 'Message';
 
-  Name: string = 'Empty'; //Placeholder for the user's name
-  Surname: string = 'Empty'; //Placeholder for the user's surname
-  Email: string = 'Empty'; //Placeholder for the user's email
-  Phone: string = 'Empty'; //Placeholder for the user's phone number
-  Birthdate: string = 'Empty'; //Placeholder for the user's birthdate
+  Name: string = 'Empty'; // Placeholder for the user's name
+  Surname: string = 'Empty'; // Placeholder for the user's surname
+  Email: string = 'Empty'; // Placeholder for the user's email
+  Phone: string = 'Empty'; // Placeholder for the user's phone number
+  Birthdate: string = 'Empty'; // Placeholder for the user's birthdate
 
-  CVfile: string = 'No CV available for download'; //Placeholder for the user's CV file
+  CVfile: string = 'No CV available for download'; // Placeholder for the user's CV file heading
 
   token: string | null = null; // Store token from localStorage
 
@@ -38,7 +38,7 @@ export class ProfileViewComponent implements OnInit {
   experienceDescription: string = ''; // Field for experience description
   selectedEducation: string = '';
   educationDescription: string = ''; // Field for education description
-  selectedSkills: string = '';  //this will change to string[] = []
+  selectedSkills: string = '';  // Field for skills
   
   constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {} //Inject the UserService
 
@@ -48,7 +48,7 @@ export class ProfileViewComponent implements OnInit {
 
     // Check if token is available
     if (this.token) {
-      // Use token to fetch user data or perform other tasks
+      // Use token to fetch user data and buttos text
       this.fetchUserData();
       this.fetchButtons();
     } else {
@@ -69,7 +69,7 @@ export class ProfileViewComponent implements OnInit {
       if (email) {
         this.userService.getUsersRelation(token, email).subscribe(
           (data: any) => {
-            // logic here, data is the response from the server, and i one string ou of:
+            // data is the response from the server, and is one string of the following:
             // 'Connected', 'Request Sent', 'Got Request', 'Sent Request'
             if (data == 'Connected') {
               this.button1 = data;
@@ -87,7 +87,7 @@ export class ProfileViewComponent implements OnInit {
           },
           (error) => {
             console.error('Error fetching user data: buttons', error);
-            // Handle error, potentially navigate back to user-page
+            // Handle error, navigate back to user-page
             this.router.navigate(['../../user-page']);
           }
         );
@@ -95,7 +95,6 @@ export class ProfileViewComponent implements OnInit {
         console.error('No email found in the URL');
       }
     } else {
-      // Handle case where token is missing
       console.error('No token found');
     }
   }
@@ -159,7 +158,7 @@ export class ProfileViewComponent implements OnInit {
           },
           (error) => {
             console.error('Error fetching user data: userdata', error);
-            // Handle error, potentially navigate back to user-page
+            // Handle error, navigate back to user-page
             this.router.navigate(['../../user-page']);
           }
         );
@@ -167,7 +166,6 @@ export class ProfileViewComponent implements OnInit {
         console.error('No email found in the URL');
       }
     } else {
-      // Handle case where token is missing
       console.error('No token found');
     }
   }

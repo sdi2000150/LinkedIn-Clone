@@ -1,7 +1,7 @@
 /* General Styles */
 body {
-    background-color: #e0e0e0; /* Light grey background */
-    color: #333; /* Darker text color */
+    background-color: #e0e0e0; /* light grey background */
+    color: #333; /* darker text color */
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 1.6em;
@@ -11,47 +11,47 @@ body {
 .container {
     display: flex;
     width: 80%;
-    margin: 20px auto; /* Center the container */
-    background-color: #fff; /* White background for contrast */
-    padding: 20px; /* Padding inside the container */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Slightly darker shadow */
-    border-radius: 8px; /* Rounded corners */
+    margin: 20px auto; /* center the container */
+    background-color: #fff; /* white background for contrast */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* slightly darker shadow */
+    border-radius: 8px; /* rounded corners */
 }
 .logo img {
     max-height: 40px;
     width: auto;
-    margin-right: 5px; /* Reduce space between logo image and text */
+    margin-right: 5px; /* reduce space between logo image and text */
 }
+
 /* Header Styles */
 #main-header {
-    background-color: #f9f9f9; /* Light grey background */
+    background-color: #f9f9f9; /* light grey background */
     padding: 10px 0;
-    border-bottom: 1px solid rgb(220, 220, 220); /* Darker blue border */
+    border-bottom: 1px solid rgb(220, 220, 220);
 }
 
 #main-header h1 {
-    flex: 2; /* Grow to fill the available space (to center) */
+    flex: 2; /* grow to fill the available space (to center) */
     text-align: center;
-    /* text-transform: uppercase; */
     margin: 0;
     font-size: 24px;
 }
 .form-group {
-    margin-left: auto; /* Pushes the form group to the right edge */
+    margin-left: auto; /* pushes the form group to the right edge */
 }
 
 #logOut {
-    background-color: #460000; /* Darker blue */
-    color: #ffffff; /* White text color */
+    background-color: #460000;
+    color: #ffffff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 4px; /* Rounded corners */
+    border-radius: 4px; /* rounded corners */
     font-size: 16px;
 }
 
 #logOut:hover {
-    background-color: #000000; /* Even darker blue on hover */
+    background-color: #000000;
 }
 
 /* Main Section Styles */
@@ -66,11 +66,11 @@ body {
 }
 
 #main ul li {
-    padding: 5px; /* Add padding inside list items */
+    padding: 5px; /* add padding inside list items */
 }
 
 #main ul li:hover {
-    background-color: #f0f0f0; /* Light grey background on hover */
+    background-color: #f0f0f0; /* light grey background on hover */
 
 }
 
@@ -83,7 +83,7 @@ body {
 #sidebar h2 {
     font-size: 20px;
     margin-bottom: 10px;
-    color: #00094a; /* Dark blue color */
+    color: #00094a; /* dark blue color */
 }
 
 #sidebar ul {
@@ -98,7 +98,7 @@ body {
 
 
 #sidebar ul li a {
-    color: #000b4c; /* Dark blue color */
+    color: #000b4c; /* dark blue color */
     text-decoration: none;
 }
 
@@ -115,17 +115,17 @@ body {
 
 /* Button Styles */
 button {
-    background-color: transparent; /* Transparent background */
-    color: #460000; /* Blue text */
-    border: 1px solid #460000; /* Blue border */
-    padding: 0px 5px; /* Smaller padding */
-    margin: 2px; /* Smaller margin */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 3px; /* Slightly rounded corners */
-    font-size: 13px; /* Smaller font size */
+    background-color: transparent; /* transparent background */
+    color: #460000;
+    border: 1px solid #460000;
+    padding: 0px 5px; /* small padding */
+    margin: 2px; /* small margin */
+    cursor: pointer; /* pointer cursor on hover */
+    border-radius: 3px; /* rounded corners */
+    font-size: 13px; /* small font size */
 }
 
 button:hover {
-    background-color: #460000; /* Blue background on hover */
-    color: white; /* White text on hover */
+    background-color: #460000;
+    color: white;
 }

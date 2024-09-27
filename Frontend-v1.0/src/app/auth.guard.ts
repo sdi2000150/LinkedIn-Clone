@@ -27,7 +27,7 @@ export const authGuard: CanActivateFn = (route, state): Observable<boolean> | Pr
           // Allow user access to user pages
           return true;
         } else {
-          // If role mismatch, redirect to login or appropriate page
+          // If role mismatch, redirect to appropriate page
           if (isAdmin) {
             router.navigate(['/admin-page']); // redirect admin to admin page
           } else {
@@ -41,6 +41,5 @@ export const authGuard: CanActivateFn = (route, state): Observable<boolean> | Pr
     // Token doesn't exist, redirect to login
     router.navigate(['/login']);
     return false;
-    // return true; // For now, allow access
   }
 };

@@ -12,7 +12,7 @@
         <div id="post-creation">
             <textarea [(ngModel)]="Text" placeholder="Start a post..."></textarea>
             <div class="media-inputs">
-                <label for="media-upload">📷🎥🎵 Media</label>
+                <label for="media-upload">📷Add image</label>
                 <input type="file" id="media-upload" accept="image/*" (change)="onArticlePhotoSelected($event)">
                 <button id="post-button" (click)="createArticle()">Post Article</button>
             </div>

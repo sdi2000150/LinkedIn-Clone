@@ -15,7 +15,7 @@ export class NotificationsComponent implements OnInit {
   usersRequestingMe: any[] = [];
   myRequests: any[] = [];
   
-  token: string | null = null; // Store token from localStorage
+  token: string = localStorage.getItem('token') || ''; // Store token from localStorage
 
   button1: string = 'Empty';
   button2: string = 'Empty';
@@ -31,23 +31,33 @@ export class NotificationsComponent implements OnInit {
 
   fetchUsersRequestingMe(): void {
     // Fetch the token from localStorage
-    this.token = localStorage.getItem('token');
-    if (this.token) {
-      this.userService.getUsersRequestingMe(this.token).subscribe(data => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.userService.getUsersRequestingMe(token).subscribe(data => {
         this.usersRequestingMe = data;
         this.usersRequestingMe.forEach(user => this.fetchButtons("received"));
+      },
+      error => {
+        console.error('Error fetching users requesting me:', error);
       });
+    } else {
+      console.error('Token not found in localStorage');
     }
   }
 
   fetchMyRequests(): void {
     // Fetch the token from localStorage
-    this.token = localStorage.getItem('token');
-    if(this.token) {
-      this.userService.getMyRequests(this.token).subscribe(data => {
+    const token = localStorage.getItem('token');
+    if(token) {
+      this.userService.getMyRequests(token).subscribe(data => {
         this.myRequests = data;
         this.myRequests.forEach(user => this.fetchButtons("sent"));
+      },
+      error => {
+        console.error('Error fetching my requests:', error);
       });
+    } else {
+      console.error('Token not found in localStorage');
     }
   }
 

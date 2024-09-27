@@ -27,18 +27,18 @@ export class SignupPageComponent {
   msgError: string = '';
   msgSuccess: string = '';
 
-  constructor(private router: Router, private userService: UserService) {} //for usage in this.router.navigate
+  constructor(private router: Router, private userService: UserService) {} // For usage in this.router.navigate
 
 
   showPassword() {
     const passwordInput = document.getElementById('password') as HTMLInputElement;
-    passwordInput.type = 'text';  //so that it is visible
-    setTimeout(() => passwordInput.type = 'password', 2000);  //set a timer for the time the password will show
+    passwordInput.type = 'text';  // So that it is visible
+    setTimeout(() => passwordInput.type = 'password', 2000);  // Set a timer for the time the password will show
   }
   showPasswordConf() {
     const passwordInput = document.getElementById('passwordConf') as HTMLInputElement;
-    passwordInput.type = 'text';  //so that it is visible
-    setTimeout(() => passwordInput.type = 'password', 2000);  //set a timer for the time the password will show
+    passwordInput.type = 'text';  // So that it is visible
+    setTimeout(() => passwordInput.type = 'password', 2000);  // Set a timer for the time the password will show
   }
 
   SignUp() {
@@ -46,14 +46,13 @@ export class SignupPageComponent {
     console.log("On sign up is called")
     if (this.email === '' || this.password === '' || this.username === '' || this.name === '' || this.lastname === '' || this.passwordConf === '') {
       this.msgError = 'Please enter all the required fields';
-      setTimeout(() => this.msgError = '', 3000);  //set a timer for the time the error will show
+      setTimeout(() => this.msgError = '', 3000);  // Set a timer for the time the error will show
 
     } else if (this.password !== this.passwordConf) {
       this.msgError = 'Passwords do not match';
       setTimeout(() => this.msgError = '', 3000);  // Clear the message after 3 seconds
       
     } else {
-      //logic here
       const user = {
         name: this.name,
         lastname: this.lastname,
@@ -63,7 +62,6 @@ export class SignupPageComponent {
         password: this.password,
         birthdate: this.birthdate,
         role: 'ROLE_USER'  // Use the default role
-        // Add other fields like phone, etc., if they exist in backend
       };
 
       // Use UserService to send a signup request
@@ -84,16 +82,13 @@ export class SignupPageComponent {
         },
         (error) => {
           console.error('Error adding user', error);
-          console.log('Status:', error.status);
-          console.log('Message:', error.message);
-          console.log('Error body:', error.error);
           
           this.msgError = 'Signup failed! Please try again.';
           setTimeout(() => this.msgError = '', 3000);  // Clear the message after 3 seconds
         }
       );
 
-      //Clear the form fields
+      // Clear the form fields
       this.email = '';
       this.password = '';
       this.name ='';

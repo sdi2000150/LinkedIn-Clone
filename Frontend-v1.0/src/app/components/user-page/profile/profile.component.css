@@ -39,7 +39,7 @@ header {
     display: flex;
     align-items: flex-start;
     position: absolute;
-    top: 150px; /* Adjust based on the height of the cover photo */
+    top: 150px; /* adjust based on the height of the cover photo */
     left: 20px;
     flex-direction: column;
 }
@@ -69,7 +69,7 @@ header {
 }
 
 .user-info h2 {
-    margin: 10px 200px 10px 0; /* Adjust the margin-right to move the h2 to the left */
+    margin: 10px 200px 10px 0; /* adjust the margin-right to move the h2 to the left */
     font-size: 20px;
     color: #333;
 }
@@ -79,7 +79,7 @@ header {
     color: white;
     border: none;
     padding: 10px 20px;
-    margin: 5px 5px 50px 0; /* Add margin-right for spacing between buttons */
+    margin: 5px 5px 50px 0; /* add margin-right for spacing between buttons */
     cursor: pointer;
     border-radius: 4px;
 }

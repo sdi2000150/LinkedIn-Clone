@@ -12,17 +12,17 @@ import { FormsModule } from '@angular/forms';
 })
 export class WelcomePageComponent {
 
-  constructor(private router: Router) {} //for usage in this.router.navigate
+  constructor(private router: Router) {} // for usage in this.router.navigate
 
   onLogIn() {
-    //Redirect to the login page
+    // Redirect to the login page
     console.log('Redirect to login page');
-    this.router.navigate(['../login-page']); //here we need to change the directory component route as needed
+    this.router.navigate(['../login-page']);
   }
 
   onSignUp() {
-    //Redirect to the sign-up page
+    // Redirect to the sign-up page
     console.log('Redirect to sign-up page');
-    this.router.navigate(['../signup-page']); //here we need to change the directory component route as needed
+    this.router.navigate(['../signup-page']);
   }
 }

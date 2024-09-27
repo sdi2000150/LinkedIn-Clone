@@ -162,13 +162,15 @@ public class User {
     // }
 
      // Simple constructor for testing
-    public User(String username, String name, String password, String role, String lastname, String email){
+    public User(String username, String name, String password, String role, String lastname, String email, LocalDate birthdate, String phone) {
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.phone = phone;
+        this.birthdate = birthdate;
         this.myArticles = new ArrayList<>();
         this.myComments = new ArrayList<>();
         this.myJobs = new ArrayList<>();

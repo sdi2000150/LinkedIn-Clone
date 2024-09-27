@@ -1,5 +1,5 @@
 body {
-    background-color: #f4f4f4; /* Match background color */
+    background-color: #f4f4f4;
     color: #555;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
@@ -11,26 +11,26 @@ body {
 .container {
     display: flex;
     width: 80%;
-    margin: 20px auto; /* Match margin */
-    background-color: white; /* Match background color */
-    padding: 20px; /* Match padding */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Match box shadow */
-    border-radius: 8px; /* Match border radius */
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .post {
-    background-color: rgb(217, 233, 255); /* Match background color */
-    padding: 20px; /* Match padding */
-    margin-bottom: 20px; /* Space between job elements */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Match box shadow */
-    border-radius: 8px; /* Match border radius */
+    background-color: rgb(217, 233, 255);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     box-sizing: border-box;
 }
 
 #left-sidebar,
 #main-content,
 #right-sidebar {
-    background-color: white; /* Match background color */
+    background-color: white;
 }
 
 #left-sidebar {
@@ -56,22 +56,22 @@ body {
 }
 
 #job-creation {
-    background: #fff; /* Background for the job creation area */
-    padding: 20px; /* Match padding */
+    background: #fff; /* background for the job creation area */
+    padding: 20px;
     margin-bottom: 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border-radius: 8px; /* Match border radius */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Match box shadow */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .job-details {
     display: flex;
     align-items: center;
-    gap: 10px; /* Adjust the gap between elements as needed */
-    margin-bottom: 10px; /* Add some space below the row */
+    gap: 10px; /* adjust the gap between elements */
+    margin-bottom: 10px; /* add some space below the row */
 }
 
 .job-details label {
@@ -79,13 +79,13 @@ body {
 }
 
 #job-creation textarea {
-    width: 100%; /* Full width */
-    height: 50px; /* Reduced height */
-    margin-bottom: 10px; /* Space between textarea and media inputs */
+    width: 100%; /* full width */
+    height: 50px; /* reduced height */
+    margin-bottom: 10px;
     box-sizing: border-box;
-    border: 1px solid #ddd; /* Match border */
-    border-radius: 4px; /* Match border radius */
-    padding: 10px; /* Match padding */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
 }
 
 .media-inputs {
@@ -108,7 +108,7 @@ body {
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 4px; /* Match border radius */
+    border-radius: 4px;
 }
 
 #job-creation button:hover {
@@ -116,11 +116,11 @@ body {
 }
 
 #timeline {
-    background: #fff; /* Background for the timeline area */
+    background: #fff;
     padding: 20px;
     box-sizing: border-box;
-    border-radius: 8px; /* Match border radius */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Match box shadow */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #timeline .job {
@@ -138,7 +138,7 @@ body {
     padding: 5px 10px;
     cursor: pointer;
     margin-right: 10px;
-    border-radius: 4px; /* Match border radius */
+    border-radius: 4px;
 }
 
 #timeline .post button:hover {
@@ -157,13 +157,13 @@ body {
 }
 
 #timeline .post {
-    width: 80%; /* Adjust width as needed */
-    margin-bottom: 20px; /* Space between job elements */
+    width: 80%;
+    margin-bottom: 20px; /* space between job elements */
 }
 
 #right-sidebar {
     width: 20%;
-    background-color: white; /* Match background color */
+    background-color: white;
     padding: 20px;
     box-sizing: border-box;
 }

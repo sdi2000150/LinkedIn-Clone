@@ -6,8 +6,8 @@ body {
 }
 
 .settings-container {
-  width: 60%; /* Adjusted width to make it smaller */
-  max-width: 800px; /* Added max-width for better responsiveness */
+  width: 60%; /* adjusted width to make it smaller */
+  max-width: 800px;
   margin: 20px auto;
   background-color: white;
   padding: 20px;
@@ -55,7 +55,7 @@ body {
   padding: 5px 10px;
   background-color: #dbeffa;
   color: #004164;
-  border: 1px solid #0077B5; /*add border color*/
+  border: 1px solid #0077B5; /* add border color */
   border: rgb(0, 0, 0);
   border-radius: 20px;
   font-size: 0.9em;
@@ -106,7 +106,7 @@ body {
 }
 
 #logOut {
-  background-color: #ec4a45; /* Typical logout button color */
+  background-color: #ec4a45;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -123,9 +123,8 @@ body {
   background-color: #c9302c;
 }
 
-/* Add this to remove underline from the <a> tag */
 a {
-  text-decoration: none;
+  text-decoration: none;  /* remove underline from the <a> tag */
 }
 
 .error {

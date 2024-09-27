@@ -14,12 +14,12 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule
 })
 export class MyPostsComponent implements OnInit {
   articles: any[] = []; // Store articles of the user
-  newComments: { [key: number]: string } = {}; // to store comment text for each article (based on key: articleId)
+  newComments: { [key: number]: string } = {}; // Store comment text for each article (based on key: articleId)
   currentUser: any = {}; // Store the current user information
 
   token: string | null = null; // Store token from localStorage
 
-  constructor(private userService: UserService, private router: Router) {} //Inject the UserService
+  constructor(private userService: UserService, private router: Router) {} // Inject the UserService
 
   ngOnInit(): void {
     // Fetch the token from localStorage
@@ -65,8 +65,6 @@ export class MyPostsComponent implements OnInit {
             reader.onloadend = () => {
               article.photoUrl = reader.result as string;
             };
-            // const url = URL.createObjectURL(blob);
-            // article.photoUrl = url;
           },
           (error) => {
             console.error('Error fetching article photo', error);
@@ -95,7 +93,7 @@ export class MyPostsComponent implements OnInit {
     }
   }
 
-//   // needs to be tested: issues occur
+
   likeArticle(articleId: number): void {
     // Fetch the token from localStorage
     this.token = localStorage.getItem('token');
@@ -142,7 +140,6 @@ export class MyPostsComponent implements OnInit {
 
             this.ngOnInit(); // Refresh the articles after adding a comment
             this.newComments[articleId] = ''; // Clear the input field after adding the comment
-
 
           } else {
             console.error('Failed to add comment');

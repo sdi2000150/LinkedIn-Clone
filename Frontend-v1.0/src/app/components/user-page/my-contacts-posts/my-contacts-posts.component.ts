@@ -15,12 +15,12 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule
 })
 export class MyContactsPostsComponent implements OnInit {
   articles: any[] = []; // Store articles of the user
-  newComments: { [key: number]: string } = {}; // to store comment text for each article (based on key: articleId)
+  newComments: { [key: number]: string } = {}; // Store comment text for each article (based on key: articleId)
   currentUser: any = {}; // Store the current user information
 
   token: string | null = null; // Store token from localStorage
 
-  constructor(private userService: UserService, private router: Router) {} //Inject the UserService
+  constructor(private userService: UserService, private router: Router) {} // Inject the UserService
 
   ngOnInit(): void {
     // Fetch the token from localStorage
@@ -40,7 +40,9 @@ export class MyContactsPostsComponent implements OnInit {
       this.userService.getContactArticles(this.token).subscribe(
         (data) => {
           this.articles = data;
-          console.log('Contact articles fetched successfully', this.articles);
+          this.articles.forEach(article => {
+            this.loadArticlePhoto(article);
+          });
         },
         (error) => {
           console.error('Error fetching contact articles', error);
@@ -51,8 +53,27 @@ export class MyContactsPostsComponent implements OnInit {
       this.router.navigate(['../../login-page']);
     }
   }
+  
+  loadArticlePhoto(article: any): void {
+    if (this.token) {
+      if (article.photoUrl) {
+        this.userService.downloadArticlePhoto(this.token, article.articleID).subscribe(
+          (blob) => {
+            // Convert the image to base64
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = () => {
+              article.photoUrl = reader.result as string;
+            };
+          },
+          (error) => {
+            console.error('Error fetching article photo', error);
+          }
+        );
+      }
+    }
+  }
 
-  // needs to be tested: issues occur
   likeArticle(articleId: number): void {
     // Fetch the token from localStorage
     this.token = localStorage.getItem('token');
@@ -100,7 +121,6 @@ export class MyContactsPostsComponent implements OnInit {
 
             this.ngOnInit(); // Refresh the articles after adding a comment
             this.newComments[articleId] = ''; // Clear the input field after adding the comment
-
 
           } else {
             console.error('Failed to add comment');

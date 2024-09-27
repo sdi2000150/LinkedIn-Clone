@@ -1,5 +1,5 @@
 body {
-    background-color: #f4f4f4; /* Match background color */
+    background-color: #f4f4f4;
     color: #555;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
@@ -11,16 +11,15 @@ body {
 .container {
     display: flex;
     width: 80%;
-    margin: 20px auto; /* Match margin */
-    background-color: white; /* Match background color */
-    padding: 20px; /* Match padding */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Match box shadow */
-    border-radius: 8px; /* Match border radius */
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 
 #main-content {
-    /* centered */
     margin: 0 auto;
     width: 60%;
     padding: 20px;
@@ -28,15 +27,14 @@ body {
 }
 
 #timeline {
-    background: #fff; /* Background for the timeline area */
+    background: #fff;
     padding: 20px;
     box-sizing: border-box;
-    border-radius: 8px; /* Match border radius */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Match box shadow */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #timeline .h2 {
-    /* center it */
     text-align: center;
     position: relative;
 }
@@ -61,7 +59,7 @@ body {
     padding: 5px 10px;
     cursor: pointer;
     margin-right: 10px;
-    border-radius: 4px; /* Match border radius */
+    border-radius: 4px;
 }
 
 #timeline .post button:hover {
@@ -81,7 +79,7 @@ body {
     font-size: 14px;
     color: #363636;
     cursor: pointer;
-    padding-bottom: 20px; /* Add padding to create a buffer zone */
+    padding-bottom: 20px; /* add padding to create a buffer zone */
 
 }
 
@@ -105,38 +103,40 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     z-index: 10;
-    overflow-y: auto; /* Add scroll if content overflows */
-    cursor: pointer; /* Change cursor to pointer (hand) */
+    overflow-y: auto; /* add scroll if content overflows */
+    cursor: pointer; /* change cursor to pointer (hand) */
 
 }
 
 .likes:hover .likes-list,
 .likes-list:hover {
     display: block;
-    /* larger box */
-    width: 100px;
-    cursor: pointer; /* Change cursor to pointer (hand) */
+    width: 100px;    /* larger box */
+    cursor: pointer; /* change cursor to pointer (hand) */
 }
 .comments:hover .comments-list,
 .comments-list:hover {
     display: block;
-    /* larger box */
-    width: 200px;
+    width: 200px;    /* larger box */
     cursor: pointer;
 }
 
-/* Remove existing styles for delete-button */
 #timeline .post .post-info .comments .delete-button {
-    all: unset; 
+    all: unset; /* remove existing styles for delete-button */
     background: none;
     color: red;
     border: none;
     font-size: 12px;
     cursor: pointer;
-    position: relative; /* Position it relatively within the post */
-    float: right; /* Align it to the far right corner */
+    position: relative; /* position it relatively within the post */
+    float: right; /* move it to the far right corner */
 }
 
 #timeline .post .post-info .comments .delete-button:hover {
     color: darkred;
+}
+
+.article-image {
+    width: 400px; /* set the width */
+    height: auto; /* maintain the image's aspect ratio */
 }

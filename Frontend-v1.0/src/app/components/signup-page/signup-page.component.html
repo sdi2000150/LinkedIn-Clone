@@ -1,5 +1,4 @@
 <header>
-    <!-- <h1>Sign Up Page</h1> -->
     <div class="logo">
       <a href="../welcome-page">
         <img src="assets/logos/mainLogo.png" alt="LinkedIn-Clone">
@@ -29,17 +28,10 @@
       <input type="text" id="username" [(ngModel)]="username" name="username">
     </div>
     <div>
-      <label for="email">Email: <span class="required">*</span></label> <!-- If there is already email address used. Show error message-->
+      <label for="email">Email: <span class="required">*</span></label> <!-- If there is already email address used. Show error message -->
       <input type="text" id="email" [(ngModel)]="email" name="email">
     </div>
     
-    <!-- <div>
-      <label for="role">Role:</label>
-      <select id="role" [(ngModel)]="role">
-        <option value="ROLE_USER">User</option>
-        <option value="ROLE_ADMIN">Admin</option>
-      </select>
-    </div> -->
     <div class="password-input">
       <label for="password">Password: <span class="required">*</span></label>
       <input type="password" id="password" [(ngModel)]="password" name="password">
@@ -59,7 +51,7 @@
       <label for="birthdate">Birthdate:</label>
       <input type="date" id="birthdate" [(ngModel)]="birthdate" name="birthdate">
     </div>
-    <!--Doesnt check erros. Bug on submit-->
+
     <form id="sign-up" (submit)="SignUp()">
      <button class="btn2" type="submit" value="SignUp">Sign Up</button>
     </form>

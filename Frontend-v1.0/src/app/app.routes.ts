@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+
+// Import all the components that will be used in the routes
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SignupPageComponent } from './components/signup-page/signup-page.component';
@@ -17,7 +19,8 @@ import { MyContactsPostsComponent } from './components/user-page/my-contacts-pos
 import { MyPostsComponent } from './components/user-page/my-posts/my-posts.component';
 import { UserViewComponent } from './components/admin-page/user-view/user-view.component';
 
-import { authGuard } from './auth.guard';  // Import your guard
+// Import the guard (to protect specific routes)
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
   { path: 'welcome-page', component: WelcomePageComponent },

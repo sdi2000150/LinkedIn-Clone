@@ -39,7 +39,7 @@ header {
     display: flex;
     align-items: flex-start;
     position: absolute;
-    top: 150px; /* Adjust based on the height of the cover photo */
+    top: 150px; /* adjust based on the height of the cover photo */
     left: 20px;
     flex-direction: column;
 }
@@ -74,10 +74,10 @@ header {
     color: white;
     border: none;
     padding: 10px 20px;
-    margin: 5px 5px 50px 0; /* Add margin-right for spacing between buttons */
+    margin: 5px 5px 50px 0; /* add margin-right for spacing between buttons */
     cursor: pointer;
     border-radius: 4px;
-    position: relative; /* Ensure the button is positioned relative to its container */
+    position: relative;
     left: -10px; 
 }
 
@@ -86,8 +86,7 @@ header {
 }
 
 #button3 {
-    /* no underline */
-    text-decoration: none;
+    text-decoration: none;  /* no underline */
     color: white;
 }
 

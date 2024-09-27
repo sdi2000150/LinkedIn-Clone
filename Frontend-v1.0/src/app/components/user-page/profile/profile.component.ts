@@ -13,13 +13,13 @@ import { Router } from '@angular/router';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
-  Name: string = 'Empty'; //Placeholder for the user's name
-  Surname: string = 'Empty'; //Placeholder for the user's surname
-  Email: string = 'Empty'; //Placeholder for the user's email
-  Phone: string = 'Empty'; //Placeholder for the user's phone number
-  Birthdate: string = 'Empty'; //Placeholder for the user's birthdate
+  Name: string = 'Empty'; // Placeholder for the user's name
+  Surname: string = 'Empty'; // Placeholder for the user's surname
+  Email: string = 'Empty'; // Placeholder for the user's email
+  Phone: string = 'Empty'; // Placeholder for the user's phone number
+  Birthdate: string = 'Empty'; // Placeholder for the user's birthdate
 
-  CVfile: string = 'Upload your CV file (only .pdf supported):'; //Placeholder for the user's CV file
+  CVfile: string = 'Upload your CV file (only .pdf supported):'; // Placeholder for the user's CV file heading
 
   token: string | null = null; // Store token from localStorage
 
@@ -52,11 +52,11 @@ export class ProfileComponent implements OnInit {
   experienceDescription: string = ''; // Field for experience description
   selectedEducation: string = '';
   educationDescription: string = ''; // Field for education description
-  selectedSkills: string = '';  //this will change to string[] = []
+  selectedSkills: string = '';  // Field for skills
   
   profilePhotoFile: File | null = null;
   coverPhotoFile: File | null = null;
-  cvFile: File | null = null; // Add a field for the CV file
+  cvFile: File | null = null;
 
   constructor(private userService: UserService, private router: Router) {} //Inject the UserService
 
@@ -132,11 +132,9 @@ export class ProfileComponent implements OnInit {
         },
         (error) => {
           console.error('Error fetching user data', error);
-          // Handle error, potentially navigate back to login
         }
       );
     } else {
-      // Handle case where token is missing
       console.error('No token found');
     }
   }
@@ -193,12 +191,10 @@ export class ProfileComponent implements OnInit {
     this.updateUserProfile();
   }
 
-  //this will change to access array of strings
   updateSkills(): void {
     this.updateUserProfile();
   }
   
-
   onCoverPhotoSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
       this.coverPhotoFile = event.target.files[0];

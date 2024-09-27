@@ -17,6 +17,7 @@ export class SettingsComponent {
   password: string = '';
   passwordConf: string = '';
   oldPassword: string = '';
+
   token: string = localStorage.getItem('token') || '';
 
   msgError: string = '';
@@ -26,13 +27,13 @@ export class SettingsComponent {
 
   showPassword() {
     const passwordInput = document.getElementById('password') as HTMLInputElement;
-    passwordInput.type = 'text';  //so that it is visible
-    setTimeout(() => passwordInput.type = 'password', 2000);  //set a timer for the time the password will show
+    passwordInput.type = 'text';  // So that it is visible
+    setTimeout(() => passwordInput.type = 'password', 2000);  // Set a timer for the time the password will show
   }
   showPasswordConf() {
     const passwordInput = document.getElementById('passwordConf') as HTMLInputElement;
-    passwordInput.type = 'text';  //so that it is visible
-    setTimeout(() => passwordInput.type = 'password', 2000);  //set a timer for the time the password will show
+    passwordInput.type = 'text';  // So that it is visible
+    setTimeout(() => passwordInput.type = 'password', 2000);  // Set a timer for the time the password will show
   }
 
   changeEmailPassword() {

@@ -95,20 +95,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Messages -->
-		<!-- Spring WebSocket -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-websocket</artifactId>
-			<version>3.3.3</version> <!-- Ensure this matches the parent version -->
-		</dependency>
-
-		<!-- Spring Messaging -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-messaging</artifactId>
-		</dependency>
-
 	</dependencies>
 	<!--................................-->
 

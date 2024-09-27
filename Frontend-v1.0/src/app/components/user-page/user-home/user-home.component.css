@@ -1,5 +1,5 @@
 body {
-    background-color: #f4f4f4; /* Match background color */
+    background-color: #f4f4f4;
     color: #555;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
@@ -10,17 +10,17 @@ body {
 .container {
     display: flex;
     width: 80%;
-    margin: 20px auto; /* Match margin */
-    background-color: white; /* Match background color */
-    padding: 20px; /* Match padding */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Match box shadow */
-    border-radius: 8px; /* Match border radius */
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 #left-sidebar,
 #main-content,
 #right-sidebar {
-    background-color: white; /* Match background color */
+    background-color: white;
 }
 
 #left-sidebar {
@@ -59,25 +59,25 @@ body {
 }
 
 #post-creation {
-    background: #fff; /* Background for the post creation area */
-    padding: 20px; /* Match padding */
+    background: #fff; /* background for the post creation area */
+    padding: 20px;
     margin-bottom: 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border-radius: 8px; /* Match border radius */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Match box shadow */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #post-creation textarea {
-    width: 100%; /* Full width */
-    height: 50px; /* Reduced height */
-    margin-bottom: 10px; /* Space between textarea and media inputs */
+    width: 100%; /* full width */
+    height: 50px; /* reduced height */
+    margin-bottom: 10px; /* space between textarea and media inputs */
     box-sizing: border-box;
-    border: 1px solid #ddd; /* Match border */
-    border-radius: 4px; /* Match border radius */
-    padding: 10px; /* Match padding */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
 }
 
 .media-inputs {
@@ -100,7 +100,7 @@ body {
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 4px; /* Match border radius */
+    border-radius: 4px;
 }
 
 .media-inputs button:hover {
@@ -108,11 +108,11 @@ body {
 }
 
 #timeline {
-    background: #fff; /* Background for the timeline area */
+    background: #fff;
     padding: 20px;
     box-sizing: border-box;
-    border-radius: 8px; /* Match border radius */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Match box shadow */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #timeline .post {
@@ -130,7 +130,7 @@ body {
     padding: 5px 10px;
     cursor: pointer;
     margin-right: 10px;
-    border-radius: 4px; /* Match border radius */
+    border-radius: 4px;
 }
 
 #timeline .post button:hover {
