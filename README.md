@@ -6,34 +6,33 @@ Mock LinkedIn-Clone Web Application - Project for Uni Course
 και SpringBoot για Back-End (Java)
 
 ## Project description
-This Project serves as a LinkedIn App Clone. Meaning that supports some of the basic features of the actual LinkedIn Application.
-Most of the features and services requested, were delived. One the major exclusions were the conversation between users, some notifications and 
+This Project serves as a LinkedIn Web App Clone. Meaning that supports some of the basic features of the actual LinkedIn Web Application.
+Most of the features and services requested, were delived. One of the major exclusions were the conversation between users, some notifications and 
 the support for video or audio input.
 
 ## Some technical details
-The frameworks used were Spring boot for the Backend part, Angular for the Front end part paired with Mysql Database.
-In order to run, angular must be downloaded. Inside the project folder ng serve command must be run in the terminal. For the server to start running,
-the application.java file must be executed. NOTE: apppication.properties must be configured correctly.
+The frameworks used were Angular for the Front-end part, and SpringBoot for the Back-end part paired with MySQL Database.
+In order to run, Angular-folder as well as SpringBoot-folder must be downloaded. Inside the Angular project folder the `ng serve --ssl --ssl-cert src/ssl/cert.pem --ssl-key src/ssl/key.pem` command must be run in the terminal. For the server to start running, inside the SpringBoot project folder, the Application.java file must be executed. NOTE: apppication.properties must be configured correctly (MySQL Database configuration).
 ## The app:
 ### Welcome-Page
 
 ### Login-Page
-The user logs in as a result of him correctly submitting his email and password. In other case, error message is displayed.
+The user logs in as a result of him correctly submitting his email and password, and being authorized and authenticated. In other case, error message is displayed.
 ### Signup-Page
-When the user signs up, he can submit all wanted information, except for images (profile and cover photos) that can be only inserted in the profile section of the app
+When the user signs up, he can submit all wanted information, except for images (profile and cover photos) that can be only inserted in the profile section of the app afterwards.
 
 ### User-Page:
 #### Home
 
 #### Network
-All Contacts of the User are displayed as a grid. 
+All Contacts of the User are displayed as a grid. There is also a search area available, for searching other Users.
 #### Jobs
 
 #### Notifications
-Notification were implemented only as a display of the request submited from and to the user. No notifications are sent during the liking of 
-the users posts or applications on his jobs.
+Notification were implemented only as a display of the requests submited from and to the user. No notifications are sent during the liking/commenting of 
+the user's posts or due to applications on his jobs.
 #### Profile
-The profile section shows all information. There is no feature separating private/public information from other users.
+The profile section shows all User information. Here, user can add: About info, CV, Education, Experience, Skills. There is no feature separating private/public information from other users.
 #### Settings
 Here the user can change his password and email. In order to do it, he must submit his old password as a security measure. His new 
 email must not exist in the database. This is handled by the app.
