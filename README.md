@@ -27,7 +27,9 @@ The user logs in as a result of him correctly submitting his email and password,
 ![Login-Page Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/login-page.png)
 
 ### Signup-Page
-When the user signs up, he can submit all wanted information, except for images (profile and cover photos) that can be only inserted in the profile section of the app afterwards.
+When the user signs up, he can submit all wanted information, except for images (profile and cover photos) that can be only inserted in the profile section of the app afterwards:
+<br><br>
+![Signup-Page Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/signup-page.png)
 
 ### User-Page:
 #### Home
