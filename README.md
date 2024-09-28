@@ -35,9 +35,13 @@ When the user signs up, he can submit all wanted information, except for images 
 #### Home
 
 #### Network
-All Contacts of the User are displayed as a grid. There is also a search area available, for searching other Users and accessing their profile in read-only format:
+All Contacts of the User are displayed as a grid.There is also a search area available, for searching other Users and accessing their profile in read-only format:
 <br><br>
 ![Network Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/network.png)
+
+Throught the other user's profile-view, a connection request can be sent, canceled, accepted, declined: 
+<br><br>
+![Profile-View Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/profile-view.png)
 
 #### Jobs
 In this page job-offers are displayed. On the left-sidebar are shown the jobs the current user offers. On the right-sidebar are shown the jobs the current user has applied to. On the middle section recommended jobs are shown (based on bonus: recommendation system).There is also a section available, for uploading a new job-offer:
