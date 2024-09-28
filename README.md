@@ -1,7 +1,7 @@
 # LinkedIn-Clone
 Mock LinkedIn-Clone Web Application - Project for Uni Course
 
-# The Team
+## The Team
 Nikitas Moschos
 Theodoros Moraitis
 
