@@ -92,4 +92,4 @@ NOTE: The recommendation system is not correctly fined tuned and trained (deduct
 
 <br>
 
-**_More detailed information about the project are provided in the Final-Report.pdf (in greek)_**
+**_More detailed information about the project is provided in the Final-Report.pdf (in greek)_**
