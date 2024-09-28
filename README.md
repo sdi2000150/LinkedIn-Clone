@@ -73,7 +73,7 @@ The home page of the Admin, a description of his capabilities is displayed, and 
 ![Admin-Home Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/admin-home.png)
 
 #### Users-List
-Here, the admin can see a list of all users in currently singed up in the app. He has the option to download each user's data in JSON/XML format, or navigate to each user's profile-view page:
+Here, the admin can see a list of all users in currently singed up in the app. He has the option to download each user's data in JSON format, or navigate to each user's profile-view page:
 <br><br>
 ![Admin-UsersList Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/admin-userslist.png)
 
