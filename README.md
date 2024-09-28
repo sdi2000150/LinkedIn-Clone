@@ -42,7 +42,10 @@ All Contacts of the User are displayed as a grid. There is also a search area av
 Notification were implemented only as a display of the requests submited from and to the user. No notifications are sent during the liking/commenting of 
 the user's posts or due to applications on his jobs.
 #### Profile
-The profile section shows all User information. Here, user can add: About info, CV, Education, Experience, Skills. There is no feature separating private/public information from other users.
+The profile section shows all User information. Here, user can add: About info, CV, Education, Experience, Skills. There is no feature separating private/public information from other users:
+<br><br>
+![Profile Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/profile.png)
+
 #### Settings
 Here the user can change his password and email. In order to do it, he must submit his old password as a security measure. His new 
 email must not exist in the database. This is handled by the app:
