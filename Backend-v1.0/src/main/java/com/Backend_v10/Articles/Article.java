@@ -36,31 +36,22 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-// @JsonIgnoreProperties({"ArticleComments"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "articleID")
 public class Article {
-   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long articleID;
-    
     String Text;
-
-    @Lob    // Large Object
+    @Lob    
     String PhotoUrl;
-    
     LocalDateTime DateTime_of_Creation;
-
-
     @ManyToOne
     @JoinColumn(name = "article_user_id",referencedColumnName = "UserID")
     User Owner;
-
     @OneToMany //(cascade = CascadeType.ALL )
     @ToString.Exclude
     @JoinColumn(name = "article_id")
     List<Comment> ArticleComments;
-
     @ManyToMany(mappedBy = "likedArticles")
     @ToString.Exclude
     private List<User> likedByUsers;

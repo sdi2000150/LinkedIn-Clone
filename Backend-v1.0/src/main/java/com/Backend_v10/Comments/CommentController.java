@@ -22,6 +22,7 @@ public class CommentController {
     }
 
 
+    //Deleting Certain Message using its ID
     @DeleteMapping("/delete/{id}")
     public void deleteComment(@PathVariable Long id){
         

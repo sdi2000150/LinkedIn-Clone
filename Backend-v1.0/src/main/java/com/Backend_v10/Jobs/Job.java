@@ -63,7 +63,6 @@ public class Job{
         this.JobApplications = new ArrayList<>();
     }
 
-    //all args contructor
     public Job(String title, Boolean needOfDegree, String otherRequirements, Integer salary, Boolean fullTime) {
         this.title = title;
         this.needOfDegree = needOfDegree;

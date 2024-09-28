@@ -52,6 +52,7 @@ public class ArticleController {
 
 
 
+
     @Transactional
     @DeleteMapping("/delete/{id}")
     public void deleteArticle(@PathVariable Long id){
@@ -65,18 +66,12 @@ public class ArticleController {
 
         //Then we delete all likes 
         this.repository.DeleteLikes(id);
-
-        
-        // if(found_article.isEmpty()){
-        //     System.out.println("Artile Not Found");
-        // }
-        // else{
          this.repository.deleteById(id);
-        // System.out.println("Article Found in DB");    }
     }
 
 
 
+    //------------Functions regarding the article itself-------------//
 
     @GetMapping("{id}/comments")
     public List<Comment> GetArticleComments(@PathVariable String id) {
@@ -103,9 +98,12 @@ public class ArticleController {
             return ResponseEntity.notFound().build();
         }
     }
+//-------------------------------------------------------------------//
 
-    //---------Article Photo--------------//
-        @PostMapping("/{article_id}/uploadPhoto")
+
+
+    //------------Functions regarding images of article-------------//
+    @PostMapping("/{article_id}/uploadPhoto")
     public Boolean UploadPhoto(@RequestParam("image") MultipartFile File, @PathVariable Long article_id){
        try{
         if(File.isEmpty() == true) {
@@ -169,6 +167,8 @@ public class ArticleController {
             return ResponseEntity.badRequest().build();
         }
     }
+    //-------------------------------------------------------------------//
+
 }
 
 

@@ -111,9 +111,9 @@ public class LoadDatabase {
         jobRepo.save(job4);
         
         // Associate articles and jobs with users
-        userService.addArticle(user1, article1);
-        userService.addArticle(user1, article2);
-        userService.addArticle(user3, article3);
+        //userService.addArticle(user1, article1);
+        //userService.addArticle(user1, article2);
+        //userService.addArticle(user3, article3);
         userService.addJob(user1, job1);
         userService.addJob(user1, job2);
         userService.addJob(user3, job3);
@@ -143,9 +143,8 @@ public class LoadDatabase {
 
         
         // Contacts tests:
-        // userService.addContact(user1, user2); //for now jetlee is not a contact of bobross
-        userService.addContact(user1, user3); // thomasch is a contact of bobross
-        userService.addContact(user1, user4); // taylorcar is a contact of bobross
+        userService.addContact(user1, user3); 
+        userService.addContact(user1, user4); 
 
         // UserConnections tests:
         // bobross have sent request to marial
@@ -169,7 +168,6 @@ public class LoadDatabase {
         userRepo.save(user1);
         userRepo.save(user2);
         userRepo.save(user5);
-        // Maybe dont need the below: (yes, not needed, maybe autosaved by the manytomany(mappedBy = "likedArticles")->(of user))
 
 
         List<String> Res = UserConnRepo.findUsersRequestingMe("jetlee@email.com");
@@ -319,22 +317,22 @@ public class LoadDatabase {
     userService.addArticle(Heisenberg, T12);
     userService.addArticle(Dirac, T13);
     // ADD LIKES ON ARTICLES
-    Godel.likeArticle(T1);
-    Bohr.likeArticle(T2);
-    Bohr.likeArticle(T3);
-    Bohr.likeArticle(T4);
-    Godel.likeArticle(T3);
-    Godel.likeArticle(T5);
-    Planck.likeArticle(T4);
-    Oppenh.likeArticle(T5);
-    Oppenh.likeArticle(T6);
-    Planck.likeArticle(T7);
-    Godel.likeArticle(T8);
-    Bohr.likeArticle(T9);
-    Planck.likeArticle(T10);
-    Bohr.likeArticle(T11);
-    Planck.likeArticle(T12);
-    Oppenh.likeArticle(T13);
+    // Godel.likeArticle(T1);
+    // Bohr.likeArticle(T2);
+    // Bohr.likeArticle(T3);
+    // Bohr.likeArticle(T4);
+    // Godel.likeArticle(T3);
+    // Godel.likeArticle(T5);
+    // Planck.likeArticle(T4);
+    // Oppenh.likeArticle(T5);
+    // Oppenh.likeArticle(T6);
+    // Planck.likeArticle(T7);
+    // Godel.likeArticle(T8);
+    // Bohr.likeArticle(T9);
+    // Planck.likeArticle(T10);
+    // Bohr.likeArticle(T11);
+    // Planck.likeArticle(T12);
+    // Oppenh.likeArticle(T13);
     // ADD COMMENTS ON ARTICLES
     Comment comment = new Comment();
     comment.setContent("Deserves A Read");
@@ -357,6 +355,8 @@ public class LoadDatabase {
     Article A8 = articleRepo.save(new Article("Get 20% off on all agricultural supplies this month! Visit us at https://agrisuppliespromo.com!!", null));
     Article A9 = articleRepo.save(new Article("Upcoming Symposium: Innovations in Precision Agriculture – How Technology is Changing the Face of Farming. Register at https://precisionagriculturesymposium.com!!", null));
     Article A10 = articleRepo.save(new Article("Attend the Global Symposium on Sustainable Agriculture Practices to address food security challenges. Details at https://sustainableagriculturesymposium.com!!", null));
+    
+
     // ADD ARTICLES TO USERS
     userService.addArticle(Farmer, A1);
     userService.addArticle(Farmer, A2);
@@ -369,16 +369,16 @@ public class LoadDatabase {
     userService.addArticle(Farmer, A9);
     userService.addArticle(Farmer, A10);
     // ADD LIKES ON ARTICLES
-    Farmer.likeArticle(A1);
-    Farmer.likeArticle(A2);
-    Farmer.likeArticle(A3);
-    Farmer.likeArticle(A4);
-    Farmer.likeArticle(A5);
-    Farmer.likeArticle(A6);
-    Farmer.likeArticle(A7);
-    Farmer.likeArticle(A8);
-    Farmer.likeArticle(A9);
-    Farmer.likeArticle(A10);
+    // Farmer.likeArticle(A1);
+    // Farmer.likeArticle(A2);
+    // Farmer.likeArticle(A3);
+    // Farmer.likeArticle(A4);
+    // Farmer.likeArticle(A5);
+    // Farmer.likeArticle(A6);
+    // Farmer.likeArticle(A7);
+    // Farmer.likeArticle(A8);
+    // Farmer.likeArticle(A9);
+    // Farmer.likeArticle(A10);
     //Architecture
     Article Arch1 = articleRepo.save(new Article("Unlock the secrets of sustainable architecture. Dive into green building at https://greenbuild.com!!", null));
     Article Arch2 = articleRepo.save(new Article("Explore the role of sustainable materials in modern architecture at https://sustainablearchmaterials.com!!", null));
@@ -387,6 +387,12 @@ public class LoadDatabase {
     Article Arch5 = articleRepo.save(new Article("Investigating the impact of AI in urban planning and smart cities. Explore the research at https://aiurbanplanning.com!!", null));
     Article Arch6 = articleRepo.save(new Article("The science behind energy-efficient buildings: How architecture reduces carbon footprint. Details at https://energyefficientarchitecture.com!!", null));
     Article Arch7 = articleRepo.save(new Article("Explore how parametric design is revolutionizing modern architecture at https://parametricarchitecture.com!!", null));
+    
+    
+    
+
+
+    
     // ADD ARTICLES TO USERS
     userService.addArticle(Jackie, Arch1);
     userService.addArticle(Jackie, Arch2);
@@ -396,13 +402,13 @@ public class LoadDatabase {
     userService.addArticle(WD, Arch6);
     userService.addArticle(WS, Arch7);
     // ADD LIKES ON ARTICLES
-    JLo.likeArticle(Arch1);
-    JLo.likeArticle(Arch2);
-    JLo.likeArticle(Arch3);
-    Jackie.likeArticle(Arch4);
-    Jackie.likeArticle(Arch5);
-    Jackie.likeArticle(Arch6);
-    JLo.likeArticle(Arch7);
+    // JLo.likeArticle(Arch1);
+    // JLo.likeArticle(Arch2);
+    // JLo.likeArticle(Arch3);
+    // Jackie.likeArticle(Arch4);
+    // Jackie.likeArticle(Arch5);
+    // Jackie.likeArticle(Arch6);
+    // JLo.likeArticle(Arch7);
     //Finance
     Article F1 = articleRepo.save(new Article("Get the inside scoop on financial technologies and cryptocurrencies at https://fintechrevolution.com!!", null));
     Article F2 = articleRepo.save(new Article("Attend our lecture on financial risk management in a volatile economy. Register now at https://riskmanagementlecture.com!!", null));
@@ -413,16 +419,20 @@ public class LoadDatabase {
     Article F7 = articleRepo.save(new Article("Breaking: New Regulations Proposed for Cryptocurrency Trading Platforms. Learn more at https://cryptoregulationnews.com!!", null));
     Article F8 = articleRepo.save(new Article("Investors React: Tech Stocks Lead Market Gains in Recent Trading Sessions. More details at https://techstocknews.com!!", null));
     Article F9 = articleRepo.save(new Article("Breaking: Global Supply Chain Disruptions Impacting Commodity Prices. Stay updated at https://commoditypricewatch.com!!", null));
+   
+   
+ 
+    
     // ADD ARTICLES TO USERS
-    userService.addArticle(Franklin, F1);
-    userService.addArticle(Franklin, F2);
-    userService.addArticle(Franklin, F3);
-    userService.addArticle(Tesla, F4);
-    userService.addArticle(Franklin, F5);
-    userService.addArticle(Franklin, F6);
-    userService.addArticle(Einstein, F7);
-    userService.addArticle(Tesla, F8);
-    userService.addArticle(Franklin, F9);
+    // userService.addArticle(Franklin, F1);
+    // userService.addArticle(Franklin, F2);
+    // userService.addArticle(Franklin, F3);
+    // userService.addArticle(Tesla, F4);
+    // userService.addArticle(Franklin, F5);
+    // userService.addArticle(Franklin, F6);
+    // userService.addArticle(Einstein, F7);
+    // userService.addArticle(Tesla, F8);
+    // userService.addArticle(Franklin, F9);
     // ADD LIKES ON ARTICLES
     Tesla.likeArticle(F1);
     Tesla.likeArticle(F2);
@@ -436,21 +446,21 @@ public class LoadDatabase {
 
 
   
-    ASmith.likeArticle(F2);
-    ASmith.likeArticle(F5);
-    ASmith.likeArticle(F8);
-    Marx.likeArticle(F1);
-    Marx.likeArticle(F7);
-    Marx.likeArticle(F5);
-    Marx.likeArticle(F4);
-    Morgan.likeArticle(F2);
-    Morgan.likeArticle(F3);
-    Morgan.likeArticle(F4);
-    Musk.likeArticle(F1);
-    Musk.likeArticle(F2);
-    Musk.likeArticle(F5);
-    Musk.likeArticle(F8);
-    Musk.likeArticle(F9);
+    // ASmith.likeArticle(F2);
+    // ASmith.likeArticle(F5);
+    // ASmith.likeArticle(F8);
+    // Marx.likeArticle(F1);
+    // Marx.likeArticle(F7);
+    // Marx.likeArticle(F5);
+    // Marx.likeArticle(F4);
+    // Morgan.likeArticle(F2);
+    // Morgan.likeArticle(F3);
+    // Morgan.likeArticle(F4);
+    // Musk.likeArticle(F1);
+    // Musk.likeArticle(F2);
+    // Musk.likeArticle(F5);
+    // Musk.likeArticle(F8);
+    // Musk.likeArticle(F9);
 
     //Literacy
     Article L1 = articleRepo.save(new Article("Enhance your creative writing skills with experts. Learn more at https://creativewriters.com!!", null));
@@ -464,6 +474,8 @@ public class LoadDatabase {
     Article L9 = articleRepo.save(new Article("Discover the birth of modern philosophy with Descartes in our engaging lecture. Details at https://descartesmodernphilosophy.com!!", null));
     Article L10 = articleRepo.save(new Article("Dive into Jean-Paul Sartre's existentialism and the essence of freedom at https://sartreexistentialismlecture.com!!", null));
     Article L11 = articleRepo.save(new Article("Explore Kant's ethical theories on duty and moral law in our latest lecture. More info at https://kantsmoralphilosophy.com!!", null));
+ 
+    
     // ADD ARTICLES TO USERS
     userService.addArticle(Franklin, L1);
     userService.addArticle(Nietzsche, L2);
@@ -477,17 +489,17 @@ public class LoadDatabase {
     userService.addArticle(Galilei, L10);
     userService.addArticle(Nietzsche, L11);    
     // ADD LIKES ON ARTICLES
-    Nietzsche.likeArticle(L1);
-    Nietzsche.likeArticle(L2);
-    Franklin.likeArticle(L3);
-    Franklin.likeArticle(L4);
-    MorganF.likeArticle(L5);
-    Nietzsche.likeArticle(L6);
-    Galilei.likeArticle(L7);
-    Curie.likeArticle(L8);
-    Galilei.likeArticle(L9);
-    Curie.likeArticle(L10);
-    Mendel.likeArticle(L11);
+    // Nietzsche.likeArticle(L1);
+    // Nietzsche.likeArticle(L2);
+    // Franklin.likeArticle(L3);
+    // Franklin.likeArticle(L4);
+    // MorganF.likeArticle(L5);
+    // Nietzsche.likeArticle(L6);
+    // Galilei.likeArticle(L7);
+    // Curie.likeArticle(L8);
+    // Galilei.likeArticle(L9);
+    // Curie.likeArticle(L10);
+    // Mendel.likeArticle(L11);
     //Engineering
     Article E1 = articleRepo.save(new Article("The wonders of renewable energy await. Discover solar, wind, and hydro at https://renewablepower.com!!", null));
     Article E2 =articleRepo.save(new Article("Explore biotechnology breakthroughs that are changing the world. Learn more at https://biotechleaders.com!!", null));
@@ -502,6 +514,10 @@ public class LoadDatabase {
     Article E11 =articleRepo.save(new Article("Enroll in Our New Online Engineering Certification Courses and Boost Your Career! Learn more at https://onlineengineeringcourses.com!!", null));
     Article E12 =articleRepo.save(new Article("Discover the Top Engineering Trends to Watch in 2024. Explore the article at https://engineeringtrends.com!!", null));
     Article E13 =articleRepo.save(new Article("New Study: The Impact of Emerging Technologies on Civil Engineering Projects. Read the findings at https://civilengineeringstudy.com!!", null));
+    
+    
+
+
     // ADD ARTICLES TO USERS
     userService.addArticle(Babbage, E1);
     userService.addArticle(Tesla, E2);
@@ -517,19 +533,19 @@ public class LoadDatabase {
     userService.addArticle(Tesla, E12);
     userService.addArticle(Fermi, E13);
     // ADD LIKES ON ARTICLES
-    Tesla.likeArticle(E1);
-    Babbage.likeArticle(E2);
-    Babbage.likeArticle(E3);
-    Tesla.likeArticle(E4);
-    Oppenh.likeArticle(E5);
-    Dirac.likeArticle(E6);
-    Tesla.likeArticle(E7);
-    Crick.likeArticle(E8);
-    Fermi.likeArticle(E9);
-    Tesla.likeArticle(E10);
-    Fermi.likeArticle(E11);
-    Fermi.likeArticle(E12);
-    Heisenberg.likeArticle(E13);
+    // Tesla.likeArticle(E1);
+    // Babbage.likeArticle(E2);
+    // Babbage.likeArticle(E3);
+    // Tesla.likeArticle(E4);
+    // Oppenh.likeArticle(E5);
+    // Dirac.likeArticle(E6);
+    // Tesla.likeArticle(E7);
+    // Crick.likeArticle(E8);
+    // Fermi.likeArticle(E9);
+    // Tesla.likeArticle(E10);
+    // Fermi.likeArticle(E11);
+    // Fermi.likeArticle(E12);
+    // Heisenberg.likeArticle(E13);
     //Marketing
     Article M1 = articleRepo.save(new Article("Master the art of digital marketing with us. Dive in at https://digitalmarketingpro.com!!", null));
     Article M2 = articleRepo.save(new Article("Discover how digital transformation is changing industries at https://digitalchange.com!!", null));
@@ -557,18 +573,18 @@ public class LoadDatabase {
     userService.addArticle(Fleming, M11);
     userService.addArticle(GrahamBell, M12);    
     // ADD LIKES ON ARTICLES
-    Messi.likeArticle(M1);
-    JLo.likeArticle(M2);
-    WD.likeArticle(M3);
-    WS.likeArticle(M4);
-    Jackie.likeArticle(M5);
-    MorganF.likeArticle(M6);
-    Napoleon.likeArticle(M7);
-    DaVinci.likeArticle(M8);
-    Fleming.addArticle(M9);
-    Einstein.likeArticle(M10);
-    Hawking.likeArticle(M11);
-    GrahamBell.likeArticle(M12);
+    // Messi.likeArticle(M1);
+    // JLo.likeArticle(M2);
+    // WD.likeArticle(M3);
+    // WS.likeArticle(M4);
+    // Jackie.likeArticle(M5);
+    // MorganF.likeArticle(M6);
+    // Napoleon.likeArticle(M7);
+    // DaVinci.likeArticle(M8);
+    // Fleming.addArticle(M9);
+    // Einstein.likeArticle(M10);
+    // Hawking.likeArticle(M11);
+    // GrahamBell.likeArticle(M12);
     //Law
     Article Law1 = articleRepo.save(new Article("Artificial Intelligence and the future of law. See more at https://lawtechai.com!!", null));
     Article Law2 = articleRepo.save(new Article("Don’t miss our seminar on privacy laws in the age of data breaches. Learn more at https://privacylawseminar.com!!", null));
@@ -581,6 +597,11 @@ public class LoadDatabase {
     Article Law9 = articleRepo.save(new Article("Don't miss the International Conference on Criminal Justice Reform, focusing on innovative legal practices. Details at https://criminaljusticereform.com!!", null));
     Article Law10 = articleRepo.save(new Article("Special Offer: Free Consultation for New Clients at Our Law Firm! Schedule your appointment at https://lawfirmconsultation.com!!", null));
     Article Law11 = articleRepo.save(new Article("Enroll in our Online Legal Courses and Get 20% Off Your First Course! Learn more at https://onlinelegalcourses.com!!", null));
+    
+        
+ 
+    
+    
     // ADD ARTICLES TO USERS
     userService.addArticle(Jackie, Law1);
     userService.addArticle(JLo, Law2);
@@ -594,22 +615,22 @@ public class LoadDatabase {
     userService.addArticle(Hawking, Law10);
     userService.addArticle(Fleming, Law11);    
     // ADD LIKES ON ARTICLES
-    Lincoln.likeArticle(Law1);
-    Lincoln.likeArticle(Law4);
-    Lincoln.likeArticle(Law6);
-    Lincoln.likeArticle(Law7);
-    Shapiro.likeArticle(Law9);
-    Shapiro.likeArticle(Law6);
-    Shapiro.likeArticle(Law5);
-    Woodrow.likeArticle(Law6);
-    Woodrow.likeArticle(Law7);
-    Woodrow.likeArticle(Law1);
-    Woodrow.likeArticle(Law1);
-    Woodrow.likeArticle(Law2);
-    WGary.likeArticle(Law3);
-    WGary.likeArticle(Law5);
-    WGary.likeArticle(Law4);
-    WGary.likeArticle(Law10);
+    // Lincoln.likeArticle(Law1);
+    // Lincoln.likeArticle(Law4);
+    // Lincoln.likeArticle(Law6);
+    // Lincoln.likeArticle(Law7);
+    // Shapiro.likeArticle(Law9);
+    // Shapiro.likeArticle(Law6);
+    // Shapiro.likeArticle(Law5);
+    // Woodrow.likeArticle(Law6);
+    // Woodrow.likeArticle(Law7);
+    // Woodrow.likeArticle(Law1);
+    // Woodrow.likeArticle(Law1);
+    // Woodrow.likeArticle(Law2);
+    // WGary.likeArticle(Law3);
+    // WGary.likeArticle(Law5);
+    // WGary.likeArticle(Law4);
+    // WGary.likeArticle(Law10);
 
 
     //Medicine
@@ -623,6 +644,11 @@ public class LoadDatabase {
     Article Med8 = articleRepo.save(new Article("Advancements in fertility treatments: The science of hope at https://fertilityscience.com!!", null));
     Article Med9 = articleRepo.save(new Article("How 3D printing is revolutionizing prosthetics and implants at https://med3dprint.com!!", null));
     Article Med10 = articleRepo.save(new Article("Fight antibiotic resistance with innovative drug discoveries at https://newantibiotics.com!!", null));
+    
+         
+
+
+    
     // ADD ARTICLES TO USERS
     userService.addArticle(Jackie, Med1);
     userService.addArticle(JLo, Med2);
@@ -635,19 +661,19 @@ public class LoadDatabase {
     userService.addArticle(Washington, Med9);
     userService.addArticle(Napoleon, Med10);    
     // ADD LIKES ON ARTICLES
-    Papanikolaou.likeArticle(Med1);
-    Papanikolaou.likeArticle(Med4);
-    Papanikolaou.likeArticle(Med5);
-    Papanikolaou.likeArticle(Med7);
-    Fleming.likeArticle(Med1);
-    Fleming.likeArticle(Med3);
-    Fleming.likeArticle(Med2);
-    Hippocrates.likeArticle(Med5);
-    Hippocrates.likeArticle(Med6);
-    Hippocrates.likeArticle(Med8);
-    Hippocrates.likeArticle(Med9);
-    Hippocrates.likeArticle(Med10);
-    Hippocrates.likeArticle(Med3);
+    // Papanikolaou.likeArticle(Med1);
+    // Papanikolaou.likeArticle(Med4);
+    // Papanikolaou.likeArticle(Med5);
+    // Papanikolaou.likeArticle(Med7);
+    // Fleming.likeArticle(Med1);
+    // Fleming.likeArticle(Med3);
+    // Fleming.likeArticle(Med2);
+    // Hippocrates.likeArticle(Med5);
+    // Hippocrates.likeArticle(Med6);
+    // Hippocrates.likeArticle(Med8);
+    // Hippocrates.likeArticle(Med9);
+    // Hippocrates.likeArticle(Med10);
+    // Hippocrates.likeArticle(Med3);
     
 
 
@@ -665,6 +691,10 @@ public class LoadDatabase {
     Article Ed9 = articleRepo.save(new Article("Upgrade your study materials! 20% off all educational resources this month only. Shop at https://educationalresourcespromo.com!!", null));
     Article Ed10 = articleRepo.save(new Article("Upcoming Lecture: 'The Future of Education: Embracing Digital Learning Environments' - Join us for insights. Register at https://digitallearninglecture.com!!", null));
     Article Ed11 = articleRepo.save(new Article("Attend a lecture on 'The Importance of Emotional Intelligence in Education' to learn about its impact on student success. More info at https://emotionalintelligenceineducation.com!!", null));
+    
+    
+
+
     // ADD ARTICLES TO USERS
     userService.addArticle(Jackie, Ed1);
     userService.addArticle(JLo, Ed2);
@@ -687,28 +717,6 @@ public class LoadDatabase {
     Article S6 = articleRepo.save(new Article("Why Emotional Intelligence is the Key to Leadership and Career Success. Read more at https://emotionalintelligenceleadership.com!!", null));
     Article S7 = articleRepo.save(new Article("The Top 5 Soft Skills Every Professional Should Develop in 2024. Find out at https://topsoftskills.com!!", null));
     Article S8 = articleRepo.save(new Article("Critical Thinking and Problem-Solving: How to Excel in Complex Situations. Learn techniques at https://criticalthinking101.com!!", null));
-    Article S9 = articleRepo.save(new Article("Building Resilience: How to Thrive Under Pressure at Work. Explore strategies at https://resilienceatwork.com!!", null));
-    Article S10 = articleRepo.save(new Article("Collaboration Skills: How to Work Effectively in a Team Environment. More at https://teamcollaborationskills.com!!", null));
-    Article S11 = articleRepo.save(new Article("Ace Your Next Interview: Top Questions and How to Answer Them. Prepare at https://interviewquestionsguide.com!!", null));
-    Article S12 = articleRepo.save(new Article("Behavioral Interview Techniques: How to Showcase Your Experience with STAR Method. Learn more at https://behavioralinterviewsuccess.com!!", null));
-    Article S13 = articleRepo.save(new Article("The Power of Storytelling in Interviews: How to Frame Your Responses for Impact. Explore tips at https://interviewstorytelling.com!!", null));
-    Article S14 = articleRepo.save(new Article("How to Overcome Interview Anxiety and Impress Your Potential Employer. Read tips at https://interviewanxietytips.com!!", null));
-    Article S15 = articleRepo.save(new Article("Remote Job Interviews: How to Prepare and Present Yourself Virtually. More info at https://remoteinterviewsuccess.com!!", null));
-    Article S16 = articleRepo.save(new Article("How to Create a Standout CV that Gets You Noticed. Learn more at https://standoutcv.com!!", null));
-    Article S17 = articleRepo.save(new Article("The Perfect CV Format for 2024: What Recruiters Are Looking For. Explore formats at https://cvformatguide.com!!", null));
-    Article S18 = articleRepo.save(new Article("Top 10 Words to Include in Your CV to Make an Impact. Discover them at https://cvimpactwords.com!!", null));
-    Article S19 = articleRepo.save(new Article("Tailoring Your Resume for Each Job Application: Why It Matters and How to Do It. Find tips at https://tailoredresume.com!!", null));
-    Article S20 = articleRepo.save(new Article("How to Highlight Your Soft Skills on Your Resume to Stand Out. Learn more at https://highlightsoftskills.com!!", null));
-    Article S21 = articleRepo.save(new Article("How to Build a Personal Brand that Enhances Your Career Prospects. More info at https://personalbrandingguide.com!!", null));
-    Article S22 = articleRepo.save(new Article("Why Networking is Critical to Your Career Growth and How to Do It Right. Explore strategies at https://networkingsuccess.com!!", null));
-    Article S23 = articleRepo.save(new Article("How to Stay Relevant in Your Career with Continuous Learning and Development. Learn more at https://careerlearninghub.com!!", null));
-    Article S24 = articleRepo.save(new Article("The Benefits of Mentorship: How to Find and Work with a Mentor. Discover more at https://mentorshipbenefits.com!!", null));
-    Article S25 = articleRepo.save(new Article("Upskilling in 2024: What Skills to Focus On for Career Advancement. Learn more at https://upskilling2024.com!!", null));
-    Article S26 = articleRepo.save(new Article("Get 50% Off on Our New Online Course 'Mastering Communication in the Workplace'. Enroll now at https://communicationcoursepromo.com!!", null));
-    Article S27 = articleRepo.save(new Article("Sign Up for Our CV Writing Workshop and Get a Free Resume Review. Learn more at https://cvworkshoppromo.com!!", null));
-    Article S28 = articleRepo.save(new Article("Improve Your Interview Skills with Our One-on-One Coaching Sessions. Book now at https://interviewcoachingpromo.com!!", null));
-    Article S29 = articleRepo.save(new Article("Upgrade Your Public Speaking Skills with Our Virtual Training Program. Register at https://publicspeakingtraining.com!!", null));
-    Article S30 = articleRepo.save(new Article("Don't Miss Out on Our Soft Skills Bootcamp! Limited spots available at https://softskillsbootcamp.com!!", null));
     // ADD ARTICLES TO USERS
     userService.addArticle(Jackie, S1);
     userService.addArticle(JLo, S2);
@@ -718,29 +726,152 @@ public class LoadDatabase {
     userService.addArticle(MorganF, S6);
     userService.addArticle(Messi, S7);
     userService.addArticle(MuhammedALi, S8);
-    userService.addArticle(Washington, S9);
-    userService.addArticle(Napoleon, S10);
-    userService.addArticle(GrahamBell, S11);
-    userService.addArticle(Einstein, S12);
-    userService.addArticle(Newton, S13);
-    userService.addArticle(Curie, S14);
-    userService.addArticle(Tesla, S15);
-    userService.addArticle(Galilei, S16);
-    userService.addArticle(DaVinci, S17);
-    userService.addArticle(Darwin, S18);
-    userService.addArticle(Hawking, S19);
-    userService.addArticle(Turing, S20);
-    userService.addArticle(Lovelace, S21);
-    userService.addArticle(Franklin, S22);
-    userService.addArticle(Pasteur, S23);
-    userService.addArticle(Mendel, S24);
-    userService.addArticle(Fleming, S25);
-    userService.addArticle(Copernicus, S26);
-    userService.addArticle(Kepler, S27);
-    userService.addArticle(Babbage, S28);
-    userService.addArticle(Bohr, S29);
-    userService.addArticle(Planck, S30);
 
+    //////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////
+
+    //JOBS
+    this.jobRepo.save(new Job("Agricultural Scientist", true, "Crop management, Soil analysis", 1200, true));
+    this.jobRepo.save(new Job("Farm Manager", false, "Farm operations, Animal husbandry", 900, true));
+    this.jobRepo.save(new Job("Agricultural Equipment Operator", true, "Tractor operation, Maintenance", 750, false));
+    this.jobRepo.save(new Job("Agriculture Technician", true, "Soil sampling, Data collection", 800, true));
+    this.jobRepo.save(new Job("Horticulturist", true, "Plant biology, Greenhouse management", 1100, true));
+    this.jobRepo.save(new Job("Agronomy Specialist", true, "Crop rotation, Pest control", 950, true));
+    this.jobRepo.save(new Job("Sustainable Agriculture Consultant", false, "Sustainable farming practices, Organic certification", 1300, true));
+    this.jobRepo.save(new Job("Agricultural Engineer", true, "Irrigation systems, Machinery design", 1400, true));
+    this.jobRepo.save(new Job("Farm Supervisor", false, "Farm logistics, Team management", 850, false));
+    this.jobRepo.save(new Job("Soil Scientist", true, "Soil chemistry, Land evaluation", 1150, true));
+    this.jobRepo.save(new Job("Animal Nutritionist", true, "Livestock feeding, Dietary planning", 1000, true));
+    this.jobRepo.save(new Job("Agricultural Inspector", true, "Regulation compliance, Health standards", 900, false));
+    this.jobRepo.save(new Job("Greenhouse Manager", true, "Greenhouse technology, Crop optimization", 850, true));
+    this.jobRepo.save(new Job("Aquaculture Specialist", false, "Fish farming, Water quality management", 950, true));
+    this.jobRepo.save(new Job("Agroforestry Consultant", true, "Forest management, Agroforestry techniques", 1200, true));
+    this.jobRepo.save(new Job("Rural Development Officer", false, "Community engagement, Rural economics", 1100, true));
+    this.jobRepo.save(new Job("Agriculture Marketing Manager", true, "Supply chain, Marketing strategies", 1300, true));
+    this.jobRepo.save(new Job("Irrigation Specialist", true, "Water management, Irrigation system design", 1000, true));
+    this.jobRepo.save(new Job("Poultry Farm Manager", true, "Poultry farming, Animal welfare", 900, true));
+    this.jobRepo.save(new Job("Organic Farm Manager", true, "Organic farming, Sustainability", 950, false));
+
+    this.jobRepo.save(new Job("Full Stack Developer", true, "Java, Spring, Angular", 1200, true));
+    this.jobRepo.save(new Job("Data Analyst", true, "Python, MS Office", 1100, true));
+    this.jobRepo.save(new Job("DevOps Engineer", false, "CI/CD, Docker, Jenkins", 1500, true));
+    this.jobRepo.save(new Job("Cybersecurity Specialist", true, "Firewall, Network security, Python", 1600, true));
+    this.jobRepo.save(new Job("Machine Learning Engineer", true, "TensorFlow, Python", 1700, true));
+    this.jobRepo.save(new Job("Software Architect", true, "Java, Microservices, Cloud", 2000, true));
+    this.jobRepo.save(new Job("Backend Developer", false, "Node.js, Express, MongoDB", 1400, true));
+    this.jobRepo.save(new Job("Cloud Solutions Architect", true, "AWS, Azure, Google Cloud", 1900, true));
+    this.jobRepo.save(new Job("Blockchain Developer", true, "Solidity, Smart contracts", 1600, true));
+    this.jobRepo.save(new Job("Network Administrator", true, "Routing, Switching, Cisco", 1200, false));
+    this.jobRepo.save(new Job("Mobile App Developer", true, "iOS, Swift, Android", 1300, true));
+    this.jobRepo.save(new Job("Game Developer", true, "Unity, Unreal Engine, C#", 1500, true));
+    this.jobRepo.save(new Job("QA Tester", false, "Manual Testing, Automation", 1000, true));
+    this.jobRepo.save(new Job("IT Support Specialist", true, "Technical support, Troubleshooting", 900, false));
+    this.jobRepo.save(new Job("UI/UX Designer", true, "Figma, Adobe XD", 1400, true));
+    this.jobRepo.save(new Job("Robotics Engineer", true, "C++, Automation, Robotics", 2000, true));
+    this.jobRepo.save(new Job("Database Administrator", true, "SQL, MySQL, Oracle", 1300, false));
+    this.jobRepo.save(new Job("AI Researcher", true, "Artificial Intelligence, Neural networks", 2100, true));
+    this.jobRepo.save(new Job("IoT Specialist", true, "IoT systems, Embedded systems", 1600, true));
+    this.jobRepo.save(new Job("Frontend Developer", true, "React, JavaScript, CSS", 1200, true));
+
+    this.jobRepo.save(new Job("General Practitioner", true, "Patient diagnosis, Medical treatments", 1800, true));
+    this.jobRepo.save(new Job("Nurse", true, "Patient care, Medication administration", 1000, true));
+    this.jobRepo.save(new Job("Surgeon", true, "Surgical procedures, Patient care", 2500, true));
+    this.jobRepo.save(new Job("Pharmacist", true, "Prescription management, Drug safety", 1200, true));
+    this.jobRepo.save(new Job("Dentist", false, "Dental care, Oral hygiene", 2000, true));
+    this.jobRepo.save(new Job("Pediatrician", true, "Child care, Pediatric treatments", 1600, true));
+    this.jobRepo.save(new Job("Medical Researcher", true, "Clinical trials, Medical innovations", 1900, true));
+    this.jobRepo.save(new Job("Anesthesiologist", true, "Anesthesia management, Surgery support", 2200, true));
+    this.jobRepo.save(new Job("Physician Assistant", true, "Patient diagnosis, Treatment planning", 1300, true));
+    this.jobRepo.save(new Job("Radiologist", true, "Medical imaging, Diagnostic radiology", 2100, true));
+    this.jobRepo.save(new Job("Optometrist", true, "Eye care, Vision correction", 1500, true));
+    this.jobRepo.save(new Job("Psychiatrist", true, "Mental health, Therapy", 1700, true));
+    this.jobRepo.save(new Job("Medical Lab Technician", false, "Lab testing, Blood analysis", 1000, false));
+    this.jobRepo.save(new Job("Orthopedic Surgeon", true, "Bone surgeries, Trauma care", 2600, true));
+    this.jobRepo.save(new Job("Cardiologist", true, "Heart health, Diagnostics", 2300, true));
+    this.jobRepo.save(new Job("Obstetrician", true, "Pregnancy care, Childbirth", 1900, true));
+    this.jobRepo.save(new Job("Dermatologist", true, "Skin care, Skin diseases", 1700, true));
+    this.jobRepo.save(new Job("Medical Coding Specialist", false, "Coding, Billing", 1200, false));
+    this.jobRepo.save(new Job("Emergency Room Nurse", true, "Patient triage, Emergency care", 1400, true));
+    this.jobRepo.save(new Job("Medical Equipment Technician", true, "Equipment maintenance, Diagnostics", 1000, false));
+    
+    this.jobRepo.save(new Job("Literary Editor", true, "Proofreading, Copyediting", 1200, true));
+    this.jobRepo.save(new Job("Content Writer", true, "Blog writing, SEO content", 800, true));
+    this.jobRepo.save(new Job("Book Publisher", false, "Manuscript evaluation, Publishing", 1500, true));
+    this.jobRepo.save(new Job("Creative Writer", true, "Fiction, Non-fiction, Storytelling", 1000, true));
+    this.jobRepo.save(new Job("Literature Teacher", true, "Teaching, Lesson planning", 1300, true));
+    this.jobRepo.save(new Job("Literary Critic", true, "Reviewing, Criticism", 1100, true));
+    this.jobRepo.save(new Job("Poet", false, "Poetry writing, Literary events", 700, true));
+    this.jobRepo.save(new Job("Translator", true, "Language skills, Translating books", 1000, true));
+    this.jobRepo.save(new Job("Publishing Assistant", false, "Manuscript preparation, Copyediting", 900, true));
+    this.jobRepo.save(new Job("Journalist", true, "News writing, Reportage", 1200, true));
+    this.jobRepo.save(new Job("Screenwriter", true, "Scriptwriting, Storytelling", 1400, true));
+    this.jobRepo.save(new Job("Book Reviewer", true, "Critical analysis, Literary reviews", 800, true));
+    this.jobRepo.save(new Job("Children's Book Author", true, "Creative writing, Storytelling", 900, true));
+    this.jobRepo.save(new Job("Playwright", true, "Drama writing, Theater", 1100, true));
+    this.jobRepo.save(new Job("Essayist", true, "Non-fiction, Essays", 1000, true));
+    this.jobRepo.save(new Job("Freelance Writer", true, "Content creation, SEO", 800, true));
+    this.jobRepo.save(new Job("Copywriter", true, "Advertising, Branding", 900, true));
+    this.jobRepo.save(new Job("Literary Agent", false, "Author representation, Contracts", 1500, true));
+    this.jobRepo.save(new Job("Book Designer", true, "Graphic design, Book layouts", 1100, true));
+    this.jobRepo.save(new Job("Publishing Executive", true, "Publishing strategy, Author management", 1600, true));    
+    this.jobRepo.save(new Job("High School Teacher", true, "Classroom management, Subject expertise", 1300, true));
+    this.jobRepo.save(new Job("College Professor", true, "Research, Teaching, Academic writing", 1500, true));
+    this.jobRepo.save(new Job("Elementary School Teacher", true, "Early childhood education, Lesson planning", 1200, true));
+    this.jobRepo.save(new Job("School Principal", true, "Leadership, Administration", 1600, true));
+    this.jobRepo.save(new Job("Special Education Teacher", false, "Special needs education, Patience", 1400, true));
+    this.jobRepo.save(new Job("Librarian", true, "Cataloging, Information management", 1100, true));
+    this.jobRepo.save(new Job("Education Coordinator", true, "Curriculum planning, Event organization", 1300, true));
+    this.jobRepo.save(new Job("School Counselor", true, "Student guidance, Mental health", 1200, true));
+    this.jobRepo.save(new Job("Preschool Teacher", true, "Early childhood education, Creativity", 1000, true));
+    
+
+
+
+    Mendel.likeArticle(E5); Lincoln.likeArticle(L10); Turing.likeArticle(Med8); Musk.likeArticle(Med2); Oppenh.likeArticle(Ed4); 
+    Pasteur.likeArticle(E11); Woodrow.likeArticle(F6); WS.likeArticle(Ed3); Nietzsche.likeArticle(A10); Babbage.likeArticle(A1);
+     Kepler.likeArticle(Ed3); JLo.likeArticle(L1); Babbage.likeArticle(F9); MuhammedALi.likeArticle(A10); WSJr.likeArticle(Law1);
+      Fermi.likeArticle(Ed3); Napoleon.likeArticle(Ed8); Turing.likeArticle(F7); Crick.likeArticle(Law2); Musk.likeArticle(Ed8); 
+      Feynman.likeArticle(E3); Woodrow.likeArticle(Med8); Shapiro.likeArticle(Law7); Messi.likeArticle(Law3); MorganF.likeArticle(E10); 
+      Hippocrates.likeArticle(E6); WSJr.likeArticle(E13); Einstein.likeArticle(Arch7); Mendel.likeArticle(Ed4); Einstein.likeArticle(F8); 
+      Godel.likeArticle(Arch6); Fermi.likeArticle(Law9); Turing.likeArticle(F8); Nietzsche.likeArticle(Arch5); GrahamBell.likeArticle(Law2); 
+      MuhammedALi.likeArticle(Arch5); Tesla.likeArticle(E1); Lovelace.likeArticle(Arch4); Farmer.likeArticle(F2); Shapiro.likeArticle(A2); 
+      Jackie.likeArticle(Ed4); Darwin.likeArticle(E8); Kepler.likeArticle(Law5); Musk.likeArticle(L4); Hawking.likeArticle(F4);
+       ASmith.likeArticle(F9); Darwin.likeArticle(Arch3); Lincoln.likeArticle(F5); Watson.likeArticle(F2); DaVinci.likeArticle(Arch1); 
+       Washington.likeArticle(Law6); Messi.likeArticle(L6); Hawking.likeArticle(Med5); JLo.likeArticle(F4); Fermi.likeArticle(E5); 
+       Marx.likeArticle(F7); Turing.likeArticle(L10); Fleming.likeArticle(A10); Napoleon.likeArticle(E8); Fermi.likeArticle(Law3);
+      Morgan.likeArticle(E10); Fleming.likeArticle(E1); Papanikolaou.likeArticle(A1); WD.likeArticle(A1); Godel.likeArticle(F3); 
+      Oppenh.likeArticle(F2); Marx.likeArticle(Arch7); Crick.likeArticle(Law4); Watson.likeArticle(Ed3); DaVinci.likeArticle(L10); 
+      WGary.likeArticle(E9); Washington.likeArticle(F1); Dirac.likeArticle(E8); Lincoln.likeArticle(Law9); Jackie.likeArticle(Law1); 
+      Farmer.likeArticle(E11); Heisenberg.likeArticle(Ed3); Shapiro.likeArticle(L9); Turing.likeArticle(E6); Fleming.likeArticle(Arch5);
+       WS.likeArticle(L6); Fleming.likeArticle(E6); Nietzsche.likeArticle(Ed8); GrahamBell.likeArticle(Law4); Marx.likeArticle(F1);
+        Napoleon.likeArticle(Med10); Lovelace.likeArticle(L3); Godel.likeArticle(E12); Heisenberg.likeArticle(F6); Woodrow.likeArticle(Arch5);
+        Rutherford.likeArticle(E11); MuhammedALi.likeArticle(L1); Napoleon.likeArticle(Med3); Messi.likeArticle(A3); Curie.likeArticle(Law6); 
+        Morgan.likeArticle(Law1); WGary.likeArticle(F4); Faraday.likeArticle(E2); Watson.likeArticle(Law8); Oppenh.likeArticle(E11); 
+        WS.likeArticle(Ed2); Napoleon.likeArticle(Law11); Mendel.likeArticle(Med6); Shapiro.likeArticle(Med9); Franklin.likeArticle(Ed2);
+         Kepler.likeArticle(A5); Newton.likeArticle(Med6); MorganF.likeArticle(Law9); JLo.likeArticle(E13); Fermi.likeArticle(Ed2); 
+         GrahamBell.likeArticle(Ed1); Franklin.likeArticle(Arch2); MuhammedALi.likeArticle(Ed7); Messi.likeArticle(L8); Lovelace.likeArticle(Ed8);
+        Papanikolaou.likeArticle(Law7); Nietzsche.likeArticle(Arch3); WS.likeArticle(A3); Galilei.likeArticle(Ed5); Franklin.likeArticle(A3);
+         WSJr.likeArticle(L2); Feynman.likeArticle(L9); Crick.likeArticle(L2); Godel.likeArticle(Arch1); GrahamBell.likeArticle(F4); 
+         Watson.likeArticle(L6); Galilei.likeArticle(A1); Hippocrates.likeArticle(Med10); DaVinci.likeArticle(Ed8); Hubble.likeArticle(E9); 
+         Crick.likeArticle(L11); Darwin.likeArticle(Law7); Einstein.likeArticle(L4); Tesla.likeArticle(Law5); Oppenh.likeArticle(L7); 
+         Bohr.likeArticle(L5); Messi.likeArticle(F7); Shapiro.likeArticle(Ed3); Oppenh.likeArticle(F1); Nietzsche.likeArticle(L9);
+          Tesla.likeArticle(E5); Papanikolaou.likeArticle(Law5); Woodrow.likeArticle(Law7); WD.likeArticle(Law5); Napoleon.likeArticle(Ed3);
+           Oppenh.likeArticle(L2); WD.likeArticle(A9); JLo.likeArticle(E4); Darwin.likeArticle(Ed7); Feynman.likeArticle(Med9); 
+           Heisenberg.likeArticle(Arch5); Turing.likeArticle(Arch3); Hippocrates.likeArticle(Ed2); Oppenh.likeArticle(Arch5); 
+           Kepler.likeArticle(F7); Washington.likeArticle(Ed7); Hippocrates.likeArticle(E2); Hubble.likeArticle(Med5); 
+           Marx.likeArticle(L4); GrahamBell.likeArticle(Med9); Pasteur.likeArticle(Law3); Woodrow.likeArticle(F4); Babbage.likeArticle(F3);
+           Feynman.likeArticle(A3); JLo.likeArticle(F8); Crick.likeArticle(L5); Franklin.likeArticle(Arch7); Hippocrates.likeArticle(F5); 
+           Fermi.likeArticle(Law6); Shapiro.likeArticle(F8); Fleming.likeArticle(Arch4); ASmith.likeArticle(Law2); Rutherford.likeArticle(A8); Mendel.likeArticle(E3); Franklin.likeArticle(Arch1); DaVinci.likeArticle(A10); Hubble.likeArticle(A1); Newton.likeArticle(E3); Musk.likeArticle(Law3); WD.likeArticle(Arch6); Lovelace.likeArticle(E7); Feynman.likeArticle(Ed3); WGary.likeArticle(L4); WSJr.likeArticle(E11); Lovelace.likeArticle(E6); GrahamBell.likeArticle(L5); Washington.likeArticle(E10); Darwin.likeArticle(L6); Godel.likeArticle(Med2); Planck.likeArticle(F2); Jackie.likeArticle(E3); WGary.likeArticle(Ed7); Franklin.likeArticle(Med5); Watson.likeArticle(Med8); Hawking.likeArticle(A6); Jackie.likeArticle(L3); WS.likeArticle(Med7); Bohr.likeArticle(Med10); Crick.likeArticle(L4); Papanikolaou.likeArticle(E2); Woodrow.likeArticle(A4); WGary.likeArticle(E5); Crick.likeArticle(Ed1); Hawking.likeArticle(A5); Galilei.likeArticle(A7); Marx.likeArticle(Med10); Faraday.likeArticle(Arch2); Farmer.likeArticle(A2); Fleming.likeArticle(Ed2);
+            Mendel.likeArticle(L5); Musk.likeArticle(Arch6); Musk.likeArticle(A4); Hippocrates.likeArticle(Law5); Papanikolaou.likeArticle(F3); Nietzsche.likeArticle(E4); Pasteur.likeArticle(Ed2); Bohr.likeArticle(Law10); WD.likeArticle(F5); Planck.likeArticle(Law9); Papanikolaou.likeArticle(A3); Euler.likeArticle(L1); Faraday.likeArticle(F3); Galilei.likeArticle(Law3); Morgan.likeArticle(L3); Turing.likeArticle(F2); Pasteur.likeArticle(E2); Rutherford.likeArticle(A2); Crick.likeArticle(F4); Copernicus.likeArticle(Law1); Copernicus.likeArticle(Ed2); Darwin.likeArticle(F5); ASmith.likeArticle(E11); Musk.likeArticle(Ed2); MuhammedALi.likeArticle(Law5); Pasteur.likeArticle(F3); Shapiro.likeArticle(F3); MuhammedALi.likeArticle(E5); Tesla.likeArticle(E4); Crick.likeArticle(E1); Mendel.likeArticle(L4); Curie.likeArticle(Ed5); WGary.likeArticle(Arch6); Morgan.likeArticle(Med2); WD.likeArticle(F6); Rutherford.likeArticle(Law3); Watson.likeArticle(Med5); ASmith.likeArticle(Law8); Musk.likeArticle(F2); WS.likeArticle(Med2); Curie.likeArticle(Med3); WD.likeArticle(E11); Galilei.likeArticle(Arch6); Faraday.likeArticle(E11); Darwin.likeArticle(E12); Babbage.likeArticle(Med4); GrahamBell.likeArticle(E10); Farmer.likeArticle(A1); Fleming.likeArticle(Law9); Feynman.likeArticle(Arch6); Darwin.likeArticle(Law9); GrahamBell.likeArticle(Ed4); Pasteur.likeArticle(E12); Fermi.likeArticle(L5); Dirac.likeArticle(F3); Shapiro.likeArticle(E12); WSJr.likeArticle(Law11); ASmith.likeArticle(Arch1); Shapiro.likeArticle(Law9); Woodrow.likeArticle(Law9); Shapiro.likeArticle(L8); Hubble.likeArticle(A7); Jackie.likeArticle(Law6); Curie.likeArticle(A6); Godel.likeArticle(Ed5); Godel.likeArticle(L9); WGary.likeArticle(Arch2); Messi.likeArticle(E8); GrahamBell.likeArticle(Med3); Galilei.likeArticle(Ed2); Galilei.likeArticle(A5); JLo.likeArticle(Med8); Fleming.likeArticle(E9); MuhammedALi.likeArticle(L10); Papanikolaou.likeArticle(F8); Planck.likeArticle(Med4); MorganF.likeArticle(Med5); Morgan.likeArticle(L4); MuhammedALi.likeArticle(A4); Hubble.likeArticle(Law3); Babbage.likeArticle(E3); Oppenh.likeArticle(Med3); ASmith.likeArticle(Med4); Babbage.likeArticle(Arch2); Lincoln.likeArticle(E13); Newton.likeArticle(Med10); Woodrow.likeArticle(A9); Washington.likeArticle(Law5); Galilei.likeArticle(F3); Messi.likeArticle(E1); MuhammedALi.likeArticle(Law2); Galilei.likeArticle(A3); Copernicus.likeArticle(E9); Papanikolaou.likeArticle(F1); Turing.likeArticle(Ed4); Bohr.likeArticle(A7); Rutherford.likeArticle(Ed2); Napoleon.likeArticle(Law8); WS.likeArticle(E8); Marx.likeArticle(Ed7); Papanikolaou.likeArticle(A10); Woodrow.likeArticle(F8); Jackie.likeArticle(Ed5); Mendel.likeArticle(Law10); GrahamBell.likeArticle(E2); GrahamBell.likeArticle(Arch2); Washington.likeArticle(Law3); Papanikolaou.likeArticle(L2); Darwin.likeArticle(L7); Watson.likeArticle(L5); WS.likeArticle(F4); Euler.likeArticle(Law1); Oppenh.likeArticle(E13); Dirac.likeArticle(Law8); Oppenh.likeArticle(A8); Jackie.likeArticle(F9); Shapiro.likeArticle(L7); Farmer.likeArticle(L1); Farmer.likeArticle(Ed3); Darwin.likeArticle(Med4); Watson.likeArticle(Ed8); Copernicus.likeArticle(Arch1); Marx.likeArticle(Law3); Jackie.likeArticle(Law10); Washington.likeArticle(Arch4); Papanikolaou.likeArticle(E7); WS.likeArticle(E10); Feynman.likeArticle(Ed8); JLo.likeArticle(A10); Jackie.likeArticle(Law11); Dirac.likeArticle(F8); Einstein.likeArticle(A6); DaVinci.likeArticle(Med3); Shapiro.likeArticle(A10); Bohr.likeArticle(Arch4); Hippocrates.likeArticle(Ed8); Turing.likeArticle(A6); Messi.likeArticle(Med9); Musk.likeArticle(F1); Einstein.likeArticle(A5); WGary.likeArticle(Law8); MuhammedALi.likeArticle(Med2); Washington.likeArticle(L6); Lovelace.likeArticle(Ed2); Shapiro.likeArticle(Med7); Papanikolaou.likeArticle(L3); Heisenberg.likeArticle(Law7); Rutherford.likeArticle(Ed6); 
+    Curie.likeArticle(Law5); Pasteur.likeArticle(Law2); Galilei.likeArticle(Law8); Fleming.likeArticle(E3); Newton.likeArticle(F5); 
+    Crick.likeArticle(A7); Nietzsche.likeArticle(E11); Planck.likeArticle(Ed8); MuhammedALi.likeArticle(E11); Crick.likeArticle(E5);
+     Euler.likeArticle(Ed6); Lovelace.likeArticle(F5); ASmith.likeArticle(Ed8); Rutherford.likeArticle(Med8); Mendel.likeArticle(L1); 
+     Dirac.likeArticle(Med7); Turing.likeArticle(A3); Nietzsche.likeArticle(E9); Woodrow.likeArticle(Arch2); Mendel.likeArticle(Ed6); 
+     Galilei.likeArticle(Ed4); WGary.likeArticle(F1); Heisenberg.likeArticle(Law5); Feynman.likeArticle(Arch1); Watson.likeArticle(F4);
+      Morgan.likeArticle(A8); Godel.likeArticle(A7); Messi.likeArticle(L1); Rutherford.likeArticle(A9); Hawking.likeArticle(Med2);
+       Heisenberg.likeArticle(E5); Bohr.likeArticle(Arch2); Musk.likeArticle(L3); Hubble.likeArticle(Ed6); Einstein.likeArticle(Law9);
+      Newton.likeArticle(E4); Lovelace.likeArticle(Law9); Feynman.likeArticle(A10); Feynman.likeArticle(Med5); Dirac.likeArticle(L3); 
+      Hawking.likeArticle(Ed8); Darwin.likeArticle(Law4); Crick.likeArticle(Arch6);
     // SAVE USERS (1 TIME TO AVOID DUBLICATES ON LIKES, ETC)
     userRepo.save(Jackie);
     userRepo.save(JLo);

@@ -97,8 +97,6 @@ public class User {
     @JsonIgnore
     private List<Article> likedArticles;
 
-
-    // Rest of the fields (may be private)
     private String username;
     private String name;
     private String lastname;
@@ -119,7 +117,6 @@ public class User {
     private String educationDescription;
     private String skills;    
 
-     // Simple constructor for testing
     public User(String username, String name, String password, String role, String lastname, String email, LocalDate birthdate, String phone) {
         this.name = name;
         this.lastname = lastname;

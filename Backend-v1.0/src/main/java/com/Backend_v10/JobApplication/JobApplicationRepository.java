@@ -10,6 +10,8 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface JobApplicationRepository extends JpaRepository<JobApplication,Long>{
+    
+    //Useful Queries done in the db
     @Transactional
     @Modifying
     @Query(value = "delete from job_applications ja where ja.job_id = ?1",nativeQuery = true)

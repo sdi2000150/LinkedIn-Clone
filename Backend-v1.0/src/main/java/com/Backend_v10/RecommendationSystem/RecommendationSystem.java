@@ -46,6 +46,10 @@ public class RecommendationSystem {
         this.total_epochs = 100;
     }
 
+
+
+//---------------------------Methods Updating the Prediction Matrix----------------------------------------//
+
     public void UpdateArticleRecommendationMatrix(List<User> AllUsers, List<Article> AllArticles){
 
         
@@ -89,13 +93,13 @@ public class RecommendationSystem {
         for(int s = 0; s < users; s++)
             for(int j = 0; j < articles; j++)
                 ActualArray[s][j] = 0;
-        System.out.println("Actual Array:\n" + Arrays.deepToString(ActualArray));
+       // System.out.println("Actual Array:\n" + Arrays.deepToString(ActualArray));
         //For each like of a user to an article,
         //set 1 in the respective cell
         for(User user: AllUsers){
             List<Article> liked_articles = new ArrayList<>();
             liked_articles = user.getLikedArticles();
-            System.out.println(liked_articles.size());
+           // System.out.println(liked_articles.size());
 
             //Found Liked Articles for a certain user
             //UserID ---> UserIndex
@@ -184,7 +188,7 @@ public class RecommendationSystem {
 			}
 			
 		}
-		//System.out.println("Actual Array " + Arrays.deepToString(ActualArray));
+		System.out.println("AT THE END OF UPDATE ARTICLES MATRIX Actual Array " + Arrays.deepToString(ActualArray));
 
 		//System.out.println("Predicted Array " + Arrays.deepToString(PredictedArticles));
 
@@ -239,12 +243,11 @@ public class RecommendationSystem {
         for(int s = 0; s < users; s++)
             for(int j = 0; j < jobs; j++)
                 ActualArray[s][j] = 0;
-        System.out.println("Actual Array:\n" + Arrays.deepToString(ActualArray));
+     //  System.out.println("Actual Array:\n" + Arrays.deepToString(ActualArray));
         System.out.println("HERE");
         //For each like of a user to an article,
         //set 1 in the respective cell
         for(User user: AllUsers){
-            System.out.println("Inside");
 
             List<JobApplication> jobapplications = new ArrayList<>();
             List<Long> JobsIAppliedIDs = new ArrayList<>();
@@ -345,6 +348,11 @@ public class RecommendationSystem {
 	//	System.out.println("Predicted Array " + Arrays.deepToString(PredictedJobs));
 
 	}	
+    //------------------------------------------------------------------------------------------//
+
+
+//-----------------Methods Recommending Article/Job to a Certain User---------------------------//
+
 
     public List<Long> RecommendArticles(User user){
         
@@ -417,5 +425,6 @@ public class RecommendationSystem {
         return BestJobs;
         
     }
+//-------------------------------------------------------------------//
 
 }

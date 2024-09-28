@@ -157,7 +157,6 @@ public class UserService {
             Optional<Article> a = articleRepo.findById(articles_of_contactsids.get(i));
             articles_of_contacts.add(a.get());
         }
-        System.out.println(articles_of_contacts);
         return articles_of_contacts;
     }
 

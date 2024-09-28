@@ -31,6 +31,7 @@ public class JobApplicationController {
         this.JobRepo = jobRepo;
     }
 
+    // Delete a certain job given its ID
     @Transactional
     @DeleteMapping("/{userEmail}/delete/{jobID}")
     public void deleteJobApplication(@PathVariable String userEmail, @PathVariable Long jobID){

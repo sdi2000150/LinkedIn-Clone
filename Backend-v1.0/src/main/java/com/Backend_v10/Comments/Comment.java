@@ -29,14 +29,11 @@ public class Comment {
     @Id 
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long commentID;
-
     String Content;
-    
     //Many comments to one owner
     @ManyToOne
     @JoinColumn(name = "owner_ID")
     User CommentOwner;
-
     @ManyToOne
     @JoinColumn(name = "article_ID")
     Article CommentArticle;

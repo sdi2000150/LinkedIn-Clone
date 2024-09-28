@@ -13,36 +13,23 @@ import com.Backend_v10.Articles.ArticleRepository;
 import com.Backend_v10.Comments.Comment;
 import com.Backend_v10.Comments.CommentRepository;
 
-import ch.qos.logback.core.model.processor.PhaseIndicator;
-import ch.qos.logback.core.util.StringUtil;
-import io.micrometer.common.util.StringUtils;
+
 import jakarta.transaction.Transactional;
 
 import com.Backend_v10.JobApplication.JobApplication;
 import com.Backend_v10.JobApplication.JobApplicationRepository;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.OptionalLong;
-import java.util.Set;
-import java.util.jar.Attributes.Name;
-import java.util.stream.Collectors;
-
-import javax.print.attribute.standard.OrientationRequested;
-
-// import org.apache.tomcat.util.file.ConfigurationSource.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -55,13 +42,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @CrossOrigin(origins = "https://localhost:4200")
 @RestController
@@ -93,7 +75,7 @@ public class UserController {
     }
 
 
-    //////////////////////// ADMIN METHODS ////////////////////////
+    //------------------------------------ ADMIN METHODS -----------------------------------------//
     @PreAuthorize("hasRole('ROLE_ADMIN')")  //only admin can access
     @GetMapping(value = "/{email}/all-data/json", produces = MediaType.APPLICATION_JSON_VALUE)  //return JSON
     public ResponseEntity<UserDTO> getAllUserDataJson(@PathVariable String email) {
@@ -117,9 +99,10 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-    ///////////////////////////////////////////////////////////////
+    //------------------------------------------------------------------------------------------------//
 
-    //-----------Recommandations------------//
+
+    //--------------------------------Recommandations EndPoints----------------------------------------//
 
     @Transactional
     @GetMapping("/{email}/RecommendArticles")
@@ -152,6 +135,10 @@ public class UserController {
         return true;
     }
 
+//----------------------------------------------------------------------------------------------------------//
+
+
+//------------------------------------Job EndPoints----------------------------------------------------------//
 
 
     @PostMapping("/create_job/{owner_email}")
@@ -162,19 +149,62 @@ public class UserController {
         return true;
     }
 
+        // Endpoint to get all jobs a specific user has applied for
+        @GetMapping("/{email}/applied-jobs")
+        public ResponseEntity<Job[]> getAppliedJobs(@PathVariable String email) {
+            Optional<User> userOptional = this.repository.findByEmail(email);
+            //get user's jobapplications
+            //and then get the jobs from them
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                List<JobApplication> jobApplications = user.getMyJobApplications();
+    
+                Job[] appliedJobs = new Job[jobApplications.size()];
+                for (int i = 0; i < jobApplications.size(); i++) {
+                    appliedJobs[i] = jobApplications.get(i).getJob();
+                }
+                
+                return  ResponseEntity.ok(appliedJobs);
+            } else {
+                // Handle the case where the user is not found
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        }
+    
+        @GetMapping("/{email}/job-offers")
+        public ResponseEntity<List<Job>> getJobOffers(@PathVariable String email) {
+            Optional<User> userOptional = this.repository.findByEmail(email);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                List<Job> jobOffers = user.getMyJobs();
+                
+                return ResponseEntity.ok(jobOffers);
+            } else {
+                // Handle the case where the user is not found
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        }
+        
+        // Endpoint to get all contacts' job offers
+        @GetMapping("/{email}/contacts-job-offers")
+        public ResponseEntity<List<Job>> getContactsJobOffers(@PathVariable String email) {
+            Optional<User> userOptional = this.repository.findByEmail(email);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                List<User> contacts = user.getMyContacts();
+                List<Job> contactsJobOffers = new ArrayList<>();
+                for (User contact : contacts) {
+                    contactsJobOffers.addAll(contact.getMyJobs());
+                }
+                return ResponseEntity.ok(contactsJobOffers);
+            } else {
+                // Handle the case where the user is not found
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        }
+    
 
-
-    @PostMapping("/create_article/{owner_email}")
-    public Long CreateArticle(@RequestBody Article newArticle, @PathVariable String owner_email){
-
-        System.out.println("HERE "+newArticle.getText());
-        Optional<User> u = this.repository.findByEmail(owner_email);
-        articleRepo.save(newArticle);
-        return this.service.addArticle(u.get(), newArticle);
-    }
-
-
-
+//------------------------------------------------Comment Endpoint ----------------------------------//
     //@newComment includes only the text 
     @PostMapping("/create_comment")
     public boolean CreateComment(@RequestBody Comment newComment, @RequestParam(name="email") String owner_email,@RequestParam(name="id") Long article_id){
@@ -187,7 +217,11 @@ public class UserController {
         return true;
     }
 
-//----------------REQUESTS----------------------//
+//---------------------------------------------------------------------------------------------------//
+
+
+
+//---------------------------------REQUESTS Endpoints------------------------------------------------//
     @GetMapping("/RequestingMe/{myemail}")
     public List<User> UsersRequestingMe(@PathVariable String myemail){
 
@@ -245,6 +279,16 @@ public class UserController {
         this.service.DeleteConnection(myemail,useremail);
     }
 
+    //Find Relationship with User
+    @GetMapping("/identify/{myemail}/{useremail}")
+    public String IdentifyUser(@PathVariable String myemail, @PathVariable String useremail){
+            return this.service.Identify_Connection(myemail, useremail);
+    }
+    //---------------------------------------------------------------------------------------------//
+
+
+
+    //-----------------------------User Endpoints--------------------------------------------------//
 
     // Get profile-view of a user
     @GetMapping("/view-profile/{email}")
@@ -253,86 +297,95 @@ public class UserController {
         // logic here
         return ResponseEntity.ok(u.get());
     }
-
-    //Find Relationship with User
-    @GetMapping("/identify/{myemail}/{useremail}")
-    public String IdentifyUser(@PathVariable String myemail, @PathVariable String useremail){
-            return this.service.Identify_Connection(myemail, useremail);
-    }
-
-    //GET ALL Articles from my CONTACTS
-    @GetMapping("/{email}/contact_articles")
-    public ResponseEntity<List<Article>> GetContactArticles(@PathVariable String email){        
-        return ResponseEntity.ok(service.return_articles_of_contacts(email));
-    }
-    //Get My Articles 
-    @GetMapping("/{email}/my_articles")
-    public ResponseEntity<List<Article>> GetMyArticles(@PathVariable String email) {
-        return ResponseEntity.ok(service.return_my_articles(email));
-    }
     
-
     @GetMapping("/delete/{email}")
     public void DeleteUser(@PathVariable String email){
         Optional<User> u = this.repository.findByEmail(email);
         this.repository.deleteById(u.get().getUserID());
     }
 
-
-    //get user info by email
-    @GetMapping("/{email}")
-    public ResponseEntity<User> GetUser(@PathVariable String email) {
-        Optional<User> u = this.repository.findByEmail(email);
-        System.out.println("Giving back user " + u.get().getMyArticles().size());
-        return ResponseEntity.ok(u.get());
-    }
-
-    //Get user Username and Email
-    @GetMapping("/find_{username}")
-    public List<String[]> getUsernameEmail(@PathVariable String username){
-        
-        
-        List<User> u = this.repository.findByUsername(username);
-        List<String[]> Results = new ArrayList<>();
-        
-        if( u.isEmpty() == true)
-        return Results;
-        
-        
-        for(int i = 0; i < u.size(); i++){
-                String[] NameEmail = new String[2];
-                String name = u.get(i).getUsername();
-                String email = u.get(i).getEmail();
-                NameEmail[0] = name;
-                NameEmail[1] = email;
-                Results.add(i, NameEmail);
-        }
-
-        return Results;
-    }
     
-    @GetMapping("/all_users")
-    public List<String[]> getAllUsers(){
-
-        List<User> u = this.repository.findAll();
-        List<String[]> Results = new ArrayList<>();
-        
-        if( u.isEmpty() == true)
-        return Results;
-        
-        
-        for(int i = 0; i < u.size(); i++){
-                String[] NameEmail = new String[2];
-                String name = u.get(i).getUsername();
-                String email = u.get(i).getEmail();
-                NameEmail[0] = name;
-                NameEmail[1] = email;
-                Results.add(i, NameEmail);
+        //get user info by email
+     @GetMapping("/{email}")
+        public ResponseEntity<User> GetUser(@PathVariable String email) {
+            Optional<User> u = this.repository.findByEmail(email);
+            System.out.println("Giving back user " + u.get().getMyArticles().size());
+            return ResponseEntity.ok(u.get());
+    }
+        //Get user Username and Email
+        @GetMapping("/find_{username}")
+        public List<String[]> getUsernameEmail(@PathVariable String username){
+            
+            
+            List<User> u = this.repository.findByUsername(username);
+            List<String[]> Results = new ArrayList<>();
+            
+            if( u.isEmpty() == true)
+            return Results;
+            
+            
+            for(int i = 0; i < u.size(); i++){
+                    String[] NameEmail = new String[2];
+                    String name = u.get(i).getUsername();
+                    String email = u.get(i).getEmail();
+                    NameEmail[0] = name;
+                    NameEmail[1] = email;
+                    Results.add(i, NameEmail);
+            }
+    
+            return Results;
         }
 
-        return Results;
+
+    // Endpoint to get all contacts
+    @GetMapping("/{email}/contacts")
+    public ResponseEntity<List<String[]>> getContacts(@PathVariable String email) {
+        Optional<User> userOptional = this.repository.findByEmail(email);
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            List<User> contacts = user.getMyContacts();
+            List<String[]> contactsInfo = new ArrayList<>();
+            for (User contact : contacts) {
+                String[] contactInfo = new String[5];
+                contactInfo[0] = contact.getUsername();
+                contactInfo[1] = contact.getEmail();
+                contactInfo[2] = contact.getName();
+                contactInfo[3] = contact.getLastname();
+                contactInfo[4] = contact.getExperienceDescription();
+                contactsInfo.add(contactInfo);
+            }
+
+            return ResponseEntity.ok(contactsInfo);
+        } else {
+            // Handle the case where the user is not found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
+        @GetMapping("/all_users")
+        public List<String[]> getAllUsers(){
+    
+            List<User> u = this.repository.findAll();
+            List<String[]> Results = new ArrayList<>();
+            
+            if( u.isEmpty() == true)
+            return Results;
+            
+            
+            for(int i = 0; i < u.size(); i++){
+                    String[] NameEmail = new String[2];
+                    String name = u.get(i).getUsername();
+                    String email = u.get(i).getEmail();
+                    NameEmail[0] = name;
+                    NameEmail[1] = email;
+                    Results.add(i, NameEmail);
+            }
+    
+            return Results;
+        }
+    
+    
 
     //Change Email and Password 
     @Transactional
@@ -420,105 +473,47 @@ public class UserController {
         }
     }
 
-    // Endpoint to get all contacts
-    @GetMapping("/{email}/contacts")
-    public ResponseEntity<List<String[]>> getContacts(@PathVariable String email) {
-        Optional<User> userOptional = this.repository.findByEmail(email);
 
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            List<User> contacts = user.getMyContacts();
-            List<String[]> contactsInfo = new ArrayList<>();
-            for (User contact : contacts) {
-                String[] contactInfo = new String[5];
-                contactInfo[0] = contact.getUsername();
-                contactInfo[1] = contact.getEmail();
-                contactInfo[2] = contact.getName();
-                contactInfo[3] = contact.getLastname();
-                contactInfo[4] = contact.getExperienceDescription();
-                contactsInfo.add(contactInfo);
+
+    //----------------------------- Articles Endpoint---------------------------------//
+    
+        // Endpoint to get all liked articles of a user
+        @GetMapping("/{email}/liked-articles")
+        public ResponseEntity<List<Article>> getLikedArticles(@PathVariable String email) {
+            Optional<User> userOptional = this.repository.findByEmail(email);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                List<Article> likedArticles = user.getLikedArticles();
+                return ResponseEntity.ok(likedArticles);
+            } else {
+                // Handle the case where the user is not found
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
             }
-
-            return ResponseEntity.ok(contactsInfo);
-        } else {
-            // Handle the case where the user is not found
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
+
+    @PostMapping("/create_article/{owner_email}")
+    public Long CreateArticle(@RequestBody Article newArticle, @PathVariable String owner_email){
+
+        System.out.println("HERE "+newArticle.getText());
+        Optional<User> u = this.repository.findByEmail(owner_email);
+        articleRepo.save(newArticle);
+        return this.service.addArticle(u.get(), newArticle);
+    }
+
+
+    //GET ALL Articles from my CONTACTS
+    @GetMapping("/{email}/contact_articles")
+    public ResponseEntity<List<Article>> GetContactArticles(@PathVariable String email){        
+        return ResponseEntity.ok(service.return_articles_of_contacts(email));
+    }
+    //Get My Articles 
+    @GetMapping("/{email}/my_articles")
+    public ResponseEntity<List<Article>> GetMyArticles(@PathVariable String email) {
+        return ResponseEntity.ok(service.return_my_articles(email));
     }
     
 
-
-    // Endpoint to get all jobs a specific user has applied for
-    @GetMapping("/{email}/applied-jobs")
-    public ResponseEntity<Job[]> getAppliedJobs(@PathVariable String email) {
-        Optional<User> userOptional = this.repository.findByEmail(email);
-        //get user's jobapplications
-        //and then get the jobs from them
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            List<JobApplication> jobApplications = user.getMyJobApplications();
-
-            Job[] appliedJobs = new Job[jobApplications.size()];
-            for (int i = 0; i < jobApplications.size(); i++) {
-                appliedJobs[i] = jobApplications.get(i).getJob();
-            }
-            
-            return  ResponseEntity.ok(appliedJobs);
-        } else {
-            // Handle the case where the user is not found
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-    }
-
-    @GetMapping("/{email}/job-offers")
-    public ResponseEntity<List<Job>> getJobOffers(@PathVariable String email) {
-        Optional<User> userOptional = this.repository.findByEmail(email);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            List<Job> jobOffers = user.getMyJobs();
-            
-            return ResponseEntity.ok(jobOffers);
-        } else {
-            // Handle the case where the user is not found
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-    }
-    
-    // Endpoint to get all contacts' job offers
-    @GetMapping("/{email}/contacts-job-offers")
-    public ResponseEntity<List<Job>> getContactsJobOffers(@PathVariable String email) {
-        Optional<User> userOptional = this.repository.findByEmail(email);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            List<User> contacts = user.getMyContacts();
-            List<Job> contactsJobOffers = new ArrayList<>();
-            for (User contact : contacts) {
-                contactsJobOffers.addAll(contact.getMyJobs());
-            }
-            return ResponseEntity.ok(contactsJobOffers);
-        } else {
-            // Handle the case where the user is not found
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-    }
-
-    // Endpoint to get all liked articles of a user
-    @GetMapping("/{email}/liked-articles")
-    public ResponseEntity<List<Article>> getLikedArticles(@PathVariable String email) {
-        Optional<User> userOptional = this.repository.findByEmail(email);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            List<Article> likedArticles = user.getLikedArticles();
-            return ResponseEntity.ok(likedArticles);
-        } else {
-            // Handle the case where the user is not found
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-    }
-    
-    //Change Password and email 
-
- 
+     
     //user likes article
     @GetMapping("/{email}/like/{article_id}")
     public boolean LikeArticle(@PathVariable String email, @PathVariable Long article_id){
@@ -535,7 +530,12 @@ public class UserController {
         return true;
     }
 
-    //----------Photos and Files -------------//
+    //---------------------------------------------------------------------------------//
+
+
+
+
+    //-------------------------Images and Files Endpoints------------------------------------------//
 
     @PostMapping("/{email}/uploadProfilePhoto")
     public Boolean UploadProfilePhoto(@RequestParam("image") MultipartFile imageFile, @PathVariable String email){
@@ -711,4 +711,6 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
     }
+    //---------------------------------------------------------------------------------------------//
+
 }

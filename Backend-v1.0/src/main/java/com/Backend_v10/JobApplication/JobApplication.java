@@ -31,12 +31,10 @@ public class JobApplication {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    // @JsonBackReference
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "job_id")
-    // @JsonBackReference
     private Job job;
 
     @Override
