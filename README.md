@@ -1,6 +1,10 @@
 # LinkedIn-Clone
 Mock LinkedIn-Clone Web Application - Project for Uni Course
 
+# The Team
+Nikitas Moschos
+Theodoros Moraitis
+
 ## Project description
 This Project serves as a LinkedIn Web App Clone. Meaning that supports some of the basic features of the actual LinkedIn Web Application.
 Most of the features and services requested, were delived. One of the major exclusions were the conversation between users, some notifications and 
