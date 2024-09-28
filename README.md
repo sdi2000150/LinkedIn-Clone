@@ -84,7 +84,7 @@ Each user's profile-view page displays the user's profile, in a read-only format
 
 <br>
 
-### BONUS TASK: RECOMMENDATION SYSTEM
+### Bonus Task: Recommendation System
 
 A recommendation system was implemented for both articles and jobs. The system suggests articles and jobs to the user, depending on his previous interaction with other articles/jobs. IMPORTANT NOTE: a like is considered an interaction with an article, while for the jobs the same applies for job applications!!! 
 The algorithm implements matrix factorization meaning the in the beggining we have the user/articles and user/jobs interaction matrix. The model is trained and then comes up with 2 submatrices P,Q whose dot product results to the prediction matrix where scores for each article/job per user is stored. Then all articles/jobs are sorted and recommended to the user starting from the higher score. That means, that the submatrices were not calculated by user input or database information, but rather the training of the model calculates P,Q using blunt mathematics and minimizing the loss function. This is considered the Model based approach.
