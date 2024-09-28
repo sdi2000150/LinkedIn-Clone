@@ -18,6 +18,7 @@ the support for video or audio input.
 ## The app:
 ### Welcome-Page
 It is the initial page when loading https://localhost:4200 and it welcomes the user, giving the option to login or signup.
+![Welcome-Page Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/welcome-page.png)
 
 ### Login-Page
 The user logs in as a result of him correctly submitting his email and password, and being authorized and authenticated. If the credentials belong to an admin, Admin-Page is loaded, otherwise User-Page is loaded.
