@@ -2,8 +2,8 @@
 Mock LinkedIn-Clone Web Application - Project for Uni Course
 
 ## The Team
-- [Nikitas Moschos](https://github.com/NikitasMosch)  
-- [Theodoros Moraitis](https://github.com/sdi2000150)
+- [Nikitas Moschos (sdi2000135)](https://github.com/NikitasMosch)  
+- [Theodoros Moraitis (sdi2000150)](https://github.com/sdi2000150)
 
 ## Project description
 This Project serves as a LinkedIn Web App Clone. Meaning that supports some of the basic features of the actual LinkedIn Web Application.
