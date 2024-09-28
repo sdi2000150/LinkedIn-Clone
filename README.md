@@ -45,7 +45,7 @@ Throught the other user's profile-view, a connection request can be sent, cancel
 
 #### Jobs
 In this page job-offers are displayed. On the left-sidebar are shown the jobs the current user offers. On the right-sidebar are shown the jobs the current user has applied to. On the middle section recommended jobs are shown (based on bonus: recommendation system).There is also a section available, for uploading a new job-offer:
-<br><br>
+<br>
 ![Jobs Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/jobs.png)
 
 #### Notifications
