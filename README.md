@@ -46,7 +46,10 @@ In this page job-offers are displayed. On the left-sidebar are shown the jobs th
 
 #### Notifications
 Notification were implemented only as a display of the requests submited from and to the user. No notifications are sent during the liking/commenting of 
-the user's posts or due to applications on his jobs.
+the user's posts or due to applications on his jobs:
+<br><br>
+![Notifications Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/notifications.png)
+
 #### Profile
 The profile section shows all User information. Here, user can add: About info, CV, Education, Experience, Skills. There is no feature separating private/public information from other users:
 <br><br>
