@@ -13,6 +13,7 @@ the support for video or audio input.
 ## Some technical details
 The frameworks used were Angular for the Front-end part, and SpringBoot for the Back-end part paired with MySQL Database.
 In order to run, Angular-folder as well as SpringBoot-folder must be downloaded. Inside the Angular project folder the `ng serve --ssl --ssl-cert src/ssl/cert.pem --ssl-key src/ssl/key.pem` command must be run in the terminal. For the server to start running, inside the SpringBoot project folder, the Application.java file must be executed. NOTE: apppication.properties must be configured correctly (MySQL Database configuration).
+SSL/TLS is added, so every request is encrypted. This was achieved by generating and using a self-signed certificate. Both back-end and front-end use the same certificate. For that reason the App's front-end URL is https://localhost:4200, which communicates with back-end at https://localhost:8443.
 ## The app:
 ### Welcome-Page
 
