@@ -1,10 +1,6 @@
 # LinkedIn-Clone
 Mock LinkedIn-Clone Web Application - Project for Uni Course
 
-
-Δουλεουμε σε Angular για Front-End (Javascript/Typescript)<br>
-και SpringBoot για Back-End (Java)
-
 ## Project description
 This Project serves as a LinkedIn Web App Clone. Meaning that supports some of the basic features of the actual LinkedIn Web Application.
 Most of the features and services requested, were delived. One of the major exclusions were the conversation between users, some notifications and 
