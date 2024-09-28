@@ -62,7 +62,7 @@ The profile section shows all User information. Here, user can add: About info, 
 
 #### Settings
 Here the user can change his password and email. In order to do it, he must submit his old password as a security measure. His new 
-email must not exist in the database. This is handled by the app:
+email must not exist in the database:
 <br><br>
 ![Settings Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/settings.png)
 
