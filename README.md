@@ -39,7 +39,7 @@ All Contacts of the User are displayed as a grid.There is also a search area ava
 <br><br>
 ![Network Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/network.png)
 
-Throught the other user's profile-view, a connection request can be sent, canceled, accepted, declined: 
+Throught the other user's profile-view, a connection request can be sent, canceled, accepted, declined, or disconnect with the specific user:
 <br><br>
 ![Profile-View Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/profile-view.png)
 
