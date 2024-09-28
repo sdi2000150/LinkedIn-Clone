@@ -17,6 +17,7 @@ the support for video or audio input.
 - JSON Web Token (JWT) is used for the authentication of the users. When a user logs in, a unique JWT is generated, and every other request by the user includes the JWT in the headers. An unauthenticated user only has access to the Welcome-Page, Login-Page and Signup-Page. No refresh token is added, so the JWT is set to be expired after 30 minutes on its generation, and then the user is redirected to the Login-Page again.
 ## The app:
 ### Welcome-Page
+It is the initial page when loading https://localhost:4200 and it welcomes the user, giving the option to login or signup.
 
 ### Login-Page
 The user logs in as a result of him correctly submitting his email and password, and being authorized and authenticated. If the credentials belong to an admin, Admin-Page is loaded, otherwise User-Page is loaded.
