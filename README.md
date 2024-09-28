@@ -62,7 +62,8 @@ Here, the admin can see a list of all users in currently singed up in the app. H
 
 #### User-View
 Each user's profile-view page displays the user's profile, in a read-only format:
-
+<br><br>
+![Admin-UserView Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/admin-userview.png)
 
 ### BONUS TASK: RECOMMENDATION SYSTEM
 
