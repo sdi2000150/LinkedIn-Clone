@@ -35,7 +35,7 @@ When the user signs up, he can submit all wanted information, except for images 
 #### Home
 
 #### Network
-All Contacts of the User are displayed as a grid. There is also a search area available, for searching other Users:
+All Contacts of the User are displayed as a grid. There is also a search area available, for searching other Users and accessing their profile in read-only format:
 <br><br>
 ![Network Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/network.png)
 
