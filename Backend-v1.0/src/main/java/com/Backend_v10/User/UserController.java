@@ -75,7 +75,7 @@ public class UserController {
     }
 
 
-    //------------------------------------ ADMIN METHODS -----------------------------------------//
+    //------------------------------------ ADMIN EndPoints -----------------------------------------//
     @PreAuthorize("hasRole('ROLE_ADMIN')")  //only admin can access
     @GetMapping(value = "/{email}/all-data/json", produces = MediaType.APPLICATION_JSON_VALUE)  //return JSON
     public ResponseEntity<UserDTO> getAllUserDataJson(@PathVariable String email) {
@@ -210,7 +210,6 @@ public class UserController {
     public boolean CreateComment(@RequestBody Comment newComment, @RequestParam(name="email") String owner_email,@RequestParam(name="id") Long article_id){
         //We need owner of comment
         //article of comment
-        System.out.println("HERE "+newComment.getContent());
         Optional<User> u = this.repository.findByEmail(owner_email);
         Optional<Article> a = this.articleRepo.findById(article_id);
         this.service.addComment(a.get(), u.get(), newComment);
@@ -309,7 +308,6 @@ public class UserController {
      @GetMapping("/{email}")
         public ResponseEntity<User> GetUser(@PathVariable String email) {
             Optional<User> u = this.repository.findByEmail(email);
-            System.out.println("Giving back user " + u.get().getMyArticles().size());
             return ResponseEntity.ok(u.get());
     }
         //Get user Username and Email
@@ -494,7 +492,6 @@ public class UserController {
     @PostMapping("/create_article/{owner_email}")
     public Long CreateArticle(@RequestBody Article newArticle, @PathVariable String owner_email){
 
-        System.out.println("HERE "+newArticle.getText());
         Optional<User> u = this.repository.findByEmail(owner_email);
         articleRepo.save(newArticle);
         return this.service.addArticle(u.get(), newArticle);
@@ -559,7 +556,6 @@ public class UserController {
         Path filePath = path.resolve(originalFileName);
         // Save the file to the local file system
         Files.write(filePath, imageFile.getBytes());
-        System.out.println("File uploaded successfully");
 
         //Save path in User Entity 
         u.get().setProfilePhotoUrl(originalFileName);
@@ -596,7 +592,6 @@ public class UserController {
         Path filePath = path.resolve(originalFileName);               
         // Save the file to the local file system
         Files.write(filePath, imageFile.getBytes());
-        System.out.println("File uploaded successfully");
         
         //Save path in User Entity 
         u.get().setCoverPhotoUrl(originalFileName);
@@ -630,7 +625,6 @@ public class UserController {
         String originalFileName = u.get().getUserID() + "CV" + ".pdf";   // ---> IDCover
         Path filePath = path.resolve(originalFileName);               
         Files.write(filePath, File.getBytes());
-        System.out.println("File uploaded successfully");
         
         //Save path in User Entity 
         u.get().setCvFileUrl(originalFileName);

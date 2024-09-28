@@ -32,7 +32,6 @@ public class CommentController {
         }
         else{
             this.repository.deleteById(id);
-            System.out.println("Comment Found in DB");    
         }
     }
 

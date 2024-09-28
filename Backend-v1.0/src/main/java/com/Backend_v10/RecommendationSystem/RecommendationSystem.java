@@ -77,10 +77,10 @@ public class RecommendationSystem {
         }
         this.articles = Long.valueOf(i);
         
-        System.out.println("Index to User Dictionary:\n" + this.IndexToUserDict.toString());
-        System.out.println("User to Index Dictionary:\n" + this.UserToIndexDict.toString());
-        System.out.println("Index to Article Dictionary:\n" + this.IndexToArticleDict.toString());
-        System.out.println("Article to Index Dictionary:\n" + this.ArticleToIndexDict.toString());
+        // System.out.println("Index to User Dictionary:\n" + this.IndexToUserDict.toString());
+        // System.out.println("User to Index Dictionary:\n" + this.UserToIndexDict.toString());
+        // System.out.println("Index to Article Dictionary:\n" + this.IndexToArticleDict.toString());
+        // System.out.println("Article to Index Dictionary:\n" + this.ArticleToIndexDict.toString());
 
         double P[][] = new double[Math.toIntExact(users)][bigK]; 
         double Q[][] = new double[Math.toIntExact(articles)][bigK]; 
@@ -93,7 +93,6 @@ public class RecommendationSystem {
         for(int s = 0; s < users; s++)
             for(int j = 0; j < articles; j++)
                 ActualArray[s][j] = 0;
-       // System.out.println("Actual Array:\n" + Arrays.deepToString(ActualArray));
         //For each like of a user to an article,
         //set 1 in the respective cell
         for(User user: AllUsers){
@@ -116,7 +115,6 @@ public class RecommendationSystem {
 
         }
         //Here we have the Intial array with all User-Article Interactions
-        //System.out.println("Actual Array:\n" + Arrays.deepToString(ActualArray));
 
 		this.lr = 0.05;
 		this.reg = 0.001;
@@ -173,7 +171,7 @@ public class RecommendationSystem {
 					}
 				}
 			}
-			System.out.println("loss= "+loss);
+			//System.out.println("loss= "+loss);
 
 
 		}
@@ -188,9 +186,6 @@ public class RecommendationSystem {
 			}
 			
 		}
-		System.out.println("AT THE END OF UPDATE ARTICLES MATRIX Actual Array " + Arrays.deepToString(ActualArray));
-
-		//System.out.println("Predicted Array " + Arrays.deepToString(PredictedArticles));
 
 	}	
 
@@ -227,10 +222,10 @@ public class RecommendationSystem {
         }
         this.jobs = Long.valueOf(i);
         
-        System.out.println("Index to User Dictionary:\n" + this.IndexToUserDict.toString());
-        System.out.println("User to Index Dictionary:\n" + this.UserToIndexDict.toString());
-        System.out.println("Index to Job Dictionary:\n" + this.IndexToJobDict.toString());
-        System.out.println("Job to Index Dictionary:\n" + this.JobToIndexDict.toString());
+        // System.out.println("Index to User Dictionary:\n" + this.IndexToUserDict.toString());
+        // System.out.println("User to Index Dictionary:\n" + this.UserToIndexDict.toString());
+        // System.out.println("Index to Job Dictionary:\n" + this.IndexToJobDict.toString());
+        // System.out.println("Job to Index Dictionary:\n" + this.JobToIndexDict.toString());
 
         double P[][] = new double[Math.toIntExact(users)][bigK]; 
         double Q[][] = new double[Math.toIntExact(jobs)][bigK]; 
@@ -243,8 +238,6 @@ public class RecommendationSystem {
         for(int s = 0; s < users; s++)
             for(int j = 0; j < jobs; j++)
                 ActualArray[s][j] = 0;
-     //  System.out.println("Actual Array:\n" + Arrays.deepToString(ActualArray));
-        System.out.println("HERE");
         //For each like of a user to an article,
         //set 1 in the respective cell
         for(User user: AllUsers){
@@ -254,7 +247,6 @@ public class RecommendationSystem {
             jobapplications = user.getMyJobApplications();
             for(JobApplication application: jobapplications)
                 JobsIAppliedIDs.add(application.getJob().getJobID());
-            System.out.println(jobapplications.size());
 
 
             //Found Liked Articles for a certain user
@@ -269,9 +261,7 @@ public class RecommendationSystem {
             }
 
         }
-        //Here we have the Intial array with all User-Article Interactions
-        //System.out.println("Actual Array:\n" + Arrays.deepToString(ActualArray));
-        
+        //Here we have the Intial array with all User-Article Interactions        
 		this.lr = 0.1;
 		this.reg = 0.01;
 		for(int u = 0; u < users; u++){
@@ -327,7 +317,7 @@ public class RecommendationSystem {
 					}
 				}
 			}
-			System.out.println("loss= "+loss);
+			//System.out.println("loss= "+loss);
 
 
 		}
@@ -343,9 +333,6 @@ public class RecommendationSystem {
 			}
 			
 		}
-	//	System.out.println("Actual Array " + Arrays.deepToString(ActualArray));
-
-	//	System.out.println("Predicted Array " + Arrays.deepToString(PredictedJobs));
 
 	}	
     //------------------------------------------------------------------------------------------//
@@ -368,10 +355,7 @@ public class RecommendationSystem {
         }
 
         //We sort our Articles
-        Arrays.sort(ArticleRatingsForUser);
-        System.out.println("ArtRatForuser " + ArticleRatingsForUser[0]);
-        
-
+        Arrays.sort(ArticleRatingsForUser);        
         //And now we get the indexes back
         int max;
         if(ArticleRatingsForUser.length < 20)
@@ -384,8 +368,6 @@ public class RecommendationSystem {
             Long best_id = this.IndexToArticleDict.get(Index);
             BestArticles.add(best_id);
         }
-
-        System.out.println(BestArticles.toString());        
         return BestArticles;
         
     }
@@ -406,9 +388,7 @@ public class RecommendationSystem {
 
         //We sort our Articles
         Arrays.sort(JobRatingsForUser);
-        System.out.println("ArtRatForuser " + JobRatingsForUser[0]);
-        
-
+    
         //And now we get the indexes back
         int max;
         if(JobRatingsForUser.length < 8)
@@ -421,9 +401,7 @@ public class RecommendationSystem {
             Long best_id = this.IndexToJobDict.get(Index);
             BestJobs.add(best_id);
         }
-        System.out.println(BestJobs.toString());
         return BestJobs;
-        
     }
 //-------------------------------------------------------------------//
 

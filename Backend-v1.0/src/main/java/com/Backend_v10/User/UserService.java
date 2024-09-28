@@ -71,7 +71,6 @@ public class UserService {
         this.Recommendationsystem.UpdateJobsRecommendationMatrix(this.userRepo.findAll(), this.jobRepo.findAll());
         List<Job> recommened_jobs = new ArrayList<>();
         Optional<User> u = this.userRepo.findByEmail(email);
-        System.out.println("Users is " + this.Recommendationsystem.getLr());
 
         List<Long> ids = this.Recommendationsystem.RecommendJobs(u.get());
         for(Long id: ids)
@@ -144,7 +143,6 @@ public class UserService {
             Optional<Article> a = articleRepo.findById(articles_of_contactsids.get(i));
             articles_of_contacts.add(a.get());
         }
-        System.out.println(articles_of_contacts);
         return articles_of_contacts;
     }
     
