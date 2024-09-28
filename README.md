@@ -88,8 +88,9 @@ A recommendation system was implemented for both articles and jobs. The system s
 The algorithm implements matrix factorization meaning the in the beggining we have the user/articles and user/jobs interaction matrix. The model is trained and then comes up with 2 submatrices P,Q whose dot product results to the prediction matrix where scores for each article/job per user is stored. Then all articles/jobs are sorted and recommended to the user starting from the higher score. That means, that the submatrices were not calculated by user input or database information, but rather the training of the model calculates P,Q using blunt mathematics and minimizing the loss function. This is considered the Model based approach.
 NOTE: The recommendation system is not correctly fined tuned and trained (deduction made by the discouraging results). This phenomemon could be the result of poorly created dataset as well as wrong selection of hyperparameters. Suggestions to make the model perform better would be appreciated.
 
+<br><br><br>
 
-**_More detailed information about the project, the functionality, the UI, etc, are provided in the Final-Report.pdf (in greek)_**
+**_More detailed information about the project, the functionality and the UI, are provided in the Final-Report.pdf (in greek)_**
 
 ### More Notes
 
