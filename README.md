@@ -91,12 +91,3 @@ NOTE: The recommendation system is not correctly fined tuned and trained (deduct
 <br>
 
 **_More detailed information about the project are provided in the Final-Report.pdf (in greek)_**
-
-### More Notes
-
-1) Images and Files are not stored in the database but rather stored locally in the server. The database stores the path to each file and matches them to their owners. The name giving of the files is handled by the app.
-
-2) Admin can only download users personal information in json form. Not XML.
-
-3)
-
