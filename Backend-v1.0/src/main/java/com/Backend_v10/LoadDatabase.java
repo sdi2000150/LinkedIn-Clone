@@ -111,9 +111,9 @@ public class LoadDatabase {
         jobRepo.save(job4);
         
         // Associate articles and jobs with users
-        //userService.addArticle(user1, article1);
-        //userService.addArticle(user1, article2);
-        //userService.addArticle(user3, article3);
+        userService.addArticle(user1, article1);
+        userService.addArticle(user1, article2);
+        userService.addArticle(user3, article3);
         userService.addJob(user1, job1);
         userService.addJob(user1, job2);
         userService.addJob(user3, job3);
@@ -424,15 +424,15 @@ public class LoadDatabase {
  
     
     // ADD ARTICLES TO USERS
-    // userService.addArticle(Franklin, F1);
-    // userService.addArticle(Franklin, F2);
-    // userService.addArticle(Franklin, F3);
-    // userService.addArticle(Tesla, F4);
-    // userService.addArticle(Franklin, F5);
-    // userService.addArticle(Franklin, F6);
-    // userService.addArticle(Einstein, F7);
-    // userService.addArticle(Tesla, F8);
-    // userService.addArticle(Franklin, F9);
+    userService.addArticle(Franklin, F1);
+    userService.addArticle(Franklin, F2);
+    userService.addArticle(Franklin, F3);
+    userService.addArticle(Tesla, F4);
+    userService.addArticle(Franklin, F5);
+    userService.addArticle(Franklin, F6);
+    userService.addArticle(Einstein, F7);
+    userService.addArticle(Tesla, F8);
+    userService.addArticle(Franklin, F9);
     // ADD LIKES ON ARTICLES
     Tesla.likeArticle(F1);
     Tesla.likeArticle(F2);
