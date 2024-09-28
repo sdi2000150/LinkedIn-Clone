@@ -34,6 +34,8 @@ When the user signs up, he can submit all wanted information, except for images 
 ### User-Page:
 #### Home
 In the home page, user can post a new article. In the main section recommended articles are displayed (based on bonus: recommendation system), which can be liked or commented by the user. On the right-side there is the option to redirect to the articles the user has posted, or to the articles the user's contacts have posted:
+<br>
+![User-Home Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/user-home.png)
 
 #### Network
 All Contacts of the User are displayed as a grid. There is also a search area available, for searching other Users and accessing their profile in read-only format:
