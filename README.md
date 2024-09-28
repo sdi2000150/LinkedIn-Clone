@@ -47,10 +47,14 @@ The profile section shows all User information. Here, user can add: About info, 
 Here the user can change his password and email. In order to do it, he must submit his old password as a security measure. His new 
 email must not exist in the database. This is handled by the app:
 <br><br>
-![Signup-Page Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/settings.png)
+![Settings Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/settings.png)
 
 ### Admin-Page:
 #### Home
+The home page of the Admin, a description of his capabilities is displayed, and the option to redirect to managing all users:
+<br><br>
+![Admin-Home Screenshot](https://github.com/NikitasMosch/LinkedInApp/blob/main/Screenshots/admin-home.png)
+
 
 #### Users-List
 
