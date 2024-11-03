@@ -1,4 +1,4 @@
-# ![Favicon](https://raw.githubusercontent.com/sdi2000150/LinkedIn-Clone/refs/heads/main/Frontend-v1.0/src/assets/icons/favicon.ico) # LinkedIn-Clone
+# ![Favicon](https://github.com/sdi2000150/LinkedIn-Clone/blob/main/Frontend-v1.0/src/assets/icons/favicon.png) # LinkedIn-Clone
 Mock LinkedIn-Clone Web Application - Project for Uni Course<br>
 Original Repository: https://github.com/NikitasMosch/LinkedInApp
 
