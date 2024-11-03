@@ -1,5 +1,6 @@
 # LinkedIn-Clone
 Mock LinkedIn-Clone Web Application - Project for Uni Course
+Original Repository: https://github.com/NikitasMosch/LinkedInApp
 
 ## The Team
 - [Nikitas Moschos (sdi2000135)](https://github.com/NikitasMosch)  
