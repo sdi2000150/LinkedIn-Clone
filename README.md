@@ -2,7 +2,7 @@
     <img src="https://github.com/sdi2000150/LinkedIn-Clone/blob/main/Frontend-v1.0/src/assets/icons/favicon.png" alt="Favicon" width="30" style="vertical-align: middle;"/> LinkedIn-Clone
 </h1>
 
-Mock LinkedIn-Clone Web Application - Project for Uni Course<br>
+LinkedIn-Clone Web Application - Project for Uni Course<br>
 Original Repository: https://github.com/NikitasMosch/LinkedInApp
 
 ## The Team
